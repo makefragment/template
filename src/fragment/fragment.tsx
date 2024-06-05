@@ -1,19 +1,20 @@
 import React, { useEffect, useMemo, useState } from "react";
 import toast, { ToastPosition, Toaster } from "react-hot-toast";
 
-import { GlobalActionsProvider } from "@plasmicapp/host";
+import { GlobalActionsProvider, GlobalContextMeta } from "@plasmicapp/host";
 import axios from "axios";
+
+type FragmentProps = React.PropsWithChildren<{
+  previewApiConfig: Record<string, any>;
+  apiConfig: Record<string, any>;
+  rtl: boolean;
+}>;
 
 export const Fragment = ({
   children,
   previewApiConfig,
   apiConfig,
-  rtl,
-}: React.PropsWithChildren<{
-  previewApiConfig: Record<string, any>;
-  apiConfig: Record<string, any>;
-  rtl: boolean;
-}>) => {
+}: FragmentProps) => {
   const actions = useMemo(
     () => ({
       showToast: (
@@ -71,4 +72,125 @@ export const Fragment = ({
       <Toaster />
     </GlobalActionsProvider>
   );
+};
+
+export const fragmentMeta: GlobalContextMeta<FragmentProps> = {
+  name: "Fragment",
+  displayName: "Fragment",
+  importPath: "@/fragment/fragment",
+  props: {
+    apiConfig: {
+      displayName: "API Config",
+      type: "object",
+      description: `e.g. { withCredentials: true }`,
+      helpText:
+        "Read about request configuration options at https://axios-http.com/docs/req_config",
+    },
+    previewApiConfig: {
+      displayName: "Preview API Config",
+      type: "object",
+      description: `e.g. { headers: { 'Authorization': 'XXX' } }`,
+      editOnly: true,
+      helpText:
+        "Read about request configuration options at https://axios-http.com/docs/req_config",
+    },
+  },
+  providesData: true,
+  globalActions: {
+    showToast: {
+      displayName: "Show Toast",
+      parameters: [
+        {
+          name: "type",
+          type: {
+            type: "choice",
+            options: ["success", "error"],
+            defaultValueHint: "success",
+          },
+        },
+        {
+          name: "message",
+          type: {
+            type: "string",
+            defaultValueHint: "A message for you!",
+            required: true,
+          },
+        },
+        {
+          name: "placement",
+          type: {
+            type: "choice",
+            options: [
+              "top-left",
+              "top-center",
+              "top-right",
+              "bottom-left",
+              "bottom-center",
+              "bottom-right",
+            ],
+            defaultValueHint: "top-right",
+          },
+        },
+        {
+          name: "duration",
+          type: {
+            type: "number",
+            defaultValueHint: 3000,
+          },
+        },
+      ],
+    },
+    apiRequest: {
+      displayName: "API Request",
+      parameters: [
+        {
+          name: "method",
+          type: {
+            type: "choice",
+            options: ["GET", "POST", "DELETE", "PUT", "PATCH"],
+            defaultValueHint: "GET",
+            defaultValue: "GET",
+          },
+        },
+        {
+          name: "url",
+          displayName: "URL",
+          type: {
+            type: "string",
+            defaultValueHint: "/api/v1/users",
+            required: true,
+          },
+        },
+        {
+          displayName: "Query Params",
+          name: "params",
+          type: {
+            type: "object",
+            description: `e.g. { id: 20 }`,
+            helpText:
+              "It will append this to the end of the URL as ?key=value.",
+          },
+        },
+        {
+          displayName: "Body",
+          name: "body",
+          type: {
+            type: "object",
+            helpText: "It is not applicable for the GET method.",
+            description: `e.g. { id: 20 }`,
+          },
+        },
+        {
+          name: "config",
+          displayName: "Request Config",
+          type: {
+            type: "object",
+            description: `e.g. { headers: { 'Authorization': 'XXX' } }`,
+            helpText:
+              "Read about request configuration options at https://axios-http.com/docs/req_config",
+          },
+        },
+      ],
+    },
+  },
 };

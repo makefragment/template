@@ -1,19 +1,23 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { DataProvider, GlobalActionsProvider } from "@plasmicapp/host";
-import { GrowthBook } from "@growthbook/growthbook-react";
+import {
+  DataProvider,
+  GlobalActionsProvider,
+  GlobalContextMeta,
+} from "@plasmicapp/host";
+import { GrowthBook as GB } from "@growthbook/growthbook-react";
 
-interface GrowthbookGlobalContextProps {
+type GrowthBookProps = React.PropsWithChildren<{
   previewAttributes?: Record<string, string>;
   apiHost: string;
   clientKey: string;
-}
+}>;
 
-export const GrowthbookGlobalContext = ({
+export const GrowthBook = ({
   children,
   previewAttributes,
   apiHost,
   clientKey,
-}: React.PropsWithChildren<GrowthbookGlobalContextProps>) => {
+}: GrowthBookProps) => {
   const [growthbook, setGrowthbook] = useState<any>();
   const [isReady, setIsReady] = useState(false);
   const [attr, setAttr] = useState({});
@@ -21,7 +25,7 @@ export const GrowthbookGlobalContext = ({
   useEffect(() => {
     if (apiHost && clientKey) {
       setGrowthbook(
-        new GrowthBook({
+        new GB({
           apiHost,
           clientKey,
           enabled: true,
@@ -113,12 +117,9 @@ export const GrowthbookGlobalContext = ({
   ]);
 
   return (
-    <GlobalActionsProvider
-      contextName="GrowthbookGlobalContext"
-      actions={actions}
-    >
+    <GlobalActionsProvider contextName="GrowthBook" actions={actions}>
       <DataProvider
-        name="Growthbook"
+        name="GrowthBook"
         data={{
           features,
           isReady,
@@ -129,4 +130,49 @@ export const GrowthbookGlobalContext = ({
       </DataProvider>
     </GlobalActionsProvider>
   );
+};
+
+export const growthBookMeta: GlobalContextMeta<GrowthBookProps> = {
+  name: "Growthbook",
+  displayName: "Fragment/GrowthBook",
+  props: {
+    apiHost: {
+      type: "string",
+      displayName: "API Host",
+      defaultValueHint: "https://cdn.growthbook.io",
+    },
+    clientKey: {
+      type: "string",
+      displayName: "Client Key",
+      defaultValueHint: "sdk-XXX",
+    },
+    previewAttributes: {
+      type: "object",
+      editOnly: true,
+      displayName: "Preview Attributes",
+      description: "Simulate how your rules will apply to users.",
+    },
+  },
+  globalActions: {
+    setAttributes: {
+      displayName: "Set Attributes",
+      parameters: [
+        {
+          name: "attributes",
+          type: "object",
+        },
+      ],
+    },
+    setAttributeOverrides: {
+      displayName: "Set Attribute Overrides",
+      parameters: [
+        {
+          name: "attributes",
+          type: "object",
+        },
+      ],
+    },
+  },
+  providesData: true,
+  importPath: "@/fragment/growthbook",
 };

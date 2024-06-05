@@ -14,12 +14,14 @@
     "@plasmicapp/cli": "^0.1.330",
     "@plasmicapp/host": "^1.0.196",
     "@plasmicapp/react-web": "^0.2.337",
+    "@radix-ui/react-popover": "^1.0.7",
     "axios": "^1.7.2",
     "jalali-moment": "^3.3.11",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "react-timeit": "^1.2.12"
   },
   "devDependencies": {
     "@types/node": "^20",

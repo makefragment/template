@@ -728,9 +728,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                                 undefined,
                                 (() => {
                                   try {
-                                    return JSON.stringify({
-                                      book_id: $props.bookId
-                                    });
+                                    return { book_id: $props.bookId };
                                   } catch (e) {
                                     if (
                                       e instanceof TypeError ||
@@ -1262,9 +1260,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                             undefined,
                             (() => {
                               try {
-                                return JSON.stringify({
+                                return {
                                   description: $state.descriptionInput.value
-                                });
+                                };
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||
@@ -1526,13 +1524,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                         undefined,
                         (() => {
                           try {
-                            return (() => {
-                              {
-                                return JSON.stringify({
-                                  book_id: $props.bookId
-                                });
-                              }
-                            })();
+                            return {
+                              book_id: $props.bookId
+                            };
                           } catch (e) {
                             if (
                               e instanceof TypeError ||

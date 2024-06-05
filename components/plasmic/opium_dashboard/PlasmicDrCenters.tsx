@@ -82,11 +82,13 @@ export const PlasmicDrCenters__VariantProps = new Array<VariantPropType>();
 export type PlasmicDrCenters__ArgsType = {
   centers?: any;
   onSelectedCenterChange?: (val: string) => void;
+  hasAllOption?: boolean;
 };
 type ArgPropType = keyof PlasmicDrCenters__ArgsType;
 export const PlasmicDrCenters__ArgProps = new Array<ArgPropType>(
   "centers",
-  "onSelectedCenterChange"
+  "onSelectedCenterChange",
+  "hasAllOption"
 );
 
 export type PlasmicDrCenters__OverridesType = {
@@ -98,6 +100,7 @@ export type PlasmicDrCenters__OverridesType = {
 export interface DefaultDrCentersProps {
   centers?: any;
   onSelectedCenterChange?: (val: string) => void;
+  hasAllOption?: boolean;
   className?: string;
 }
 
@@ -118,7 +121,16 @@ function PlasmicDrCenters__RenderFunc(props: {
 }) {
   const { variants, overrides, forNode } = props;
 
-  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+  const args = React.useMemo(
+    () =>
+      Object.assign(
+        {
+          hasAllOption: false
+        },
+        props.args
+      ),
+    [props.args]
+  );
 
   const $props = {
     ...args,
@@ -138,7 +150,20 @@ function PlasmicDrCenters__RenderFunc(props: {
         path: "selectedCenter",
         type: "readonly",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => "all",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $props.hasAllOption ? "all" : $props.centers[0].id;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })(),
 
         onChangeProp: "onSelectedCenterChange"
       },
@@ -189,86 +214,99 @@ function PlasmicDrCenters__RenderFunc(props: {
             hasGap={true}
             className={classNames(projectcss.all, sty.freeBox__jC2P)}
           >
-            <DrCenter
-              className={classNames("__wab_instance", sty.drCenter__ljbmU)}
-              name={"\u06a9\u0644 \u0646\u0648\u0628\u062a\u200c\u0647\u0627"}
-              officeBook={undefined}
-              onlineBook={undefined}
-              onselected={async () => {
-                const $steps = {};
-
-                $steps["updateSelectedCenter"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["selectedCenter"]
-                        },
-                        operation: 0,
-                        value: "all"
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
+            {(() => {
+              try {
+                return $props.hasAllOption;
+              } catch (e) {
                 if (
-                  $steps["updateSelectedCenter"] != null &&
-                  typeof $steps["updateSelectedCenter"] === "object" &&
-                  typeof $steps["updateSelectedCenter"].then === "function"
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
                 ) {
-                  $steps["updateSelectedCenter"] = await $steps[
-                    "updateSelectedCenter"
-                  ];
+                  return true;
                 }
+                throw e;
+              }
+            })() ? (
+              <DrCenter
+                className={classNames("__wab_instance", sty.drCenter__ljbmU)}
+                name={"\u06a9\u0644 \u0646\u0648\u0628\u062a\u200c\u0647\u0627"}
+                officeBook={undefined}
+                onlineBook={undefined}
+                onselected={async () => {
+                  const $steps = {};
 
-                $steps["updateSelectedCenter2"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        tplRef: "fragmentPopover",
-                        action: "close"
-                      };
-                      return (({ tplRef, action, args }) => {
-                        return $refs?.[tplRef]?.[action]?.(...(args ?? []));
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateSelectedCenter2"] != null &&
-                  typeof $steps["updateSelectedCenter2"] === "object" &&
-                  typeof $steps["updateSelectedCenter2"].then === "function"
-                ) {
-                  $steps["updateSelectedCenter2"] = await $steps[
-                    "updateSelectedCenter2"
-                  ];
-                }
-              }}
-              selected={(() => {
-                try {
-                  return $state.selectedCenter == "all";
-                } catch (e) {
+                  $steps["updateSelectedCenter"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["selectedCenter"]
+                          },
+                          operation: 0,
+                          value: "all"
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
                   if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
+                    $steps["updateSelectedCenter"] != null &&
+                    typeof $steps["updateSelectedCenter"] === "object" &&
+                    typeof $steps["updateSelectedCenter"].then === "function"
                   ) {
-                    return [];
+                    $steps["updateSelectedCenter"] = await $steps[
+                      "updateSelectedCenter"
+                    ];
                   }
-                  throw e;
-                }
-              })()}
-            />
 
+                  $steps["updateSelectedCenter2"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          tplRef: "fragmentPopover",
+                          action: "close"
+                        };
+                        return (({ tplRef, action, args }) => {
+                          return $refs?.[tplRef]?.[action]?.(...(args ?? []));
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateSelectedCenter2"] != null &&
+                    typeof $steps["updateSelectedCenter2"] === "object" &&
+                    typeof $steps["updateSelectedCenter2"].then === "function"
+                  ) {
+                    $steps["updateSelectedCenter2"] = await $steps[
+                      "updateSelectedCenter2"
+                    ];
+                  }
+                }}
+                selected={(() => {
+                  try {
+                    return $state.selectedCenter == "all";
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return [];
+                    }
+                    throw e;
+                  }
+                })()}
+              />
+            ) : null}
             {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
               (() => {
                 try {

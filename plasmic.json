@@ -771,20 +771,6 @@
           "componentType": "component"
         },
         {
-          "id": "Ita2Jf6_aAkK",
-          "name": "DrAppHomePage",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicDrAppHomePage.tsx",
-          "importSpec": {
-            "modulePath": "../src/pages/new-page.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicDrAppHomePage.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/new-page"
-        },
-        {
           "id": "la8Z2HMwL1Zp",
           "name": "Workhour",
           "type": "managed",
@@ -797,6 +783,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/workhour"
+        },
+        {
+          "id": "Ita2Jf6_aAkK",
+          "name": "BookList",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicBookList.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/book-list.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicBookList.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/book-list"
         }
       ],
       "icons": [

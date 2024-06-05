@@ -22,6 +22,17 @@
 .root > :global(.__wab_flex-container) > :global(.__wab_slot) > picture > img {
   margin-top: var(--token-_c276Gs_1FIE);
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .root {
+    width: 100%;
+    min-width: 0;
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .root > :global(.__wab_flex-container) {
+    min-width: 0;
+  }
+}
 .fragmentPopover:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
@@ -36,8 +47,13 @@
   max-width: 100%;
   background: #ebeff8;
   width: 390px;
-  border-radius: 8px;
-  padding: 8px;
+  border-radius: 6px;
+  padding: var(--token-vMUQwr5Jto1d);
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox__cxKPj {
+    width: 360px;
+  }
 }
 .freeBox__zu23P {
   display: flex;
@@ -52,7 +68,6 @@
   align-content: stretch;
   min-width: 0;
   min-height: 0;
-  padding: 8px;
 }
 .text {
   position: relative;
@@ -60,7 +75,7 @@
   height: auto;
   max-width: 100%;
   font-weight: 600;
-  font-size: var(--token-tM2Vh4zTir7U);
+  font-size: var(--token-6NbVMeD6zQwn);
   text-align: justify;
   align-self: flex-start;
   text-decoration-line: none;

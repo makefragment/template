@@ -66,6 +66,8 @@ import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import AddPatient from "../../AddPatient"; // plasmic-import: tPaqHhQ134RQ/component
 
+import { useScreenVariants as useScreenVariantsbr2UhI7UlpvR } from "../fragment_icons/PlasmicGlobalVariant__Screen"; // plasmic-import: BR2UhI7ulpvR/globalVariant
+
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
@@ -180,6 +182,10 @@ function PlasmicBookList__RenderFunc(props: {
     $ctx,
     $queries: {},
     $refs
+  });
+
+  const globalVariants = ensureGlobalVariants({
+    screen: useScreenVariantsbr2UhI7UlpvR()
   });
 
   return (
@@ -424,156 +430,153 @@ function PlasmicBookList__RenderFunc(props: {
                 })()}
               />
             ) : null}
-            <Dialog
-              data-plasmic-name={"dialog"}
-              data-plasmic-override={overrides.dialog}
-              body={
-                <div
-                  className={classNames(projectcss.all, sty.freeBox___8Ydnx)}
-                >
-                  <DrCenters
-                    data-plasmic-name={"drCenters2"}
-                    data-plasmic-override={overrides.drCenters2}
-                    centers={(() => {
-                      try {
-                        return $state.centers;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return undefined;
-                        }
-                        throw e;
-                      }
-                    })()}
-                    className={classNames("__wab_instance", sty.drCenters2)}
-                    hasAllOption={false}
-                    onSelectedCenterChange={async (...eventArgs: any) => {
-                      generateStateOnChangeProp($state, [
-                        "drCenters2",
-                        "selectedCenter"
-                      ]).apply(null, eventArgs);
-                      (async val => {
-                        const $steps = {};
-
-                        $steps["updateSelectedCenterInAddPatient"] = true
-                          ? (() => {
-                              const actionArgs = {
-                                variable: {
-                                  objRoot: $state,
-                                  variablePath: ["selectedCenterInAddPatient"]
-                                },
-                                operation: 0,
-                                value: val
-                              };
-                              return (({
-                                variable,
-                                value,
-                                startIndex,
-                                deleteCount
-                              }) => {
-                                if (!variable) {
-                                  return;
-                                }
-                                const { objRoot, variablePath } = variable;
-
-                                $stateSet(objRoot, variablePath, value);
-                                return value;
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                        if (
-                          $steps["updateSelectedCenterInAddPatient"] != null &&
-                          typeof $steps["updateSelectedCenterInAddPatient"] ===
-                            "object" &&
-                          typeof $steps["updateSelectedCenterInAddPatient"]
-                            .then === "function"
-                        ) {
-                          $steps["updateSelectedCenterInAddPatient"] =
-                            await $steps["updateSelectedCenterInAddPatient"];
-                        }
-                      }).apply(null, eventArgs);
-                    }}
-                  />
-
-                  <AddPatient
-                    data-plasmic-name={"addPatient"}
-                    data-plasmic-override={overrides.addPatient}
-                    centerId={(() => {
-                      try {
-                        return $state.selectedCenterInAddPatient;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return undefined;
-                        }
-                        throw e;
-                      }
-                    })()}
-                    className={classNames("__wab_instance", sty.addPatient)}
-                    type={"web"}
-                    userCenterId={(() => {
-                      try {
-                        return $state.centers.find(
-                          center =>
-                            center.id === $state.selectedCenterInAddPatient
-                        ).user_center_id;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return undefined;
-                        }
-                        throw e;
-                      }
-                    })()}
-                  />
-                </div>
-              }
-              className={classNames("__wab_instance", sty.dialog)}
-              onOpenChange={generateStateOnChangeProp($state, [
-                "dialog",
-                "open"
-              ])}
-              open={generateStateValueProp($state, ["dialog", "open"])}
-              title={null}
-              trigger={
-                <Button
-                  data-plasmic-name={"button"}
-                  data-plasmic-override={overrides.button}
-                  children2={
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__hPsEz
-                      )}
-                    >
-                      {
-                        "\u0627\u0641\u0632\u0648\u062f\u0646 \u0628\u06cc\u0645\u0627\u0631"
-                      }
-                    </div>
-                  }
-                  endIcon={
-                    <ChevronLeftIcon
-                      className={classNames(projectcss.all, sty.svg__yU2QN)}
-                      role={"img"}
-                    />
-                  }
-                  startIcon={
-                    <ChevronRightIcon
-                      className={classNames(projectcss.all, sty.svg__oaC4E)}
-                      role={"img"}
-                    />
-                  }
-                />
-              }
-            />
           </div>
+          <Dialog
+            data-plasmic-name={"dialog"}
+            data-plasmic-override={overrides.dialog}
+            body={
+              <div className={classNames(projectcss.all, sty.freeBox___8Ydnx)}>
+                <DrCenters
+                  data-plasmic-name={"drCenters2"}
+                  data-plasmic-override={overrides.drCenters2}
+                  centers={(() => {
+                    try {
+                      return $state.centers;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  className={classNames("__wab_instance", sty.drCenters2)}
+                  hasAllOption={false}
+                  onSelectedCenterChange={async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "drCenters2",
+                      "selectedCenter"
+                    ]).apply(null, eventArgs);
+                    (async val => {
+                      const $steps = {};
+
+                      $steps["updateSelectedCenterInAddPatient"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["selectedCenterInAddPatient"]
+                              },
+                              operation: 0,
+                              value: val
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateSelectedCenterInAddPatient"] != null &&
+                        typeof $steps["updateSelectedCenterInAddPatient"] ===
+                          "object" &&
+                        typeof $steps["updateSelectedCenterInAddPatient"]
+                          .then === "function"
+                      ) {
+                        $steps["updateSelectedCenterInAddPatient"] =
+                          await $steps["updateSelectedCenterInAddPatient"];
+                      }
+                    }).apply(null, eventArgs);
+                  }}
+                />
+
+                <AddPatient
+                  data-plasmic-name={"addPatient"}
+                  data-plasmic-override={overrides.addPatient}
+                  centerId={(() => {
+                    try {
+                      return $state.selectedCenterInAddPatient;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                  className={classNames("__wab_instance", sty.addPatient)}
+                  type={"web"}
+                  userCenterId={(() => {
+                    try {
+                      return $state.centers.find(
+                        center =>
+                          center.id === $state.selectedCenterInAddPatient
+                      ).user_center_id;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                />
+              </div>
+            }
+            className={classNames("__wab_instance", sty.dialog)}
+            onOpenChange={generateStateOnChangeProp($state, ["dialog", "open"])}
+            open={generateStateValueProp($state, ["dialog", "open"])}
+            title={null}
+            trigger={
+              <Button
+                data-plasmic-name={"button"}
+                data-plasmic-override={overrides.button}
+                children2={
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__hPsEz
+                    )}
+                  >
+                    {
+                      "\u0627\u0641\u0632\u0648\u062f\u0646 \u0628\u06cc\u0645\u0627\u0631"
+                    }
+                  </div>
+                }
+                className={classNames("__wab_instance", sty.button)}
+                endIcon={
+                  <ChevronLeftIcon
+                    className={classNames(projectcss.all, sty.svg__yU2QN)}
+                    role={"img"}
+                  />
+                }
+                startIcon={
+                  <ChevronRightIcon
+                    className={classNames(projectcss.all, sty.svg__oaC4E)}
+                    role={"img"}
+                  />
+                }
+              />
+            }
+          />
+
           <div className={classNames(projectcss.all, sty.freeBox__yEo7)}>
             <div className={classNames(projectcss.all, sty.freeBox__yjkSt)}>
               <Icon9Icon

@@ -8,6 +8,7 @@
   justify-items: center;
   justify-content: flex-start;
   align-items: center;
+  background: #ffffff;
   min-width: 0;
   min-height: 0;
   grid-template-columns:
@@ -25,7 +26,7 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
   width: 100%;
   height: auto;
@@ -60,11 +61,18 @@
   min-width: 0;
   min-height: 0;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox___24C1Y {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .text__l4Akh {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
+  text-align: right;
   min-width: 0;
   margin: 10px;
 }
@@ -84,12 +92,20 @@
 }
 .dialog:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
-  position: fixed;
-  left: 0;
+  position: relative;
+  left: auto;
   top: auto;
   z-index: 1;
-  right: 0;
-  bottom: 0;
+  right: auto;
+  bottom: auto;
+}
+.button:global(.__wab_instance) {
+  left: auto;
+  top: auto;
+  z-index: 1;
+  position: fixed;
+  right: auto;
+  bottom: 66px;
 }
 .text__hPsEz {
   position: relative;
@@ -132,14 +148,19 @@
 }
 .freeBox__yEo7 {
   display: flex;
-  position: relative;
+  position: fixed;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: auto;
   height: 50px;
   max-width: 100%;
-  min-width: 0;
+  left: 0;
+  top: auto;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
   border: 5px solid #e5e9f0;
 }
 .freeBox__yjkSt {

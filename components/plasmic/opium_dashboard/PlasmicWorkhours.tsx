@@ -61,7 +61,7 @@ import {
 
 import Checkbox from "../../Checkbox"; // plasmic-import: IDR0sAqN5tth/component
 import Select from "../../Select"; // plasmic-import: C-JgjGWfRxfZ/component
-import Popover from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
+import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
 import DaysOfWeek from "../../DaysOfWeek"; // plasmic-import: WbPt8L2jActx/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";

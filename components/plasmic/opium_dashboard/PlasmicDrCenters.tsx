@@ -59,7 +59,7 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import Popover from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
+import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
 import DrCenter from "../../DrCenter"; // plasmic-import: Y5f_I7uzx8ZQ/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 

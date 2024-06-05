@@ -7,24 +7,24 @@
 import * as React from "react";
 import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
 import { Fragment } from "@/fragment/fragment"; // plasmic-import: XrnTG1nYzajh/codeComponent
-import { Growthbook } from "@/fragment/growthbook"; // plasmic-import: dJ6m3Gi6AaJW/codeComponent
 import { Splunk } from "@/fragment/splunk"; // plasmic-import: D-MouOpzo74u/codeComponent
+import { GrowthBook } from "@/fragment/growthbook"; // plasmic-import: f0pzGvBkxmac/codeComponent
 
 export interface GlobalContextsProviderProps {
   children?: React.ReactElement;
   fragmentProps?: Partial<
     Omit<React.ComponentProps<typeof Fragment>, "children">
   >;
-  growthbookProps?: Partial<
-    Omit<React.ComponentProps<typeof Growthbook>, "children">
-  >;
   splunkProps?: Partial<Omit<React.ComponentProps<typeof Splunk>, "children">>;
+  growthBookProps?: Partial<
+    Omit<React.ComponentProps<typeof GrowthBook>, "children">
+  >;
 }
 
 export default function GlobalContextsProvider(
   props: GlobalContextsProviderProps
 ) {
-  const { children, fragmentProps, growthbookProps, splunkProps } = props;
+  const { children, fragmentProps, splunkProps, growthBookProps } = props;
 
   return (
     <Fragment
@@ -40,40 +40,40 @@ export default function GlobalContextsProvider(
           : undefined
       }
     >
-      <Growthbook
-        {...growthbookProps}
-        apiHost={
-          growthbookProps && "apiHost" in growthbookProps
-            ? growthbookProps.apiHost!
+      <Splunk
+        {...splunkProps}
+        defaultApiHost={
+          splunkProps && "defaultApiHost" in splunkProps
+            ? splunkProps.defaultApiHost!
             : undefined
         }
-        clientKey={
-          growthbookProps && "clientKey" in growthbookProps
-            ? growthbookProps.clientKey!
-            : undefined
-        }
-        previewAttributes={
-          growthbookProps && "previewAttributes" in growthbookProps
-            ? growthbookProps.previewAttributes!
+        defaultApiKey={
+          splunkProps && "defaultApiKey" in splunkProps
+            ? splunkProps.defaultApiKey!
             : undefined
         }
       >
-        <Splunk
-          {...splunkProps}
-          defaultApiHost={
-            splunkProps && "defaultApiHost" in splunkProps
-              ? splunkProps.defaultApiHost!
+        <GrowthBook
+          {...growthBookProps}
+          apiHost={
+            growthBookProps && "apiHost" in growthBookProps
+              ? growthBookProps.apiHost!
               : undefined
           }
-          defaultApiKey={
-            splunkProps && "defaultApiKey" in splunkProps
-              ? splunkProps.defaultApiKey!
+          clientKey={
+            growthBookProps && "clientKey" in growthBookProps
+              ? growthBookProps.clientKey!
+              : undefined
+          }
+          previewAttributes={
+            growthBookProps && "previewAttributes" in growthBookProps
+              ? growthBookProps.previewAttributes!
               : undefined
           }
         >
           {children}
-        </Splunk>
-      </Growthbook>
+        </GrowthBook>
+      </Splunk>
     </Fragment>
   );
 }

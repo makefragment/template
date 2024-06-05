@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+[data-radix-popper-content-wrapper]{
+    z-index: 999 !important;
+}

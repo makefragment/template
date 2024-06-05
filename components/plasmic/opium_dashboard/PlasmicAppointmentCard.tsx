@@ -1515,7 +1515,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             }
 
             $steps["apiCame"] =
-              $state.bookStatusState == "not_came" && $props.bookDelete == "0"
+              ($state.bookStatusState == "not_came" ||
+                $state.bookStatusState == "not_visited") &&
+              $props.bookDelete == "0"
                 ? (() => {
                     const actionArgs = {
                       args: [
@@ -1553,7 +1555,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             }
 
             $steps["updateBookStatusState"] =
-              $state.bookStatusState == "not_came" && $props.bookDelete == "0"
+              ($state.bookStatusState == "not_came" ||
+                $state.bookStatusState == "not_visited") &&
+              $props.bookDelete == "0"
                 ? (() => {
                     const actionArgs = {
                       variable: {

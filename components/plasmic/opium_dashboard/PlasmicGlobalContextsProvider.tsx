@@ -15,7 +15,6 @@ export interface GlobalContextsProviderProps {
   fragmentProps?: Partial<
     Omit<React.ComponentProps<typeof Fragment>, "children">
   >;
-
   splunkProps?: Partial<Omit<React.ComponentProps<typeof Splunk>, "children">>;
   growthBookProps?: Partial<
     Omit<React.ComponentProps<typeof GrowthBook>, "children">
@@ -59,12 +58,12 @@ export default function GlobalContextsProvider(
           apiHost={
             growthBookProps && "apiHost" in growthBookProps
               ? growthBookProps.apiHost!
-              : undefined
+              : "https://growthbook-api.paziresh24.com"
           }
           clientKey={
             growthBookProps && "clientKey" in growthBookProps
               ? growthBookProps.clientKey!
-              : undefined
+              : "sdk-x5P9GQI8GqpDwlY8"
           }
           previewAttributes={
             growthBookProps && "previewAttributes" in growthBookProps

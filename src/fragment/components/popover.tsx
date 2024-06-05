@@ -58,7 +58,6 @@ export const Popover = forwardRef(
 export const popoverMeta: CodeComponentMeta<PopoverType> = {
   name: "Popover",
   displayName: "Fragment/Popover",
-  isDefaultExport: true,
   importPath: "@/fragment/components/popover",
   figmaMappings: [{ figmaComponentName: "Popover" }],
   props: {

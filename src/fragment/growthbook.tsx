@@ -133,7 +133,7 @@ export const GrowthBook = ({
 };
 
 export const growthBookMeta: GlobalContextMeta<GrowthBookProps> = {
-  name: "Growthbook",
+  name: "GrowthBook",
   displayName: "Fragment/GrowthBook",
   props: {
     apiHost: {

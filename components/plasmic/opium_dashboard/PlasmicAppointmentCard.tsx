@@ -1489,7 +1489,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             const $steps = {};
 
             $steps["updateDialog2Open"] =
-              $state.bookStatusState == "came" && $props.bookDelete == "0"
+              ($state.bookStatusState == "came" ||
+                $state.bookStatusState == "not_visited") &&
+              $props.bookDelete == "0"
                 ? (() => {
                     const actionArgs = {
                       variable: {

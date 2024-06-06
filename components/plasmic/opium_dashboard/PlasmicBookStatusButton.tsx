@@ -189,7 +189,14 @@ function PlasmicBookStatusButton__RenderFunc(props: {
         {
           [sty.rootcame]: hasVariant($state, "came", "came"),
           [sty.rootdeleted]: hasVariant($state, "deleted", "deleted"),
-          [sty.rootvisited]: hasVariant($state, "visited", "visited")
+          [sty.rootvisited]: hasVariant($state, "visited", "visited"),
+          [sty.rootvisited_came]:
+            hasVariant($state, "came", "came") &&
+            hasVariant($state, "visited", "visited"),
+          [sty.rootvisited_deleted_came]:
+            hasVariant($state, "came", "came") &&
+            hasVariant($state, "visited", "visited") &&
+            hasVariant($state, "deleted", "deleted")
         }
       )}
     >

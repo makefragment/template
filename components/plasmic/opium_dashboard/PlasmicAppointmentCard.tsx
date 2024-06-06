@@ -1456,7 +1456,11 @@ function PlasmicAppointmentCard__RenderFunc(props: {
           data-plasmic-override={overrides.bookStatusButton}
           came={(() => {
             try {
-              return $state.bookStatusState == "came";
+              return (
+                ($state.bookStatusState == "came" ||
+                  $state.bookStatusState == "not_visited") &&
+                $props.bookDelete == "0"
+              );
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -1515,9 +1519,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             }
 
             $steps["apiCame"] =
-              ($state.bookStatusState == "not_came" ||
-                $state.bookStatusState == "not_visited") &&
-              $props.bookDelete == "0"
+              $state.bookStatusState == "not_came" && $props.bookDelete == "0"
                 ? (() => {
                     const actionArgs = {
                       args: [
@@ -1555,9 +1557,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             }
 
             $steps["updateBookStatusState"] =
-              ($state.bookStatusState == "not_came" ||
-                $state.bookStatusState == "not_visited") &&
-              $props.bookDelete == "0"
+              $state.bookStatusState == "not_came" && $props.bookDelete == "0"
                 ? (() => {
                     const actionArgs = {
                       variable: {

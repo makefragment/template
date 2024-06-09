@@ -708,10 +708,10 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                         ? (() => {
                             const actionArgs = {
                               args: [
-                                "DELETE",
+                                "PATCH",
                                 (() => {
                                   try {
-                                    return "https://apigw.paziresh24.com/v1/doctors/books";
+                                    return `https://apigw.paziresh24.com/v1/doctors/book`;
                                   } catch (e) {
                                     if (
                                       e instanceof TypeError ||
@@ -726,7 +726,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                                 undefined,
                                 (() => {
                                   try {
-                                    return { book_id: $props.bookId };
+                                    return {
+                                      book_id: $props.bookId
+                                    };
                                   } catch (e) {
                                     if (
                                       e instanceof TypeError ||

@@ -955,7 +955,7 @@ function PlasmicAddPatient__RenderFunc(props: {
                       $props.centerId
                     }&user_center_id=${$props.userCenterId}&from=${Math.floor(
                       Date.now() / 1000
-                    )}&to=${Math.floor(Date.now() / 1000) + 60 * 24 * 60 * 60}`;
+                    )}&to=${Math.floor(Date.now() / 1000) + 10 * 24 * 60 * 60}`;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||

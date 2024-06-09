@@ -11,10 +11,8 @@
 .button:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
-  width: 150px;
-}
-.buttondeleted:global(.__wab_instance) {
-  width: 150px;
+  width: 110px;
+  min-width: 110px;
 }
 .svg__cGuhN {
   position: relative;

@@ -354,6 +354,24 @@
   height: 24px;
   flex-shrink: 0;
 }
+.freeBox__k5TzV {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__tnT4M {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
 .freeBox__hage0 {
   display: flex;
   flex-direction: row;
@@ -367,11 +385,13 @@
 .freeBox__hage0 > :global(.__wab_flex-container) {
   flex-direction: row;
   align-items: stretch;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-wrap: wrap;
   min-width: 0;
-  margin-left: calc(0px - var(--token-vMUQwr5Jto1d));
-  width: calc(100% + var(--token-vMUQwr5Jto1d));
+  margin-left: calc(0px - var(--token-fhaz6q6bl-fW));
+  width: calc(100% + var(--token-fhaz6q6bl-fW));
+  margin-top: calc(0px - var(--token-_c276Gs_1FIE));
+  height: calc(100% + var(--token-_c276Gs_1FIE));
 }
 .freeBox__hage0 > :global(.__wab_flex-container) > *,
 .freeBox__hage0 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
@@ -381,7 +401,8 @@
   > :global(.__wab_slot)
   > picture
   > img {
-  margin-left: var(--token-vMUQwr5Jto1d);
+  margin-left: var(--token-fhaz6q6bl-fW);
+  margin-top: var(--token-_c276Gs_1FIE);
 }
 .freeBox__eUi9U {
   display: flex;
@@ -389,10 +410,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: auto;
+  width: 65px;
   height: auto;
   max-width: 100%;
   background: #27bda00d;
+  flex-shrink: 0;
   border-radius: 1px;
   padding: 8px;
   border: 1px solid #27bda03d;

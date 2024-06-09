@@ -797,6 +797,19 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/book-list"
+        },
+        {
+          "id": "hYLHU_pJKp9-",
+          "name": "Duration",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicDuration.tsx",
+          "importSpec": {
+            "modulePath": "Duration.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicDuration.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -879,6 +892,11 @@
           "id": "WD9d-X_nOEzc",
           "name": "Icon9Icon",
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon9.tsx"
+        },
+        {
+          "id": "BN2FHeznHhq_",
+          "name": "Icon10Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon10.tsx"
         }
       ],
       "images": [],

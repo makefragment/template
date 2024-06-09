@@ -153,7 +153,6 @@
   position: fixed;
   right: auto;
   bottom: 66px;
-  display: none;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .button:global(.__wab_instance) {

@@ -134,8 +134,6 @@ function PlasmicBookList__RenderFunc(props: {
 
   const $globalActions = useGlobalActions?.();
 
-  const currentUser = useCurrentUser?.() || {};
-
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -368,68 +366,54 @@ function PlasmicBookList__RenderFunc(props: {
               }}
             />
 
-            {(() => {
-              try {
-                return $state.centers.length > 0;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return true;
+            <PatientList
+              data-plasmic-name={"patientList"}
+              data-plasmic-override={overrides.patientList}
+              centers={(() => {
+                try {
+                  return $state.centers;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
                 }
-                throw e;
-              }
-            })() ? (
-              <PatientList
-                data-plasmic-name={"patientList"}
-                data-plasmic-override={overrides.patientList}
-                centers={(() => {
-                  try {
-                    return $state.centers;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return undefined;
-                    }
-                    throw e;
+              })()}
+              className={classNames("__wab_instance", sty.patientList)}
+              date={(() => {
+                try {
+                  return new Date()
+                    .toLocaleDateString("en-gb")
+                    .split("/")
+                    .reverse()
+                    .join("-");
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
                   }
-                })()}
-                className={classNames("__wab_instance", sty.patientList)}
-                date={(() => {
-                  try {
-                    return new Date()
-                      .toLocaleDateString("en-gb")
-                      .split("/")
-                      .reverse()
-                      .join("-");
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return undefined;
-                    }
-                    throw e;
+                  throw e;
+                }
+              })()}
+              selectedCenter={(() => {
+                try {
+                  return $state.selectedCenter;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
                   }
-                })()}
-                selectedCenter={(() => {
-                  try {
-                    return $state.selectedCenter;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return undefined;
-                    }
-                    throw e;
-                  }
-                })()}
-              />
-            ) : null}
+                  throw e;
+                }
+              })()}
+            />
           </div>
           <div className={classNames(projectcss.all, sty.freeBox__hHl56)}>
             <Dialog
@@ -508,6 +492,45 @@ function PlasmicBookList__RenderFunc(props: {
                   <AddPatient
                     data-plasmic-name={"addPatient"}
                     data-plasmic-override={overrides.addPatient}
+                    booked={async () => {
+                      const $steps = {};
+
+                      $steps["updateDialogOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["dialog", "open"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateDialogOpen"] != null &&
+                        typeof $steps["updateDialogOpen"] === "object" &&
+                        typeof $steps["updateDialogOpen"].then === "function"
+                      ) {
+                        $steps["updateDialogOpen"] = await $steps[
+                          "updateDialogOpen"
+                        ];
+                      }
+                    }}
                     centerId={(() => {
                       try {
                         return $state.selectedCenterInAddPatient;

@@ -204,8 +204,6 @@ function PlasmicAppointmentCard__RenderFunc(props: {
 
   const $globalActions = useGlobalActions?.();
 
-  const currentUser = useCurrentUser?.() || {};
-
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -1246,7 +1244,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                             "PATCH",
                             (() => {
                               try {
-                                return `https://api.paziresh24.com/V1/doctor/centers/5532/books/${$props.bookId}/description`;
+                                return `https://api.paziresh24.com/V1/doctor/centers/${$props.centerId}/books/${$props.bookId}/description`;
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||

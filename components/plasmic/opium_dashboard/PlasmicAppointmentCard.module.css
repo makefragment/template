@@ -11,6 +11,9 @@
 .dialog:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
+  left: auto;
+  top: auto;
+  z-index: 1;
 }
 .freeBox__w3Skv {
   display: flex;
@@ -155,6 +158,7 @@
 }
 .text__jdiI {
   font-size: var(--token-6NbVMeD6zQwn);
+  font-weight: 100;
 }
 .svg__alC9Q {
   position: relative;

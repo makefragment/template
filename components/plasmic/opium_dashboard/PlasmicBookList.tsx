@@ -76,8 +76,6 @@ import sty from "./PlasmicBookList.module.css"; // plasmic-import: Ita2Jf6_aAkK/
 
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
-import Icon9Icon from "./icons/PlasmicIcon__Icon9"; // plasmic-import: WD9d-X_nOEzc/icon
-import Icon8Icon from "./icons/PlasmicIcon__Icon8"; // plasmic-import: myuWpZoZw4pf/icon
 
 createPlasmicElementProxy;
 
@@ -573,174 +571,55 @@ function PlasmicBookList__RenderFunc(props: {
               open={generateStateValueProp($state, ["dialog", "open"])}
               title={null}
               trigger={
-                <Button
-                  data-plasmic-name={"button"}
-                  data-plasmic-override={overrides.button}
-                  children2={
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__hPsEz
-                      )}
-                    >
-                      {
-                        "\u0627\u0641\u0632\u0648\u062f\u0646 \u0628\u06cc\u0645\u0627\u0631"
-                      }
-                    </div>
+                (() => {
+                  try {
+                    return $state.centers.length > 0;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return false;
+                    }
+                    throw e;
                   }
-                  className={classNames("__wab_instance", sty.button)}
-                  endIcon={
-                    <ChevronLeftIcon
-                      className={classNames(projectcss.all, sty.svg__yU2QN)}
-                      role={"img"}
-                    />
-                  }
-                  startIcon={
-                    <ChevronRightIcon
-                      className={classNames(projectcss.all, sty.svg__oaC4E)}
-                      role={"img"}
-                    />
-                  }
-                />
+                })() ? (
+                  <Button
+                    data-plasmic-name={"button"}
+                    data-plasmic-override={overrides.button}
+                    children2={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__hPsEz
+                        )}
+                      >
+                        {
+                          "\u0627\u0641\u0632\u0648\u062f\u0646 \u0628\u06cc\u0645\u0627\u0631"
+                        }
+                      </div>
+                    }
+                    className={classNames("__wab_instance", sty.button)}
+                    endIcon={
+                      <ChevronLeftIcon
+                        className={classNames(projectcss.all, sty.svg__yU2QN)}
+                        role={"img"}
+                      />
+                    }
+                    isDisabled={undefined}
+                    showStartIcon={undefined}
+                    space={undefined}
+                    startIcon={
+                      <ChevronRightIcon
+                        className={classNames(projectcss.all, sty.svg__oaC4E)}
+                        role={"img"}
+                      />
+                    }
+                  />
+                ) : null
               }
             />
-          </div>
-          <div className={classNames(projectcss.all, sty.freeBox__yEo7)}>
-            <div className={classNames(projectcss.all, sty.freeBox__yjkSt)}>
-              <Icon9Icon
-                className={classNames(projectcss.all, sty.svg__bVuYg)}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps[
-                    "goToHttpswwwpaziresh24Comdashboardappsdrappworkhours"
-                  ] = true
-                    ? (() => {
-                        const actionArgs = {
-                          destination:
-                            "https://www.paziresh24.com/dashboard/apps/drapp/workhours/"
-                        };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps[
-                      "goToHttpswwwpaziresh24Comdashboardappsdrappworkhours"
-                    ] != null &&
-                    typeof $steps[
-                      "goToHttpswwwpaziresh24Comdashboardappsdrappworkhours"
-                    ] === "object" &&
-                    typeof $steps[
-                      "goToHttpswwwpaziresh24Comdashboardappsdrappworkhours"
-                    ].then === "function"
-                  ) {
-                    $steps[
-                      "goToHttpswwwpaziresh24Comdashboardappsdrappworkhours"
-                    ] = await $steps[
-                      "goToHttpswwwpaziresh24Comdashboardappsdrappworkhours"
-                    ];
-                  }
-
-                  $steps["runCode"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return $$.splunkEvent({
-                              token: "6d18640a-95c3-4368-a8d0-dc0beae3a44b",
-                              group: "dr-app-booklist",
-                              data: {},
-                              type: "click-land-to-booklist-page"
-                            });
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["runCode"] != null &&
-                    typeof $steps["runCode"] === "object" &&
-                    typeof $steps["runCode"].then === "function"
-                  ) {
-                    $steps["runCode"] = await $steps["runCode"];
-                  }
-                }}
-                role={"img"}
-              />
-
-              <Icon8Icon
-                className={classNames(projectcss.all, sty.svg__tDtCy)}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["goToDrAppHomePage"] = true
-                    ? (() => {
-                        const actionArgs = { destination: `/book-list` };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["goToDrAppHomePage"] != null &&
-                    typeof $steps["goToDrAppHomePage"] === "object" &&
-                    typeof $steps["goToDrAppHomePage"].then === "function"
-                  ) {
-                    $steps["goToDrAppHomePage"] = await $steps[
-                      "goToDrAppHomePage"
-                    ];
-                  }
-
-                  $steps["invokeGlobalAction"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          args: [
-                            {
-                              group: "dr-app-booklist",
-                              type: "click-land-to-workhour-page"
-                            }
-                          ]
-                        };
-                        return $globalActions["Splunk.sendLog"]?.apply(null, [
-                          ...actionArgs.args
-                        ]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["invokeGlobalAction"] != null &&
-                    typeof $steps["invokeGlobalAction"] === "object" &&
-                    typeof $steps["invokeGlobalAction"].then === "function"
-                  ) {
-                    $steps["invokeGlobalAction"] = await $steps[
-                      "invokeGlobalAction"
-                    ];
-                  }
-                }}
-                role={"img"}
-              />
-            </div>
           </div>
         </div>
       </div>

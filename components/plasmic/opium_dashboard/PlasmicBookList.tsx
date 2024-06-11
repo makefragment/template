@@ -59,10 +59,11 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
+import { DatePicker } from "@/fragment/components/date-picker"; // plasmic-import: b38lDo6Nm8Rh/codeComponent
 import DrCenters from "../../DrCenters"; // plasmic-import: IkLsGKQP_uPj/component
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import PatientList from "../../PatientList"; // plasmic-import: uw2UKvNlq2Yr/component
-import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import AddPatient from "../../AddPatient"; // plasmic-import: tPaqHhQ134RQ/component
 
@@ -74,6 +75,7 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicBookList.module.css"; // plasmic-import: Ita2Jf6_aAkK/css
 
+import CalendarIcon from "../fragment_icons/icons/PlasmicIcon__Calendar"; // plasmic-import: e2zWN9c_lxv7/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 
@@ -90,13 +92,18 @@ export const PlasmicBookList__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicBookList__OverridesType = {
   bookList?: Flex__<"div">;
+  date?: Flex__<"div">;
+  calendar?: Flex__<typeof Dialog>;
+  تقومماهانه?: Flex__<"div">;
+  fragmentDatePicker?: Flex__<typeof DatePicker>;
+  center?: Flex__<"div">;
   drCenters?: Flex__<typeof DrCenters>;
   sideEffect?: Flex__<typeof SideEffect>;
   patientList?: Flex__<typeof PatientList>;
+  addPatient?: Flex__<"div">;
   dialog?: Flex__<typeof Dialog>;
   button?: Flex__<typeof Button>;
   drCenters2?: Flex__<typeof DrCenters>;
-  addPatient?: Flex__<typeof AddPatient>;
 };
 
 export interface DefaultBookListProps {}
@@ -169,6 +176,18 @@ function PlasmicBookList__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "calendar.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "fragmentDatePicker.value",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -211,7 +230,192 @@ function PlasmicBookList__RenderFunc(props: {
           )}
           dir={"rtl"}
         >
-          <div className={classNames(projectcss.all, sty.freeBox__fQz4U)}>
+          <div
+            data-plasmic-name={"date"}
+            data-plasmic-override={overrides.date}
+            className={classNames(projectcss.all, sty.date)}
+          >
+            <Stack__
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox___64VOz)}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__qxVhq
+                )}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["updateCalendarOpen"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["calendar", "open"]
+                          },
+                          operation: 0,
+                          value: true
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateCalendarOpen"] != null &&
+                    typeof $steps["updateCalendarOpen"] === "object" &&
+                    typeof $steps["updateCalendarOpen"].then === "function"
+                  ) {
+                    $steps["updateCalendarOpen"] = await $steps[
+                      "updateCalendarOpen"
+                    ];
+                  }
+                }}
+              >
+                <React.Fragment>
+                  {(() => {
+                    try {
+                      return $state.fragmentDatePicker.value
+                        ? new Date($state.fragmentDatePicker.value * 1000)
+                            .toLocaleDateString("fa-IR")
+                            .split("/")
+                            .join("/")
+                        : new Date()
+                            .toLocaleDateString("fa-IR")
+                            .split("/")
+                            .join("/");
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "";
+                      }
+                      throw e;
+                    }
+                  })()}
+                </React.Fragment>
+              </div>
+              <Dialog
+                data-plasmic-name={"calendar"}
+                data-plasmic-override={overrides.calendar}
+                body={
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox__dhNMk)}
+                  >
+                    <DatePicker
+                      data-plasmic-name={"fragmentDatePicker"}
+                      data-plasmic-override={overrides.fragmentDatePicker}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.fragmentDatePicker
+                      )}
+                      holidays={[]}
+                      locale={"fa"}
+                      onChange={async (...eventArgs: any) => {
+                        generateStateOnChangeProp($state, [
+                          "fragmentDatePicker",
+                          "value"
+                        ]).apply(null, eventArgs);
+                        (async date => {
+                          const $steps = {};
+
+                          $steps["updateStateتقومOpen"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["calendar", "open"]
+                                  },
+                                  operation: 0,
+                                  value: false
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateStateتقومOpen"] != null &&
+                            typeof $steps["updateStateتقومOpen"] === "object" &&
+                            typeof $steps["updateStateتقومOpen"].then ===
+                              "function"
+                          ) {
+                            $steps["updateStateتقومOpen"] = await $steps[
+                              "updateStateتقومOpen"
+                            ];
+                          }
+                        }).apply(null, eventArgs);
+                      }}
+                      value={generateStateValueProp($state, [
+                        "fragmentDatePicker",
+                        "value"
+                      ])}
+                    />
+                  </div>
+                }
+                className={classNames("__wab_instance", sty.calendar)}
+                onOpenChange={generateStateOnChangeProp($state, [
+                  "calendar",
+                  "open"
+                ])}
+                open={generateStateValueProp($state, ["calendar", "open"])}
+                title={
+                  <div
+                    data-plasmic-name={
+                      "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
+                    }
+                    data-plasmic-override={overrides.تقومماهانه}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.تقومماهانه
+                    )}
+                  >
+                    {
+                      "\u062a\u0642\u0648\u06cc\u0645 \u0645\u0627\u0647\u0627\u0646\u0647"
+                    }
+                  </div>
+                }
+                trigger={
+                  <CalendarIcon
+                    className={classNames(projectcss.all, sty.svg__g42XL)}
+                    role={"img"}
+                  />
+                }
+              />
+            </Stack__>
+          </div>
+          <div
+            data-plasmic-name={"center"}
+            data-plasmic-override={overrides.center}
+            className={classNames(projectcss.all, sty.center)}
+          >
             <div className={classNames(projectcss.all, sty.freeBox__k3O51)}>
               <div className={classNames(projectcss.all, sty.freeBox___24C1Y)}>
                 <div
@@ -383,11 +587,17 @@ function PlasmicBookList__RenderFunc(props: {
               className={classNames("__wab_instance", sty.patientList)}
               date={(() => {
                 try {
-                  return new Date()
-                    .toLocaleDateString("en-gb")
-                    .split("/")
-                    .reverse()
-                    .join("-");
+                  return $state.fragmentDatePicker.value
+                    ? new Date($state.fragmentDatePicker.value * 1000)
+                        .toLocaleDateString("en-gb")
+                        .split("/")
+                        .reverse()
+                        .join("-")
+                    : new Date()
+                        .toLocaleDateString("en-gb")
+                        .split("/")
+                        .reverse()
+                        .join("-");
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -413,7 +623,11 @@ function PlasmicBookList__RenderFunc(props: {
               })()}
             />
           </div>
-          <div className={classNames(projectcss.all, sty.freeBox__hHl56)}>
+          <div
+            data-plasmic-name={"addPatient"}
+            data-plasmic-override={overrides.addPatient}
+            className={classNames(projectcss.all, sty.addPatient)}
+          >
             <Dialog
               data-plasmic-name={"dialog"}
               data-plasmic-override={overrides.dialog}
@@ -488,8 +702,6 @@ function PlasmicBookList__RenderFunc(props: {
                   />
 
                   <AddPatient
-                    data-plasmic-name={"addPatient"}
-                    data-plasmic-override={overrides.addPatient}
                     booked={async () => {
                       const $steps = {};
 
@@ -542,7 +754,10 @@ function PlasmicBookList__RenderFunc(props: {
                         throw e;
                       }
                     })()}
-                    className={classNames("__wab_instance", sty.addPatient)}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.addPatient___4S6X
+                    )}
                     type={"web"}
                     userCenterId={(() => {
                       try {
@@ -630,34 +845,58 @@ function PlasmicBookList__RenderFunc(props: {
 const PlasmicDescendants = {
   bookList: [
     "bookList",
+    "date",
+    "calendar",
+    "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
+    "fragmentDatePicker",
+    "center",
     "drCenters",
     "sideEffect",
     "patientList",
+    "addPatient",
     "dialog",
     "button",
-    "drCenters2",
-    "addPatient"
+    "drCenters2"
   ],
+  date: [
+    "date",
+    "calendar",
+    "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
+    "fragmentDatePicker"
+  ],
+  calendar: [
+    "calendar",
+    "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
+    "fragmentDatePicker"
+  ],
+  تقومماهانه: ["\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647"],
+  fragmentDatePicker: ["fragmentDatePicker"],
+  center: ["center", "drCenters", "sideEffect", "patientList"],
   drCenters: ["drCenters"],
   sideEffect: ["sideEffect"],
   patientList: ["patientList"],
-  dialog: ["dialog", "button", "drCenters2", "addPatient"],
+  addPatient: ["addPatient", "dialog", "button", "drCenters2"],
+  dialog: ["dialog", "button", "drCenters2"],
   button: ["button"],
-  drCenters2: ["drCenters2"],
-  addPatient: ["addPatient"]
+  drCenters2: ["drCenters2"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   bookList: "div";
+  date: "div";
+  calendar: typeof Dialog;
+  تقومماهانه: "div";
+  fragmentDatePicker: typeof DatePicker;
+  center: "div";
   drCenters: typeof DrCenters;
   sideEffect: typeof SideEffect;
   patientList: typeof PatientList;
+  addPatient: "div";
   dialog: typeof Dialog;
   button: typeof Button;
   drCenters2: typeof DrCenters;
-  addPatient: typeof AddPatient;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -720,13 +959,20 @@ export const PlasmicBookList = Object.assign(
   makeNodeComponent("bookList"),
   {
     // Helper components rendering sub-elements
+    date: makeNodeComponent("date"),
+    calendar: makeNodeComponent("calendar"),
+    تقومماهانه: makeNodeComponent(
+      "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
+    ),
+    fragmentDatePicker: makeNodeComponent("fragmentDatePicker"),
+    center: makeNodeComponent("center"),
     drCenters: makeNodeComponent("drCenters"),
     sideEffect: makeNodeComponent("sideEffect"),
     patientList: makeNodeComponent("patientList"),
+    addPatient: makeNodeComponent("addPatient"),
     dialog: makeNodeComponent("dialog"),
     button: makeNodeComponent("button"),
     drCenters2: makeNodeComponent("drCenters2"),
-    addPatient: makeNodeComponent("addPatient"),
 
     // Metadata about props expected for PlasmicBookList
     internalVariantProps: PlasmicBookList__VariantProps,

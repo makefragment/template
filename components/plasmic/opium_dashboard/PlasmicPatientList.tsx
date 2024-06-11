@@ -205,7 +205,7 @@ function PlasmicPatientList__RenderFunc(props: {
         className={classNames("__wab_instance", sty.sideEffect)}
         deps={(() => {
           try {
-            return [$props.selectedCenter, $props.centers];
+            return [$props.selectedCenter, $props.centers, $props.date];
           } catch (e) {
             if (
               e instanceof TypeError ||

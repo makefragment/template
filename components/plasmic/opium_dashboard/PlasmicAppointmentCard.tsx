@@ -1262,9 +1262,11 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                             undefined,
                             (() => {
                               try {
-                                return {
-                                  description: $state.descriptionInput.value
-                                };
+                                return (() => {
+                                  {
+                                    description: $state.descriptionInput.value;
+                                  }
+                                })();
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||
@@ -1360,6 +1362,58 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                   ) {
                     $steps["updateDialog2Open"] = await $steps[
                       "updateDialog2Open"
+                    ];
+                  }
+
+                  $steps["submitDescription"] =
+                    $steps.apiDescription.data.status === "success"
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              (() => {
+                                try {
+                                  return {
+                                    group: "description",
+                                    data: {
+                                      center_id: $props.centerId,
+                                      user_center_id: $props.userCenterId,
+                                      type: 3,
+                                      fullname:
+                                        $state.fullname ??
+                                        $state.inputfullname.value,
+                                      cell:
+                                        $state.cell ?? $state.inputcell.value,
+                                      national_code: $state.nationalCode.value,
+                                      bookid: $props.bookId,
+                                      description: $state.descriptionInput.value
+                                    },
+                                    type: "add-description"
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            ]
+                          };
+                          return $globalActions["Splunk.sendLog"]?.apply(null, [
+                            ...actionArgs.args
+                          ]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["submitDescription"] != null &&
+                    typeof $steps["submitDescription"] === "object" &&
+                    typeof $steps["submitDescription"].then === "function"
+                  ) {
+                    $steps["submitDescription"] = await $steps[
+                      "submitDescription"
                     ];
                   }
                 }}
@@ -1532,9 +1586,11 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                         undefined,
                         (() => {
                           try {
-                            return {
-                              book_id: $props.bookId
-                            };
+                            return (() => {
+                              {
+                                book_id: $props.bookId;
+                              }
+                            })();
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -1590,6 +1646,53 @@ function PlasmicAppointmentCard__RenderFunc(props: {
               $steps["updateBookStatusState"] = await $steps[
                 "updateBookStatusState"
               ];
+            }
+
+            $steps["startVisit"] =
+              $steps.apiCame.data.status === "success"
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        (() => {
+                          try {
+                            return {
+                              group: "book-status",
+                              data: {
+                                center_id: $props.centerId,
+                                user_center_id: $props.userCenterId,
+                                type: 3,
+                                fullname:
+                                  $state.fullname ?? $state.inputfullname.value,
+                                cell: $state.cell ?? $state.inputcell.value,
+                                national_code: $state.nationalCode.value,
+                                bookid: $props.bookId,
+                                description: $state.descriptionInput.value
+                              },
+                              type: "came"
+                            };
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["Splunk.sendLog"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+            if (
+              $steps["startVisit"] != null &&
+              typeof $steps["startVisit"] === "object" &&
+              typeof $steps["startVisit"].then === "function"
+            ) {
+              $steps["startVisit"] = await $steps["startVisit"];
             }
           }}
           visited={(() => {

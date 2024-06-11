@@ -721,6 +721,51 @@ function PlasmicAddPatient__RenderFunc(props: {
             $steps["finishLoading"] = await $steps["finishLoading"];
           }
 
+          $steps["clickSubmit"] =
+            $state.booktime.open === true
+              ? (() => {
+                  const actionArgs = {
+                    args: [
+                      (() => {
+                        try {
+                          return {
+                            group: "add-book",
+                            data: {
+                              center_id: $props.centerId,
+                              user_center_id: $props.userCenterId,
+                              type: 3,
+                              fullname:
+                                $state.fullname ?? $state.inputfullname.value,
+                              cell: $state.cell ?? $state.inputcell.value,
+                              national_code: $state.nationalCode.value
+                            },
+                            type: "first-submit"
+                          };
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()
+                    ]
+                  };
+                  return $globalActions["Splunk.sendLog"]?.apply(null, [
+                    ...actionArgs.args
+                  ]);
+                })()
+              : undefined;
+          if (
+            $steps["clickSubmit"] != null &&
+            typeof $steps["clickSubmit"] === "object" &&
+            typeof $steps["clickSubmit"].then === "function"
+          ) {
+            $steps["clickSubmit"] = await $steps["clickSubmit"];
+          }
+
           $steps["registerRequest"] = true
             ? (() => {
                 const actionArgs = {
@@ -1345,7 +1390,7 @@ function PlasmicAddPatient__RenderFunc(props: {
                                               national_code:
                                                 $state.nationalCode.value
                                             },
-                                            type: "add-freeturn-book"
+                                            type: "add-first-free-book"
                                           };
                                         } catch (e) {
                                           if (
@@ -1495,6 +1540,60 @@ function PlasmicAddPatient__RenderFunc(props: {
                           ) {
                             $steps["updatePreferBooktimeOpen"] = await $steps[
                               "updatePreferBooktimeOpen"
+                            ];
+                          }
+
+                          $steps["clickOnPreferBook"] =
+                            $steps.updatePreferBooktimeOpen === true
+                              ? (() => {
+                                  const actionArgs = {
+                                    args: [
+                                      (() => {
+                                        try {
+                                          return {
+                                            group: "add-book",
+                                            data: {
+                                              center_id: $props.centerId,
+                                              user_center_id:
+                                                $props.userCenterId,
+                                              type: 3,
+                                              fullname:
+                                                $state.fullname ??
+                                                $state.inputfullname.value,
+                                              cell:
+                                                $state.cell ??
+                                                $state.inputcell.value,
+                                              national_code:
+                                                $state.nationalCode.value
+                                            },
+                                            type: "click-prefer-book"
+                                          };
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                    ]
+                                  };
+                                  return $globalActions[
+                                    "Splunk.sendLog"
+                                  ]?.apply(null, [...actionArgs.args]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["clickOnPreferBook"] != null &&
+                            typeof $steps["clickOnPreferBook"] === "object" &&
+                            typeof $steps["clickOnPreferBook"].then ===
+                              "function"
+                          ) {
+                            $steps["clickOnPreferBook"] = await $steps[
+                              "clickOnPreferBook"
                             ];
                           }
                         }}

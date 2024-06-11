@@ -27,7 +27,84 @@
     grid-column: 4;
   }
 }
-.freeBox__fQz4U {
+.date {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #e5e9f0;
+}
+.freeBox___64VOz {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.freeBox___64VOz > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  margin-left: calc(0px - var(--token-fhaz6q6bl-fW));
+  width: calc(100% + var(--token-fhaz6q6bl-fW));
+}
+.freeBox___64VOz > :global(.__wab_flex-container) > *,
+.freeBox___64VOz > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox___64VOz > :global(.__wab_flex-container) > picture > img,
+.freeBox___64VOz
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: var(--token-fhaz6q6bl-fW);
+}
+.text__qxVhq {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  text-align: center;
+  font-weight: 600;
+}
+.calendar:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.svg__g42XL {
+  position: relative;
+  object-fit: cover;
+  max-width: 100%;
+  width: var(--token-W6cMLA0AZVBO);
+  height: var(--token-W6cMLA0AZVBO);
+}
+.freeBox__dhNMk {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.fragmentDatePicker:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  position: relative;
+}
+.center {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -40,7 +117,7 @@
   border: 4px none #e5e9f0;
 }
 @media (min-width: 0px) and (max-width: 768px) {
-  .freeBox__fQz4U {
+  .center {
     width: 100%;
     grid-column-start: 1 !important;
     grid-column-end: -1 !important;
@@ -60,8 +137,7 @@
   max-width: 100%;
   min-width: 0;
   border-radius: 8px;
-  border-style: solid;
-  border-color: #e5e9f0;
+  border: 1px solid #e5e9f0;
 }
 .freeBox___24C1Y {
   display: flex;
@@ -117,7 +193,7 @@
   max-width: 100%;
   position: relative;
 }
-.freeBox__hHl56 {
+.addPatient {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -194,7 +270,7 @@
   position: relative;
   width: auto;
 }
-.addPatient:global(.__wab_instance) {
+.addPatient___4S6X:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }

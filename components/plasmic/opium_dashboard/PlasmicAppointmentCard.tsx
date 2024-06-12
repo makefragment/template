@@ -866,6 +866,42 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                           "updateDialogOpen"
                         ];
                       }
+
+                      $steps["updateDialogOpen2"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["bookStatusState"]
+                              },
+                              operation: 0,
+                              value: "deleted"
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateDialogOpen2"] != null &&
+                        typeof $steps["updateDialogOpen2"] === "object" &&
+                        typeof $steps["updateDialogOpen2"].then === "function"
+                      ) {
+                        $steps["updateDialogOpen2"] = await $steps[
+                          "updateDialogOpen2"
+                        ];
+                      }
                     }}
                     startIcon={
                       <ChevronRightIcon
@@ -1643,7 +1679,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             }
 
             $steps["startVisit"] =
-              $steps.apiCame.data.status === "success"
+              $steps.apiCame?.data?.status === "success"
                 ? (() => {
                     const actionArgs = {
                       args: [

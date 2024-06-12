@@ -301,6 +301,7 @@ function PlasmicPatientList__RenderFunc(props: {
                     value: $steps.apiAllVisitorsData.data
                       .map(item => item.data)
                       .flat()
+                      .sort((a, b) => new Date(a.from) - new Date(b.from))
                   };
                   return (({ variable, value, startIndex, deleteCount }) => {
                     if (!variable) {

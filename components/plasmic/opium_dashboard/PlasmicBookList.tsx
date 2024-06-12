@@ -822,7 +822,6 @@ function PlasmicBookList__RenderFunc(props: {
                         role={"img"}
                       />
                     }
-                    isDisabled={undefined}
                     showStartIcon={undefined}
                     space={undefined}
                     startIcon={

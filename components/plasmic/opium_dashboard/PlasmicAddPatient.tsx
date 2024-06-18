@@ -817,6 +817,54 @@ function PlasmicAddPatient__RenderFunc(props: {
           ) {
             $steps["resetPassword"] = await $steps["resetPassword"];
           }
+
+          $steps["updateNationalCodeValue"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["nationalCode", "value"]
+                  },
+                  operation: 0
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateNationalCodeValue"] != null &&
+            typeof $steps["updateNationalCodeValue"] === "object" &&
+            typeof $steps["updateNationalCodeValue"].then === "function"
+          ) {
+            $steps["updateNationalCodeValue"] = await $steps[
+              "updateNationalCodeValue"
+            ];
+          }
+
+          $steps["updateNationalCodeValue2"] = true
+            ? (() => {
+                const actionArgs = { args: [] };
+                return $globalActions["GrowthBook.setAttributes"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
+          if (
+            $steps["updateNationalCodeValue2"] != null &&
+            typeof $steps["updateNationalCodeValue2"] === "object" &&
+            typeof $steps["updateNationalCodeValue2"].then === "function"
+          ) {
+            $steps["updateNationalCodeValue2"] = await $steps[
+              "updateNationalCodeValue2"
+            ];
+          }
         }}
         startIcon={
           <ChevronRightIcon

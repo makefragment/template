@@ -632,7 +632,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                                       book_id: $props.bookId,
                                       ref_id: $props.refId
                                     },
-                                    type: "first-delete-button"
+                                    type: "click-first-delete-button"
                                   };
                                 } catch (e) {
                                   if (
@@ -957,7 +957,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                                         book_id: $props.bookId,
                                         ref_id: $props.refId
                                       },
-                                      type: "delete-button"
+                                      type: "click-delete-button-in-patient-info"
                                     };
                                   } catch (e) {
                                     if (
@@ -1151,7 +1151,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                               center_id: $props.centerId,
                               book_id: $props.bookId
                             },
-                            type: "patient-info"
+                            type: "click-for-patient-info"
                           };
                         } catch (e) {
                           if (

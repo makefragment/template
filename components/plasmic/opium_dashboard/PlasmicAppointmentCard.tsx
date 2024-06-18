@@ -1866,14 +1866,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                               group: "book-status",
                               data: {
                                 center_id: $props.centerId,
-                                user_center_id: $props.userCenterId,
-                                type: 3,
-                                fullname:
-                                  $state.fullname ?? $state.inputfullname.value,
-                                cell: $state.cell ?? $state.inputcell.value,
-                                national_code: $state.nationalCode.value,
-                                bookid: $props.bookId,
-                                description: $state.descriptionInput.value
+                                bookid: $props.bookId
                               },
                               type: "came"
                             };

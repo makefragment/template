@@ -14,6 +14,7 @@
     "@plasmicapp/cli": "^0.1.330",
     "@plasmicapp/host": "^1.0.196",
     "@plasmicapp/react-web": "^0.2.337",
+    "@plasmicpkgs/plasmic-query": "^0.0.216",
     "@radix-ui/react-popover": "^1.0.7",
     "axios": "^1.7.2",
     "jalali-moment": "^3.3.11",

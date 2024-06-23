@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter%3Aital%2Cwght%400%2C400%3B0%2C600%3B0%2C700&family=Inconsolata%3Aital%2Cwght%400%2C400%3B0%2C600%3B0%2C700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Inconsolata%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700&display=swap");
 
 .plasmic_tokens {
   --plsmc-standard-width: 800px;
@@ -11,12 +11,12 @@
 }
 
 .plasmic_default_styles {
-  --mixin-rcPmAzzdS4tm_font-family: "Inter", sans-serif;
+  --mixin-rcPmAzzdS4tm_font-family: "Vazirmatn", sans-serif;
   --mixin-rcPmAzzdS4tm_font-size: 16px;
   --mixin-rcPmAzzdS4tm_font-weight: 400;
   --mixin-rcPmAzzdS4tm_font-style: normal;
   --mixin-rcPmAzzdS4tm_color: #535353;
-  --mixin-rcPmAzzdS4tm_text-align: left;
+  --mixin-rcPmAzzdS4tm_text-align: right;
   --mixin-rcPmAzzdS4tm_text-transform: none;
   --mixin-rcPmAzzdS4tm_line-height: 1.5;
   --mixin-rcPmAzzdS4tm_letter-spacing: normal;

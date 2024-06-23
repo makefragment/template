@@ -140,8 +140,6 @@ function PlasmicBookStatusButton__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = useCurrentUser?.() || {};
-
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -161,6 +159,12 @@ function PlasmicBookStatusButton__RenderFunc(props: {
         type: "private",
         variableType: "variant",
         initFunc: ({ $props, $state, $queries, $ctx }) => $props.deleted
+      },
+      {
+        path: "loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -230,7 +234,14 @@ function PlasmicBookStatusButton__RenderFunc(props: {
         className={classNames("__wab_instance", sty.button, {
           [sty.buttoncame]: hasVariant($state, "came", "came"),
           [sty.buttondeleted]: hasVariant($state, "deleted", "deleted"),
-          [sty.buttonvisited]: hasVariant($state, "visited", "visited")
+          [sty.buttonvisited]: hasVariant($state, "visited", "visited"),
+          [sty.buttonvisited_came]:
+            hasVariant($state, "came", "came") &&
+            hasVariant($state, "visited", "visited"),
+          [sty.buttonvisited_deleted_came]:
+            hasVariant($state, "came", "came") &&
+            hasVariant($state, "visited", "visited") &&
+            hasVariant($state, "deleted", "deleted")
         })}
         color={
           hasVariant($state, "deleted", "deleted")
@@ -245,8 +256,50 @@ function PlasmicBookStatusButton__RenderFunc(props: {
             role={"img"}
           />
         }
+        loading={(() => {
+          try {
+            return $state.loading;
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return [];
+            }
+            throw e;
+          }
+        })()}
         onClick={async event => {
           const $steps = {};
+
+          $steps["updateLoading"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["loading"]
+                  },
+                  operation: 0,
+                  value: true
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateLoading"] != null &&
+            typeof $steps["updateLoading"] === "object" &&
+            typeof $steps["updateLoading"].then === "function"
+          ) {
+            $steps["updateLoading"] = await $steps["updateLoading"];
+          }
 
           $steps["runOnclick"] = true
             ? (() => {
@@ -262,6 +315,35 @@ function PlasmicBookStatusButton__RenderFunc(props: {
             typeof $steps["runOnclick"].then === "function"
           ) {
             $steps["runOnclick"] = await $steps["runOnclick"];
+          }
+
+          $steps["updateLoading2"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["loading"]
+                  },
+                  operation: 0,
+                  value: false
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateLoading2"] != null &&
+            typeof $steps["updateLoading2"] === "object" &&
+            typeof $steps["updateLoading2"].then === "function"
+          ) {
+            $steps["updateLoading2"] = await $steps["updateLoading2"];
           }
         }}
         outline={

@@ -68,7 +68,7 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicPatientList.module.css"; // plasmic-import: uw2UKvNlq2Yr/css
 
-import Icon17Icon from "../fragment_design_system/icons/PlasmicIcon__Icon17"; // plasmic-import: eCsLCdWP9DST/icon
+import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
 
 createPlasmicElementProxy;
 
@@ -94,6 +94,7 @@ export const PlasmicPatientList__ArgProps = new Array<ArgPropType>(
 export type PlasmicPatientList__OverridesType = {
   root?: Flex__<"div">;
   sideEffect?: Flex__<typeof SideEffect>;
+  freeBox?: Flex__<"div">;
   svg?: Flex__<"svg">;
   appointmentCard?: Flex__<typeof AppointmentCard>;
 };
@@ -146,8 +147,6 @@ function PlasmicPatientList__RenderFunc(props: {
 
   const $globalActions = useGlobalActions?.();
 
-  const currentUser = useCurrentUser?.() || {};
-
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -160,7 +159,7 @@ function PlasmicPatientList__RenderFunc(props: {
         path: "loading",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
+        initFunc: ({ $props, $state, $queries, $ctx }) => true
       },
       {
         path: "visitChannel",
@@ -206,7 +205,7 @@ function PlasmicPatientList__RenderFunc(props: {
         className={classNames("__wab_instance", sty.sideEffect)}
         deps={(() => {
           try {
-            return [$props.selectedCenter];
+            return [$props.selectedCenter, $props.centers, $props.date];
           } catch (e) {
             if (
               e instanceof TypeError ||
@@ -220,57 +219,15 @@ function PlasmicPatientList__RenderFunc(props: {
         onMount={async () => {
           const $steps = {};
 
-          $steps["apiAllVisitorsData"] = true
-            ? (() => {
-                const actionArgs = {
-                  args: [
-                    "GET",
-                    "https://apigw.paziresh24.com/v1/allvisitorsdata",
-                    (() => {
-                      try {
-                        return {
-                          centers:
-                            $props.selectedCenter == "all"
-                              ? $props.centers.map(center => center.id)
-                              : $props.selectedCenter,
-                          date: $props.date
-                        };
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return undefined;
-                        }
-                        throw e;
-                      }
-                    })()
-                  ]
-                };
-                return $globalActions["Fragment.apiRequest"]?.apply(null, [
-                  ...actionArgs.args
-                ]);
-              })()
-            : undefined;
-          if (
-            $steps["apiAllVisitorsData"] != null &&
-            typeof $steps["apiAllVisitorsData"] === "object" &&
-            typeof $steps["apiAllVisitorsData"].then === "function"
-          ) {
-            $steps["apiAllVisitorsData"] = await $steps["apiAllVisitorsData"];
-          }
-
-          $steps["updateAllvisitorsdata"] = true
+          $steps["updateLoading"] = true
             ? (() => {
                 const actionArgs = {
                   variable: {
                     objRoot: $state,
-                    variablePath: ["allvisitorsdata"]
+                    variablePath: ["loading"]
                   },
                   operation: 0,
-                  value: $steps.apiAllVisitorsData.data
-                    .map(item => item.data)
-                    .flat()
+                  value: true
                 };
                 return (({ variable, value, startIndex, deleteCount }) => {
                   if (!variable) {
@@ -284,6 +241,80 @@ function PlasmicPatientList__RenderFunc(props: {
               })()
             : undefined;
           if (
+            $steps["updateLoading"] != null &&
+            typeof $steps["updateLoading"] === "object" &&
+            typeof $steps["updateLoading"].then === "function"
+          ) {
+            $steps["updateLoading"] = await $steps["updateLoading"];
+          }
+
+          $steps["apiAllVisitorsData"] =
+            $props.centers.length > 0
+              ? (() => {
+                  const actionArgs = {
+                    args: [
+                      "GET",
+                      "https://apigw.paziresh24.com/v1/allvisitorsdata",
+                      (() => {
+                        try {
+                          return {
+                            centers:
+                              $props.selectedCenter == "all"
+                                ? $props.centers.map(center => center.id)
+                                : $props.selectedCenter,
+                            date: $props.date
+                          };
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()
+                    ]
+                  };
+                  return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                    ...actionArgs.args
+                  ]);
+                })()
+              : undefined;
+          if (
+            $steps["apiAllVisitorsData"] != null &&
+            typeof $steps["apiAllVisitorsData"] === "object" &&
+            typeof $steps["apiAllVisitorsData"].then === "function"
+          ) {
+            $steps["apiAllVisitorsData"] = await $steps["apiAllVisitorsData"];
+          }
+
+          $steps["updateAllvisitorsdata"] =
+            $props.centers.length > 0
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["allvisitorsdata"]
+                    },
+                    operation: 0,
+                    value: $steps.apiAllVisitorsData.data
+                      .map(item => item.data)
+                      .flat()
+                      .sort((a, b) => new Date(a.from) - new Date(b.from))
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+
+                    $stateSet(objRoot, variablePath, value);
+                    return value;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+          if (
             $steps["updateAllvisitorsdata"] != null &&
             typeof $steps["updateAllvisitorsdata"] === "object" &&
             typeof $steps["updateAllvisitorsdata"].then === "function"
@@ -292,12 +323,42 @@ function PlasmicPatientList__RenderFunc(props: {
               "updateAllvisitorsdata"
             ];
           }
+
+          $steps["updateLoading2"] =
+            $props.centers.length > 0
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["loading"]
+                    },
+                    operation: 0,
+                    value: false
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+
+                    $stateSet(objRoot, variablePath, value);
+                    return value;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+          if (
+            $steps["updateLoading2"] != null &&
+            typeof $steps["updateLoading2"] === "object" &&
+            typeof $steps["updateLoading2"].then === "function"
+          ) {
+            $steps["updateLoading2"] = await $steps["updateLoading2"];
+          }
         }}
       />
 
       {(() => {
         try {
-          return $state.loading == true;
+          return $state.loading;
         } catch (e) {
           if (
             e instanceof TypeError ||
@@ -308,12 +369,18 @@ function PlasmicPatientList__RenderFunc(props: {
           throw e;
         }
       })() ? (
-        <Icon17Icon
-          data-plasmic-name={"svg"}
-          data-plasmic-override={overrides.svg}
-          className={classNames(projectcss.all, sty.svg)}
-          role={"img"}
-        />
+        <div
+          data-plasmic-name={"freeBox"}
+          data-plasmic-override={overrides.freeBox}
+          className={classNames(projectcss.all, sty.freeBox)}
+        >
+          <Icon10Icon
+            data-plasmic-name={"svg"}
+            data-plasmic-override={overrides.svg}
+            className={classNames(projectcss.all, sty.svg)}
+            role={"img"}
+          />
+        </div>
       ) : null}
       {(() => {
         try {
@@ -410,6 +477,21 @@ function PlasmicPatientList__RenderFunc(props: {
                 cell={(() => {
                   try {
                     return currentItem.cell;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
+                centerId={(() => {
+                  try {
+                    return $props.centers.find(
+                      item => item.user_center_id === currentItem.user_center_id
+                    ).id;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -594,8 +676,9 @@ function PlasmicPatientList__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "sideEffect", "svg", "appointmentCard"],
+  root: ["root", "sideEffect", "freeBox", "svg", "appointmentCard"],
   sideEffect: ["sideEffect"],
+  freeBox: ["freeBox", "svg"],
   svg: ["svg"],
   appointmentCard: ["appointmentCard"]
 } as const;
@@ -605,6 +688,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   sideEffect: typeof SideEffect;
+  freeBox: "div";
   svg: "svg";
   appointmentCard: typeof AppointmentCard;
 };
@@ -670,6 +754,7 @@ export const PlasmicPatientList = Object.assign(
   {
     // Helper components rendering sub-elements
     sideEffect: makeNodeComponent("sideEffect"),
+    freeBox: makeNodeComponent("freeBox"),
     svg: makeNodeComponent("svg"),
     appointmentCard: makeNodeComponent("appointmentCard"),
 

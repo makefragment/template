@@ -64,7 +64,6 @@ import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import { DatePicker } from "@/fragment/components/date-picker"; // plasmic-import: b38lDo6Nm8Rh/codeComponent
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -88,18 +87,16 @@ export const PlasmicAddPatient__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicAddPatient__ArgsType = {
   centerId?: string;
-  serviceId?: string;
   userCenterId?: string;
   type?: string;
-  serviceId2?: string;
+  booked?: () => void;
 };
 type ArgPropType = keyof PlasmicAddPatient__ArgsType;
 export const PlasmicAddPatient__ArgProps = new Array<ArgPropType>(
   "centerId",
-  "serviceId",
   "userCenterId",
   "type",
-  "serviceId2"
+  "booked"
 );
 
 export type PlasmicAddPatient__OverridesType = {
@@ -120,10 +117,9 @@ export type PlasmicAddPatient__OverridesType = {
 
 export interface DefaultAddPatientProps {
   centerId?: string;
-  serviceId?: string;
   userCenterId?: string;
   type?: string;
-  serviceId2?: string;
+  booked?: () => void;
   className?: string;
 }
 
@@ -157,8 +153,6 @@ function PlasmicAddPatient__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const $globalActions = useGlobalActions?.();
-
-  const currentUser = useCurrentUser?.() || {};
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -727,6 +721,51 @@ function PlasmicAddPatient__RenderFunc(props: {
             $steps["finishLoading"] = await $steps["finishLoading"];
           }
 
+          $steps["clickSubmit"] =
+            $state.booktime.open === true
+              ? (() => {
+                  const actionArgs = {
+                    args: [
+                      (() => {
+                        try {
+                          return {
+                            group: "add-book",
+                            data: {
+                              center_id: $props.centerId,
+                              user_center_id: $props.userCenterId,
+                              type: 3,
+                              fullname:
+                                $state.fullname ?? $state.inputfullname.value,
+                              cell: $state.cell ?? $state.inputcell.value,
+                              national_code: $state.nationalCode.value
+                            },
+                            type: "first-submit"
+                          };
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()
+                    ]
+                  };
+                  return $globalActions["Splunk.sendLog"]?.apply(null, [
+                    ...actionArgs.args
+                  ]);
+                })()
+              : undefined;
+          if (
+            $steps["clickSubmit"] != null &&
+            typeof $steps["clickSubmit"] === "object" &&
+            typeof $steps["clickSubmit"].then === "function"
+          ) {
+            $steps["clickSubmit"] = await $steps["clickSubmit"];
+          }
+
           $steps["registerRequest"] = true
             ? (() => {
                 const actionArgs = {
@@ -777,6 +816,54 @@ function PlasmicAddPatient__RenderFunc(props: {
             typeof $steps["resetPassword"].then === "function"
           ) {
             $steps["resetPassword"] = await $steps["resetPassword"];
+          }
+
+          $steps["updateNationalCodeValue"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["nationalCode", "value"]
+                  },
+                  operation: 0
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateNationalCodeValue"] != null &&
+            typeof $steps["updateNationalCodeValue"] === "object" &&
+            typeof $steps["updateNationalCodeValue"].then === "function"
+          ) {
+            $steps["updateNationalCodeValue"] = await $steps[
+              "updateNationalCodeValue"
+            ];
+          }
+
+          $steps["updateNationalCodeValue2"] = true
+            ? (() => {
+                const actionArgs = { args: [] };
+                return $globalActions["GrowthBook.setAttributes"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
+          if (
+            $steps["updateNationalCodeValue2"] != null &&
+            typeof $steps["updateNationalCodeValue2"] === "object" &&
+            typeof $steps["updateNationalCodeValue2"].then === "function"
+          ) {
+            $steps["updateNationalCodeValue2"] = await $steps[
+              "updateNationalCodeValue2"
+            ];
           }
         }}
         startIcon={
@@ -959,11 +1046,9 @@ function PlasmicAddPatient__RenderFunc(props: {
                   try {
                     return `https://apigw.paziresh24.com/v2/freeturns?center_id=${
                       $props.centerId
-                    }&user_center_id=${$props.userCenterId}&service_id=${
-                      $props.serviceId
-                    }&from=${Math.floor(Date.now() / 1000)}&to=${
-                      Math.floor(Date.now() / 1000) + 60 * 24 * 60 * 60
-                    }`;
+                    }&user_center_id=${$props.userCenterId}&from=${Math.floor(
+                      Date.now() / 1000
+                    )}&to=${Math.floor(Date.now() / 1000) + 10 * 24 * 60 * 60}`;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -1140,7 +1225,6 @@ function PlasmicAddPatient__RenderFunc(props: {
                                         return {
                                           center_id: $props.centerId,
                                           user_center_id: $props.userCenterId,
-                                          service_id: $props.serviceId2,
                                           type: 3,
                                           from_timestamp:
                                             $ctx.fetchedDatafirstfreeturn[0]
@@ -1191,13 +1275,12 @@ function PlasmicAddPatient__RenderFunc(props: {
                                         return {
                                           center_id: $props.centerId,
                                           user_center_id: $props.userCenterId,
-                                          service_id: $props.serviceId2,
                                           type: 3,
                                           fullname:
-                                            $state.fullname ??
+                                            $state.fullname?.trim() ??
                                             $state.inputfullname.value,
                                           cell:
-                                            $state.cell ??
+                                            $state.cell?.trim() ??
                                             $state.inputcell.value,
                                           request_code:
                                             $steps.suspend.data.request_code,
@@ -1231,7 +1314,8 @@ function PlasmicAddPatient__RenderFunc(props: {
                           }
 
                           $steps["invokeGlobalAction"] =
-                            $steps.bookApi.data.status == "28"
+                            $steps.bookApi.data.status == "28" ||
+                            $steps.bookApi.data.status == "0"
                               ? (() => {
                                   const actionArgs = {
                                     args: [
@@ -1256,7 +1340,8 @@ function PlasmicAddPatient__RenderFunc(props: {
                           }
 
                           $steps["updateBooktimeOpen"] =
-                            $steps.bookApi.data.status == "28"
+                            $steps.bookApi.data.status == "28" ||
+                            $steps.bookApi.data.status == "0"
                               ? (() => {
                                   const actionArgs = {
                                     variable: {
@@ -1330,35 +1415,47 @@ function PlasmicAddPatient__RenderFunc(props: {
                           }
 
                           $steps["eventSubmitBook"] =
-                            $steps.bookApi.data.status == "28"
+                            $steps.bookApi.data.status == "28" ||
+                            $steps.bookApi.data.status == "0"
                               ? (() => {
                                   const actionArgs = {
-                                    customFunction: async () => {
-                                      return $$.splunkEvent({
-                                        group: "add-book",
-                                        data: {
-                                          center_id: $props.centerId,
-                                          user_center_id: $props.userCenterId,
-                                          service_id: $props.serviceId2,
-                                          type: 3,
-                                          fullname:
-                                            $state.fullname ??
-                                            $state.inputfullname.value,
-                                          cell:
-                                            $state.cell ??
-                                            $state.inputcell.value,
-                                          national_code:
-                                            $state.nationalCode.value
-                                        },
-                                        type: "add-freeturn-book",
-                                        token:
-                                          "6d18640a-95c3-4368-a8d0-dc0beae3a44b"
-                                      });
-                                    }
+                                    args: [
+                                      (() => {
+                                        try {
+                                          return {
+                                            group: "add-book",
+                                            data: {
+                                              center_id: $props.centerId,
+                                              user_center_id:
+                                                $props.userCenterId,
+                                              type: 3,
+                                              fullname:
+                                                $state.fullname ??
+                                                $state.inputfullname.value,
+                                              cell:
+                                                $state.cell ??
+                                                $state.inputcell.value,
+                                              national_code:
+                                                $state.nationalCode.value
+                                            },
+                                            type: "add-first-free-book"
+                                          };
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                    ]
                                   };
-                                  return (({ customFunction }) => {
-                                    return customFunction();
-                                  })?.apply(null, [actionArgs]);
+                                  return $globalActions[
+                                    "Splunk.sendLog"
+                                  ]?.apply(null, [...actionArgs.args]);
                                 })()
                               : undefined;
                           if (
@@ -1370,7 +1467,28 @@ function PlasmicAddPatient__RenderFunc(props: {
                               "eventSubmitBook"
                             ];
                           }
+
+                          $steps["runBooked"] =
+                            $steps.bookApi.data.status == "28" ||
+                            $steps.bookApi.data.status == "0"
+                              ? (() => {
+                                  const actionArgs = {
+                                    eventRef: $props["booked"]
+                                  };
+                                  return (({ eventRef, args }) => {
+                                    return eventRef?.(...(args ?? []));
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["runBooked"] != null &&
+                            typeof $steps["runBooked"] === "object" &&
+                            typeof $steps["runBooked"].then === "function"
+                          ) {
+                            $steps["runBooked"] = await $steps["runBooked"];
+                          }
                         }}
+                        space={undefined}
                         startIcon={
                           <ChevronRightIcon
                             className={classNames(
@@ -1470,6 +1588,60 @@ function PlasmicAddPatient__RenderFunc(props: {
                           ) {
                             $steps["updatePreferBooktimeOpen"] = await $steps[
                               "updatePreferBooktimeOpen"
+                            ];
+                          }
+
+                          $steps["clickOnPreferBook"] =
+                            $steps.updatePreferBooktimeOpen === true
+                              ? (() => {
+                                  const actionArgs = {
+                                    args: [
+                                      (() => {
+                                        try {
+                                          return {
+                                            group: "add-book",
+                                            data: {
+                                              center_id: $props.centerId,
+                                              user_center_id:
+                                                $props.userCenterId,
+                                              type: 3,
+                                              fullname:
+                                                $state.fullname ??
+                                                $state.inputfullname.value,
+                                              cell:
+                                                $state.cell ??
+                                                $state.inputcell.value,
+                                              national_code:
+                                                $state.nationalCode.value
+                                            },
+                                            type: "click-prefer-book"
+                                          };
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                    ]
+                                  };
+                                  return $globalActions[
+                                    "Splunk.sendLog"
+                                  ]?.apply(null, [...actionArgs.args]);
+                                })()
+                              : undefined;
+                          if (
+                            $steps["clickOnPreferBook"] != null &&
+                            typeof $steps["clickOnPreferBook"] === "object" &&
+                            typeof $steps["clickOnPreferBook"].then ===
+                              "function"
+                          ) {
+                            $steps["clickOnPreferBook"] = await $steps[
+                              "clickOnPreferBook"
                             ];
                           }
                         }}
@@ -1700,8 +1872,6 @@ function PlasmicAddPatient__RenderFunc(props: {
                                         $props.centerId
                                       }&user_center_id=${
                                         $props.userCenterId
-                                      }&service_id=${
-                                        $props.serviceId
                                       }&from=${from}&to=${to.getTime() / 1000}`;
                                     })();
                                   } catch (e) {
@@ -1746,6 +1916,43 @@ function PlasmicAddPatient__RenderFunc(props: {
                                             )}
                                             role={"img"}
                                           />
+                                        </div>
+                                      ) : null}
+                                      {(() => {
+                                        try {
+                                          return (
+                                            !$state.loadingButton &&
+                                            $ctx?.fetchedData?.[0]?.filds
+                                              ?.result?.length == 0
+                                          );
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return true;
+                                          }
+                                          throw e;
+                                        }
+                                      })() ? (
+                                        <div
+                                          className={classNames(
+                                            projectcss.all,
+                                            sty.freeBox__k5TzV
+                                          )}
+                                        >
+                                          <div
+                                            className={classNames(
+                                              projectcss.all,
+                                              projectcss.__wab_text,
+                                              sty.text__tnT4M
+                                            )}
+                                          >
+                                            {
+                                              "\u0646\u0648\u0628\u062a \u062e\u0627\u0644\u06cc \u062f\u0631 \u0627\u06cc\u0646 \u062a\u0627\u0631\u06cc\u062e \u0648\u062c\u0648\u062f \u0646\u062f\u0627\u0631\u062f."
+                                            }
+                                          </div>
                                         </div>
                                       ) : null}
                                       {(() => {
@@ -1955,16 +2162,14 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                                         $props.centerId,
                                                                       user_center_id:
                                                                         $props.userCenterId,
-                                                                      service_id:
-                                                                        $props.serviceId2,
                                                                       type: 3,
                                                                       fullname:
-                                                                        $state.fullname ??
+                                                                        $state.fullname?.trim() ??
                                                                         $state
                                                                           .inputfullname
                                                                           .value,
                                                                       cell:
-                                                                        $state.cell ??
+                                                                        $state.cell?.trim() ??
                                                                         $state
                                                                           .inputcell
                                                                           .value,
@@ -2019,7 +2224,9 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                       "invokeGlobalAction"
                                                     ] =
                                                       $steps.preferBook.data
-                                                        .status == "28"
+                                                        .status == "28" ||
+                                                      $steps.preferBook.data
+                                                        .status == "0"
                                                         ? (() => {
                                                             const actionArgs = {
                                                               args: [
@@ -2056,7 +2263,9 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                       "updatePreferBooktimeOpen2"
                                                     ] =
                                                       $steps.preferBook.data
-                                                        .status == "28"
+                                                        .status == "28" ||
+                                                      $steps.preferBook.data
+                                                        .status == "0"
                                                         ? (() => {
                                                             const actionArgs = {
                                                               variable: {
@@ -2116,7 +2325,9 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                       "updatePreferBooktimeOpen"
                                                     ] =
                                                       $steps.preferBook.data
-                                                        .status == "28"
+                                                        .status == "28" ||
+                                                      $steps.preferBook.data
+                                                        .status == "0"
                                                         ? (() => {
                                                             const actionArgs = {
                                                               variable: {
@@ -2176,7 +2387,9 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                       "updateBooktimeOpen"
                                                     ] =
                                                       $steps.preferBook.data
-                                                        .status == "28"
+                                                        .status == "28" ||
+                                                      $steps.preferBook.data
+                                                        .status == "0"
                                                         ? (() => {
                                                             const actionArgs = {
                                                               variable: {
@@ -2288,13 +2501,15 @@ function PlasmicAddPatient__RenderFunc(props: {
 
                                                     $steps["eventSubmitBook"] =
                                                       $steps.preferBook.data
-                                                        .status == "28"
+                                                        .status == "28" ||
+                                                      $steps.preferBook.data
+                                                        .status == "0"
                                                         ? (() => {
                                                             const actionArgs = {
-                                                              customFunction:
-                                                                async () => {
-                                                                  return $$.splunkEvent(
-                                                                    {
+                                                              args: [
+                                                                (() => {
+                                                                  try {
+                                                                    return {
                                                                       group:
                                                                         "add-book",
                                                                       data: {
@@ -2302,8 +2517,6 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                                           $props.centerId,
                                                                         user_center_id:
                                                                           $props.userCenterId,
-                                                                        service_id:
-                                                                          $props.serviceId2,
                                                                         type: 3,
                                                                         fullname:
                                                                           $state.fullname ??
@@ -2320,19 +2533,26 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                                             .nationalCode
                                                                             .value
                                                                       },
-                                                                      type: "add-prefer-book",
-                                                                      token:
-                                                                        "6d18640a-95c3-4368-a8d0-dc0beae3a44b"
+                                                                      type: "add-prefer-book"
+                                                                    };
+                                                                  } catch (e) {
+                                                                    if (
+                                                                      e instanceof
+                                                                        TypeError ||
+                                                                      e?.plasmicType ===
+                                                                        "PlasmicUndefinedDataError"
+                                                                    ) {
+                                                                      return undefined;
                                                                     }
-                                                                  );
-                                                                }
+                                                                    throw e;
+                                                                  }
+                                                                })()
+                                                              ]
                                                             };
-                                                            return (({
-                                                              customFunction
-                                                            }) => {
-                                                              return customFunction();
-                                                            })?.apply(null, [
-                                                              actionArgs
+                                                            return $globalActions[
+                                                              "Splunk.sendLog"
+                                                            ]?.apply(null, [
+                                                              ...actionArgs.args
                                                             ]);
                                                           })()
                                                         : undefined;
@@ -2352,6 +2572,43 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                       ] = await $steps[
                                                         "eventSubmitBook"
                                                       ];
+                                                    }
+
+                                                    $steps["runBooked"] =
+                                                      $steps.preferBook.data
+                                                        .status == "28" ||
+                                                      $steps.preferBook.data
+                                                        .status == "0"
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              eventRef:
+                                                                $props["booked"]
+                                                            };
+                                                            return (({
+                                                              eventRef,
+                                                              args
+                                                            }) => {
+                                                              return eventRef?.(
+                                                                ...(args ?? [])
+                                                              );
+                                                            })?.apply(null, [
+                                                              actionArgs
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps["runBooked"] !=
+                                                        null &&
+                                                      typeof $steps[
+                                                        "runBooked"
+                                                      ] === "object" &&
+                                                      typeof $steps["runBooked"]
+                                                        .then === "function"
+                                                    ) {
+                                                      $steps["runBooked"] =
+                                                        await $steps[
+                                                          "runBooked"
+                                                        ];
                                                     }
                                                   }}
                                                 >

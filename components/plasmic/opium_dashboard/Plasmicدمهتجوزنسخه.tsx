@@ -59,11 +59,17 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
+import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
+
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./Plasmicدمهتجوزنسخه.module.css"; // plasmic-import: 1AR8vXE8xbWC/css
+
+import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
+import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 
 createPlasmicElementProxy;
 
@@ -78,6 +84,7 @@ export const Plasmicدمهتجوزنسخه__ArgProps = new Array<ArgPropType>();
 
 export type Plasmicدمهتجوزنسخه__OverridesType = {
   root?: Flex__<"div">;
+  dialog?: Flex__<typeof Dialog>;
 };
 
 export interface DefaultدمهتجوزنسخهProps {
@@ -113,6 +120,26 @@ function Plasmicدمهتجوزنسخه__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = useGlobalActions?.();
+
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "dialog.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
+
   return (
     <div
       data-plasmic-name={"root"}
@@ -128,18 +155,52 @@ function Plasmicدمهتجوزنسخه__RenderFunc(props: {
         plasmic_fragment_design_system_css.plasmic_tokens,
         sty.root
       )}
-    />
+    >
+      <Dialog
+        data-plasmic-name={"dialog"}
+        data-plasmic-override={overrides.dialog}
+        className={classNames("__wab_instance", sty.dialog)}
+        onOpenChange={async (...eventArgs: any) => {
+          generateStateOnChangeProp($state, ["dialog", "open"]).apply(
+            null,
+            eventArgs
+          );
+          (async val => {
+            const $steps = {};
+
+            $steps["invokeGlobalAction"] = true
+              ? (() => {
+                  const actionArgs = { args: [] };
+                  return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                    ...actionArgs.args
+                  ]);
+                })()
+              : undefined;
+            if (
+              $steps["invokeGlobalAction"] != null &&
+              typeof $steps["invokeGlobalAction"] === "object" &&
+              typeof $steps["invokeGlobalAction"].then === "function"
+            ) {
+              $steps["invokeGlobalAction"] = await $steps["invokeGlobalAction"];
+            }
+          }).apply(null, eventArgs);
+        }}
+        open={generateStateValueProp($state, ["dialog", "open"])}
+      />
+    </div>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root"]
+  root: ["root", "dialog"],
+  dialog: ["dialog"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  dialog: typeof Dialog;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -203,6 +264,7 @@ export const Plasmicدمهتجوزنسخه = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    dialog: makeNodeComponent("dialog"),
 
     // Metadata about props expected for Plasmicدمهتجوزنسخه
     internalVariantProps: Plasmicدمهتجوزنسخه__VariantProps,

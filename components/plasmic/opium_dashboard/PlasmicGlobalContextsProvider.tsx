@@ -9,23 +9,32 @@ import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
 import { Fragment } from "@/fragment/fragment"; // plasmic-import: XrnTG1nYzajh/codeComponent
 import { Splunk } from "@/fragment/splunk"; // plasmic-import: D-MouOpzo74u/codeComponent
 import { GrowthBook } from "@/fragment/growthbook"; // plasmic-import: f0pzGvBkxmac/codeComponent
+import { Hamdast } from "@/hamdast/hamdast"; // plasmic-import: PpweMV5hxHPx/codeComponent
 
 export interface GlobalContextsProviderProps {
   children?: React.ReactElement;
   fragmentProps?: Partial<
     Omit<React.ComponentProps<typeof Fragment>, "children">
   >;
-
   splunkProps?: Partial<Omit<React.ComponentProps<typeof Splunk>, "children">>;
   growthBookProps?: Partial<
     Omit<React.ComponentProps<typeof GrowthBook>, "children">
+  >;
+  hamdastProps?: Partial<
+    Omit<React.ComponentProps<typeof Hamdast>, "children">
   >;
 }
 
 export default function GlobalContextsProvider(
   props: GlobalContextsProviderProps
 ) {
-  const { children, fragmentProps, splunkProps, growthBookProps } = props;
+  const {
+    children,
+    fragmentProps,
+    splunkProps,
+    growthBookProps,
+    hamdastProps
+  } = props;
 
   return (
     <Fragment
@@ -72,7 +81,16 @@ export default function GlobalContextsProvider(
               : undefined
           }
         >
-          {children}
+          <Hamdast
+            {...hamdastProps}
+            clientKey={
+              hamdastProps && "clientKey" in hamdastProps
+                ? hamdastProps.clientKey!
+                : "SZA4Q3NKjR4bZH9eCm0IZrH7omQV2kmr"
+            }
+          >
+            {children}
+          </Hamdast>
         </GrowthBook>
       </Splunk>
     </Fragment>

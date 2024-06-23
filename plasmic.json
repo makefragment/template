@@ -951,6 +951,12 @@
           "name": "GrowthBook",
           "displayName": "GrowthBook",
           "componentImportPath": "@/fragment/growthbook"
+        },
+        {
+          "id": "PpweMV5hxHPx",
+          "name": "Hamdast",
+          "displayName": "Hamdast",
+          "componentImportPath": "@/hamdast/hamdast"
         }
       ],
       "customFunctions": []

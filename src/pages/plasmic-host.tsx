@@ -11,6 +11,7 @@ import { DatePicker, datePickerMeta } from "@/fragment/components/date-picker";
 import { TimePicker, timePickerMeta } from "@/fragment/components/time-picker";
 import { Splunk, splunkMeta } from "@/fragment/splunk";
 import { Popover, popoverMeta } from "@/fragment/components/popover";
+import { Hamdast, hamdastMeta } from "@/hamdast/hamdast";
 
 export default function PlasmicHost() {
   return <PlasmicCanvasHost />;
@@ -19,6 +20,7 @@ export default function PlasmicHost() {
 registerGlobalContext(Fragment, fragmentMeta);
 registerGlobalContext(GrowthBook, growthBookMeta);
 registerGlobalContext(Splunk, splunkMeta);
+registerGlobalContext(Hamdast, hamdastMeta);
 registerComponent(DatePicker, datePickerMeta);
 registerComponent(TimePicker, timePickerMeta);
 registerComponent(Popover, popoverMeta);

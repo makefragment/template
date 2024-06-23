@@ -12,10 +12,14 @@ type HamdastProps = React.PropsWithChildren<{
 
 export const Hamdast = ({ children, clientKey }: HamdastProps) => {
   useEffect(() => {
-    if (!!(window as any).hamdast) {
+    if (
+      !!(window as any).hamdast &&
+      (window as any)?.hamdast?.clientKey !== clientKey
+    ) {
       (window as any).hamdast.initialize(clientKey);
     }
-  }, []);
+  }, [clientKey]);
+
   const actions = useMemo(() => ({}), []);
 
   return (

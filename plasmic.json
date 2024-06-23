@@ -35,7 +35,7 @@
           "projectId": "kE2m6SaQqQewvhrZdkGhrf",
           "renderModuleFilePath": "plasmic/app_store/PlasmicAppStoreCatalogue.tsx",
           "importSpec": {
-            "modulePath": "../src/pages/index.tsx"
+            "modulePath": "../src/pages/old.tsx"
           },
           "cssFilePath": "plasmic/app_store/PlasmicAppStoreCatalogue.module.css",
           "scheme": "blackbox",
@@ -147,7 +147,7 @@
           "projectId": "kE2m6SaQqQewvhrZdkGhrf",
           "renderModuleFilePath": "plasmic/app_store/PlasmicAppStoreCatalogue2.tsx",
           "importSpec": {
-            "modulePath": "../src/pages/new-page.tsx"
+            "modulePath": "../src/pages/index.tsx"
           },
           "cssFilePath": "plasmic/app_store/PlasmicAppStoreCatalogue2.module.css",
           "scheme": "blackbox",
@@ -280,7 +280,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-query"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     }
   ],
   "globalVariants": {

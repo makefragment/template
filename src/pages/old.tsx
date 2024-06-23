@@ -4,23 +4,23 @@ import * as React from "react";
 import { PageParamsProvider as PageParamsProvider__ } from "@plasmicapp/react-web/lib/host";
 import GlobalContextsProvider from "../../components/plasmic/app_store/PlasmicGlobalContextsProvider";
 
-import { PlasmicAppStoreCatalogue2 } from "../../components/plasmic/app_store/PlasmicAppStoreCatalogue2";
+import { PlasmicAppStoreCatalogue } from "../../components/plasmic/app_store/PlasmicAppStoreCatalogue";
 import { useRouter } from "next/router";
 
-function AppStoreCatalogue2() {
-  // Use PlasmicAppStoreCatalogue2 to render this component as it was
+function AppStoreCatalogue() {
+  // Use PlasmicAppStoreCatalogue to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicAppStoreCatalogue2 are:
+  // Props you can pass into PlasmicAppStoreCatalogue are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, PlasmicAppStoreCatalogue2 is wrapped by your project's global
+  // By default, PlasmicAppStoreCatalogue is wrapped by your project's global
   // variant context providers. These wrappers may be moved to
   // Next.js Custom App component
   // (https://nextjs.org/docs/advanced-features/custom-app).
@@ -31,10 +31,10 @@ function AppStoreCatalogue2() {
         params={useRouter()?.query}
         query={useRouter()?.query}
       >
-        <PlasmicAppStoreCatalogue2 />
+        <PlasmicAppStoreCatalogue />
       </PageParamsProvider__>
     </GlobalContextsProvider>
   );
 }
 
-export default AppStoreCatalogue2;
+export default AppStoreCatalogue;

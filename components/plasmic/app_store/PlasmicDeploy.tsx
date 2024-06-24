@@ -92,6 +92,7 @@ export type PlasmicDeploy__OverridesType = {
   appCatalogFetcher?: Flex__<typeof DataFetcher>;
   appImage?: Flex__<typeof PlasmicImg__>;
   apiUrlInput?: Flex__<typeof TextInput>;
+  httpsappstoredarkubeapphmvrToken?: Flex__<"a"> & Partial<LinkProps>;
   tokenInput?: Flex__<typeof TextInput>;
   orgFetcher?: Flex__<typeof DataFetcher>;
   orgSelect?: Flex__<typeof Select>;
@@ -378,15 +379,23 @@ function PlasmicDeploy__RenderFunc(props: {
                 )}
               </DataCtxReader__>
             </DataFetcher>
-            <div
+            <PlasmicLink__
+              data-plasmic-name={"httpsappstoredarkubeapphmvrToken"}
+              data-plasmic-override={overrides.httpsappstoredarkubeapphmvrToken}
               className={classNames(
                 projectcss.all,
+                projectcss.a,
                 projectcss.__wab_text,
-                sty.text__vQoxk
+                sty.httpsappstoredarkubeapphmvrToken
               )}
+              component={Link}
+              href={"https://appstore.darkube.app/hmvr-token"}
+              platform={"nextjs"}
             >
-              {"\u062a\u0648\u06a9\u0646 \u0647\u0645\u200c\u0631\u0648\u0634"}
-            </div>
+              {
+                "\u062a\u0648\u06a9\u0646 \u0647\u0645\u0631\u0648\u0634 ( \u0631\u0627\u0647\u0646\u0645\u0627 )"
+              }
+            </PlasmicLink__>
             <TextInput
               data-plasmic-name={"tokenInput"}
               data-plasmic-override={overrides.tokenInput}
@@ -1166,6 +1175,7 @@ const PlasmicDescendants = {
     "appCatalogFetcher",
     "appImage",
     "apiUrlInput",
+    "httpsappstoredarkubeapphmvrToken",
     "tokenInput",
     "orgFetcher",
     "orgSelect",
@@ -1184,6 +1194,7 @@ const PlasmicDescendants = {
     "appCatalogFetcher",
     "appImage",
     "apiUrlInput",
+    "httpsappstoredarkubeapphmvrToken",
     "tokenInput",
     "orgFetcher",
     "orgSelect",
@@ -1200,6 +1211,7 @@ const PlasmicDescendants = {
   appCatalogFetcher: ["appCatalogFetcher", "appImage", "apiUrlInput"],
   appImage: ["appImage"],
   apiUrlInput: ["apiUrlInput"],
+  httpsappstoredarkubeapphmvrToken: ["httpsappstoredarkubeapphmvrToken"],
   tokenInput: ["tokenInput"],
   orgFetcher: ["orgFetcher", "orgSelect"],
   orgSelect: ["orgSelect"],
@@ -1222,6 +1234,7 @@ type NodeDefaultElementType = {
   appCatalogFetcher: typeof DataFetcher;
   appImage: typeof PlasmicImg__;
   apiUrlInput: typeof TextInput;
+  httpsappstoredarkubeapphmvrToken: "a";
   tokenInput: typeof TextInput;
   orgFetcher: typeof DataFetcher;
   orgSelect: typeof Select;
@@ -1300,6 +1313,9 @@ export const PlasmicDeploy = Object.assign(
     appCatalogFetcher: makeNodeComponent("appCatalogFetcher"),
     appImage: makeNodeComponent("appImage"),
     apiUrlInput: makeNodeComponent("apiUrlInput"),
+    httpsappstoredarkubeapphmvrToken: makeNodeComponent(
+      "httpsappstoredarkubeapphmvrToken"
+    ),
     tokenInput: makeNodeComponent("tokenInput"),
     orgFetcher: makeNodeComponent("orgFetcher"),
     orgSelect: makeNodeComponent("orgSelect"),

@@ -153,6 +153,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/new-page"
+        },
+        {
+          "id": "wia2M04pK3E5",
+          "name": "HamraveshToken",
+          "type": "managed",
+          "projectId": "kE2m6SaQqQewvhrZdkGhrf",
+          "renderModuleFilePath": "plasmic/app_store/PlasmicHamraveshToken.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/hmvr-token.tsx"
+          },
+          "cssFilePath": "plasmic/app_store/PlasmicHamraveshToken.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/hmvr-token"
         }
       ],
       "icons": [
@@ -197,6 +211,26 @@
           "id": "bCh-ixibAkna",
           "name": "app-icon.jpg",
           "filePath": "../public/plasmic/app_store/images/appIconjpg.jpg"
+        },
+        {
+          "id": "4dKvsUYwwpeW",
+          "name": "1.png",
+          "filePath": "../public/plasmic/app_store/images/_1Png.png"
+        },
+        {
+          "id": "asnfvjBRxn9-",
+          "name": "2.png",
+          "filePath": "../public/plasmic/app_store/images/_2Png.png"
+        },
+        {
+          "id": "oQT73yEau-KE",
+          "name": "3.png",
+          "filePath": "../public/plasmic/app_store/images/_3Png.png"
+        },
+        {
+          "id": "NOtw_RyL4obd",
+          "name": "4.png",
+          "filePath": "../public/plasmic/app_store/images/_4Png.png"
         }
       ],
       "indirect": false,

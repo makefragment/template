@@ -417,7 +417,7 @@ function PlasmicDeploy__RenderFunc(props: {
               try {
                 return (
                   $state.tokenInput.value != null &&
-                  $state.tokenInput.value.length > 39
+                  $state.tokenInput.value.length >= 36
                 );
               } catch (e) {
                 if (

@@ -167,6 +167,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/hmvr-token"
+        },
+        {
+          "id": "iQPczQWmgb90",
+          "name": "NewPage",
+          "type": "managed",
+          "projectId": "kE2m6SaQqQewvhrZdkGhrf",
+          "renderModuleFilePath": "plasmic/app_store/PlasmicNewPage.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/new-page.tsx"
+          },
+          "cssFilePath": "plasmic/app_store/PlasmicNewPage.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/new-page"
         }
       ],
       "icons": [

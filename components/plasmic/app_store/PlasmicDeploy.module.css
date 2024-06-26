@@ -172,6 +172,8 @@
   object-fit: cover;
   position: relative;
   overflow: visible;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
 }
 .nameSpaceSelect:global(.__wab_instance) {

@@ -330,6 +330,28 @@
       ],
       "customFunctions": [],
       "jsBundleThemes": []
+    },
+    {
+      "projectId": "9Vr5YWkf3w7jj6SsTcCEta",
+      "projectApiToken": "IvzN3wRogyeRjfeLl1hqzdjIjkVBvUQXxxVMFtbbpBdxfeSyKuR8fwKkECaSQERdZAIiGsh8aXppCCjBiCYyg",
+      "projectName": "loading-boundary",
+      "version": ">0.0.0",
+      "cssFilePath": "plasmic/loading_boundary/plasmic.module.css",
+      "components": [],
+      "icons": [],
+      "images": [],
+      "indirect": true,
+      "globalContextsFilePath": "",
+      "splitsProviderFilePath": "",
+      "codeComponents": [
+        {
+          "id": "u-J0rH0B-4",
+          "name": "LoadingBoundary",
+          "displayName": "hostless-loading-boundary",
+          "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
+        }
+      ],
+      "customFunctions": []
     }
   ],
   "globalVariants": {

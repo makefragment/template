@@ -216,6 +216,12 @@ function PlasmicDeploy__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "installing",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -293,7 +299,7 @@ function PlasmicDeploy__RenderFunc(props: {
                       className={classNames(sty.appImage)}
                       displayHeight={"auto"}
                       displayMaxHeight={"none"}
-                      displayMaxWidth={"30%"}
+                      displayMaxWidth={"none"}
                       displayMinHeight={"0"}
                       displayMinWidth={"0"}
                       displayWidth={"auto"}
@@ -1047,7 +1053,10 @@ function PlasmicDeploy__RenderFunc(props: {
               className={classNames("__wab_instance", sty.installButton)}
               isDisabled={(() => {
                 try {
-                  return $state.appNameInput.value.length < 2;
+                  return (
+                    $state.appNameInput.value.length < 2 ||
+                    $state.installing === true
+                  );
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -1061,7 +1070,41 @@ function PlasmicDeploy__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
-                $steps["invokeGlobalAction"] = true
+                $steps["updateInstalling"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["installing"]
+                        },
+                        operation: 0,
+                        value: true
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateInstalling"] != null &&
+                  typeof $steps["updateInstalling"] === "object" &&
+                  typeof $steps["updateInstalling"].then === "function"
+                ) {
+                  $steps["updateInstalling"] = await $steps["updateInstalling"];
+                }
+
+                $steps["sendRequest"] = true
                   ? (() => {
                       const actionArgs = {
                         args: [
@@ -1123,16 +1166,14 @@ function PlasmicDeploy__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["invokeGlobalAction"] != null &&
-                  typeof $steps["invokeGlobalAction"] === "object" &&
-                  typeof $steps["invokeGlobalAction"].then === "function"
+                  $steps["sendRequest"] != null &&
+                  typeof $steps["sendRequest"] === "object" &&
+                  typeof $steps["sendRequest"].then === "function"
                 ) {
-                  $steps["invokeGlobalAction"] = await $steps[
-                    "invokeGlobalAction"
-                  ];
+                  $steps["sendRequest"] = await $steps["sendRequest"];
                 }
 
-                $steps["invokeGlobalAction2"] = true
+                $steps["toast"] = true
                   ? (() => {
                       const actionArgs = {
                         args: [
@@ -1148,20 +1189,88 @@ function PlasmicDeploy__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["invokeGlobalAction2"] != null &&
-                  typeof $steps["invokeGlobalAction2"] === "object" &&
-                  typeof $steps["invokeGlobalAction2"].then === "function"
+                  $steps["toast"] != null &&
+                  typeof $steps["toast"] === "object" &&
+                  typeof $steps["toast"].then === "function"
                 ) {
-                  $steps["invokeGlobalAction2"] = await $steps[
-                    "invokeGlobalAction2"
+                  $steps["toast"] = await $steps["toast"];
+                }
+
+                $steps["updateInstalling2"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["installing"]
+                        },
+                        operation: 0,
+                        value: false
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateInstalling2"] != null &&
+                  typeof $steps["updateInstalling2"] === "object" &&
+                  typeof $steps["updateInstalling2"].then === "function"
+                ) {
+                  $steps["updateInstalling2"] = await $steps[
+                    "updateInstalling2"
                   ];
                 }
               }}
               shape={"rounded"}
             >
-              {"\u0646\u0635\u0628"}
+              <React.Fragment>
+                {(() => {
+                  try {
+                    return $state.installing === true
+                      ? "در حال نصب - لطفا صبور باشید"
+                      : "شروع نصب";
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return "\u0646\u0635\u0628";
+                    }
+                    throw e;
+                  }
+                })()}
+              </React.Fragment>
             </Button>
           </Stack__>
+          {(() => {
+            try {
+              return $state.installing;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
+              }
+              throw e;
+            }
+          })() ? (
+            <Icon3Icon
+              className={classNames(projectcss.all, sty.svg__ttXNp)}
+              role={"img"}
+            />
+          ) : null}
         </div>
       </div>
     </React.Fragment>

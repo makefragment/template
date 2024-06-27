@@ -195,7 +195,7 @@ function PlasmicDialog__RenderFunc(props: {
         sty.dialog,
         { [sty.dialognoTrigger]: hasVariant($state, "noTrigger", "noTrigger") }
       )}
-      defaultOpen={true}
+      defaultOpen={false}
       onOpenChange={generateStateOnChangeProp($state, ["dialog", "open"])}
       open={generateStateValueProp($state, ["dialog", "open"])}
       themeResetClass={classNames(

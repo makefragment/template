@@ -77,7 +77,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "sqPBLwEBBKHA2WDuGb17eV",
@@ -167,7 +168,8 @@
           "componentImportPath": "@plasmicpkgs/radix-ui"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "jkU633o1Cz7HrJdwdxhVHk",
@@ -221,7 +223,8 @@
           }
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "ohDidvG9XsCeFumugENU3J",
@@ -621,7 +624,8 @@
           "componentImportPath": "@plasmicpkgs/antd5/skinny/registerBreadcrumb"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "7nJ7UcFmq9UzB6eXfC5z4a",
@@ -643,7 +647,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-nav"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "9Vr5YWkf3w7jj6SsTcCEta",
@@ -665,7 +670,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "YUiM7yqBWAqsh8KSnrdj7",
@@ -693,7 +699,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-query"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "kE2m6SaQqQewvhrZdkGhrf",
@@ -868,20 +875,6 @@
           "cssFilePath": "plasmic/app_store/PlasmicDialog.module.css",
           "scheme": "blackbox",
           "componentType": "component"
-        },
-        {
-          "id": "QW0-gAwjJnGE",
-          "name": "Deploy2",
-          "type": "managed",
-          "projectId": "kE2m6SaQqQewvhrZdkGhrf",
-          "renderModuleFilePath": "plasmic/app_store/PlasmicDeploy2.tsx",
-          "importSpec": {
-            "modulePath": "../src/pages/deploy-2/[app].tsx"
-          },
-          "cssFilePath": "plasmic/app_store/PlasmicDeploy2.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/deploy-2/[app]"
         }
       ],
       "icons": [

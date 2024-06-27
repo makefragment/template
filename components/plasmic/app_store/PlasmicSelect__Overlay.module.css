@@ -4,6 +4,8 @@
   position: relative;
   width: auto;
   height: auto;
+  max-height: 300px;
+  overflow: visible;
 }
 .top {
   display: flex;

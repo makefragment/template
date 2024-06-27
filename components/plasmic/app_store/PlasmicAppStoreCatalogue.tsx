@@ -60,9 +60,13 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import Button from "../../Button"; // plasmic-import: SeN-_u-Bb4MZ/component
+import { NavigationBar } from "@plasmicpkgs/plasmic-nav";
+import { RichLayout } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-layout";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: kE2m6SaQqQewvhrZdkGhrf/projectcss
 import sty from "./PlasmicAppStoreCatalogue.module.css"; // plasmic-import: 99T2ETSydRuz/css
 
@@ -87,6 +91,8 @@ export type PlasmicAppStoreCatalogue__OverridesType = {
   svg?: Flex__<"svg">;
   text?: Flex__<"div">;
   button?: Flex__<typeof Button>;
+  navigationBar?: Flex__<typeof NavigationBar>;
+  richAppLayout?: Flex__<typeof RichLayout>;
 };
 
 export interface DefaultAppStoreCatalogueProps {}
@@ -155,6 +161,8 @@ function PlasmicAppStoreCatalogue__RenderFunc(props: {
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
             projectcss.plasmic_tokens,
+            plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens,
             sty.root
           )}
           dir={"rtl"}
@@ -190,6 +198,127 @@ function PlasmicAppStoreCatalogue__RenderFunc(props: {
             </div>
             <div className={classNames(projectcss.all, sty.freeBox__ujCr6)} />
           </div>
+          <NavigationBar
+            data-plasmic-name={"navigationBar"}
+            data-plasmic-override={overrides.navigationBar}
+            brand={
+              <PlasmicLink__
+                className={classNames(
+                  projectcss.all,
+                  projectcss.a,
+                  sty.link__ll2Hm
+                )}
+                component={Link}
+                href={"#"}
+                platform={"nextjs"}
+              >
+                <PlasmicImg__
+                  alt={""}
+                  className={classNames(sty.img__m6U)}
+                  displayHeight={"40px"}
+                  displayMaxHeight={"none"}
+                  displayMaxWidth={"none"}
+                  displayMinHeight={"0"}
+                  displayMinWidth={"0"}
+                  displayWidth={"auto"}
+                  src={"https://static1.plasmic.app/nav-logo-placeholder.svg"}
+                />
+              </PlasmicLink__>
+            }
+            className={classNames("__wab_instance", sty.navigationBar)}
+            closeButton={
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__aQke)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"none"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                src={"https://static1.plasmic.app/close.svg"}
+              />
+            }
+            itemsGap={8}
+            menuItems={
+              <React.Fragment>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.link__vIql2
+                  )}
+                  component={Link}
+                  href={"/"}
+                  platform={"nextjs"}
+                >
+                  {"Home"}
+                </PlasmicLink__>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.link__qh0S0
+                  )}
+                  component={Link}
+                  href={"/"}
+                  platform={"nextjs"}
+                >
+                  {"About"}
+                </PlasmicLink__>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.link__xmrw
+                  )}
+                  component={Link}
+                  href={"/"}
+                  platform={"nextjs"}
+                >
+                  {"Contact"}
+                </PlasmicLink__>
+              </React.Fragment>
+            }
+            openButton={
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__nkm7A)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"none"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                src={"https://static1.plasmic.app/menu.svg"}
+              />
+            }
+            responsiveBreakpoint={768}
+          />
+
+          <RichLayout
+            data-plasmic-name={"richAppLayout"}
+            data-plasmic-override={overrides.richAppLayout}
+            className={classNames("__wab_instance", sty.richAppLayout)}
+            logoElement={
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img___5GgOd)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"none"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                src={"https://static1.plasmic.app/fake-logo.svg"}
+              />
+            }
+            navMenuItems={[{ path: "/", name: "Home" }]}
+            title={"App title"}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -197,10 +326,12 @@ function PlasmicAppStoreCatalogue__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "svg", "text", "button"],
+  root: ["root", "svg", "text", "button", "navigationBar", "richAppLayout"],
   svg: ["svg"],
   text: ["text"],
-  button: ["button"]
+  button: ["button"],
+  navigationBar: ["navigationBar"],
+  richAppLayout: ["richAppLayout"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -210,6 +341,8 @@ type NodeDefaultElementType = {
   svg: "svg";
   text: "div";
   button: typeof Button;
+  navigationBar: typeof NavigationBar;
+  richAppLayout: typeof RichLayout;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -275,6 +408,8 @@ export const PlasmicAppStoreCatalogue = Object.assign(
     svg: makeNodeComponent("svg"),
     text: makeNodeComponent("text"),
     button: makeNodeComponent("button"),
+    navigationBar: makeNodeComponent("navigationBar"),
+    richAppLayout: makeNodeComponent("richAppLayout"),
 
     // Metadata about props expected for PlasmicAppStoreCatalogue
     internalVariantProps: PlasmicAppStoreCatalogue__VariantProps,

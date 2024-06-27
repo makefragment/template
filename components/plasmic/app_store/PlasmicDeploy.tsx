@@ -59,21 +59,25 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import Button from "../../Button"; // plasmic-import: SeN-_u-Bb4MZ/component
 import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import TextInput from "../../TextInput"; // plasmic-import: 20BEVE161Tub/component
 import Select from "../../Select"; // plasmic-import: IPsHMEFnMbCe/component
-import Button from "../../Button"; // plasmic-import: SeN-_u-Bb4MZ/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
+
+import { useScreenVariants as useScreenVariantshFSeMrw7Uuy } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: h_fSEMrw7Uuy/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: kE2m6SaQqQewvhrZdkGhrf/projectcss
 import sty from "./PlasmicDeploy.module.css"; // plasmic-import: o8zUWsy5LVXF/css
 
-import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: akcTM9Ae0af4/icon
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: LwBmQ7p7bmsl/icon
-import Icon3Icon from "./icons/PlasmicIcon__Icon3"; // plasmic-import: jyFOmxNthMrg/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: Uv6mWKVW5aWf/icon
+import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: akcTM9Ae0af4/icon
+import Icon3Icon from "./icons/PlasmicIcon__Icon3"; // plasmic-import: jyFOmxNthMrg/icon
 
 createPlasmicElementProxy;
 
@@ -88,7 +92,7 @@ export const PlasmicDeploy__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicDeploy__OverridesType = {
   root?: Flex__<"div">;
-  freeBox?: Flex__<"div">;
+  img?: Flex__<typeof PlasmicImg__>;
   appCatalogFetcher?: Flex__<typeof DataFetcher>;
   appImage?: Flex__<typeof PlasmicImg__>;
   apiUrlInput?: Flex__<typeof TextInput>;
@@ -233,6 +237,10 @@ function PlasmicDeploy__RenderFunc(props: {
     $refs
   });
 
+  const globalVariants = ensureGlobalVariants({
+    screen: useScreenVariantshFSeMrw7Uuy()
+  });
+
   return (
     <React.Fragment>
       <Head></Head>
@@ -255,16 +263,148 @@ function PlasmicDeploy__RenderFunc(props: {
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
             projectcss.plasmic_tokens,
+            plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens,
             sty.root
           )}
           dir={"rtl"}
         >
           <Stack__
             as={"div"}
-            data-plasmic-name={"freeBox"}
-            data-plasmic-override={overrides.freeBox}
             hasGap={true}
-            className={classNames(projectcss.all, sty.freeBox)}
+            className={classNames(projectcss.all, sty.freeBox__yJaeN)}
+          >
+            <Stack__
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox__vMMuR)}
+            >
+              <PlasmicImg__
+                data-plasmic-name={"img"}
+                data-plasmic-override={overrides.img}
+                alt={""}
+                className={classNames(sty.img)}
+                displayHeight={"40px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"none"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"40px"}
+                src={{
+                  src: "/plasmic/app_store/images/appIconjpg.jpg",
+                  fullWidth: 360,
+                  fullHeight: 360,
+                  aspectRatio: undefined
+                }}
+              />
+
+              <Stack__
+                as={"div"}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.freeBox__bI2)}
+              >
+                <Button
+                  className={classNames("__wab_instance", sty.button__jizTg)}
+                  color={"clear"}
+                  endIcon={
+                    <Icon2Icon
+                      className={classNames(projectcss.all, sty.svg___9EbLq)}
+                      role={"img"}
+                    />
+                  }
+                  startIcon={
+                    <ChecksvgIcon
+                      className={classNames(projectcss.all, sty.svg__awKn1)}
+                      role={"img"}
+                    />
+                  }
+                  submitsForm={true}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__biLcq
+                    )}
+                  >
+                    {"Help"}
+                  </div>
+                </Button>
+                <Button
+                  className={classNames("__wab_instance", sty.button__osu0)}
+                  color={"red"}
+                  endIcon={
+                    <Icon2Icon
+                      className={classNames(projectcss.all, sty.svg__mwWmY)}
+                      role={"img"}
+                    />
+                  }
+                  startIcon={
+                    <ChecksvgIcon
+                      className={classNames(projectcss.all, sty.svg__iwOt)}
+                      role={"img"}
+                    />
+                  }
+                  submitsForm={true}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__l8FDd
+                    )}
+                  >
+                    {"Contact"}
+                  </div>
+                </Button>
+              </Stack__>
+              {false ? (
+                <div className={classNames(projectcss.all, sty.freeBox__yietI)}>
+                  <button
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.button,
+                      projectcss.__wab_text,
+                      sty.button__p03G4
+                    )}
+                  >
+                    {"Sign up"}
+                  </button>
+                  <Button
+                    className={classNames("__wab_instance", sty.button__a1RYh)}
+                    color={"clear"}
+                    endIcon={
+                      <Icon2Icon
+                        className={classNames(projectcss.all, sty.svg__pf2W3)}
+                        role={"img"}
+                      />
+                    }
+                    startIcon={
+                      <ChecksvgIcon
+                        className={classNames(projectcss.all, sty.svg__yqSda)}
+                        role={"img"}
+                      />
+                    }
+                    submitsForm={true}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__tmpLe
+                      )}
+                    >
+                      {"Log in"}
+                    </div>
+                  </Button>
+                </div>
+              ) : null}
+            </Stack__>
+          </Stack__>
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox___7F9Z)}
           >
             <DataFetcher
               data-plasmic-name={"appCatalogFetcher"}
@@ -703,7 +843,14 @@ function PlasmicDeploy__RenderFunc(props: {
               >
                 <DataCtxReader__>
                   {$ctx => (
-                    <React.Fragment>
+                    <Stack__
+                      as={"div"}
+                      hasGap={true}
+                      className={classNames(
+                        projectcss.all,
+                        sty.freeBox___4St0F
+                      )}
+                    >
                       <div
                         className={classNames(
                           projectcss.all,
@@ -745,7 +892,7 @@ function PlasmicDeploy__RenderFunc(props: {
                           "value"
                         ])}
                       />
-                    </React.Fragment>
+                    </Stack__>
                   )}
                 </DataCtxReader__>
               </DataFetcher>
@@ -1330,7 +1477,7 @@ function PlasmicDeploy__RenderFunc(props: {
 const PlasmicDescendants = {
   root: [
     "root",
-    "freeBox",
+    "img",
     "appCatalogFetcher",
     "appImage",
     "apiUrlInput",
@@ -1348,25 +1495,7 @@ const PlasmicDescendants = {
     "domainText",
     "installButton"
   ],
-  freeBox: [
-    "freeBox",
-    "appCatalogFetcher",
-    "appImage",
-    "apiUrlInput",
-    "httpsappstoredarkubeapphmvrToken",
-    "tokenInput",
-    "orgFetcher",
-    "orgSelect",
-    "zoneFetcher",
-    "zoneSelect",
-    "nsFetcher",
-    "nameSpaceSelect",
-    "appNameInput",
-    "domainInput",
-    "httpRestApiFetcher",
-    "domainText",
-    "installButton"
-  ],
+  img: ["img"],
   appCatalogFetcher: ["appCatalogFetcher", "appImage", "apiUrlInput"],
   appImage: ["appImage"],
   apiUrlInput: ["apiUrlInput"],
@@ -1389,7 +1518,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  freeBox: "div";
+  img: typeof PlasmicImg__;
   appCatalogFetcher: typeof DataFetcher;
   appImage: typeof PlasmicImg__;
   apiUrlInput: typeof TextInput;
@@ -1468,7 +1597,7 @@ export const PlasmicDeploy = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    freeBox: makeNodeComponent("freeBox"),
+    img: makeNodeComponent("img"),
     appCatalogFetcher: makeNodeComponent("appCatalogFetcher"),
     appImage: makeNodeComponent("appImage"),
     apiUrlInput: makeNodeComponent("apiUrlInput"),

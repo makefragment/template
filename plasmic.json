@@ -810,6 +810,72 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicDuration.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "pk_8VfwTEmq0",
+          "name": "UncertainBookStatusList",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicUncertainBookStatusList.tsx",
+          "importSpec": {
+            "modulePath": "UncertainBookStatusList.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicUncertainBookStatusList.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "51ly1GErXHXh",
+          "name": "UncertainBookStatusBookCard",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicUncertainBookStatusBookCard.tsx",
+          "importSpec": {
+            "modulePath": "UncertainBookStatusBookCard.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicUncertainBookStatusBookCard.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "afJEDiTUc7Lt",
+          "name": "SpecifyBookStatusButton",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicSpecifyBookStatusButton.tsx",
+          "importSpec": {
+            "modulePath": "SpecifyBookStatusButton.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicSpecifyBookStatusButton.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "OnraYGfaX_Kh",
+          "name": "UncertainBookStatusListPage",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicUncertainBookStatusListPage.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/uncertain-book-status-list.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicUncertainBookStatusListPage.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/uncertain-book-status-list"
+        },
+        {
+          "id": "QMzVdopOLfBM",
+          "name": "Card",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicCard.tsx",
+          "importSpec": {
+            "modulePath": "Card.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicCard.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

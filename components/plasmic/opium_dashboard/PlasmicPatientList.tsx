@@ -699,6 +699,19 @@ function PlasmicPatientList__RenderFunc(props: {
                     throw e;
                   }
                 })()}
+                type={(() => {
+                  try {
+                    return currentItem.type;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
               />
             );
           })

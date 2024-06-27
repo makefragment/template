@@ -63,6 +63,7 @@ import Button from "../../Button"; // plasmic-import: SeN-_u-Bb4MZ/component
 import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import TextInput from "../../TextInput"; // plasmic-import: 20BEVE161Tub/component
 import Select from "../../Select"; // plasmic-import: IPsHMEFnMbCe/component
+import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantshFSeMrw7Uuy } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: h_fSEMrw7Uuy/globalVariant
@@ -71,6 +72,7 @@ import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: kE2m6SaQqQewvhrZdkGhrf/projectcss
 import sty from "./PlasmicDeploy.module.css"; // plasmic-import: o8zUWsy5LVXF/css
 
@@ -109,6 +111,7 @@ export type PlasmicDeploy__OverridesType = {
   httpRestApiFetcher?: Flex__<typeof DataFetcher>;
   domainText?: Flex__<"div">;
   installButton?: Flex__<typeof Button>;
+  dialog?: Flex__<typeof Dialog>;
 };
 
 export interface DefaultDeployProps {}
@@ -226,6 +229,12 @@ function PlasmicDeploy__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "dialog.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -265,6 +274,7 @@ function PlasmicDeploy__RenderFunc(props: {
             projectcss.plasmic_tokens,
             plasmic_antd_5_hostless_css.plasmic_tokens,
             plasmic_plasmic_rich_components_css.plasmic_tokens,
+            plasmic_fragment_design_system_css.plasmic_tokens,
             sty.root
           )}
           dir={"rtl"}
@@ -962,7 +972,11 @@ function PlasmicDeploy__RenderFunc(props: {
               >
                 <DataCtxReader__>
                   {$ctx => (
-                    <React.Fragment>
+                    <Stack__
+                      as={"div"}
+                      hasGap={true}
+                      className={classNames(projectcss.all, sty.freeBox__crNoD)}
+                    >
                       <div
                         className={classNames(
                           projectcss.all,
@@ -1007,7 +1021,7 @@ function PlasmicDeploy__RenderFunc(props: {
                           "value"
                         ])}
                       />
-                    </React.Fragment>
+                    </Stack__>
                   )}
                 </DataCtxReader__>
               </DataFetcher>
@@ -1267,6 +1281,40 @@ function PlasmicDeploy__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
+                $steps["updateDialogOpen"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["dialog", "open"]
+                        },
+                        operation: 0,
+                        value: true
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateDialogOpen"] != null &&
+                  typeof $steps["updateDialogOpen"] === "object" &&
+                  typeof $steps["updateDialogOpen"].then === "function"
+                ) {
+                  $steps["updateDialogOpen"] = await $steps["updateDialogOpen"];
+                }
+
                 $steps["updateInstalling"] = true
                   ? (() => {
                       const actionArgs = {
@@ -1449,6 +1497,18 @@ function PlasmicDeploy__RenderFunc(props: {
                 })()}
               </React.Fragment>
             </Button>
+            <Dialog
+              data-plasmic-name={"dialog"}
+              data-plasmic-override={overrides.dialog}
+              className={classNames("__wab_instance", sty.dialog)}
+              noTrigger={true}
+              onOpenChange={generateStateOnChangeProp($state, [
+                "dialog",
+                "open"
+              ])}
+              open={generateStateValueProp($state, ["dialog", "open"])}
+              trigger={null}
+            />
           </Stack__>
           {(() => {
             try {
@@ -1493,7 +1553,8 @@ const PlasmicDescendants = {
     "domainInput",
     "httpRestApiFetcher",
     "domainText",
-    "installButton"
+    "installButton",
+    "dialog"
   ],
   img: ["img"],
   appCatalogFetcher: ["appCatalogFetcher", "appImage", "apiUrlInput"],
@@ -1511,7 +1572,8 @@ const PlasmicDescendants = {
   domainInput: ["domainInput"],
   httpRestApiFetcher: ["httpRestApiFetcher", "domainText"],
   domainText: ["domainText"],
-  installButton: ["installButton"]
+  installButton: ["installButton"],
+  dialog: ["dialog"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -1535,6 +1597,7 @@ type NodeDefaultElementType = {
   httpRestApiFetcher: typeof DataFetcher;
   domainText: "div";
   installButton: typeof Button;
+  dialog: typeof Dialog;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -1616,6 +1679,7 @@ export const PlasmicDeploy = Object.assign(
     httpRestApiFetcher: makeNodeComponent("httpRestApiFetcher"),
     domainText: makeNodeComponent("domainText"),
     installButton: makeNodeComponent("installButton"),
+    dialog: makeNodeComponent("dialog"),
 
     // Metadata about props expected for PlasmicDeploy
     internalVariantProps: PlasmicDeploy__VariantProps,

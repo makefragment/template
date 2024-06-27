@@ -21,6 +21,7 @@
     "@plasmicpkgs/plasmic-nav": "^0.0.168",
     "@plasmicpkgs/plasmic-query": "^0.0.216",
     "@plasmicpkgs/plasmic-rich-components": "^1.0.187",
+    "@plasmicpkgs/radix-ui": "^0.0.53",
     "@radix-ui/react-popover": "^1.0.7",
     "axios": "^1.7.2",
     "jalali-moment": "^3.3.11",

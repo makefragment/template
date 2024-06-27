@@ -287,6 +287,19 @@ function PlasmicAppStoreCatalogue2__RenderFunc(props: {
                           data-plasmic-name={"button"}
                           data-plasmic-override={overrides.button}
                           className={classNames("__wab_instance", sty.button)}
+                          isDisabled={(() => {
+                            try {
+                              return !$ctx.fetchedData[currentIndex].enable;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return [];
+                              }
+                              throw e;
+                            }
+                          })()}
                           link={`/deploy/${(() => {
                             try {
                               return currentItem.value;

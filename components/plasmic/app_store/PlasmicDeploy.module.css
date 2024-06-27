@@ -127,6 +127,9 @@
   min-width: 0;
   min-height: 0;
 }
+.text__qMoMb {
+  color: #ff0000;
+}
 .text__lmi76 {
   position: relative;
   width: 100%;
@@ -157,6 +160,9 @@
   max-width: 100%;
   width: 40px;
   height: 40px;
+}
+.text__mk2MD {
+  color: #ff0000;
 }
 .text__tBmv1 {
   position: relative;

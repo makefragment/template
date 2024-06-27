@@ -442,7 +442,31 @@ function PlasmicDeploy__RenderFunc(props: {
                 dataName={"OrgData"}
                 errorDisplay={
                   <DataCtxReader__>
-                    {$ctx => "Error fetching data"}
+                    {$ctx => (
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__qMoMb
+                        )}
+                      >
+                        <React.Fragment>
+                          {(() => {
+                            try {
+                              return $ctx.fetchError.info.error;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return "Error fetching data";
+                              }
+                              throw e;
+                            }
+                          })()}
+                        </React.Fragment>
+                      </div>
+                    )}
                   </DataCtxReader__>
                 }
                 errorName={"fetchError"}
@@ -605,7 +629,31 @@ function PlasmicDeploy__RenderFunc(props: {
                 dataName={"fetchedData"}
                 errorDisplay={
                   <DataCtxReader__>
-                    {$ctx => "Error fetching data"}
+                    {$ctx => (
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__mk2MD
+                        )}
+                      >
+                        <React.Fragment>
+                          {(() => {
+                            try {
+                              return $ctx.fetchError.info.error;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return "Error fetching data";
+                              }
+                              throw e;
+                            }
+                          })()}
+                        </React.Fragment>
+                      </div>
+                    )}
                   </DataCtxReader__>
                 }
                 errorName={"fetchError"}

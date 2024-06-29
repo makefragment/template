@@ -1,7 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import toast, { ToastPosition, Toaster } from "react-hot-toast";
 
-import { GlobalActionsProvider, GlobalContextMeta } from "@plasmicapp/host";
+import {
+  DataProvider,
+  GlobalActionsProvider,
+  GlobalContextMeta,
+} from "@plasmicapp/host";
 import axios from "axios";
 
 type FragmentProps = React.PropsWithChildren<{
@@ -14,6 +18,7 @@ export const Fragment = ({
   children,
   previewApiConfig,
   apiConfig,
+  rtl,
 }: FragmentProps) => {
   const actions = useMemo(
     () => ({
@@ -68,8 +73,18 @@ export const Fragment = ({
 
   return (
     <GlobalActionsProvider contextName="Fragment" actions={actions}>
-      {children}
-      <Toaster />
+      <DataProvider
+        name="Fragment"
+        data={{
+          apiConfig: apiConfig ?? {},
+          previewApiConfig: previewApiConfig ?? {},
+          rtl,
+        }}
+        hidden
+      >
+        {children}
+        <Toaster />
+      </DataProvider>
     </GlobalActionsProvider>
   );
 };
@@ -93,6 +108,11 @@ export const fragmentMeta: GlobalContextMeta<FragmentProps> = {
       editOnly: true,
       helpText:
         "Read about request configuration options at https://axios-http.com/docs/req_config",
+    },
+    rtl: {
+      displayName: "RTL",
+      type: "boolean",
+      description: `Direction`,
     },
   },
   providesData: true,

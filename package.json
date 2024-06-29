@@ -15,13 +15,19 @@
     "@plasmicapp/host": "^1.0.196",
     "@plasmicapp/react-web": "^0.2.337",
     "@radix-ui/react-popover": "^1.0.7",
+    "@radix-ui/react-select": "^2.1.1",
+    "@radix-ui/react-switch": "^1.1.0",
     "axios": "^1.7.2",
+    "clsx": "^2.1.1",
     "jalali-moment": "^3.3.11",
+    "lucide-react": "^0.399.0",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
-    "react-timeit": "^1.2.12"
+    "react-timeit": "^1.2.12",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20",

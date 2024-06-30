@@ -16,7 +16,7 @@ export const Hamdast = ({ children, clientKey }: HamdastProps) => {
       !!(window as any).hamdast &&
       (window as any)?.hamdast?.clientKey !== clientKey
     ) {
-      (window as any).hamdast.initialize(clientKey);
+      (window as any).hamdast.initialize({ clientKey });
     }
   }, [clientKey]);
 

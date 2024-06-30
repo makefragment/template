@@ -1,7 +1,5 @@
 /* eslint-disable react/display-name */
 import { CodeComponentMeta, useSelector } from "@plasmicapp/host";
-import * as SwitchPrimitive from "@/components/ui/switch";
-import { cn } from "@/lib/utils";
 import { ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 

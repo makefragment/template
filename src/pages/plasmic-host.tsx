@@ -15,6 +15,7 @@ import { Select, selectMeta } from "@/fragment/components/select";
 import { Input, inputMeta } from "@/fragment/components/input";
 import { Switch, switchMeta } from "@/fragment/components/switch";
 import { ApiRequest, apiRequestMeta } from "@/fragment/components/api-request";
+import { Hamdast, hamdastMeta } from "@/hamdast/hamdast";
 
 export default function PlasmicHost() {
   return <PlasmicCanvasHost />;
@@ -23,6 +24,7 @@ export default function PlasmicHost() {
 registerGlobalContext(Fragment, fragmentMeta);
 registerGlobalContext(GrowthBook, growthBookMeta);
 registerGlobalContext(Splunk, splunkMeta);
+registerGlobalContext(Hamdast, hamdastMeta);
 registerComponent(DatePicker, datePickerMeta);
 registerComponent(TimePicker, timePickerMeta);
 registerComponent(Popover, popoverMeta);

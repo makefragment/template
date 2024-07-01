@@ -60,7 +60,7 @@ export const inputMeta: CodeComponentMeta<InputType> = {
     name: {
       type: "string",
       advanced: true,
-      description: "The HTML name of the select",
+      description: "The HTML name of the input",
     },
     onChange: {
       type: "eventHandler",

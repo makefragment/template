@@ -60,7 +60,8 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
-import Checkbox from "../../Checkbox"; // plasmic-import: IDR0sAqN5tth/component
+import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
+import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import UncertainBookStatusBookCard from "../../UncertainBookStatusBookCard"; // plasmic-import: 51ly1GErXHXh/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -69,6 +70,8 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicUncertainBookStatusList.module.css"; // plasmic-import: pk_8VfwTEmq0/css
 
+import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
+import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
 
 createPlasmicElementProxy;
@@ -84,20 +87,27 @@ export type PlasmicUncertainBookStatusList__ArgsType = {
   date?: string;
   selectedCenter?: string;
   centers?: any;
+  allBookStateStatus?: () => void;
+  sureVisited?: boolean;
+  onSureVisitedChange?: (val: string) => void;
 };
 type ArgPropType = keyof PlasmicUncertainBookStatusList__ArgsType;
 export const PlasmicUncertainBookStatusList__ArgProps = new Array<ArgPropType>(
   "searchquery",
   "date",
   "selectedCenter",
-  "centers"
+  "centers",
+  "allBookStateStatus",
+  "sureVisited",
+  "onSureVisitedChange"
 );
 
 export type PlasmicUncertainBookStatusList__OverridesType = {
   root?: Flex__<"div">;
   sideEffect?: Flex__<typeof SideEffect>;
-  selectAll?: Flex__<typeof Checkbox>;
-  text?: Flex__<"div">;
+  dialog?: Flex__<typeof Dialog>;
+  yessure?: Flex__<typeof Button>;
+  no?: Flex__<typeof Button>;
   uncertainBookStatusBookCard?: Flex__<typeof UncertainBookStatusBookCard>;
   svg?: Flex__<"svg">;
 };
@@ -107,6 +117,9 @@ export interface DefaultUncertainBookStatusListProps {
   date?: string;
   selectedCenter?: string;
   centers?: any;
+  allBookStateStatus?: () => void;
+  sureVisited?: boolean;
+  onSureVisitedChange?: (val: string) => void;
   className?: string;
 }
 
@@ -177,10 +190,18 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => []
       },
       {
-        path: "selectAll.isChecked",
+        path: "dialog.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "sureVisited",
+        type: "writable",
+        variableType: "boolean",
+
+        valueProp: "sureVisited",
+        onChangeProp: "onSureVisitedChange"
       }
     ],
     [$props, $ctx, $refs]
@@ -335,33 +356,404 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
         }}
       />
 
-      <div className={classNames(projectcss.all, sty.freeBox__tCQp)}>
-        <Checkbox
-          data-plasmic-name={"selectAll"}
-          data-plasmic-override={overrides.selectAll}
-          className={classNames("__wab_instance", sty.selectAll)}
-          isChecked={
-            generateStateValueProp($state, ["selectAll", "isChecked"]) ?? false
+      {(() => {
+        try {
+          return $state.uncertainBookStatus.length > 0;
+        } catch (e) {
+          if (
+            e instanceof TypeError ||
+            e?.plasmicType === "PlasmicUndefinedDataError"
+          ) {
+            return true;
           }
-          onChange={(...eventArgs) => {
-            generateStateOnChangeProp($state, ["selectAll", "isChecked"])(
-              eventArgs[0]
-            );
+          throw e;
+        }
+      })() ? (
+        <Stack__
+          as={"div"}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.freeBox__mUrfz)}
+          onClick={async event => {
+            const $steps = {};
+
+            $steps["updateDialogOpen"] = true
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["dialog", "open"]
+                    },
+                    operation: 0,
+                    value: true
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+
+                    $stateSet(objRoot, variablePath, value);
+                    return value;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["updateDialogOpen"] != null &&
+              typeof $steps["updateDialogOpen"] === "object" &&
+              typeof $steps["updateDialogOpen"].then === "function"
+            ) {
+              $steps["updateDialogOpen"] = await $steps["updateDialogOpen"];
+            }
           }}
         >
           <div
-            data-plasmic-name={"text"}
-            data-plasmic-override={overrides.text}
             className={classNames(
               projectcss.all,
               projectcss.__wab_text,
-              sty.text
+              sty.text__cbGs0
+            )}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["allBookVisitedEvent"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        (() => {
+                          try {
+                            return {
+                              group: "uncertain-book-status",
+                              data: {
+                                center_id: $props.centerId,
+                                bookid: $props.bookId
+                              },
+                              type: "click-all-book-visited"
+                            };
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["Splunk.sendLog"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["allBookVisitedEvent"] != null &&
+                typeof $steps["allBookVisitedEvent"] === "object" &&
+                typeof $steps["allBookVisitedEvent"].then === "function"
+              ) {
+                $steps["allBookVisitedEvent"] = await $steps[
+                  "allBookVisitedEvent"
+                ];
+              }
+            }}
+          >
+            {
+              "\u062a\u063a\u06cc\u06cc\u0631 \u0648\u0636\u0639\u06cc\u062a \u0647\u0645\u0647 \u0646\u0648\u0628\u062a\u200c\u0647\u0627 \u0628\u0647 \u00ab\u0648\u06cc\u0632\u06cc\u062a \u0634\u062f\u0647\u00bb"
+            }
+          </div>
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text___7Cstp
             )}
           >
-            {"\u0627\u0646\u062a\u062e\u0627\u0628 \u0647\u0645\u0647 "}
+            {
+              '\u0627\u0632 \u0627\u06cc\u0646 \u067e\u0633\u060c \u0646\u0648\u0628\u062a\u200c\u0647\u0627\u06cc \u0628\u0627 \u0648\u0636\u0639\u06cc\u062a \u0646\u0627\u0645\u0634\u062e\u0635\u060c \u0628\u0639\u062f \u0627\u0632 \u06f3\u06f0 \u0631\u0648\u0632\u060c \u0628\u0647 \u0639\u0646\u0648\u0627\u0646 \u0646\u0648\u0628\u062a "\u0648\u06cc\u0632\u06cc\u062a \u0634\u062f\u0647" \u062f\u0631 \u0646\u0638\u0631 \u06af\u0631\u0641\u062a\u0647 \u062e\u0648\u0627\u0647\u0646\u062f \u0634\u062f.'
+            }
           </div>
-        </Checkbox>
-      </div>
+        </Stack__>
+      ) : null}
+      <Dialog
+        data-plasmic-name={"dialog"}
+        data-plasmic-override={overrides.dialog}
+        body={
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__d51Fh)}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__ouew3
+              )}
+            >
+              {
+                "\u0622\u06cc\u0627 \u0627\u0637\u0645\u06cc\u0646\u0627\u0646 \u062f\u0627\u0631\u06cc\u062f \u06a9\u0647 \u0647\u0645\u0647 \u0646\u0648\u0628\u062a \u0647\u0627 \u0631\u0627 \u0648\u06cc\u0632\u06cc\u062a \u06a9\u0631\u062f\u0647 \u0627\u06cc\u062f\u061f\u200c"
+              }
+            </div>
+            <Stack__
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox__epDHv)}
+            >
+              <Button
+                data-plasmic-name={"yessure"}
+                data-plasmic-override={overrides.yessure}
+                children2={
+                  "\u0628\u0644\u0647\u060c \u0627\u0637\u0645\u06cc\u0646\u0627\u0646 \u062f\u0627\u0631\u0645"
+                }
+                className={classNames("__wab_instance", sty.yessure)}
+                loading={(() => {
+                  try {
+                    return $state.loading;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return [];
+                    }
+                    throw e;
+                  }
+                })()}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["startLoading"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["loading"]
+                          },
+                          operation: 0,
+                          value: true
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["startLoading"] != null &&
+                    typeof $steps["startLoading"] === "object" &&
+                    typeof $steps["startLoading"].then === "function"
+                  ) {
+                    $steps["startLoading"] = await $steps["startLoading"];
+                  }
+
+                  $steps["apiVisitedAllUncertainBookStatus"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "GET",
+                            "https://apigw.paziresh24.com/v1/visited-all-uncertain-book-status"
+                          ]
+                        };
+                        return $globalActions["Fragment.apiRequest"]?.apply(
+                          null,
+                          [...actionArgs.args]
+                        );
+                      })()
+                    : undefined;
+                  if (
+                    $steps["apiVisitedAllUncertainBookStatus"] != null &&
+                    typeof $steps["apiVisitedAllUncertainBookStatus"] ===
+                      "object" &&
+                    typeof $steps["apiVisitedAllUncertainBookStatus"].then ===
+                      "function"
+                  ) {
+                    $steps["apiVisitedAllUncertainBookStatus"] = await $steps[
+                      "apiVisitedAllUncertainBookStatus"
+                    ];
+                  }
+
+                  $steps["updateDialogClose"] =
+                    $steps.apiVisitedAllUncertainBookStatus?.data?.message ===
+                    "visited successful"
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["dialog", "open"]
+                            },
+                            operation: 0,
+                            value: false
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["updateDialogClose"] != null &&
+                    typeof $steps["updateDialogClose"] === "object" &&
+                    typeof $steps["updateDialogClose"].then === "function"
+                  ) {
+                    $steps["updateDialogClose"] = await $steps[
+                      "updateDialogClose"
+                    ];
+                  }
+
+                  $steps["updateSureVisited"] =
+                    $steps.apiVisitedAllUncertainBookStatus?.data?.message ===
+                    "visited successful"
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["sureVisited"]
+                            },
+                            operation: 0,
+                            value: true
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["updateSureVisited"] != null &&
+                    typeof $steps["updateSureVisited"] === "object" &&
+                    typeof $steps["updateSureVisited"].then === "function"
+                  ) {
+                    $steps["updateSureVisited"] = await $steps[
+                      "updateSureVisited"
+                    ];
+                  }
+
+                  $steps["finishLoading"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["loading"]
+                          },
+                          operation: 0,
+                          value: false
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["finishLoading"] != null &&
+                    typeof $steps["finishLoading"] === "object" &&
+                    typeof $steps["finishLoading"].then === "function"
+                  ) {
+                    $steps["finishLoading"] = await $steps["finishLoading"];
+                  }
+
+                  $steps["eventVisitedAllUncertainBookStatus"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            (() => {
+                              try {
+                                return {
+                                  group: "uncertain-book-status",
+                                  data: {
+                                    center_id: $props.centerId,
+                                    bookid: $props.bookId
+                                  },
+                                  type: "visited-all-uncertain-book-status"
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Splunk.sendLog"]?.apply(null, [
+                          ...actionArgs.args
+                        ]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["eventVisitedAllUncertainBookStatus"] != null &&
+                    typeof $steps["eventVisitedAllUncertainBookStatus"] ===
+                      "object" &&
+                    typeof $steps["eventVisitedAllUncertainBookStatus"].then ===
+                      "function"
+                  ) {
+                    $steps["eventVisitedAllUncertainBookStatus"] = await $steps[
+                      "eventVisitedAllUncertainBookStatus"
+                    ];
+                  }
+                }}
+              />
+
+              <Button
+                data-plasmic-name={"no"}
+                data-plasmic-override={overrides.no}
+                children2={"\u062e\u06cc\u0631"}
+                className={classNames("__wab_instance", sty.no)}
+                color={"softSand"}
+              />
+            </Stack__>
+          </Stack__>
+        }
+        className={classNames("__wab_instance", sty.dialog)}
+        onOpenChange={generateStateOnChangeProp($state, ["dialog", "open"])}
+        open={generateStateValueProp($state, ["dialog", "open"])}
+        title={null}
+        trigger={null}
+      />
+
       {(() => {
         try {
           return $state.loading == false;
@@ -424,7 +816,9 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
                 })()}
                 bookStatus={(() => {
                   try {
-                    return currentItem.book_status === 1
+                    return $state.sureVisited
+                      ? "visited"
+                      : currentItem.book_status === 1
                       ? "not_came"
                       : currentItem.book_status === 2
                       ? "not_visited"
@@ -666,6 +1060,29 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
           />
         </div>
       ) : null}
+      <div
+        className={classNames(
+          projectcss.all,
+          projectcss.__wab_text,
+          sty.text__wnCg1
+        )}
+      >
+        <React.Fragment>
+          {(() => {
+            try {
+              return $props.allBookStateStatus;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return "faaaaaal";
+              }
+              throw e;
+            }
+          })()}
+        </React.Fragment>
+      </div>
     </div>
   ) as React.ReactElement | null;
 }
@@ -674,14 +1091,16 @@ const PlasmicDescendants = {
   root: [
     "root",
     "sideEffect",
-    "selectAll",
-    "text",
+    "dialog",
+    "yessure",
+    "no",
     "uncertainBookStatusBookCard",
     "svg"
   ],
   sideEffect: ["sideEffect"],
-  selectAll: ["selectAll", "text"],
-  text: ["text"],
+  dialog: ["dialog", "yessure", "no"],
+  yessure: ["yessure"],
+  no: ["no"],
   uncertainBookStatusBookCard: ["uncertainBookStatusBookCard"],
   svg: ["svg"]
 } as const;
@@ -691,8 +1110,9 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   sideEffect: typeof SideEffect;
-  selectAll: typeof Checkbox;
-  text: "div";
+  dialog: typeof Dialog;
+  yessure: typeof Button;
+  no: typeof Button;
   uncertainBookStatusBookCard: typeof UncertainBookStatusBookCard;
   svg: "svg";
 };
@@ -758,8 +1178,9 @@ export const PlasmicUncertainBookStatusList = Object.assign(
   {
     // Helper components rendering sub-elements
     sideEffect: makeNodeComponent("sideEffect"),
-    selectAll: makeNodeComponent("selectAll"),
-    text: makeNodeComponent("text"),
+    dialog: makeNodeComponent("dialog"),
+    yessure: makeNodeComponent("yessure"),
+    no: makeNodeComponent("no"),
     uncertainBookStatusBookCard: makeNodeComponent(
       "uncertainBookStatusBookCard"
     ),

@@ -172,6 +172,12 @@ function PlasmicPatientList__RenderFunc(props: {
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "insurances",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
       }
     ],
     [$props, $ctx, $refs]
@@ -353,6 +359,108 @@ function PlasmicPatientList__RenderFunc(props: {
           ) {
             $steps["updateLoading2"] = await $steps["updateLoading2"];
           }
+
+          $steps["apiOnlineVisitChannels"] = true
+            ? (() => {
+                const actionArgs = {
+                  args: [
+                    undefined,
+                    "https://apigw.paziresh24.com/v1/visit-channels"
+                  ]
+                };
+                return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
+          if (
+            $steps["apiOnlineVisitChannels"] != null &&
+            typeof $steps["apiOnlineVisitChannels"] === "object" &&
+            typeof $steps["apiOnlineVisitChannels"].then === "function"
+          ) {
+            $steps["apiOnlineVisitChannels"] = await $steps[
+              "apiOnlineVisitChannels"
+            ];
+          }
+
+          $steps["updateVisitChannel"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["visitChannel"]
+                  },
+                  operation: 0,
+                  value: $steps.apiOnlineVisitChannels.data
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateVisitChannel"] != null &&
+            typeof $steps["updateVisitChannel"] === "object" &&
+            typeof $steps["updateVisitChannel"].then === "function"
+          ) {
+            $steps["updateVisitChannel"] = await $steps["updateVisitChannel"];
+          }
+
+          $steps["apiInsurances"] = true
+            ? (() => {
+                const actionArgs = {
+                  args: [
+                    "GET",
+                    "https://prescription-api.paziresh24.com/V1/insurances/"
+                  ]
+                };
+                return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
+          if (
+            $steps["apiInsurances"] != null &&
+            typeof $steps["apiInsurances"] === "object" &&
+            typeof $steps["apiInsurances"].then === "function"
+          ) {
+            $steps["apiInsurances"] = await $steps["apiInsurances"];
+          }
+
+          $steps["updateInsurances"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["insurances"]
+                  },
+                  operation: 0,
+                  value: $steps.apiInsurances.data
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateInsurances"] != null &&
+            typeof $steps["updateInsurances"] === "object" &&
+            typeof $steps["updateInsurances"].then === "function"
+          ) {
+            $steps["updateInsurances"] = await $steps["updateInsurances"];
+          }
         }}
       />
 
@@ -431,7 +539,9 @@ function PlasmicPatientList__RenderFunc(props: {
                 })()}
                 bookId={(() => {
                   try {
-                    return currentItem.id;
+                    return currentItem.type === "prescription"
+                      ? ""
+                      : currentItem.id;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -550,6 +660,41 @@ function PlasmicPatientList__RenderFunc(props: {
                     throw e;
                   }
                 })()}
+                finalized={(() => {
+                  try {
+                    return (() => {
+                      const finalized =
+                        currentItem.finalized !== undefined
+                          ? currentItem.finalized
+                          : false;
+                      return finalized;
+                    })();
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
+                insurances={(() => {
+                  try {
+                    return (
+                      $state.insurances &&
+                      Object.keys($state.insurances).length > 0
+                    );
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
                 key={currentIndex}
                 name={(() => {
                   try {
@@ -639,12 +784,29 @@ function PlasmicPatientList__RenderFunc(props: {
                     throw e;
                   }
                 })()}
+                prescriptionId={(() => {
+                  try {
+                    return currentItem.id;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
                 refId={(() => {
                   try {
-                    return currentItem.type === "prescription"
+                    return currentItem.type === "prescription" &&
+                      currentItem.finalized
                       ? currentItem.salamat_prescription.trackingCode ||
                           currentItem.tamin_prescription[0].trackingCode ||
                           ""
+                      : currentItem.type === "prescription" &&
+                        !currentItem.finalized
+                      ? "نسخه ای ثبت نشده است"
                       : currentItem.ref_id;
                   } catch (e) {
                     if (
@@ -664,7 +826,7 @@ function PlasmicPatientList__RenderFunc(props: {
                           item.user_center_id == currentItem.user_center_id &&
                           item.id == "5532"
                       ) &&
-                      $state.visitChannel.some(
+                      $state.visitChannel[0].data.some(
                         channel => channel.type === "secure_call"
                       )
                     );

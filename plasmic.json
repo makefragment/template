@@ -636,19 +636,6 @@
           "componentType": "component"
         },
         {
-          "id": "1AR8vXE8xbWC",
-          "name": "دمهتجوزنسخه",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/Plasmicدمهتجوزنسخه.tsx",
-          "importSpec": {
-            "modulePath": "دمهتجوزنسخه.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/Plasmicدمهتجوزنسخه.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
           "id": "AuSNwEdbo4sV",
           "name": "Workhours",
           "type": "managed",
@@ -876,6 +863,32 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicCard.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "1AR8vXE8xbWC",
+          "name": "Prescription",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicPrescription.tsx",
+          "importSpec": {
+            "modulePath": "Prescription.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicPrescription.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "ro6__ROOMy7S",
+          "name": "Anahita",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicAnahita.tsx",
+          "importSpec": {
+            "modulePath": "Anahita.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicAnahita.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -1023,6 +1036,30 @@
           "name": "Hamdast",
           "displayName": "Hamdast",
           "componentImportPath": "@/hamdast/hamdast"
+        },
+        {
+          "id": "n8ioKZzFQxrO",
+          "name": "Select",
+          "displayName": "Select",
+          "componentImportPath": "@/fragment/components/select"
+        },
+        {
+          "id": "ByhbQ0nAxig8",
+          "name": "Input",
+          "displayName": "Input",
+          "componentImportPath": "@/fragment/components/input"
+        },
+        {
+          "id": "dH6_VlwkAh4P",
+          "name": "Switch",
+          "displayName": "Switch",
+          "componentImportPath": "@/fragment/components/switch"
+        },
+        {
+          "id": "Gl72hv5IMo-p",
+          "name": "ApiRequest",
+          "displayName": "ApiRequest",
+          "componentImportPath": "@/fragment/components/api-request"
         }
       ],
       "customFunctions": []

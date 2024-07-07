@@ -59,7 +59,6 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import Checkbox from "../../Checkbox"; // plasmic-import: IDR0sAqN5tth/component
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import PatientPrivateData from "../../PatientPrivateData"; // plasmic-import: 0zlB7TkmySN6/component
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
@@ -134,7 +133,6 @@ export const PlasmicUncertainBookStatusBookCard__ArgProps =
 
 export type PlasmicUncertainBookStatusBookCard__OverridesType = {
   root?: Flex__<"div">;
-  checkbox?: Flex__<typeof Checkbox>;
   dialog?: Flex__<typeof Dialog>;
   ساعتوتارخ?: Flex__<"div">;
   دالوحذفنوبت?: Flex__<typeof Dialog>;
@@ -262,25 +260,6 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
               throw e;
             }
           })()
-      },
-      {
-        path: "checkbox.isChecked",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return undefined;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return [];
-              }
-              throw e;
-            }
-          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -317,29 +296,6 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
       dir={"rtl"}
     >
       <div className={classNames(projectcss.all, sty.freeBox__z2Gfb)}>
-        <Checkbox
-          data-plasmic-name={"checkbox"}
-          data-plasmic-override={overrides.checkbox}
-          className={classNames("__wab_instance", sty.checkbox)}
-          isChecked={
-            generateStateValueProp($state, ["checkbox", "isChecked"]) ?? false
-          }
-          onChange={(...eventArgs) => {
-            generateStateOnChangeProp($state, ["checkbox", "isChecked"])(
-              eventArgs[0]
-            );
-          }}
-        >
-          <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text__jw9Jk
-            )}
-          >
-            {""}
-          </div>
-        </Checkbox>
         <Dialog
           data-plasmic-name={"dialog"}
           data-plasmic-override={overrides.dialog}
@@ -2033,7 +1989,7 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
           }}
           visited={(() => {
             try {
-              return $state.bookStatusState == "visited";
+              return $state.bookStatusState === "visited";
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -2053,7 +2009,6 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
 const PlasmicDescendants = {
   root: [
     "root",
-    "checkbox",
     "dialog",
     "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u062e",
     "\u062f\u0627\u0644\u0648\u062d\u0630\u0641\u0646\u0648\u0628\u062a",
@@ -2063,7 +2018,6 @@ const PlasmicDescendants = {
     "safeCall",
     "specifyBookStatusButton"
   ],
-  checkbox: ["checkbox"],
   dialog: [
     "dialog",
     "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u062e",
@@ -2090,7 +2044,6 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  checkbox: typeof Checkbox;
   dialog: typeof Dialog;
   ساعتوتارخ: "div";
   دالوحذفنوبت: typeof Dialog;
@@ -2165,7 +2118,6 @@ export const PlasmicUncertainBookStatusBookCard = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    checkbox: makeNodeComponent("checkbox"),
     dialog: makeNodeComponent("dialog"),
     ساعتوتارخ: makeNodeComponent(
       "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u062e"

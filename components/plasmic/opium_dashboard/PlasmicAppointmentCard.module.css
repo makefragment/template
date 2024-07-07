@@ -302,55 +302,6 @@
   max-width: 100%;
   position: relative;
 }
-.freeBox__g57Fo {
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-  padding: 8px;
-}
-.freeBox__g57Fo > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  align-content: stretch;
-  min-width: 0;
-  margin-left: calc(0px - var(--token-_c276Gs_1FIE));
-  width: calc(100% + var(--token-_c276Gs_1FIE));
-}
-.freeBox__g57Fo > :global(.__wab_flex-container) > *,
-.freeBox__g57Fo > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox__g57Fo > :global(.__wab_flex-container) > picture > img,
-.freeBox__g57Fo
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: var(--token-_c276Gs_1FIE);
-}
-.button__ltYs2:global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
-  width: 100%;
-  min-width: 0;
-  display: none;
-}
-.svg__y0Ea2 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
-.svg__e2Bq9 {
-  position: relative;
-  object-fit: cover;
-  width: auto;
-  height: 1em;
-}
 .button__iLuiz:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
@@ -365,6 +316,43 @@
   height: 1em;
 }
 .svg__cqwx7 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.button__ltYs2:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.svg__y0Ea2 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__e2Bq9 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.button__czTw6:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  display: none;
+}
+.svg__zG0Nd {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__e2Jg5 {
   position: relative;
   object-fit: cover;
   width: auto;

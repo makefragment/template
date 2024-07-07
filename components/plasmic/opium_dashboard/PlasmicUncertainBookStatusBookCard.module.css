@@ -20,15 +20,6 @@
   min-width: 0;
   padding: 8px;
 }
-.checkbox:global(.__wab_instance) {
-  max-width: 100%;
-  position: relative;
-  display: none;
-}
-.text__jw9Jk {
-  font-weight: 700;
-  color: #000000;
-}
 .dialog:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;

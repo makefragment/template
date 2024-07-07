@@ -1615,48 +1615,51 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                 onClick={async event => {
                   const $steps = {};
 
-                  $steps["apiDescription"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          args: [
-                            "PATCH",
-                            (() => {
-                              try {
-                                return `https://api.paziresh24.com/V1/doctor/centers/${$props.centerId}/books/${$props.bookId}/description`;
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
+                  $steps["apiDescription"] =
+                    $props.bookId.length > 0
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              "PATCH",
+                              (() => {
+                                try {
+                                  return `https://api.paziresh24.com/V1/doctor/centers/${$props.centerId}/books/${$props.bookId}/description`;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
                                 }
-                                throw e;
-                              }
-                            })(),
-                            undefined,
-                            (() => {
-                              try {
-                                return {
-                                  description: $state.descriptionInput.value
-                                };
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
+                              })(),
+                              undefined,
+                              (() => {
+                                try {
+                                  return {
+                                    description: $state.descriptionInput.value
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
                                 }
-                                throw e;
-                              }
-                            })()
-                          ]
-                        };
-                        return $globalActions["Fragment.apiRequest"]?.apply(
-                          null,
-                          [...actionArgs.args]
-                        );
-                      })()
-                    : undefined;
+                              })()
+                            ]
+                          };
+                          return $globalActions["Fragment.apiRequest"]?.apply(
+                            null,
+                            [...actionArgs.args]
+                          );
+                        })()
+                      : undefined;
                   if (
                     $steps["apiDescription"] != null &&
                     typeof $steps["apiDescription"] === "object" &&
@@ -1666,7 +1669,8 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                   }
 
                   $steps["updateBookStatusState"] =
-                    $steps.apiDescription?.data?.status === "SUCCESS"
+                    $steps.apiDescription?.data?.status === "SUCCESS" ||
+                    $props.finalized === true
                       ? (() => {
                           const actionArgs = {
                             variable: {

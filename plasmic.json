@@ -1063,6 +1063,21 @@
         }
       ],
       "customFunctions": []
+    },
+    {
+      "projectId": "a3pmZtcpA5asHkNtN3SGoF",
+      "projectApiToken": "1f2n20WEoxaPX0hs2uqNOsnXjfuNVyw4FB2zgrleQqQm7qWQPGlBFi63m7FgGuFbWu1b8lKhAm6fmfGf5CC8A",
+      "projectName": "uuid",
+      "version": ">0.0.0",
+      "cssFilePath": "plasmic/uuid/plasmic.module.css",
+      "components": [],
+      "icons": [],
+      "images": [],
+      "indirect": true,
+      "globalContextsFilePath": "",
+      "splitsProviderFilePath": "",
+      "codeComponents": [],
+      "customFunctions": []
     }
   ],
   "globalVariants": {

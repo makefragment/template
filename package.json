@@ -30,7 +30,8 @@
     "react-hot-toast": "^2.4.1",
     "react-timeit": "^1.2.12",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",

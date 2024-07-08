@@ -80,6 +80,8 @@ import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; 
 import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: euu18ryAtnAt/icon
 import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: BMYyZW6g83gg/icon
 
+import { v4 as __lib_uuid__v4 } from "uuid";
+
 createPlasmicElementProxy;
 
 export type PlasmicAppointmentCard__VariantMembers = {
@@ -176,7 +178,11 @@ export interface DefaultAppointmentCardProps {
   className?: string;
 }
 
-const $$ = {};
+const $$ = {
+  uuid: {
+    v4: __lib_uuid__v4
+  }
+};
 
 function useNextRouter() {
   try {
@@ -739,100 +745,160 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                 }
               />
             ) : null}
-            <Button
-              children2={
-                "\u062a\u062c\u0648\u06cc\u0632 \u0646\u0633\u062e\u0647"
+            {(() => {
+              try {
+                return $props.finalized === false;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return false;
+                }
+                throw e;
               }
-              className={classNames("__wab_instance", sty.button__czTw6)}
-              onClick={async event => {
-                const $steps = {};
+            })() ? (
+              <Button
+                children2={
+                  "\u062a\u062c\u0648\u06cc\u0632 \u0646\u0633\u062e\u0647"
+                }
+                className={classNames("__wab_instance", sty.button__czTw6)}
+                onClick={async event => {
+                  const $steps = {};
 
-                $steps["apiBuildPrescription"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        args: [
-                          "POST",
-                          "https://prescription-api.paziresh24.com/insurance/prescription",
-                          undefined,
-                          (() => {
+                  $steps["apiBuildPrescription"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "POST",
+                            "https://prescription-api.paziresh24.com/insurance/prescription",
+                            undefined,
+                            (() => {
+                              try {
+                                return {
+                                  baseURL: null,
+                                  patientCell: $props.cell,
+                                  patientNationalCode: $props.nationalcode,
+                                  identifier: $props.bookId
+                                    ? $props.bookId
+                                    : $$.uuid.v4(),
+                                  tags: [
+                                    {
+                                      type: "center_id",
+                                      value: $props.centerId
+                                    }
+                                  ]
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Fragment.apiRequest"]?.apply(
+                          null,
+                          [...actionArgs.args]
+                        );
+                      })()
+                    : undefined;
+                  if (
+                    $steps["apiBuildPrescription"] != null &&
+                    typeof $steps["apiBuildPrescription"] === "object" &&
+                    typeof $steps["apiBuildPrescription"].then === "function"
+                  ) {
+                    $steps["apiBuildPrescription"] = await $steps[
+                      "apiBuildPrescription"
+                    ];
+                  }
+
+                  $steps["updateNewPrescriptionId"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["newPrescriptionId"]
+                          },
+                          operation: 0,
+                          value: $steps.apiBuildPrescription.data.result.id
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateNewPrescriptionId"] != null &&
+                    typeof $steps["updateNewPrescriptionId"] === "object" &&
+                    typeof $steps["updateNewPrescriptionId"].then === "function"
+                  ) {
+                    $steps["updateNewPrescriptionId"] = await $steps[
+                      "updateNewPrescriptionId"
+                    ];
+                  }
+
+                  $steps["pagePrescription"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: (() => {
                             try {
-                              return {
-                                baseURL: null,
-                                patientCell: $props.cell,
-                                patientNationalCode: $props.nationalcode,
-                                tags: [
-                                  { type: "center_id", value: $props.centerId }
-                                ]
-                              };
+                              return `https://dr.paziresh24.com/prescription/patient/${
+                                $props.prescriptionId ||
+                                $state.newPrescriptionId
+                              }`;
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
                                 e?.plasmicType === "PlasmicUndefinedDataError"
                               ) {
-                                return undefined;
+                                return "";
                               }
                               throw e;
                             }
                           })()
-                        ]
-                      };
-                      return $globalActions["Fragment.apiRequest"]?.apply(
-                        null,
-                        [...actionArgs.args]
-                      );
-                    })()
-                  : undefined;
-                if (
-                  $steps["apiBuildPrescription"] != null &&
-                  typeof $steps["apiBuildPrescription"] === "object" &&
-                  typeof $steps["apiBuildPrescription"].then === "function"
-                ) {
-                  $steps["apiBuildPrescription"] = await $steps[
-                    "apiBuildPrescription"
-                  ];
-                }
-
-                $steps["pagePrescription"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination: (() => {
-                          try {
-                            return `https://dr.paziresh24.com/prescription/patient/${$props.prescriptionId}`;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return "";
-                            }
-                            throw e;
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
                           }
-                        })()
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["pagePrescription"] != null &&
-                  typeof $steps["pagePrescription"] === "object" &&
-                  typeof $steps["pagePrescription"].then === "function"
-                ) {
-                  $steps["pagePrescription"] = await $steps["pagePrescription"];
-                }
-              }}
-            />
-
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["pagePrescription"] != null &&
+                    typeof $steps["pagePrescription"] === "object" &&
+                    typeof $steps["pagePrescription"].then === "function"
+                  ) {
+                    $steps["pagePrescription"] = await $steps[
+                      "pagePrescription"
+                    ];
+                  }
+                }}
+              />
+            ) : null}
             <Dialog
               data-plasmic-name={
                 "\u062f\u0627\u0644\u0648\u062d\u0630\u0641\u0646\u0648\u0628\u062a"

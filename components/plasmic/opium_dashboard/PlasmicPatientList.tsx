@@ -663,8 +663,11 @@ function PlasmicPatientList__RenderFunc(props: {
                 finalized={(() => {
                   try {
                     return (
-                      currentItem.finalized ||
-                      currentItem.prescription.finalized
+                      (currentItem.type === "book" &&
+                        currentItem.prescription.finalized) ||
+                      (currentItem.type === "prescription" &&
+                        currentItem.finalized) ||
+                      false
                     );
                   } catch (e) {
                     if (
@@ -783,9 +786,13 @@ function PlasmicPatientList__RenderFunc(props: {
                 })()}
                 prescriptionId={(() => {
                   try {
-                    return currentItem.prescription
-                      ? currentItem.prescription.id
-                      : currentItem.id;
+                    return (
+                      (currentItem.type === "book" &&
+                        currentItem.prescription &&
+                        currentItem.prescription.id) ||
+                      (currentItem.type === "prescription" && currentItem.id) ||
+                      null
+                    );
                   } catch (e) {
                     if (
                       e instanceof TypeError ||

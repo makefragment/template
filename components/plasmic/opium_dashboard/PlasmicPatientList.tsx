@@ -662,13 +662,10 @@ function PlasmicPatientList__RenderFunc(props: {
                 })()}
                 finalized={(() => {
                   try {
-                    return (() => {
-                      const finalized =
-                        currentItem.finalized !== undefined
-                          ? currentItem.finalized
-                          : false;
-                      return finalized;
-                    })();
+                    return (
+                      currentItem.finalized ||
+                      currentItem.prescription.finalized
+                    );
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -786,7 +783,9 @@ function PlasmicPatientList__RenderFunc(props: {
                 })()}
                 prescriptionId={(() => {
                   try {
-                    return currentItem.id;
+                    return currentItem.prescription
+                      ? currentItem.prescription.id
+                      : currentItem.id;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||

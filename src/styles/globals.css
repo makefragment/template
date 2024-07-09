@@ -80,9 +80,9 @@
 }
 
 .holiday-style.-selected {
-  @apply text-white;
+  @apply !text-white;
 }
 
 .holiday-style {
-  @apply text-red-500;
+  @apply !text-red-500;
 }

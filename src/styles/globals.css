@@ -78,3 +78,11 @@
 [data-radix-popper-content-wrapper] {
   z-index: 999 !important;
 }
+
+.holiday-style.-selected {
+  @apply text-white;
+}
+
+.holiday-style {
+  @apply text-red-500;
+}

@@ -385,7 +385,7 @@ function PlasmicUncertainBookStatusListPage__RenderFunc(props: {
                     {(() => {
                       try {
                         return `وضعیت «${$state.countUncertainBookStatus[0].count_id}» تا از نوبت‌های ویزیت آنلاین را به پذیرش ۲۴ اعلام نکرده‌اید.
-هزینه‌های مربوط به این نوبت‌ها برای شما محاسبه نشده است و تا زمان تعیین وضعیت و تسویه حساب، مبلغ مربوطه در حساب شرکت به صورت قرض‌الحسنه نگهداری می‌شود.`;
+هزینه‌های مربوط به این نوبت‌ها برای شما محاسبه نشده است و تا زمان تعیین وضعیت، برای شما محاسبه نمی‌گردد.`;
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
@@ -485,6 +485,9 @@ function PlasmicUncertainBookStatusListPage__RenderFunc(props: {
                         "\u0627\u0644\u0627\u0646 \u0628\u0631\u0631\u0633\u06cc \u0645\u06cc\u06a9\u0646\u0645"
                       }
                       className={classNames("__wab_instance", sty.checkNow)}
+                      onClick={async event => {
+                        const $steps = {};
+                      }}
                     />
                   }
                 />

@@ -59,10 +59,10 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { DatePicker } from "@/fragment/components/date-picker"; // plasmic-import: b38lDo6Nm8Rh/codeComponent
 import DrCenters from "../../DrCenters"; // plasmic-import: IkLsGKQP_uPj/component
-import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import PatientList from "../../PatientList"; // plasmic-import: uw2UKvNlq2Yr/component
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import AddPatient from "../../AddPatient"; // plasmic-import: tPaqHhQ134RQ/component
@@ -98,7 +98,6 @@ export type PlasmicBookList__OverridesType = {
   fragmentDatePicker?: Flex__<typeof DatePicker>;
   center?: Flex__<"div">;
   drCenters?: Flex__<typeof DrCenters>;
-  sideEffect?: Flex__<typeof SideEffect>;
   patientList?: Flex__<typeof PatientList>;
   addPatient?: Flex__<"div">;
   dialog?: Flex__<typeof Dialog>;
@@ -188,6 +187,12 @@ function PlasmicBookList__RenderFunc(props: {
         type: "private",
         variableType: "number",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "holiday",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
     [$props, $ctx, $refs]
@@ -230,6 +235,63 @@ function PlasmicBookList__RenderFunc(props: {
           )}
           dir={"rtl"}
         >
+          <SideEffect
+            className={classNames("__wab_instance", sty.sideEffect__d8T7G)}
+            onMount={async () => {
+              const $steps = {};
+
+              $steps["apiHoliday"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        undefined,
+                        "https://apigw.paziresh24.com/v1/holidays-next-year"
+                      ]
+                    };
+                    return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["apiHoliday"] != null &&
+                typeof $steps["apiHoliday"] === "object" &&
+                typeof $steps["apiHoliday"].then === "function"
+              ) {
+                $steps["apiHoliday"] = await $steps["apiHoliday"];
+              }
+
+              $steps["updateHoliday"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["holiday"]
+                      },
+                      operation: 0,
+                      value: $steps.apiHoliday.data
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateHoliday"] != null &&
+                typeof $steps["updateHoliday"] === "object" &&
+                typeof $steps["updateHoliday"].then === "function"
+              ) {
+                $steps["updateHoliday"] = await $steps["updateHoliday"];
+              }
+            }}
+          />
+
           <div
             data-plasmic-name={"date"}
             data-plasmic-override={overrides.date}
@@ -324,7 +386,19 @@ function PlasmicBookList__RenderFunc(props: {
                         "__wab_instance",
                         sty.fragmentDatePicker
                       )}
-                      holidays={[]}
+                      holidays={(() => {
+                        try {
+                          return $state.holiday.map(item => item.date);
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()}
                       locale={"fa"}
                       onChange={async (...eventArgs: any) => {
                         generateStateOnChangeProp($state, [
@@ -504,9 +578,7 @@ function PlasmicBookList__RenderFunc(props: {
               </div>
             </div>
             <SideEffect
-              data-plasmic-name={"sideEffect"}
-              data-plasmic-override={overrides.sideEffect}
-              className={classNames("__wab_instance", sty.sideEffect)}
+              className={classNames("__wab_instance", sty.sideEffect__usExo)}
               onMount={async () => {
                 const $steps = {};
 
@@ -850,7 +922,6 @@ const PlasmicDescendants = {
     "fragmentDatePicker",
     "center",
     "drCenters",
-    "sideEffect",
     "patientList",
     "addPatient",
     "dialog",
@@ -870,9 +941,8 @@ const PlasmicDescendants = {
   ],
   تقومماهانه: ["\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647"],
   fragmentDatePicker: ["fragmentDatePicker"],
-  center: ["center", "drCenters", "sideEffect", "patientList"],
+  center: ["center", "drCenters", "patientList"],
   drCenters: ["drCenters"],
-  sideEffect: ["sideEffect"],
   patientList: ["patientList"],
   addPatient: ["addPatient", "dialog", "button", "drCenters2"],
   dialog: ["dialog", "button", "drCenters2"],
@@ -890,7 +960,6 @@ type NodeDefaultElementType = {
   fragmentDatePicker: typeof DatePicker;
   center: "div";
   drCenters: typeof DrCenters;
-  sideEffect: typeof SideEffect;
   patientList: typeof PatientList;
   addPatient: "div";
   dialog: typeof Dialog;
@@ -966,7 +1035,6 @@ export const PlasmicBookList = Object.assign(
     fragmentDatePicker: makeNodeComponent("fragmentDatePicker"),
     center: makeNodeComponent("center"),
     drCenters: makeNodeComponent("drCenters"),
-    sideEffect: makeNodeComponent("sideEffect"),
     patientList: makeNodeComponent("patientList"),
     addPatient: makeNodeComponent("addPatient"),
     dialog: makeNodeComponent("dialog"),

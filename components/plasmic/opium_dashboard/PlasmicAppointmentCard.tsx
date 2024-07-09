@@ -896,6 +896,43 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                       "pagePrescription"
                     ];
                   }
+
+                  $steps["updateBookStatusState"] =
+                    $steps.apiBuildPrescription.data.result.id.lenght > 0
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["bookStatusState"]
+                            },
+                            operation: 0,
+                            value: came
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["updateBookStatusState"] != null &&
+                    typeof $steps["updateBookStatusState"] === "object" &&
+                    typeof $steps["updateBookStatusState"].then === "function"
+                  ) {
+                    $steps["updateBookStatusState"] = await $steps[
+                      "updateBookStatusState"
+                    ];
+                  }
                 }}
               />
             ) : null}

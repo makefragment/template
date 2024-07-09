@@ -14,6 +14,9 @@
     "@plasmicapp/cli": "^0.1.330",
     "@plasmicapp/host": "^1.0.196",
     "@plasmicapp/react-web": "^0.2.337",
+    "@plasmicpkgs/plasmic-basic-components": "^0.0.215",
+    "@plasmicpkgs/plasmic-query": "^0.0.214",
+    "@plasmicpkgs/radix-ui": "^0.0.51",
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slider": "^1.2.0",
@@ -28,7 +31,8 @@
     "react-hot-toast": "^2.4.1",
     "react-timeit": "^1.2.12",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -36,6 +36,7 @@ export const DatePicker = ({ onChange, locale, holidays = [], value }: any) => {
       {...(value && {
         value: dateToJson(value),
       })}
+      shouldHighlightWeekends
     />
   );
 };

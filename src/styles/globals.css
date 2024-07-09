@@ -79,6 +79,14 @@
   z-index: 999 !important;
 }
 
+.holiday-style.-selected {
+  @apply text-white;
+}
+
+.holiday-style {
+  @apply text-red-500;
+}
+
 @layer utilities {
     .font-thin {
       font-weight: 100;
@@ -132,4 +140,3 @@
   button {
     font-family: var(--iran-sans-x), tahoma !important;
   }
-  

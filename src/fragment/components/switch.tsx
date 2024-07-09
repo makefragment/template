@@ -36,7 +36,7 @@ export const switchMeta: CodeComponentMeta<SwitchType> = {
     name: {
       type: "string",
       advanced: true,
-      description: "The HTML name of the select",
+      description: "The HTML name of the switch",
     },
     onCheckedChange: {
       type: "eventHandler",

@@ -2211,11 +2211,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             }
 
             $steps["updateBookStatusState"] =
-              ($steps.apiCame?.data?.status === "SUCCESS" &&
-                $props.insurances === true &&
-                $props.finalized === false) ||
-              ($state.bookStatusState === "not_came" &&
-                $props.bookDelete === "0")
+              ($props.type === "book" &&
+                $steps.apiCame?.data?.status === "SUCCESS") ||
+              $props.type === "prescription"
                 ? (() => {
                     const actionArgs = {
                       variable: {
@@ -2247,7 +2245,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             }
 
             $steps["startVisit"] =
-              $steps.apiCame?.data?.status === "SUCCESS"
+              ($props.type === "book" &&
+                $steps.apiCame?.data?.status === "SUCCESS") ||
+              $props.type === "prescription"
                 ? (() => {
                     const actionArgs = {
                       args: [

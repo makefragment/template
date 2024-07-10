@@ -1,43 +1,128 @@
-import { Calendar } from "@hassanmojab/react-modern-calendar-datepicker";
-import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Calendar as CalendarV2, DateObject } from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+
 import { CodeComponentMeta } from "@plasmicapp/host";
 
 import moment from "jalali-moment";
+import { cn } from "@/lib/utils";
+import React from "react";
 
-export const DatePicker = ({ onChange, locale, holidays = [], value }: any) => {
-  const dateToJson = (value: number) => {
-    const date = moment(value * 1000).locale(locale);
-    return {
-      year: date.year(),
-      month: date.month() + 1,
-      day: date.date(),
-    };
-  };
+export const DatePicker = ({
+  onChange,
+  locale,
+  holidays = [],
+  value,
+  mode,
+  values = [],
+  dayCell,
+  customDayCell,
+}: any) => {
   return (
-    <Calendar
-      onChange={(value: any) => {
-        return onChange(
-          moment(
-            `${value?.year}/${value?.month}/${value?.day}`,
-            "jYYYY/jMM/jDD",
-            locale
+    <>
+      <CalendarV2
+        monthYearSeparator="|"
+        multiple={mode === "multiple"}
+        value={
+          mode === "multiple"
+            ? (Array.isArray(values) ? values : [values]).map(
+                (item: any) => item * 1000
+              )
+            : value * 1000
+        }
+        onChange={(value: any) => {
+          Array.isArray(value)
+            ? onChange(value.map((item) => item.unix))
+            : onChange(value.unix);
+        }}
+        className={cn("fragment", { "custom-day-cell": customDayCell })}
+        {...(locale === "fa" && {
+          calendar: persian,
+          locale: {
+            ...persian_fa,
+            weekDays: persian_fa.weekDays.map((item) => [
+              item[0],
+              item[1].slice(0, 1),
+            ]),
+          },
+        })}
+        shadow={false}
+        mapDays={({ date, today, isSameDate, selectedDate }) => {
+          let isWeekend = (locale === "fa" ? [6] : [0, 6]).includes(
+            date.weekDay.index
+          );
+          if (customDayCell && !!dayCell) {
+            return {
+              style: {},
+              class: "fragment-day-reset-cell",
+              children: React.createElement(dayCell, {
+                unix: date.unix,
+                date: { day: date.day, month: date.month, year: date.year },
+                isToday: isSameDate(date, today),
+                isWeekend,
+                isHoliday: holidays.some(
+                  (item: number) =>
+                    moment(+item * 1000)
+                      .startOf("day")
+                      .unix() ==
+                    moment(date.unix * 1000)
+                      .startOf("day")
+                      .unix()
+                ),
+                isSelected: Array.isArray(selectedDate)
+                  ? selectedDate.some(
+                      (item) =>
+                        moment(+item.unix * 1000)
+                          .startOf("day")
+                          .unix() ==
+                        moment(date.unix * 1000)
+                          .startOf("day")
+                          .unix()
+                    )
+                  : isSameDate(date, selectedDate),
+              }),
+            };
+          }
+          let props: any = {};
+
+          props.class = "fragment-day-cell";
+
+          if (isWeekend) props.class = "fragment-day-holiday-cell";
+
+          if (isSameDate(date, today)) props.class = "fragment-day-today-cell";
+
+          if (
+            holidays.some(
+              (item: number) =>
+                moment(+item * 1000)
+                  .startOf("day")
+                  .unix() ==
+                moment(date.unix * 1000)
+                  .startOf("day")
+                  .unix()
+            )
           )
-            .locale("en")
-            .unix()
-        );
-      }}
-      locale={locale}
-      customDaysClassName={holidays.map((d: any) => {
-        return {
-          ...dateToJson(d),
-          className: "holiday-style",
-        };
-      })}
-      {...(value && {
-        value: dateToJson(value),
-      })}
-      shouldHighlightWeekends
-    />
+            props.class = "fragment-day-holiday-cell";
+
+          if (
+            Array.isArray(selectedDate)
+              ? selectedDate.some(
+                  (item) =>
+                    moment(+item.unix * 1000)
+                      .startOf("day")
+                      .unix() ==
+                    moment(date.unix * 1000)
+                      .startOf("day")
+                      .unix()
+                )
+              : isSameDate(date, selectedDate)
+          )
+            props.class = "fragment-day-active-cell";
+
+          return props;
+        }}
+      />
+    </>
   );
 };
 
@@ -46,7 +131,12 @@ export const datePickerMeta: CodeComponentMeta<any> = {
   displayName: "Fragment/DatePicker",
   importPath: "@/fragment/components/date-picker",
   props: {
-    value: { type: "number" },
+    value: { type: "number", hidden: (ps) => ps.mode === "multiple" },
+    values: {
+      type: "array",
+      hidden: (ps) => ps.mode === "single",
+      defaultValue: [],
+    },
     onChange: {
       type: "eventHandler",
       argTypes: [
@@ -61,10 +151,30 @@ export const datePickerMeta: CodeComponentMeta<any> = {
       type: "choice",
       options: ["fa", "en"],
     },
+    mode: {
+      type: "choice",
+      options: [
+        {
+          label: "Single",
+          value: "single",
+        },
+        {
+          label: "Multiple",
+          value: "multiple",
+        },
+      ],
+    },
     holidays: {
       defaultValue: [],
       type: "array",
       helpText: "Array of day timestamps, e.g., [1710534600, 1710707400].",
+    },
+    customDayCell: "boolean",
+    dayCell: {
+      displayName: "Custom Day Cell",
+      type: "slot",
+      renderPropParams: ["dateProps"],
+      hidden: (ps) => !ps.customDayCell,
     },
   },
   states: {
@@ -73,6 +183,14 @@ export const datePickerMeta: CodeComponentMeta<any> = {
       variableType: "number",
       valueProp: "value",
       onChangeProp: "onChange",
+      hidden: (ps) => ps.mode === "multiple",
+    },
+    values: {
+      type: "writable",
+      variableType: "array",
+      valueProp: "values",
+      onChangeProp: "onChange",
+      hidden: (ps) => ps.mode === "single",
     },
   },
 };

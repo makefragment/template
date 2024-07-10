@@ -1,0 +1,44 @@
+.fragment .rmdp-week-day {
+  @apply text-gray-300 !w-full select-none font-light text-xs;
+}
+
+.fragment.custom-day-cell .rmdp-week .rmdp-day {
+  @apply !w-full !h-auto;
+}
+
+.fragment.fragment.custom-day-cell .rmdp-week .rmdp-day span {
+  font-size: inherit;
+  @apply !text-inherit !inset-auto !static !rounded-none !shadow-none !p-0 select-none hover:!bg-transparent !bg-transparent;
+}
+
+/* --------- */
+
+.fragment-day-today-cell {
+  @apply !text-slate-700 select-none !bg-transparent flex justify-center after:transition-all after:duration-500 after:opacity-100 items-center font-bold after:absolute after:bg-slate-300 relative after:w-2 after:h-[1.5px] after:rounded-full after:bottom-px hover:!bg-slate-100/100 hover:!text-slate-700 hover:after:opacity-0;
+}
+
+.fragment-day-cell {
+  @apply text-slate-500 select-none bg-slate-100/0 transition-all duration-300 p-3 flex justify-center items-center hover:!bg-slate-100/100 hover:!text-slate-500;
+}
+
+.fragment-day-holiday-cell {
+  @apply text-red-400 select-none bg-red-50/0 p-3 flex justify-center items-center transition-all duration-300 hover:!bg-red-50/50 hover:!text-red-400;
+}
+
+.fragment-day-active-cell {
+  @apply !bg-teal-500 select-none !shadow-none flex justify-center items-center p-3;
+}
+
+/* --------------- */
+
+.fragment .rmdp-ym .rmdp-day span {
+  @apply text-slate-500 select-none bg-slate-100/0 transition-all duration-300 !py-1 flex justify-center items-center hover:!bg-slate-100/100 hover:!text-slate-500;
+}
+
+.fragment .rmdp-ym .rmdp-day.rmdp-today span {
+  @apply !text-slate-700 select-none !bg-transparent flex justify-center after:transition-all after:duration-500 after:opacity-100 items-center font-bold after:absolute after:bg-slate-300 relative after:w-2 after:h-[1.5px] after:rounded-full after:bottom-px hover:!bg-slate-100/100 hover:!text-slate-700 hover:after:opacity-0;
+}
+
+.fragment .rmdp-ym .rmdp-day.rmdp-selected span {
+  @apply !bg-teal-500 !text-white select-none after:!hidden !shadow-none flex justify-center items-center;
+}

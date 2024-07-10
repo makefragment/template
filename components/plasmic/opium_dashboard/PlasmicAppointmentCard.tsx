@@ -747,7 +747,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             ) : null}
             {(() => {
               try {
-                return $props.finalized === false;
+                return $props.insurances === true && $props.finalized === false;
               } catch (e) {
                 if (
                   e instanceof TypeError ||
@@ -1945,13 +1945,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                     const actionArgs = {
                       args: [
                         "POST",
-                        "https://apigw.paziresh24.com/v1/book-safe-call/",
-                        undefined,
                         (() => {
                           try {
-                            return {
-                              body: JSON.stringify({ book_id: $props.bookId })
-                            };
+                            return `https://apigw.paziresh24.com/v1/book-safe-call/${$props.bookId}`;
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
@@ -1961,7 +1957,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                             }
                             throw e;
                           }
-                        })()
+                        })(),
+                        undefined,
+                        undefined
                       ]
                     };
                     return $globalActions["Fragment.apiRequest"]?.apply(null, [
@@ -1975,6 +1973,92 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                 typeof $steps["apiSafeCall"].then === "function"
               ) {
                 $steps["apiSafeCall"] = await $steps["apiSafeCall"];
+              }
+
+              $steps["showToast"] =
+                $steps.apiSafeCall.data.success === true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          undefined,
+                          "\u062a\u0627 \u062f\u0642\u0627\u06cc\u0642\u06cc \u062f\u06cc\u06af\u0631 \u062a\u0645\u0627\u0633 \u0628\u0631\u0642\u0631\u0627\u0631 \u062e\u0648\u0627\u0647\u062f \u0634\u062f."
+                        ]
+                      };
+                      return $globalActions["Fragment.showToast"]?.apply(null, [
+                        ...actionArgs.args
+                      ]);
+                    })()
+                  : undefined;
+              if (
+                $steps["showToast"] != null &&
+                typeof $steps["showToast"] === "object" &&
+                typeof $steps["showToast"].then === "function"
+              ) {
+                $steps["showToast"] = await $steps["showToast"];
+              }
+
+              $steps["showUnsuccessfulToast"] =
+                $steps.apiSafeCall.data.success !== true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "error",
+                          "\u0628\u0631\u0642\u0631\u0627\u0631\u06cc \u062a\u0645\u0627\u0633 \u0628\u0627 \u062e\u0637\u0627 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f. \u062f\u0642\u0627\u06cc\u0642\u06cc \u062f\u06cc\u06af\u0631 \u0645\u062c\u062f\u062f\u0627 \u062a\u0644\u0627\u0634 \u06a9\u0646\u06cc\u062f."
+                        ]
+                      };
+                      return $globalActions["Fragment.showToast"]?.apply(null, [
+                        ...actionArgs.args
+                      ]);
+                    })()
+                  : undefined;
+              if (
+                $steps["showUnsuccessfulToast"] != null &&
+                typeof $steps["showUnsuccessfulToast"] === "object" &&
+                typeof $steps["showUnsuccessfulToast"].then === "function"
+              ) {
+                $steps["showUnsuccessfulToast"] = await $steps[
+                  "showUnsuccessfulToast"
+                ];
+              }
+
+              $steps["callByDr"] =
+                $steps.apiSafeCall.data.success === true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          (() => {
+                            try {
+                              return {
+                                group: "book-visit",
+                                data: {
+                                  center_id: $props.centerId,
+                                  bookid: $props.bookId
+                                },
+                                type: "safe-call-by-dr"
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
+                      };
+                      return $globalActions["Splunk.sendLog"]?.apply(null, [
+                        ...actionArgs.args
+                      ]);
+                    })()
+                  : undefined;
+              if (
+                $steps["callByDr"] != null &&
+                typeof $steps["callByDr"] === "object" &&
+                typeof $steps["callByDr"].then === "function"
+              ) {
+                $steps["callByDr"] = await $steps["callByDr"];
               }
             }}
           />

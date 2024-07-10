@@ -1060,6 +1060,12 @@
           "name": "ApiRequest",
           "displayName": "ApiRequest",
           "componentImportPath": "@/fragment/components/api-request"
+        },
+        {
+          "id": "Q-z8H8vk5X79",
+          "name": "Slider",
+          "displayName": "Slider",
+          "componentImportPath": "@/fragment/components/slider"
         }
       ],
       "customFunctions": []

@@ -682,10 +682,11 @@ function PlasmicPatientList__RenderFunc(props: {
                 insurances={(() => {
                   try {
                     return (
-                      ($state.insurances.tamin !== null &&
-                        $state.insurances.tamin) ||
-                      ($state.insurances.salamat.length > 0 &&
-                        $state.insurances.salamat.includes(true))
+                      ($state.insurances.tamin.id &&
+                        $state.insurances.tamin.id !== "") ||
+                      $state.insurances.salamat.some(
+                        insurance => Object.keys(insurance).length !== 0
+                      )
                     );
                   } catch (e) {
                     if (

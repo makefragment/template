@@ -1975,7 +1975,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                 $steps["apiSafeCall"] = await $steps["apiSafeCall"];
               }
 
-              $steps["showToast"] =
+              $steps["showSuccessfulToast"] =
                 $steps.apiSafeCall.data.success === true
                   ? (() => {
                       const actionArgs = {
@@ -1990,11 +1990,13 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                     })()
                   : undefined;
               if (
-                $steps["showToast"] != null &&
-                typeof $steps["showToast"] === "object" &&
-                typeof $steps["showToast"].then === "function"
+                $steps["showSuccessfulToast"] != null &&
+                typeof $steps["showSuccessfulToast"] === "object" &&
+                typeof $steps["showSuccessfulToast"].then === "function"
               ) {
-                $steps["showToast"] = await $steps["showToast"];
+                $steps["showSuccessfulToast"] = await $steps[
+                  "showSuccessfulToast"
+                ];
               }
 
               $steps["showUnsuccessfulToast"] =
@@ -2165,10 +2167,15 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             }
 
             $steps["apiCame"] =
-              $props.bookId &&
-              (($props.insurances === true && $props.finalized === false) ||
-                ($state.bookStatusState === "not_came" &&
-                  $props.bookDelete === "0"))
+              ($props.type === "book" &&
+                !$props.insurances &&
+                $state.bookStatusState === "not_came" &&
+                $props.bookDelete === "0") ||
+              ($props.type === "book" &&
+                $props.insurances &&
+                $state.bookStatusState === "not_came" &&
+                $props.bookDelete === "") ||
+              $props.type !== "prescription"
                 ? (() => {
                     const actionArgs = {
                       args: [

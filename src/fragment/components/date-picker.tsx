@@ -1,4 +1,4 @@
-import { Calendar as CalendarV2, DateObject } from "react-multi-date-picker";
+import { Calendar, DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 
@@ -20,7 +20,7 @@ export const DatePicker = ({
 }: any) => {
   return (
     <>
-      <CalendarV2
+      <Calendar
         monthYearSeparator="|"
         multiple={mode === "multiple"}
         value={

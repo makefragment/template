@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { CodeComponentMeta, useSelector } from "@plasmicapp/host";
-import { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 
 type ApiRequestType = {
@@ -9,9 +9,9 @@ type ApiRequestType = {
   params: Record<string, string | string[]>;
   body?: Record<string, any>;
   config?: Record<string, any>;
-  Children: ReactNode;
-  ErrorDisplay?: ReactNode;
-  LoadingDisplay?: ReactNode;
+  children: ReactNode;
+  errorDisplay?: ReactNode;
+  loadingDisplay?: ReactNode;
   previewErrorDisplay?: boolean;
   previewLoadingDisplay?: boolean;
   onError?: (error?: any) => void;
@@ -26,9 +26,9 @@ export const ApiRequest = (props: ApiRequestType) => {
     url,
     body,
     config,
-    ErrorDisplay,
-    LoadingDisplay,
-    Children,
+    errorDisplay,
+    loadingDisplay,
+    children,
     previewErrorDisplay,
     previewLoadingDisplay,
     onError,
@@ -82,14 +82,13 @@ export const ApiRequest = (props: ApiRequestType) => {
   };
 
   if (isLoading || previewLoadingDisplay) {
-    return <>{LoadingDisplay}</>;
+    return loadingDisplay;
   }
 
   if (isError || previewErrorDisplay) {
-    return <>{ErrorDisplay}</>;
+    return errorDisplay;
   }
-
-  return <>{Children}</>;
+  return children;
 };
 
 export const apiRequestMeta: CodeComponentMeta<ApiRequestType> = {
@@ -139,8 +138,9 @@ export const apiRequestMeta: CodeComponentMeta<ApiRequestType> = {
       type: "boolean",
       editOnly: true,
     },
-    Children: "slot",
-    LoadingDisplay: {
+    children: { displayName: "Children", type: "slot" },
+    loadingDisplay: {
+      displayName: "Loading Display",
       type: "slot",
       defaultValue: [
         {
@@ -149,7 +149,8 @@ export const apiRequestMeta: CodeComponentMeta<ApiRequestType> = {
         },
       ],
     },
-    ErrorDisplay: {
+    errorDisplay: {
+      displayName: "Error Display",
       type: "slot",
       defaultValue: [
         {

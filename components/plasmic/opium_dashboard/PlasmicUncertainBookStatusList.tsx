@@ -233,7 +233,6 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
         data-plasmic-name={"sideEffect"}
         data-plasmic-override={overrides.sideEffect}
         className={classNames("__wab_instance", sty.sideEffect)}
-        deps={undefined}
         onMount={async () => {
           const $steps = {};
 
@@ -732,6 +731,30 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
                   ) {
                     $steps["eventVisitedAllUncertainBookStatus"] = await $steps[
                       "eventVisitedAllUncertainBookStatus"
+                    ];
+                  }
+
+                  $steps["apiBecomeOutOfRollout"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "GET",
+                            "https://apigw.paziresh24.com/v1/rollout-show-list-of-uncertain-book-status"
+                          ]
+                        };
+                        return $globalActions["Fragment.apiRequest"]?.apply(
+                          null,
+                          [...actionArgs.args]
+                        );
+                      })()
+                    : undefined;
+                  if (
+                    $steps["apiBecomeOutOfRollout"] != null &&
+                    typeof $steps["apiBecomeOutOfRollout"] === "object" &&
+                    typeof $steps["apiBecomeOutOfRollout"].then === "function"
+                  ) {
+                    $steps["apiBecomeOutOfRollout"] = await $steps[
+                      "apiBecomeOutOfRollout"
                     ];
                   }
                 }}

@@ -889,6 +889,19 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicAnahita.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "aO3nMrtaTkyI",
+          "name": "Financials",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicFinancials.tsx",
+          "importSpec": {
+            "modulePath": "Financials.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicFinancials.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -976,6 +989,11 @@
           "id": "BN2FHeznHhq_",
           "name": "Icon10Icon",
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon10.tsx"
+        },
+        {
+          "id": "5cHhSNd_qbK2",
+          "name": "Icon11Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon11.tsx"
         }
       ],
       "images": [],

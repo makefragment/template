@@ -16,6 +16,7 @@ import { Input, inputMeta } from "@/fragment/components/input";
 import { Switch, switchMeta } from "@/fragment/components/switch";
 import { ApiRequest, apiRequestMeta } from "@/fragment/components/api-request";
 import { Slider, sliderMeta } from "@/fragment/components/slider";
+import { Chart, chartMeta } from "@/fragment/components/chart";
 
 export default function PlasmicHost() {
   return <PlasmicCanvasHost />;
@@ -32,3 +33,4 @@ registerComponent(Input, inputMeta);
 registerComponent(Switch, switchMeta);
 registerComponent(Slider, sliderMeta);
 registerComponent(ApiRequest, apiRequestMeta);
+registerComponent(Chart, chartMeta);

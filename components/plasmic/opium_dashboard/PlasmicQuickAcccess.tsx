@@ -59,7 +59,7 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
-import QuikAccessWallet from "../../QuikAccessWallet"; // plasmic-import: GvtgrqQf9C66/component
+import QuickAccessWallet from "../../QuickAccessWallet"; // plasmic-import: GvtgrqQf9C66/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -81,7 +81,7 @@ export const PlasmicQuickAcccess__ArgProps = new Array<ArgPropType>();
 export type PlasmicQuickAcccess__OverridesType = {
   root?: Flex__<"div">;
   freeBox?: Flex__<"div">;
-  quikAccessWallet?: Flex__<typeof QuikAccessWallet>;
+  quickAccessWallet?: Flex__<typeof QuickAccessWallet>;
 };
 
 export interface DefaultQuickAcccessProps {}
@@ -180,10 +180,10 @@ function PlasmicQuickAcccess__RenderFunc(props: {
               }
             }}
           >
-            <QuikAccessWallet
-              data-plasmic-name={"quikAccessWallet"}
-              data-plasmic-override={overrides.quikAccessWallet}
-              className={classNames("__wab_instance", sty.quikAccessWallet)}
+            <QuickAccessWallet
+              data-plasmic-name={"quickAccessWallet"}
+              data-plasmic-override={overrides.quickAccessWallet}
+              className={classNames("__wab_instance", sty.quickAccessWallet)}
             />
           </div>
         </div>
@@ -193,9 +193,9 @@ function PlasmicQuickAcccess__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "freeBox", "quikAccessWallet"],
-  freeBox: ["freeBox", "quikAccessWallet"],
-  quikAccessWallet: ["quikAccessWallet"]
+  root: ["root", "freeBox", "quickAccessWallet"],
+  freeBox: ["freeBox", "quickAccessWallet"],
+  quickAccessWallet: ["quickAccessWallet"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -203,7 +203,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   freeBox: "div";
-  quikAccessWallet: typeof QuikAccessWallet;
+  quickAccessWallet: typeof QuickAccessWallet;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -267,7 +267,7 @@ export const PlasmicQuickAcccess = Object.assign(
   {
     // Helper components rendering sub-elements
     freeBox: makeNodeComponent("freeBox"),
-    quikAccessWallet: makeNodeComponent("quikAccessWallet"),
+    quickAccessWallet: makeNodeComponent("quickAccessWallet"),
 
     // Metadata about props expected for PlasmicQuickAcccess
     internalVariantProps: PlasmicQuickAcccess__VariantProps,

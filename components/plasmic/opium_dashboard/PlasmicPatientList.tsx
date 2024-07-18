@@ -883,6 +883,19 @@ function PlasmicPatientList__RenderFunc(props: {
                     throw e;
                   }
                 })()}
+                userCenterId={(() => {
+                  try {
+                    return currentItem.user_center_id;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
               />
             );
           })

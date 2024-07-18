@@ -116,6 +116,7 @@ export type PlasmicAppointmentCard__ArgsType = {
   finalized?: string;
   prescriptionId?: string;
   insurances?: string;
+  userCenterId?: string;
 };
 type ArgPropType = keyof PlasmicAppointmentCard__ArgsType;
 export const PlasmicAppointmentCard__ArgProps = new Array<ArgPropType>(
@@ -138,7 +139,8 @@ export const PlasmicAppointmentCard__ArgProps = new Array<ArgPropType>(
   "type",
   "finalized",
   "prescriptionId",
-  "insurances"
+  "insurances",
+  "userCenterId"
 );
 
 export type PlasmicAppointmentCard__OverridesType = {
@@ -174,6 +176,7 @@ export interface DefaultAppointmentCardProps {
   finalized?: string;
   prescriptionId?: string;
   insurances?: string;
+  userCenterId?: string;
   onlineBorder?: SingleBooleanChoiceArg<"onlineBorder">;
   className?: string;
 }
@@ -1219,7 +1222,8 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                                       data: {
                                         center_id: $props.centerId,
                                         book_id: $props.bookId,
-                                        ref_id: $props.refId
+                                        ref_id: $props.refId,
+                                        user_center_id: $props.userCenterId
                                       },
                                       type: "click-delete-button-in-patient-info"
                                     };
@@ -2034,7 +2038,8 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                                 group: "book-visit",
                                 data: {
                                   center_id: $props.centerId,
-                                  bookid: $props.bookId
+                                  bookid: $props.bookId,
+                                  user_center_id: $props.userCenterId
                                 },
                                 type: "safe-call-by-dr"
                               };
@@ -2257,7 +2262,8 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                               group: "book-status",
                               data: {
                                 center_id: $props.centerId,
-                                bookid: $props.bookId
+                                bookid: $props.bookId,
+                                user_center_id: $props.userCenterId
                               },
                               type: "came"
                             };
@@ -2296,7 +2302,8 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                             group: "book-status",
                             data: {
                               center_id: $props.centerId,
-                              bookid: $props.bookId
+                              bookid: $props.bookId,
+                              user_center_id: $props.userCenterId
                             },
                             type: "visited"
                           };

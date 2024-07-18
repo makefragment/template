@@ -904,19 +904,6 @@
           "componentType": "component"
         },
         {
-          "id": "GvtgrqQf9C66",
-          "name": "QuikAccessWallet",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicQuikAccessWallet.tsx",
-          "importSpec": {
-            "modulePath": "QuikAccessWallet.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicQuikAccessWallet.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
           "id": "QT7G39QHkEwQ",
           "name": "QuickAcccess",
           "type": "managed",
@@ -929,6 +916,19 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/new-page"
+        },
+        {
+          "id": "GvtgrqQf9C66",
+          "name": "QuickAccessWallet",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicQuickAccessWallet.tsx",
+          "importSpec": {
+            "modulePath": "QuickAccessWallet.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicQuickAccessWallet.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

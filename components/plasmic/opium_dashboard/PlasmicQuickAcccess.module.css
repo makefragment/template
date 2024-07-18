@@ -33,7 +33,7 @@
   min-width: 0;
   padding: 8px;
 }
-.quikAccessWallet:global(.__wab_instance) {
+.quickAccessWallet:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }

@@ -7,6 +7,7 @@
   justify-content: space-between;
   align-items: center;
   min-width: 0;
+  border-bottom: 1px solid var(--token-BU1JCAY6hntB);
 }
 .dialog:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;

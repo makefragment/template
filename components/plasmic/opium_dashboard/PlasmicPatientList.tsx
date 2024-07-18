@@ -706,7 +706,7 @@ function PlasmicPatientList__RenderFunc(props: {
                           /\s+/g,
                           " "
                         )
-                      : currentItem.display_name === ""
+                      : currentItem.display_name.trim() === ""
                       ? "بدون نام"
                       : currentItem.display_name;
                   } catch (e) {

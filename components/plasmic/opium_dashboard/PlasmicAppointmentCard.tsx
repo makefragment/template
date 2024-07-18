@@ -756,7 +756,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                   e instanceof TypeError ||
                   e?.plasmicType === "PlasmicUndefinedDataError"
                 ) {
-                  return false;
+                  return true;
                 }
                 throw e;
               }
@@ -774,7 +774,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                         const actionArgs = {
                           args: [
                             "POST",
-                            "https://prescription-api.paziresh24.com/insurance/prescription",
+                            "https://apigw.paziresh24.com/prescription/v1/insurances/",
                             undefined,
                             (() => {
                               try {

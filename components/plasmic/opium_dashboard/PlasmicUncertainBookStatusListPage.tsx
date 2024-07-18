@@ -487,6 +487,51 @@ function PlasmicUncertainBookStatusListPage__RenderFunc(props: {
                       className={classNames("__wab_instance", sty.checkNow)}
                       onClick={async event => {
                         const $steps = {};
+
+                        $steps["eventClickCheckNowButton"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  (() => {
+                                    try {
+                                      return {
+                                        group: "uncertain-book-status",
+                                        data: {
+                                          center_id: $props.centerId,
+                                          bookid: $props.bookId
+                                        },
+                                        type: "click-check-now-button"
+                                      };
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                ]
+                              };
+                              return $globalActions["Splunk.sendLog"]?.apply(
+                                null,
+                                [...actionArgs.args]
+                              );
+                            })()
+                          : undefined;
+                        if (
+                          $steps["eventClickCheckNowButton"] != null &&
+                          typeof $steps["eventClickCheckNowButton"] ===
+                            "object" &&
+                          typeof $steps["eventClickCheckNowButton"].then ===
+                            "function"
+                        ) {
+                          $steps["eventClickCheckNowButton"] = await $steps[
+                            "eventClickCheckNowButton"
+                          ];
+                        }
                       }}
                     />
                   }
@@ -533,6 +578,48 @@ function PlasmicUncertainBookStatusListPage__RenderFunc(props: {
                     ) {
                       $steps["goToHttpsdrpaziresh24Comsettingpayment"] =
                         await $steps["goToHttpsdrpaziresh24Comsettingpayment"];
+                    }
+
+                    $steps["eventClickCheckLater"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              (() => {
+                                try {
+                                  return {
+                                    group: "uncertain-book-status",
+                                    data: {
+                                      center_id: $props.centerId,
+                                      bookid: $props.bookId
+                                    },
+                                    type: "click-check-later-button"
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            ]
+                          };
+                          return $globalActions["Splunk.sendLog"]?.apply(null, [
+                            ...actionArgs.args
+                          ]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["eventClickCheckLater"] != null &&
+                      typeof $steps["eventClickCheckLater"] === "object" &&
+                      typeof $steps["eventClickCheckLater"].then === "function"
+                    ) {
+                      $steps["eventClickCheckLater"] = await $steps[
+                        "eventClickCheckLater"
+                      ];
                     }
                   }}
                 />

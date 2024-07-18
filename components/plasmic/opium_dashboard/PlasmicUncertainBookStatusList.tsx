@@ -63,6 +63,7 @@ import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import UncertainBookStatusBookCard from "../../UncertainBookStatusBookCard"; // plasmic-import: 51ly1GErXHXh/component
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -403,6 +404,51 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
             ) {
               $steps["updateDialogOpen"] = await $steps["updateDialogOpen"];
             }
+
+            $steps["eventClickChangeAllBookStatus"] = true
+              ? (() => {
+                  const actionArgs = {
+                    args: [
+                      (() => {
+                        try {
+                          return {
+                            group: "uncertain-book-status",
+                            data: {
+                              user_center_id: $state.uncertainBookStatus.find(
+                                item => item.user_center_id
+                              ).user_center_id,
+                              center_id: $state.uncertainBookStatus.find(
+                                item => item.center_id
+                              ).center_id
+                            },
+                            type: "click-change-all-book-status"
+                          };
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()
+                    ]
+                  };
+                  return $globalActions["Splunk.sendLog"]?.apply(null, [
+                    ...actionArgs.args
+                  ]);
+                })()
+              : undefined;
+            if (
+              $steps["eventClickChangeAllBookStatus"] != null &&
+              typeof $steps["eventClickChangeAllBookStatus"] === "object" &&
+              typeof $steps["eventClickChangeAllBookStatus"].then === "function"
+            ) {
+              $steps["eventClickChangeAllBookStatus"] = await $steps[
+                "eventClickChangeAllBookStatus"
+              ];
+            }
           }}
         >
           <div
@@ -700,10 +746,15 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
                                 return {
                                   group: "uncertain-book-status",
                                   data: {
-                                    center_id: $props.centerId,
-                                    bookid: $props.bookId
+                                    user_center_id:
+                                      $state.uncertainBookStatus.find(
+                                        item => item.user_center_id
+                                      ).user_center_id,
+                                    center_id: $state.uncertainBookStatus.find(
+                                      item => item.center_id
+                                    ).center_id
                                   },
-                                  type: "visited-all-uncertain-book-status"
+                                  type: "click-yes-sure-button-for-visited-all-uncertain-book-status"
                                 };
                               } catch (e) {
                                 if (
@@ -766,6 +817,91 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
                 children2={"\u062e\u06cc\u0631"}
                 className={classNames("__wab_instance", sty.no)}
                 color={"softSand"}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["eventClickNoButton"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            (() => {
+                              try {
+                                return {
+                                  group: "uncertain-book-status",
+                                  data: {
+                                    user_center_id:
+                                      $state.uncertainBookStatus.find(
+                                        item => item.user_center_id
+                                      ).user_center_id,
+                                    center_id: $state.uncertainBookStatus.find(
+                                      item => item.center_id
+                                    ).center_id
+                                  },
+                                  type: "click-no-button-for-visited-all-uncertain-book-status"
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Splunk.sendLog"]?.apply(null, [
+                          ...actionArgs.args
+                        ]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["eventClickNoButton"] != null &&
+                    typeof $steps["eventClickNoButton"] === "object" &&
+                    typeof $steps["eventClickNoButton"].then === "function"
+                  ) {
+                    $steps["eventClickNoButton"] = await $steps[
+                      "eventClickNoButton"
+                    ];
+                  }
+
+                  $steps["updateDialogOpen"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["dialog", "open"]
+                          },
+                          operation: 0,
+                          value: false
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateDialogOpen"] != null &&
+                    typeof $steps["updateDialogOpen"] === "object" &&
+                    typeof $steps["updateDialogOpen"].then === "function"
+                  ) {
+                    $steps["updateDialogOpen"] = await $steps[
+                      "updateDialogOpen"
+                    ];
+                  }
+                }}
               />
             </Stack__>
           </Stack__>

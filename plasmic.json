@@ -902,6 +902,33 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicFinancials.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "GvtgrqQf9C66",
+          "name": "QuikAccessWallet",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicQuikAccessWallet.tsx",
+          "importSpec": {
+            "modulePath": "QuikAccessWallet.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicQuikAccessWallet.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "QT7G39QHkEwQ",
+          "name": "QuickAcccess",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicQuickAcccess.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/new-page.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicQuickAcccess.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/new-page"
         }
       ],
       "icons": [
@@ -994,6 +1021,11 @@
           "id": "5cHhSNd_qbK2",
           "name": "Icon11Icon",
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon11.tsx"
+        },
+        {
+          "id": "jRnh11j7PY60",
+          "name": "Icon12Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon12.tsx"
         }
       ],
       "images": [],
@@ -1131,6 +1163,6 @@
   "nextjsConfig": {
     "pagesDir": "../src/pages"
   },
-  "cliVersion": "0.1.330",
-  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.330/dist/plasmic.schema.json"
+  "cliVersion": "0.1.331",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.331/dist/plasmic.schema.json"
 }

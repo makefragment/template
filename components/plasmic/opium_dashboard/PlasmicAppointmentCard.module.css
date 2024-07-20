@@ -6,6 +6,7 @@
   height: auto;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
   min-width: 0;
   border-bottom: 1px solid var(--token-BU1JCAY6hntB);
 }

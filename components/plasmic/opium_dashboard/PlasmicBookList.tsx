@@ -193,6 +193,12 @@ function PlasmicBookList__RenderFunc(props: {
         type: "private",
         variableType: "array",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "dontShowOnlineVisit",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -695,53 +701,118 @@ function PlasmicBookList__RenderFunc(props: {
               })()}
             />
           </div>
-          <div
-            data-plasmic-name={"addPatient"}
-            data-plasmic-override={overrides.addPatient}
-            className={classNames(projectcss.all, sty.addPatient)}
-          >
-            <Dialog
-              data-plasmic-name={"dialog"}
-              data-plasmic-override={overrides.dialog}
-              body={
-                <div
-                  className={classNames(projectcss.all, sty.freeBox___8Ydnx)}
-                >
-                  <DrCenters
-                    data-plasmic-name={"drCenters2"}
-                    data-plasmic-override={overrides.drCenters2}
-                    centers={(() => {
-                      try {
-                        return $state.centers;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return undefined;
+          {(
+            hasVariant(globalVariants, "screen", "mobileOnly")
+              ? true
+              : (() => {
+                  try {
+                    return $state.centers.some(center => center.id !== "5532");
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return false;
+                    }
+                    throw e;
+                  }
+                })()
+          ) ? (
+            <div
+              data-plasmic-name={"addPatient"}
+              data-plasmic-override={overrides.addPatient}
+              className={classNames(projectcss.all, sty.addPatient)}
+            >
+              <Dialog
+                data-plasmic-name={"dialog"}
+                data-plasmic-override={overrides.dialog}
+                body={
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox___8Ydnx)}
+                  >
+                    <DrCenters
+                      data-plasmic-name={"drCenters2"}
+                      data-plasmic-override={overrides.drCenters2}
+                      centers={(() => {
+                        try {
+                          return $state.centers.filter(
+                            center => center.id !== "5532"
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
                         }
-                        throw e;
-                      }
-                    })()}
-                    className={classNames("__wab_instance", sty.drCenters2)}
-                    hasAllOption={false}
-                    onSelectedCenterChange={async (...eventArgs: any) => {
-                      generateStateOnChangeProp($state, [
-                        "drCenters2",
-                        "selectedCenter"
-                      ]).apply(null, eventArgs);
-                      (async val => {
+                      })()}
+                      className={classNames("__wab_instance", sty.drCenters2)}
+                      hasAllOption={false}
+                      onSelectedCenterChange={async (...eventArgs: any) => {
+                        generateStateOnChangeProp($state, [
+                          "drCenters2",
+                          "selectedCenter"
+                        ]).apply(null, eventArgs);
+                        (async val => {
+                          const $steps = {};
+
+                          $steps["updateSelectedCenterInAddPatient"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["selectedCenterInAddPatient"]
+                                  },
+                                  operation: 0,
+                                  value: val
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateSelectedCenterInAddPatient"] !=
+                              null &&
+                            typeof $steps[
+                              "updateSelectedCenterInAddPatient"
+                            ] === "object" &&
+                            typeof $steps["updateSelectedCenterInAddPatient"]
+                              .then === "function"
+                          ) {
+                            $steps["updateSelectedCenterInAddPatient"] =
+                              await $steps["updateSelectedCenterInAddPatient"];
+                          }
+                        }).apply(null, eventArgs);
+                      }}
+                    />
+
+                    <AddPatient
+                      booked={async () => {
                         const $steps = {};
 
-                        $steps["updateSelectedCenterInAddPatient"] = true
+                        $steps["updateDialogOpen"] = true
                           ? (() => {
                               const actionArgs = {
                                 variable: {
                                   objRoot: $state,
-                                  variablePath: ["selectedCenterInAddPatient"]
+                                  variablePath: ["dialog", "open"]
                                 },
                                 operation: 0,
-                                value: val
+                                value: false
                               };
                               return (({
                                 variable,
@@ -760,153 +831,110 @@ function PlasmicBookList__RenderFunc(props: {
                             })()
                           : undefined;
                         if (
-                          $steps["updateSelectedCenterInAddPatient"] != null &&
-                          typeof $steps["updateSelectedCenterInAddPatient"] ===
-                            "object" &&
-                          typeof $steps["updateSelectedCenterInAddPatient"]
-                            .then === "function"
+                          $steps["updateDialogOpen"] != null &&
+                          typeof $steps["updateDialogOpen"] === "object" &&
+                          typeof $steps["updateDialogOpen"].then === "function"
                         ) {
-                          $steps["updateSelectedCenterInAddPatient"] =
-                            await $steps["updateSelectedCenterInAddPatient"];
+                          $steps["updateDialogOpen"] = await $steps[
+                            "updateDialogOpen"
+                          ];
                         }
-                      }).apply(null, eventArgs);
-                    }}
-                  />
-
-                  <AddPatient
-                    booked={async () => {
-                      const $steps = {};
-
-                      $steps["updateDialogOpen"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["dialog", "open"]
-                              },
-                              operation: 0,
-                              value: false
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
+                      }}
+                      centerId={(() => {
+                        try {
+                          return $state.selectedCenterInAddPatient;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.addPatient___4S6X
+                      )}
+                      type={"web"}
+                      userCenterId={(() => {
+                        try {
+                          return $state.centers.find(
+                            center =>
+                              center.id === $state.selectedCenterInAddPatient
+                          ).user_center_id;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}
+                    />
+                  </div>
+                }
+                className={classNames("__wab_instance", sty.dialog)}
+                onOpenChange={generateStateOnChangeProp($state, [
+                  "dialog",
+                  "open"
+                ])}
+                open={generateStateValueProp($state, ["dialog", "open"])}
+                title={null}
+                trigger={
+                  (() => {
+                    try {
+                      return $state.centers.length > 0;
+                    } catch (e) {
                       if (
-                        $steps["updateDialogOpen"] != null &&
-                        typeof $steps["updateDialogOpen"] === "object" &&
-                        typeof $steps["updateDialogOpen"].then === "function"
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
                       ) {
-                        $steps["updateDialogOpen"] = await $steps[
-                          "updateDialogOpen"
-                        ];
+                        return false;
                       }
-                    }}
-                    centerId={(() => {
-                      try {
-                        return $state.selectedCenterInAddPatient;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return undefined;
-                        }
-                        throw e;
+                      throw e;
+                    }
+                  })() ? (
+                    <Button
+                      data-plasmic-name={"button"}
+                      data-plasmic-override={overrides.button}
+                      children2={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__hPsEz
+                          )}
+                        >
+                          {
+                            "\u0627\u0641\u0632\u0648\u062f\u0646 \u0628\u06cc\u0645\u0627\u0631"
+                          }
+                        </div>
                       }
-                    })()}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.addPatient___4S6X
-                    )}
-                    type={"web"}
-                    userCenterId={(() => {
-                      try {
-                        return $state.centers.find(
-                          center =>
-                            center.id === $state.selectedCenterInAddPatient
-                        ).user_center_id;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return undefined;
-                        }
-                        throw e;
+                      className={classNames("__wab_instance", sty.button)}
+                      endIcon={
+                        <ChevronLeftIcon
+                          className={classNames(projectcss.all, sty.svg__yU2QN)}
+                          role={"img"}
+                        />
                       }
-                    })()}
-                  />
-                </div>
-              }
-              className={classNames("__wab_instance", sty.dialog)}
-              onOpenChange={generateStateOnChangeProp($state, [
-                "dialog",
-                "open"
-              ])}
-              open={generateStateValueProp($state, ["dialog", "open"])}
-              title={null}
-              trigger={
-                (() => {
-                  try {
-                    return $state.centers.length > 0;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return false;
-                    }
-                    throw e;
-                  }
-                })() ? (
-                  <Button
-                    data-plasmic-name={"button"}
-                    data-plasmic-override={overrides.button}
-                    children2={
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__hPsEz
-                        )}
-                      >
-                        {
-                          "\u0627\u0641\u0632\u0648\u062f\u0646 \u0628\u06cc\u0645\u0627\u0631"
-                        }
-                      </div>
-                    }
-                    className={classNames("__wab_instance", sty.button)}
-                    endIcon={
-                      <ChevronLeftIcon
-                        className={classNames(projectcss.all, sty.svg__yU2QN)}
-                        role={"img"}
-                      />
-                    }
-                    showStartIcon={undefined}
-                    space={undefined}
-                    startIcon={
-                      <ChevronRightIcon
-                        className={classNames(projectcss.all, sty.svg__oaC4E)}
-                        role={"img"}
-                      />
-                    }
-                  />
-                ) : null
-              }
-            />
-          </div>
+                      showStartIcon={undefined}
+                      space={undefined}
+                      startIcon={
+                        <ChevronRightIcon
+                          className={classNames(projectcss.all, sty.svg__oaC4E)}
+                          role={"img"}
+                        />
+                      }
+                    />
+                  ) : null
+                }
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     </React.Fragment>

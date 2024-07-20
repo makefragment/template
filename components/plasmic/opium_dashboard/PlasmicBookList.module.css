@@ -210,6 +210,11 @@
   min-width: 0;
   padding: 8px;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .addPatient {
+    display: flex;
+  }
+}
 .dialog:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
@@ -274,6 +279,7 @@
   max-width: 100%;
   position: relative;
   width: auto;
+  display: none;
 }
 .addPatient___4S6X:global(.__wab_instance) {
   max-width: 100%;

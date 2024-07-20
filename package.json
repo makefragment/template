@@ -28,6 +28,7 @@
     "react-multi-date-picker": "^4.5.2",
     "react-timeit": "^1.2.12",
     "recharts": "^2.12.7",
+    "swr": "^2.2.5",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },

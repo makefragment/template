@@ -59,6 +59,7 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import TextInput from "../../TextInput"; // plasmic-import: 4D7TNkkkVIcw/component
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
@@ -101,6 +102,7 @@ export const PlasmicAddPatient__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicAddPatient__OverridesType = {
   root?: Flex__<"div">;
+  sideEffect?: Flex__<typeof SideEffect>;
   nationalCode?: Flex__<typeof TextInput>;
   button?: Flex__<typeof Button>;
   booktime?: Flex__<typeof Dialog>;
@@ -233,20 +235,7 @@ function PlasmicAddPatient__RenderFunc(props: {
         path: "datePicker.value",
         type: "private",
         variableType: "number",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return undefined;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "freeturns",
@@ -265,6 +254,12 @@ function PlasmicAddPatient__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "holidays",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
     [$props, $ctx, $refs]
@@ -295,6 +290,65 @@ function PlasmicAddPatient__RenderFunc(props: {
       )}
       dir={"rtl"}
     >
+      <SideEffect
+        data-plasmic-name={"sideEffect"}
+        data-plasmic-override={overrides.sideEffect}
+        className={classNames("__wab_instance", sty.sideEffect)}
+        onMount={async () => {
+          const $steps = {};
+
+          $steps["apiHoliday"] = true
+            ? (() => {
+                const actionArgs = {
+                  args: [
+                    "GET",
+                    "https://apigw.paziresh24.com/v1/holidays-next-year"
+                  ]
+                };
+                return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
+          if (
+            $steps["apiHoliday"] != null &&
+            typeof $steps["apiHoliday"] === "object" &&
+            typeof $steps["apiHoliday"].then === "function"
+          ) {
+            $steps["apiHoliday"] = await $steps["apiHoliday"];
+          }
+
+          $steps["updateStateHoliday"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["holidays"]
+                  },
+                  operation: 0,
+                  value: $steps.apiHoliday.data
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateStateHoliday"] != null &&
+            typeof $steps["updateStateHoliday"] === "object" &&
+            typeof $steps["updateStateHoliday"].then === "function"
+          ) {
+            $steps["updateStateHoliday"] = await $steps["updateStateHoliday"];
+          }
+        }}
+      />
+
       <div
         className={classNames(
           projectcss.all,
@@ -1504,7 +1558,7 @@ function PlasmicAddPatient__RenderFunc(props: {
                         data-plasmic-name={"preferBooktimeButton"}
                         data-plasmic-override={overrides.preferBooktimeButton}
                         children2={
-                          "\u0632\u0645\u0627\u0646 \u062f\u0644\u062e\u0648\u0627\u0647"
+                          "\u0646\u0648\u0628\u062a\u200c\u0647\u0627\u06cc \u062e\u0627\u0644\u06cc"
                         }
                         className={classNames(
                           "__wab_instance",
@@ -1732,7 +1786,22 @@ function PlasmicAddPatient__RenderFunc(props: {
                                         "__wab_instance",
                                         sty.datePicker
                                       )}
-                                      holidays={[]}
+                                      holidays={(() => {
+                                        try {
+                                          return $state.holidays.map(
+                                            item => item.date
+                                          );
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return [];
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
                                       locale={"fa"}
                                       onChange={async (...eventArgs: any) => {
                                         generateStateOnChangeProp($state, [
@@ -2782,6 +2851,7 @@ function PlasmicAddPatient__RenderFunc(props: {
 const PlasmicDescendants = {
   root: [
     "root",
+    "sideEffect",
     "nationalCode",
     "button",
     "booktime",
@@ -2795,6 +2865,7 @@ const PlasmicDescendants = {
     "\u062a\u0642\u0648\u0645",
     "datePicker"
   ],
+  sideEffect: ["sideEffect"],
   nationalCode: ["nationalCode"],
   button: ["button"],
   booktime: [
@@ -2831,6 +2902,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  sideEffect: typeof SideEffect;
   nationalCode: typeof TextInput;
   button: typeof Button;
   booktime: typeof Dialog;
@@ -2905,6 +2977,7 @@ export const PlasmicAddPatient = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    sideEffect: makeNodeComponent("sideEffect"),
     nationalCode: makeNodeComponent("nationalCode"),
     button: makeNodeComponent("button"),
     booktime: makeNodeComponent("booktime"),

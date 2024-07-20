@@ -417,7 +417,7 @@ function PlasmicPatientList__RenderFunc(props: {
                 const actionArgs = {
                   args: [
                     "GET",
-                    "https://prescription-api.paziresh24.com/V1/insurances/"
+                    "https://apigw.paziresh24.com/prescription/v1/insurances/"
                   ]
                 };
                 return $globalActions["Fragment.apiRequest"]?.apply(null, [

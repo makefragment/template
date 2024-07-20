@@ -774,7 +774,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                         const actionArgs = {
                           args: [
                             "POST",
-                            "https://apigw.paziresh24.com/prescription/v1/insurances/",
+                            "https://apigw.paziresh24.com/prescription/insurance/prescription",
                             undefined,
                             (() => {
                               try {

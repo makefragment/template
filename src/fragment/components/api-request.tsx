@@ -45,8 +45,8 @@ export const ApiRequest = (props: ApiRequestType) => {
     params,
     body,
     config: {
-      ...fragmentConfig.apiConfig,
-      ...fragmentConfig.previewApiConfig,
+      ...fragmentConfig?.apiConfig,
+      ...fragmentConfig?.previewApiConfig,
       ...config,
     },
   };

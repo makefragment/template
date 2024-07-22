@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@growthbook/growthbook-react": "^1.0.0",
-    "@hassanmojab/react-modern-calendar-datepicker": "^3.1.7",
     "@plasmicapp/cli": "^0.1.331",
     "@plasmicapp/host": "^1.0.196",
     "@plasmicapp/react-web": "^0.2.337",
@@ -29,7 +28,10 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
+    "react-multi-date-picker": "^4.5.2",
     "react-timeit": "^1.2.12",
+    "recharts": "^2.12.7",
+    "swr": "^2.2.5",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^10.0.0"

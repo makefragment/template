@@ -26,7 +26,7 @@
 }
 
 .fragment-day-active-cell {
-  @apply !bg-teal-500 select-none !shadow-none flex justify-center items-center p-3;
+  @apply !bg-primary select-none !shadow-none flex justify-center items-center p-3;
 }
 
 /* --------------- */
@@ -40,5 +40,15 @@
 }
 
 .fragment .rmdp-ym .rmdp-day.rmdp-selected span {
-  @apply !bg-teal-500 !text-white select-none after:!hidden !shadow-none flex justify-center items-center;
+  @apply !bg-primary !text-white select-none after:!hidden !shadow-none flex justify-center items-center;
+}
+
+.fragment .rmdp-arrow {
+  @apply border-primary m-0;
+}
+.fragment .rmdp-arrow-container {
+  @apply flex justify-center items-center;
+}
+.fragment .rmdp-arrow-container:hover {
+  @apply bg-primary;
 }

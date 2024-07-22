@@ -12,6 +12,7 @@ type FragmentProps = React.PropsWithChildren<{
   previewApiConfig: Record<string, any>;
   apiConfig: Record<string, any>;
   rtl: boolean;
+  primaryColor: string;
 }>;
 
 export const Fragment = ({
@@ -19,7 +20,16 @@ export const Fragment = ({
   previewApiConfig,
   apiConfig,
   rtl,
+  primaryColor,
 }: FragmentProps) => {
+  useEffect(() => {
+    changeTheme(primaryColor);
+  }, [primaryColor]);
+
+  const changeTheme = (color: string) => {
+    document.documentElement.style.setProperty("--primary", color);
+  };
+
   const actions = useMemo(
     () => ({
       showToast: (
@@ -79,6 +89,7 @@ export const Fragment = ({
           apiConfig: apiConfig ?? {},
           previewApiConfig: previewApiConfig ?? {},
           rtl,
+          primaryColor,
         }}
         hidden
       >
@@ -113,6 +124,12 @@ export const fragmentMeta: GlobalContextMeta<FragmentProps> = {
       displayName: "RTL",
       type: "boolean",
       description: `Direction`,
+    },
+    primaryColor: {
+      displayName: "Primary Color",
+      type: "color",
+      defaultValue: "#000000",
+      defaultValueHint: "#000000",
     },
   },
   providesData: true,

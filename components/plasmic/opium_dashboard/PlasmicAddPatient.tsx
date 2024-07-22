@@ -63,12 +63,14 @@ import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import TextInput from "../../TextInput"; // plasmic-import: 4D7TNkkkVIcw/component
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
+import { TimePicker } from "@/fragment/components/time-picker"; // plasmic-import: 0Mwoeihejk-H/codeComponent
 import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import { DatePicker } from "@/fragment/components/date-picker"; // plasmic-import: b38lDo6Nm8Rh/codeComponent
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicAddPatient.module.css"; // plasmic-import: tPaqHhQ134RQ/css
 
@@ -78,6 +80,7 @@ import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 import CalendarIcon from "../fragment_icons/icons/PlasmicIcon__Calendar"; // plasmic-import: e2zWN9c_lxv7/icon
 import Icon17Icon from "../fragment_design_system/icons/PlasmicIcon__Icon17"; // plasmic-import: eCsLCdWP9DST/icon
+import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: q8mRvXMvOrv9/icon
 
 createPlasmicElementProxy;
 
@@ -106,6 +109,7 @@ export type PlasmicAddPatient__OverridesType = {
   nationalCode?: Flex__<typeof TextInput>;
   button?: Flex__<typeof Button>;
   booktime?: Flex__<typeof Dialog>;
+  fragmentTimePicker?: Flex__<typeof TimePicker>;
   verticalStackData?: Flex__<"div">;
   inputcell?: Flex__<typeof TextInput>;
   inputfullname?: Flex__<typeof TextInput>;
@@ -115,6 +119,15 @@ export type PlasmicAddPatient__OverridesType = {
   preferBooktime?: Flex__<typeof Dialog>;
   تقوم?: Flex__<typeof Dialog>;
   datePicker?: Flex__<typeof DatePicker>;
+  addNewBookTime?: Flex__<"div">;
+  dialogNewTimePicker?: Flex__<typeof Dialog>;
+  fromHorizental?: Flex__<"div">;
+  fromText?: Flex__<"div">;
+  fromTimePicker?: Flex__<typeof TimePicker>;
+  toHorizental?: Flex__<"div">;
+  toText?: Flex__<"div">;
+  toTimePicker?: Flex__<typeof TimePicker>;
+  submitNewBook?: Flex__<typeof Button>;
 };
 
 export interface DefaultAddPatientProps {
@@ -260,6 +273,36 @@ function PlasmicAddPatient__RenderFunc(props: {
         type: "private",
         variableType: "array",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "fragmentTimePicker.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => "00:00"
+      },
+      {
+        path: "dialogNewTimePicker.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "fromTimePicker.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ``
+      },
+      {
+        path: "toTimePicker.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ``
+      },
+      {
+        path: "datePicker.values",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
     [$props, $ctx, $refs]
@@ -286,6 +329,7 @@ function PlasmicAddPatient__RenderFunc(props: {
         projectcss.plasmic_mixins,
         projectcss.plasmic_tokens,
         plasmic_fragment_design_system_css.plasmic_tokens,
+        plasmic_antd_5_hostless_css.plasmic_tokens,
         sty.root
       )}
       dir={"rtl"}
@@ -1808,6 +1852,10 @@ function PlasmicAddPatient__RenderFunc(props: {
                                           "datePicker",
                                           "value"
                                         ]).apply(null, eventArgs);
+                                        generateStateOnChangeProp($state, [
+                                          "datePicker",
+                                          "values"
+                                        ]).apply(null, eventArgs);
                                         (async date => {
                                           const $steps = {};
 
@@ -1866,6 +1914,10 @@ function PlasmicAddPatient__RenderFunc(props: {
                                       value={generateStateValueProp($state, [
                                         "datePicker",
                                         "value"
+                                      ])}
+                                      values={generateStateValueProp($state, [
+                                        "datePicker",
+                                        "values"
                                       ])}
                                     />
                                   </div>
@@ -2722,6 +2774,237 @@ function PlasmicAddPatient__RenderFunc(props: {
                                               );
                                             }
                                           )}
+                                          <div
+                                            data-plasmic-name={"addNewBookTime"}
+                                            data-plasmic-override={
+                                              overrides.addNewBookTime
+                                            }
+                                            className={classNames(
+                                              projectcss.all,
+                                              sty.addNewBookTime
+                                            )}
+                                            onClick={async event => {
+                                              const $steps = {};
+
+                                              $steps[
+                                                "updateDialogNewTimePickerOpen"
+                                              ] = true
+                                                ? (() => {
+                                                    const actionArgs = {
+                                                      variable: {
+                                                        objRoot: $state,
+                                                        variablePath: [
+                                                          "dialogNewTimePicker",
+                                                          "open"
+                                                        ]
+                                                      },
+                                                      operation: 0,
+                                                      value: true
+                                                    };
+                                                    return (({
+                                                      variable,
+                                                      value,
+                                                      startIndex,
+                                                      deleteCount
+                                                    }) => {
+                                                      if (!variable) {
+                                                        return;
+                                                      }
+                                                      const {
+                                                        objRoot,
+                                                        variablePath
+                                                      } = variable;
+
+                                                      $stateSet(
+                                                        objRoot,
+                                                        variablePath,
+                                                        value
+                                                      );
+                                                      return value;
+                                                    })?.apply(null, [
+                                                      actionArgs
+                                                    ]);
+                                                  })()
+                                                : undefined;
+                                              if (
+                                                $steps[
+                                                  "updateDialogNewTimePickerOpen"
+                                                ] != null &&
+                                                typeof $steps[
+                                                  "updateDialogNewTimePickerOpen"
+                                                ] === "object" &&
+                                                typeof $steps[
+                                                  "updateDialogNewTimePickerOpen"
+                                                ].then === "function"
+                                              ) {
+                                                $steps[
+                                                  "updateDialogNewTimePickerOpen"
+                                                ] = await $steps[
+                                                  "updateDialogNewTimePickerOpen"
+                                                ];
+                                              }
+                                            }}
+                                          >
+                                            <Icon2Icon
+                                              className={classNames(
+                                                projectcss.all,
+                                                sty.svg___2GeMo
+                                              )}
+                                              role={"img"}
+                                            />
+                                          </div>
+                                          <Dialog
+                                            data-plasmic-name={
+                                              "dialogNewTimePicker"
+                                            }
+                                            data-plasmic-override={
+                                              overrides.dialogNewTimePicker
+                                            }
+                                            body={
+                                              <div
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  sty.freeBox___6SJkA
+                                                )}
+                                              >
+                                                <div
+                                                  data-plasmic-name={
+                                                    "fromHorizental"
+                                                  }
+                                                  data-plasmic-override={
+                                                    overrides.fromHorizental
+                                                  }
+                                                  className={classNames(
+                                                    projectcss.all,
+                                                    sty.fromHorizental
+                                                  )}
+                                                >
+                                                  <div
+                                                    data-plasmic-name={
+                                                      "fromText"
+                                                    }
+                                                    data-plasmic-override={
+                                                      overrides.fromText
+                                                    }
+                                                    className={classNames(
+                                                      projectcss.all,
+                                                      projectcss.__wab_text,
+                                                      sty.fromText
+                                                    )}
+                                                  >
+                                                    {
+                                                      "\u0632\u0645\u0627\u0646 \u0634\u0631\u0648\u0639"
+                                                    }
+                                                  </div>
+                                                  <TimePicker
+                                                    data-plasmic-name={
+                                                      "fromTimePicker"
+                                                    }
+                                                    data-plasmic-override={
+                                                      overrides.fromTimePicker
+                                                    }
+                                                    className={classNames(
+                                                      "__wab_instance",
+                                                      sty.fromTimePicker
+                                                    )}
+                                                    onChange={generateStateOnChangeProp(
+                                                      $state,
+                                                      [
+                                                        "fromTimePicker",
+                                                        "value"
+                                                      ]
+                                                    )}
+                                                    value={generateStateValueProp(
+                                                      $state,
+                                                      [
+                                                        "fromTimePicker",
+                                                        "value"
+                                                      ]
+                                                    )}
+                                                  />
+                                                </div>
+                                                <div
+                                                  data-plasmic-name={
+                                                    "toHorizental"
+                                                  }
+                                                  data-plasmic-override={
+                                                    overrides.toHorizental
+                                                  }
+                                                  className={classNames(
+                                                    projectcss.all,
+                                                    sty.toHorizental
+                                                  )}
+                                                >
+                                                  <div
+                                                    data-plasmic-name={"toText"}
+                                                    data-plasmic-override={
+                                                      overrides.toText
+                                                    }
+                                                    className={classNames(
+                                                      projectcss.all,
+                                                      projectcss.__wab_text,
+                                                      sty.toText
+                                                    )}
+                                                  >
+                                                    {
+                                                      "\u0632\u0645\u0627\u0646 \u067e\u0627\u06cc\u0627\u0646"
+                                                    }
+                                                  </div>
+                                                  <TimePicker
+                                                    data-plasmic-name={
+                                                      "toTimePicker"
+                                                    }
+                                                    data-plasmic-override={
+                                                      overrides.toTimePicker
+                                                    }
+                                                    className={classNames(
+                                                      "__wab_instance",
+                                                      sty.toTimePicker
+                                                    )}
+                                                    onChange={generateStateOnChangeProp(
+                                                      $state,
+                                                      ["toTimePicker", "value"]
+                                                    )}
+                                                    value={generateStateValueProp(
+                                                      $state,
+                                                      ["toTimePicker", "value"]
+                                                    )}
+                                                  />
+                                                </div>
+                                                <Button
+                                                  data-plasmic-name={
+                                                    "submitNewBook"
+                                                  }
+                                                  data-plasmic-override={
+                                                    overrides.submitNewBook
+                                                  }
+                                                  children2={
+                                                    "\u062b\u0628\u062a \u0646\u0648\u0628\u062a"
+                                                  }
+                                                  className={classNames(
+                                                    "__wab_instance",
+                                                    sty.submitNewBook
+                                                  )}
+                                                />
+                                              </div>
+                                            }
+                                            className={classNames(
+                                              "__wab_instance",
+                                              sty.dialogNewTimePicker
+                                            )}
+                                            onOpenChange={generateStateOnChangeProp(
+                                              $state,
+                                              ["dialogNewTimePicker", "open"]
+                                            )}
+                                            open={generateStateValueProp(
+                                              $state,
+                                              ["dialogNewTimePicker", "open"]
+                                            )}
+                                            title={
+                                              "\u0627\u0641\u0632\u0648\u062f\u0646 \u0646\u0648\u0628\u062a \u062f\u0631 \u0632\u0645\u0627\u0646 \u062f\u0644\u062e\u0648\u0627\u0647"
+                                            }
+                                            trigger={null}
+                                          />
                                         </Stack__>
                                       ) : null}
                                     </React.Fragment>
@@ -2841,7 +3124,21 @@ function PlasmicAddPatient__RenderFunc(props: {
               ) : null}
             </React.Fragment>
           }
-          trigger={null}
+          trigger={
+            <TimePicker
+              data-plasmic-name={"fragmentTimePicker"}
+              data-plasmic-override={overrides.fragmentTimePicker}
+              className={classNames("__wab_instance", sty.fragmentTimePicker)}
+              onChange={generateStateOnChangeProp($state, [
+                "fragmentTimePicker",
+                "value"
+              ])}
+              value={generateStateValueProp($state, [
+                "fragmentTimePicker",
+                "value"
+              ])}
+            />
+          }
         />
       ) : null}
     </Stack__>
@@ -2855,6 +3152,7 @@ const PlasmicDescendants = {
     "nationalCode",
     "button",
     "booktime",
+    "fragmentTimePicker",
     "verticalStackData",
     "inputcell",
     "inputfullname",
@@ -2863,13 +3161,23 @@ const PlasmicDescendants = {
     "preferBooktimeButton",
     "preferBooktime",
     "\u062a\u0642\u0648\u0645",
-    "datePicker"
+    "datePicker",
+    "addNewBookTime",
+    "dialogNewTimePicker",
+    "fromHorizental",
+    "fromText",
+    "fromTimePicker",
+    "toHorizental",
+    "toText",
+    "toTimePicker",
+    "submitNewBook"
   ],
   sideEffect: ["sideEffect"],
   nationalCode: ["nationalCode"],
   button: ["button"],
   booktime: [
     "booktime",
+    "fragmentTimePicker",
     "verticalStackData",
     "inputcell",
     "inputfullname",
@@ -2878,8 +3186,18 @@ const PlasmicDescendants = {
     "preferBooktimeButton",
     "preferBooktime",
     "\u062a\u0642\u0648\u0645",
-    "datePicker"
+    "datePicker",
+    "addNewBookTime",
+    "dialogNewTimePicker",
+    "fromHorizental",
+    "fromText",
+    "fromTimePicker",
+    "toHorizental",
+    "toText",
+    "toTimePicker",
+    "submitNewBook"
   ],
+  fragmentTimePicker: ["fragmentTimePicker"],
   verticalStackData: ["verticalStackData", "inputcell", "inputfullname"],
   inputcell: ["inputcell"],
   inputfullname: ["inputfullname"],
@@ -2889,13 +3207,53 @@ const PlasmicDescendants = {
     "preferBooktimeButton",
     "preferBooktime",
     "\u062a\u0642\u0648\u0645",
-    "datePicker"
+    "datePicker",
+    "addNewBookTime",
+    "dialogNewTimePicker",
+    "fromHorizental",
+    "fromText",
+    "fromTimePicker",
+    "toHorizental",
+    "toText",
+    "toTimePicker",
+    "submitNewBook"
   ],
   freeturnBook: ["freeturnBook"],
   preferBooktimeButton: ["preferBooktimeButton"],
-  preferBooktime: ["preferBooktime", "\u062a\u0642\u0648\u0645", "datePicker"],
+  preferBooktime: [
+    "preferBooktime",
+    "\u062a\u0642\u0648\u0645",
+    "datePicker",
+    "addNewBookTime",
+    "dialogNewTimePicker",
+    "fromHorizental",
+    "fromText",
+    "fromTimePicker",
+    "toHorizental",
+    "toText",
+    "toTimePicker",
+    "submitNewBook"
+  ],
   تقوم: ["\u062a\u0642\u0648\u0645", "datePicker"],
-  datePicker: ["datePicker"]
+  datePicker: ["datePicker"],
+  addNewBookTime: ["addNewBookTime"],
+  dialogNewTimePicker: [
+    "dialogNewTimePicker",
+    "fromHorizental",
+    "fromText",
+    "fromTimePicker",
+    "toHorizental",
+    "toText",
+    "toTimePicker",
+    "submitNewBook"
+  ],
+  fromHorizental: ["fromHorizental", "fromText", "fromTimePicker"],
+  fromText: ["fromText"],
+  fromTimePicker: ["fromTimePicker"],
+  toHorizental: ["toHorizental", "toText", "toTimePicker"],
+  toText: ["toText"],
+  toTimePicker: ["toTimePicker"],
+  submitNewBook: ["submitNewBook"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -2906,6 +3264,7 @@ type NodeDefaultElementType = {
   nationalCode: typeof TextInput;
   button: typeof Button;
   booktime: typeof Dialog;
+  fragmentTimePicker: typeof TimePicker;
   verticalStackData: "div";
   inputcell: typeof TextInput;
   inputfullname: typeof TextInput;
@@ -2915,6 +3274,15 @@ type NodeDefaultElementType = {
   preferBooktime: typeof Dialog;
   تقوم: typeof Dialog;
   datePicker: typeof DatePicker;
+  addNewBookTime: "div";
+  dialogNewTimePicker: typeof Dialog;
+  fromHorizental: "div";
+  fromText: "div";
+  fromTimePicker: typeof TimePicker;
+  toHorizental: "div";
+  toText: "div";
+  toTimePicker: typeof TimePicker;
+  submitNewBook: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -2981,6 +3349,7 @@ export const PlasmicAddPatient = Object.assign(
     nationalCode: makeNodeComponent("nationalCode"),
     button: makeNodeComponent("button"),
     booktime: makeNodeComponent("booktime"),
+    fragmentTimePicker: makeNodeComponent("fragmentTimePicker"),
     verticalStackData: makeNodeComponent("verticalStackData"),
     inputcell: makeNodeComponent("inputcell"),
     inputfullname: makeNodeComponent("inputfullname"),
@@ -2990,6 +3359,15 @@ export const PlasmicAddPatient = Object.assign(
     preferBooktime: makeNodeComponent("preferBooktime"),
     تقوم: makeNodeComponent("\u062a\u0642\u0648\u0645"),
     datePicker: makeNodeComponent("datePicker"),
+    addNewBookTime: makeNodeComponent("addNewBookTime"),
+    dialogNewTimePicker: makeNodeComponent("dialogNewTimePicker"),
+    fromHorizental: makeNodeComponent("fromHorizental"),
+    fromText: makeNodeComponent("fromText"),
+    fromTimePicker: makeNodeComponent("fromTimePicker"),
+    toHorizental: makeNodeComponent("toHorizental"),
+    toText: makeNodeComponent("toText"),
+    toTimePicker: makeNodeComponent("toTimePicker"),
+    submitNewBook: makeNodeComponent("submitNewBook"),
 
     // Metadata about props expected for PlasmicAddPatient
     internalVariantProps: PlasmicAddPatient__VariantProps,

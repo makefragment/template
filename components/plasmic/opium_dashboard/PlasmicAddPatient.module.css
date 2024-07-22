@@ -77,6 +77,10 @@
   max-width: 100%;
   position: relative;
 }
+.fragmentTimePicker:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
 .text__oxki4 {
   position: relative;
   width: 100%;
@@ -291,6 +295,7 @@
   max-width: 100%;
   align-self: center;
   text-align: center;
+  cursor: pointer;
 }
 .تقوم:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
@@ -419,7 +424,7 @@
   max-width: 100%;
   background: #27bda00d;
   flex-shrink: 0;
-  border-radius: 1px;
+  border-radius: 8px;
   padding: 8px;
   border: 1px solid #27bda03d;
 }
@@ -427,4 +432,107 @@
   width: auto;
   height: auto;
   max-width: 100%;
+}
+.addNewBookTime {
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: auto;
+  max-width: 100%;
+  background: #27bda00d;
+  flex-shrink: 0;
+  display: none;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #27bda03d;
+}
+.svg___2GeMo {
+  object-fit: cover;
+  max-width: 100%;
+  width: auto;
+  height: 1em;
+  flex-shrink: 0;
+}
+.dialogNewTimePicker:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  display: none;
+}
+.freeBox___6SJkA {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  border-radius: 4px;
+  padding: 8px;
+  border: 1px solid var(--token-Y3HOiwZmAcAF);
+}
+.fromHorizental {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.fromText {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.fromTimePicker:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.toHorizental {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.toText {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.toTimePicker:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.submitNewBook:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.svg__uGvMq {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__x7Sqd {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }

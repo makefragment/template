@@ -2956,6 +2956,78 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                 $steps["finishLoading"] =
                                                   await $steps["finishLoading"];
                                               }
+
+                                              $steps[
+                                                "eventClickForAddBookOutOfSlut"
+                                              ] = true
+                                                ? (() => {
+                                                    const actionArgs = {
+                                                      args: [
+                                                        (() => {
+                                                          try {
+                                                            return {
+                                                              group: "add-book",
+                                                              data: {
+                                                                center_id:
+                                                                  $props.centerId,
+                                                                user_center_id:
+                                                                  $props.userCenterId,
+                                                                type: 3,
+                                                                fullname:
+                                                                  $state.fullname ??
+                                                                  $state
+                                                                    .inputfullname
+                                                                    .value,
+                                                                cell:
+                                                                  $state.cell ??
+                                                                  $state
+                                                                    .inputcell
+                                                                    .value,
+                                                                national_code:
+                                                                  $state
+                                                                    .nationalCode
+                                                                    .value
+                                                              },
+                                                              type: "click-for-add-book-out-of-slot"
+                                                            };
+                                                          } catch (e) {
+                                                            if (
+                                                              e instanceof
+                                                                TypeError ||
+                                                              e?.plasmicType ===
+                                                                "PlasmicUndefinedDataError"
+                                                            ) {
+                                                              return undefined;
+                                                            }
+                                                            throw e;
+                                                          }
+                                                        })()
+                                                      ]
+                                                    };
+                                                    return $globalActions[
+                                                      "Splunk.sendLog"
+                                                    ]?.apply(null, [
+                                                      ...actionArgs.args
+                                                    ]);
+                                                  })()
+                                                : undefined;
+                                              if (
+                                                $steps[
+                                                  "eventClickForAddBookOutOfSlut"
+                                                ] != null &&
+                                                typeof $steps[
+                                                  "eventClickForAddBookOutOfSlut"
+                                                ] === "object" &&
+                                                typeof $steps[
+                                                  "eventClickForAddBookOutOfSlut"
+                                                ].then === "function"
+                                              ) {
+                                                $steps[
+                                                  "eventClickForAddBookOutOfSlut"
+                                                ] = await $steps[
+                                                  "eventClickForAddBookOutOfSlut"
+                                                ];
+                                              }
                                             }}
                                           >
                                             <Icon2Icon
@@ -3731,7 +3803,7 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                                             .nationalCode
                                                                             .value
                                                                       },
-                                                                      type: "add-new-time-book"
+                                                                      type: "add-book-out-of-slot"
                                                                     };
                                                                   } catch (e) {
                                                                     if (

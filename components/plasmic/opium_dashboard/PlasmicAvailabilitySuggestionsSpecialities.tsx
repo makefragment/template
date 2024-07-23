@@ -85,6 +85,7 @@ export const PlasmicAvailabilitySuggestionsSpecialities__ArgProps =
 export type PlasmicAvailabilitySuggestionsSpecialities__OverridesType = {
   root?: Flex__<"div">;
   sideEffect?: Flex__<typeof SideEffect>;
+  ساعاتربازدد?: Flex__<"div">;
   text?: Flex__<"div">;
 };
 
@@ -123,12 +124,32 @@ function PlasmicAvailabilitySuggestionsSpecialities__RenderFunc(props: {
 
   const $globalActions = useGlobalActions?.();
 
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "availabilitySuggestionsSpecialities",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
+
   return (
-    <div
+    <Stack__
+      as={"div"}
       data-plasmic-name={"root"}
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
+      hasGap={true}
       className={classNames(
         projectcss.all,
         projectcss.root_reset,
@@ -147,7 +168,7 @@ function PlasmicAvailabilitySuggestionsSpecialities__RenderFunc(props: {
         onMount={async () => {
           const $steps = {};
 
-          $steps["invokeGlobalAction"] = true
+          $steps["apiAvailabilitySuggestionsSpecialities"] = true
             ? (() => {
                 const actionArgs = {
                   args: [
@@ -161,29 +182,149 @@ function PlasmicAvailabilitySuggestionsSpecialities__RenderFunc(props: {
               })()
             : undefined;
           if (
-            $steps["invokeGlobalAction"] != null &&
-            typeof $steps["invokeGlobalAction"] === "object" &&
-            typeof $steps["invokeGlobalAction"].then === "function"
+            $steps["apiAvailabilitySuggestionsSpecialities"] != null &&
+            typeof $steps["apiAvailabilitySuggestionsSpecialities"] ===
+              "object" &&
+            typeof $steps["apiAvailabilitySuggestionsSpecialities"].then ===
+              "function"
           ) {
-            $steps["invokeGlobalAction"] = await $steps["invokeGlobalAction"];
+            $steps["apiAvailabilitySuggestionsSpecialities"] = await $steps[
+              "apiAvailabilitySuggestionsSpecialities"
+            ];
+          }
+
+          $steps["updateAvailabilitySuggestionsSpecialities"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["availabilitySuggestionsSpecialities"]
+                  },
+                  operation: 0,
+                  value: $steps.apiAvailabilitySuggestionsSpecialities.data
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateAvailabilitySuggestionsSpecialities"] != null &&
+            typeof $steps["updateAvailabilitySuggestionsSpecialities"] ===
+              "object" &&
+            typeof $steps["updateAvailabilitySuggestionsSpecialities"].then ===
+              "function"
+          ) {
+            $steps["updateAvailabilitySuggestionsSpecialities"] = await $steps[
+              "updateAvailabilitySuggestionsSpecialities"
+            ];
           }
         }}
       />
 
       <div
+        data-plasmic-name={
+          "\u0633\u0627\u0639\u0627\u062a\u0631\u0628\u0627\u0632\u062f\u062f"
+        }
+        data-plasmic-override={overrides.ساعاتربازدد}
+        className={classNames(
+          projectcss.all,
+          projectcss.__wab_text,
+          sty.ساعاتربازدد
+        )}
+      >
+        {
+          "\u0633\u0627\u0639\u0627\u062a \u067e\u0631\u0628\u0627\u0632\u062f\u06cc\u062f"
+        }
+      </div>
+      <div
         data-plasmic-name={"text"}
         data-plasmic-override={overrides.text}
         className={classNames(projectcss.all, projectcss.__wab_text, sty.text)}
       >
-        {"Enter some text"}
+        <React.Fragment>
+          <React.Fragment>
+            {"\u0641\u0639\u0627\u0644 \u06a9\u0631\u062f\u0646 "}
+          </React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700 }}
+          >
+            {
+              "\u0648\u06cc\u0632\u06cc\u062a \u0622\u0646\u0644\u0627\u06cc\u0646"
+            }
+          </span>
+          <React.Fragment>{" \u062f\u0631 \u0631\u0648\u0632 "}</React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700 }}
+          >
+            {"\u06cc\u06a9\u0634\u0646\u0628\u0647\u200c\u0647\u0627"}
+          </span>
+          <React.Fragment>
+            {
+              " \u062f\u0631 \u0628\u0627\u0632\u0647\u200c\u0647\u0627\u06cc \u0632\u0645\u0627\u0646\u06cc "
+            }
+          </React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700 }}
+          >
+            {"0 \u0627\u0644\u06cc 2 \u0628\u0627\u0645\u062f\u0627\u062f"}
+          </span>
+          <React.Fragment>{"\u060c "}</React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700 }}
+          >
+            {"8 \u0627\u0644\u06cc 18"}
+          </span>
+          <React.Fragment>{" \u0648 "}</React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700 }}
+          >
+            {"22 \u0627\u0644\u06cc 24"}
+          </span>
+          <React.Fragment>
+            {
+              " \u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u062f \u0628\u0647 \u0627\u0641\u0632\u0627\u06cc\u0634 \u0646\u0648\u0628\u062a\u200c\u0647\u0627\u06cc \u0634\u0645\u0627 \u0648 \u062c\u0630\u0628 "
+            }
+          </React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700, color: "#3AAD4C" }}
+          >
+            {"157 \u0628\u06cc\u0645\u0627\u0631 "}
+          </span>
+          <React.Fragment>
+            {
+              "\u06a9\u0647 \u062f\u0631 \u0627\u06cc\u0646 \u0633\u0627\u0639\u0627\u062a \u062d\u0636\u0648\u0631 \u062f\u0627\u0634\u062a\u0647\u200c\u0627\u0646\u062f\u060c \u06a9\u0645\u06a9 \u06a9\u0646\u062f.\n"
+            }
+          </React.Fragment>
+        </React.Fragment>
       </div>
-    </div>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "sideEffect", "text"],
+  root: [
+    "root",
+    "sideEffect",
+    "\u0633\u0627\u0639\u0627\u062a\u0631\u0628\u0627\u0632\u062f\u062f",
+    "text"
+  ],
   sideEffect: ["sideEffect"],
+  ساعاتربازدد: [
+    "\u0633\u0627\u0639\u0627\u062a\u0631\u0628\u0627\u0632\u062f\u062f"
+  ],
   text: ["text"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -192,6 +333,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   sideEffect: typeof SideEffect;
+  ساعاتربازدد: "div";
   text: "div";
 };
 
@@ -261,6 +403,9 @@ export const PlasmicAvailabilitySuggestionsSpecialities = Object.assign(
   {
     // Helper components rendering sub-elements
     sideEffect: makeNodeComponent("sideEffect"),
+    ساعاتربازدد: makeNodeComponent(
+      "\u0633\u0627\u0639\u0627\u062a\u0631\u0628\u0627\u0632\u062f\u062f"
+    ),
     text: makeNodeComponent("text"),
 
     // Metadata about props expected for PlasmicAvailabilitySuggestionsSpecialities

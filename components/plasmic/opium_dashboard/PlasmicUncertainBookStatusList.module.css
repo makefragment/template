@@ -23,6 +23,7 @@
   max-width: 100%;
   background: #ffffff;
   cursor: pointer;
+  box-shadow: 0px 4px 16px 0px var(--token-pi_amP1jS-3_);
   min-width: 0;
   border-radius: 8px;
   padding: 8px;

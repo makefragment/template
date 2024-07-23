@@ -434,6 +434,7 @@
   max-width: 100%;
 }
 .addNewBookTime {
+  display: flex;
   flex-direction: column;
   position: relative;
   align-items: center;
@@ -443,7 +444,6 @@
   max-width: 100%;
   background: #27bda00d;
   flex-shrink: 0;
-  display: none;
   border-radius: 8px;
   padding: 8px;
   border: 1px solid #27bda03d;
@@ -453,18 +453,16 @@
   max-width: 100%;
   width: auto;
   height: 1em;
+  color: var(--token-RvPI6LyeIPmd);
   flex-shrink: 0;
 }
 .dialogNewTimePicker:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
-  display: none;
 }
 .freeBox___6SJkA {
   display: flex;
   flex-direction: column;
   position: relative;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -472,6 +470,24 @@
   border-radius: 4px;
   padding: 8px;
   border: 1px solid var(--token-Y3HOiwZmAcAF);
+}
+.freeBox___6SJkA > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  margin-top: calc(0px - var(--token-vMUQwr5Jto1d));
+  height: calc(100% + var(--token-vMUQwr5Jto1d));
+}
+.freeBox___6SJkA > :global(.__wab_flex-container) > *,
+.freeBox___6SJkA > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox___6SJkA > :global(.__wab_flex-container) > picture > img,
+.freeBox___6SJkA
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: var(--token-vMUQwr5Jto1d);
 }
 .fromHorizental {
   display: flex;
@@ -484,6 +500,7 @@
   max-width: 100%;
   min-width: 0;
   padding: 8px;
+  border: 1px solid var(--token-LN1YkB123lXQ);
 }
 .fromText {
   position: relative;
@@ -507,6 +524,7 @@
   max-width: 100%;
   min-width: 0;
   padding: 8px;
+  border: 1px solid var(--token-Pxe4wDL2kJpb);
 }
 .toText {
   position: relative;
@@ -521,16 +539,17 @@
 }
 .submitNewBook:global(.__wab_instance) {
   max-width: 100%;
+  position: relative;
   width: 100%;
   min-width: 0;
 }
-.svg__uGvMq {
+.svg__iM9Te {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
 }
-.svg__x7Sqd {
+.svg___5XVi {
   position: relative;
   object-fit: cover;
   width: auto;

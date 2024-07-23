@@ -66,6 +66,7 @@ import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { TimePicker } from "@/fragment/components/time-picker"; // plasmic-import: 0Mwoeihejk-H/codeComponent
 import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import { DatePicker } from "@/fragment/components/date-picker"; // plasmic-import: b38lDo6Nm8Rh/codeComponent
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -303,6 +304,18 @@ function PlasmicAddPatient__RenderFunc(props: {
         type: "private",
         variableType: "array",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "newTimeFromBook",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "newTimeToBook",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -2786,6 +2799,56 @@ function PlasmicAddPatient__RenderFunc(props: {
                                             onClick={async event => {
                                               const $steps = {};
 
+                                              $steps["startLoading"] = true
+                                                ? (() => {
+                                                    const actionArgs = {
+                                                      variable: {
+                                                        objRoot: $state,
+                                                        variablePath: [
+                                                          "loadingButton"
+                                                        ]
+                                                      },
+                                                      operation: 0,
+                                                      value: true
+                                                    };
+                                                    return (({
+                                                      variable,
+                                                      value,
+                                                      startIndex,
+                                                      deleteCount
+                                                    }) => {
+                                                      if (!variable) {
+                                                        return;
+                                                      }
+                                                      const {
+                                                        objRoot,
+                                                        variablePath
+                                                      } = variable;
+
+                                                      $stateSet(
+                                                        objRoot,
+                                                        variablePath,
+                                                        value
+                                                      );
+                                                      return value;
+                                                    })?.apply(null, [
+                                                      actionArgs
+                                                    ]);
+                                                  })()
+                                                : undefined;
+                                              if (
+                                                $steps["startLoading"] !=
+                                                  null &&
+                                                typeof $steps[
+                                                  "startLoading"
+                                                ] === "object" &&
+                                                typeof $steps["startLoading"]
+                                                  .then === "function"
+                                              ) {
+                                                $steps["startLoading"] =
+                                                  await $steps["startLoading"];
+                                              }
+
                                               $steps[
                                                 "updateDialogNewTimePickerOpen"
                                               ] = true
@@ -2843,6 +2906,56 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                   "updateDialogNewTimePickerOpen"
                                                 ];
                                               }
+
+                                              $steps["finishLoading"] = true
+                                                ? (() => {
+                                                    const actionArgs = {
+                                                      variable: {
+                                                        objRoot: $state,
+                                                        variablePath: [
+                                                          "loadingButton"
+                                                        ]
+                                                      },
+                                                      operation: 0,
+                                                      value: false
+                                                    };
+                                                    return (({
+                                                      variable,
+                                                      value,
+                                                      startIndex,
+                                                      deleteCount
+                                                    }) => {
+                                                      if (!variable) {
+                                                        return;
+                                                      }
+                                                      const {
+                                                        objRoot,
+                                                        variablePath
+                                                      } = variable;
+
+                                                      $stateSet(
+                                                        objRoot,
+                                                        variablePath,
+                                                        value
+                                                      );
+                                                      return value;
+                                                    })?.apply(null, [
+                                                      actionArgs
+                                                    ]);
+                                                  })()
+                                                : undefined;
+                                              if (
+                                                $steps["finishLoading"] !=
+                                                  null &&
+                                                typeof $steps[
+                                                  "finishLoading"
+                                                ] === "object" &&
+                                                typeof $steps["finishLoading"]
+                                                  .then === "function"
+                                              ) {
+                                                $steps["finishLoading"] =
+                                                  await $steps["finishLoading"];
+                                              }
                                             }}
                                           >
                                             <Icon2Icon
@@ -2861,7 +2974,9 @@ function PlasmicAddPatient__RenderFunc(props: {
                                               overrides.dialogNewTimePicker
                                             }
                                             body={
-                                              <div
+                                              <Stack__
+                                                as={"div"}
+                                                hasGap={true}
                                                 className={classNames(
                                                   projectcss.all,
                                                   sty.freeBox___6SJkA
@@ -2893,7 +3008,7 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                     )}
                                                   >
                                                     {
-                                                      "\u0632\u0645\u0627\u0646 \u0634\u0631\u0648\u0639"
+                                                      "\u0632\u0645\u0627\u0646 \u0634\u0631\u0648\u0639:"
                                                     }
                                                   </div>
                                                   <TimePicker
@@ -2947,7 +3062,7 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                     )}
                                                   >
                                                     {
-                                                      "\u0632\u0645\u0627\u0646 \u067e\u0627\u06cc\u0627\u0646"
+                                                      "\u0632\u0645\u0627\u0646 \u067e\u0627\u06cc\u0627\u0646:"
                                                     }
                                                   </div>
                                                   <TimePicker
@@ -2985,8 +3100,727 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                     "__wab_instance",
                                                     sty.submitNewBook
                                                   )}
+                                                  endIcon={
+                                                    <ChevronLeftIcon
+                                                      className={classNames(
+                                                        projectcss.all,
+                                                        sty.svg___5XVi
+                                                      )}
+                                                      role={"img"}
+                                                    />
+                                                  }
+                                                  loading={(() => {
+                                                    try {
+                                                      return $state.loadingButton;
+                                                    } catch (e) {
+                                                      if (
+                                                        e instanceof
+                                                          TypeError ||
+                                                        e?.plasmicType ===
+                                                          "PlasmicUndefinedDataError"
+                                                      ) {
+                                                        return [];
+                                                      }
+                                                      throw e;
+                                                    }
+                                                  })()}
+                                                  onClick={async event => {
+                                                    const $steps = {};
+
+                                                    $steps["checkForm"] =
+                                                      (!$state.fullname ||
+                                                        !$state.cell) &&
+                                                      (!$state.inputfullname
+                                                        .value ||
+                                                        !$state.inputcell.value)
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              args: [
+                                                                "error",
+                                                                "\u0644\u0637\u0641\u0627 \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f."
+                                                              ]
+                                                            };
+                                                            return $globalActions[
+                                                              "Fragment.showToast"
+                                                            ]?.apply(null, [
+                                                              ...actionArgs.args
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps["checkForm"] !=
+                                                        null &&
+                                                      typeof $steps[
+                                                        "checkForm"
+                                                      ] === "object" &&
+                                                      typeof $steps["checkForm"]
+                                                        .then === "function"
+                                                    ) {
+                                                      $steps["checkForm"] =
+                                                        await $steps[
+                                                          "checkForm"
+                                                        ];
+                                                    }
+
+                                                    $steps["startLoading"] =
+                                                      Boolean(
+                                                        ($state.fullname &&
+                                                          $state.cell) ||
+                                                          ($state.inputfullname
+                                                            .value &&
+                                                            $state.inputcell
+                                                              .value)
+                                                      )
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              variable: {
+                                                                objRoot: $state,
+                                                                variablePath: [
+                                                                  "loadingButton"
+                                                                ]
+                                                              },
+                                                              operation: 0,
+                                                              value: true
+                                                            };
+                                                            return (({
+                                                              variable,
+                                                              value,
+                                                              startIndex,
+                                                              deleteCount
+                                                            }) => {
+                                                              if (!variable) {
+                                                                return;
+                                                              }
+                                                              const {
+                                                                objRoot,
+                                                                variablePath
+                                                              } = variable;
+
+                                                              $stateSet(
+                                                                objRoot,
+                                                                variablePath,
+                                                                value
+                                                              );
+                                                              return value;
+                                                            })?.apply(null, [
+                                                              actionArgs
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps["startLoading"] !=
+                                                        null &&
+                                                      typeof $steps[
+                                                        "startLoading"
+                                                      ] === "object" &&
+                                                      typeof $steps[
+                                                        "startLoading"
+                                                      ].then === "function"
+                                                    ) {
+                                                      $steps["startLoading"] =
+                                                        await $steps[
+                                                          "startLoading"
+                                                        ];
+                                                    }
+
+                                                    $steps["checkTime"] =
+                                                      $state.fromTimePicker
+                                                        .value >
+                                                      $state.toTimePicker.value
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              args: [
+                                                                "error",
+                                                                "\u0632\u0645\u0627\u0646 \u067e\u0627\u06cc\u0627\u0646 \u0628\u0627\u06cc\u062f \u0627\u0632 \u0632\u0645\u0627\u0646 \u0634\u0631\u0648\u0639 \u0628\u0632\u0631\u06af\u062a\u0631 \u0628\u0627\u0634\u062f."
+                                                              ]
+                                                            };
+                                                            return $globalActions[
+                                                              "Fragment.showToast"
+                                                            ]?.apply(null, [
+                                                              ...actionArgs.args
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps["checkTime"] !=
+                                                        null &&
+                                                      typeof $steps[
+                                                        "checkTime"
+                                                      ] === "object" &&
+                                                      typeof $steps["checkTime"]
+                                                        .then === "function"
+                                                    ) {
+                                                      $steps["checkTime"] =
+                                                        await $steps[
+                                                          "checkTime"
+                                                        ];
+                                                    }
+
+                                                    $steps["newTimeFromBook"] =
+                                                      true
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              variable: {
+                                                                objRoot: $state,
+                                                                variablePath: [
+                                                                  "newTimeFromBook"
+                                                                ]
+                                                              },
+                                                              operation: 0,
+                                                              value: Math.floor(
+                                                                new Date(
+                                                                  $state
+                                                                    .datePicker
+                                                                    .value *
+                                                                    1000
+                                                                ).setHours(
+                                                                  parseInt(
+                                                                    $state.fromTimePicker.value.split(
+                                                                      ":"
+                                                                    )[0]
+                                                                  ),
+                                                                  parseInt(
+                                                                    $state.fromTimePicker.value.split(
+                                                                      ":"
+                                                                    )[1]
+                                                                  )
+                                                                ) / 1000
+                                                              )
+                                                            };
+                                                            return (({
+                                                              variable,
+                                                              value,
+                                                              startIndex,
+                                                              deleteCount
+                                                            }) => {
+                                                              if (!variable) {
+                                                                return;
+                                                              }
+                                                              const {
+                                                                objRoot,
+                                                                variablePath
+                                                              } = variable;
+
+                                                              $stateSet(
+                                                                objRoot,
+                                                                variablePath,
+                                                                value
+                                                              );
+                                                              return value;
+                                                            })?.apply(null, [
+                                                              actionArgs
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps[
+                                                        "newTimeFromBook"
+                                                      ] != null &&
+                                                      typeof $steps[
+                                                        "newTimeFromBook"
+                                                      ] === "object" &&
+                                                      typeof $steps[
+                                                        "newTimeFromBook"
+                                                      ].then === "function"
+                                                    ) {
+                                                      $steps[
+                                                        "newTimeFromBook"
+                                                      ] = await $steps[
+                                                        "newTimeFromBook"
+                                                      ];
+                                                    }
+
+                                                    $steps["newTimeToBook"] =
+                                                      true
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              variable: {
+                                                                objRoot: $state,
+                                                                variablePath: [
+                                                                  "newTimeToBook"
+                                                                ]
+                                                              },
+                                                              operation: 0,
+                                                              value: Math.floor(
+                                                                new Date(
+                                                                  $state
+                                                                    .datePicker
+                                                                    .value *
+                                                                    1000
+                                                                ).setHours(
+                                                                  parseInt(
+                                                                    $state.toTimePicker.value.split(
+                                                                      ":"
+                                                                    )[0]
+                                                                  ),
+                                                                  parseInt(
+                                                                    $state.toTimePicker.value.split(
+                                                                      ":"
+                                                                    )[1]
+                                                                  )
+                                                                ) / 1000
+                                                              )
+                                                            };
+                                                            return (({
+                                                              variable,
+                                                              value,
+                                                              startIndex,
+                                                              deleteCount
+                                                            }) => {
+                                                              if (!variable) {
+                                                                return;
+                                                              }
+                                                              const {
+                                                                objRoot,
+                                                                variablePath
+                                                              } = variable;
+
+                                                              $stateSet(
+                                                                objRoot,
+                                                                variablePath,
+                                                                value
+                                                              );
+                                                              return value;
+                                                            })?.apply(null, [
+                                                              actionArgs
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps["newTimeToBook"] !=
+                                                        null &&
+                                                      typeof $steps[
+                                                        "newTimeToBook"
+                                                      ] === "object" &&
+                                                      typeof $steps[
+                                                        "newTimeToBook"
+                                                      ].then === "function"
+                                                    ) {
+                                                      $steps["newTimeToBook"] =
+                                                        await $steps[
+                                                          "newTimeToBook"
+                                                        ];
+                                                    }
+
+                                                    $steps["suspend"] = Boolean(
+                                                      ($state.fullname &&
+                                                        $state.cell) ||
+                                                        ($state.inputfullname
+                                                          .value &&
+                                                          $state.inputcell
+                                                            .value &&
+                                                          $state.fromTimePicker
+                                                            .value <
+                                                            $state.toTimePicker
+                                                              .value)
+                                                    )
+                                                      ? (() => {
+                                                          const actionArgs = {
+                                                            args: [
+                                                              "GET",
+                                                              "https://apigw.paziresh24.com/v2/suspend",
+                                                              (() => {
+                                                                try {
+                                                                  return {
+                                                                    center_id:
+                                                                      $props.centerId,
+                                                                    user_center_id:
+                                                                      $props.userCenterId,
+                                                                    type: 3,
+                                                                    from_timestamp:
+                                                                      $state.newTimeFromBook,
+                                                                    to_timestamp:
+                                                                      $state.newTimeToBook
+                                                                  };
+                                                                } catch (e) {
+                                                                  if (
+                                                                    e instanceof
+                                                                      TypeError ||
+                                                                    e?.plasmicType ===
+                                                                      "PlasmicUndefinedDataError"
+                                                                  ) {
+                                                                    return undefined;
+                                                                  }
+                                                                  throw e;
+                                                                }
+                                                              })()
+                                                            ]
+                                                          };
+                                                          return $globalActions[
+                                                            "Fragment.apiRequest"
+                                                          ]?.apply(null, [
+                                                            ...actionArgs.args
+                                                          ]);
+                                                        })()
+                                                      : undefined;
+                                                    if (
+                                                      $steps["suspend"] !=
+                                                        null &&
+                                                      typeof $steps[
+                                                        "suspend"
+                                                      ] === "object" &&
+                                                      typeof $steps["suspend"]
+                                                        .then === "function"
+                                                    ) {
+                                                      $steps["suspend"] =
+                                                        await $steps["suspend"];
+                                                    }
+
+                                                    $steps["bookApi"] = Boolean(
+                                                      ($state.fullname &&
+                                                        $state.cell) ||
+                                                        ($state.inputfullname
+                                                          .value &&
+                                                          $state.inputcell
+                                                            .value &&
+                                                          $state.fromTimePicker
+                                                            .value <
+                                                            $state.toTimePicker
+                                                              .value)
+                                                    )
+                                                      ? (() => {
+                                                          const actionArgs = {
+                                                            args: [
+                                                              "POST",
+                                                              "https://apigw.paziresh24.com/v2/book",
+                                                              undefined,
+                                                              (() => {
+                                                                try {
+                                                                  return {
+                                                                    center_id:
+                                                                      $props.centerId,
+                                                                    user_center_id:
+                                                                      $props.userCenterId,
+                                                                    type: 3,
+                                                                    fullname:
+                                                                      $state.fullname?.trim() ??
+                                                                      $state
+                                                                        .inputfullname
+                                                                        .value,
+                                                                    cell:
+                                                                      $state.cell?.trim() ??
+                                                                      $state
+                                                                        .inputcell
+                                                                        .value,
+                                                                    request_code:
+                                                                      $steps
+                                                                        .suspend
+                                                                        .data
+                                                                        .request_code,
+                                                                    national_code:
+                                                                      $state
+                                                                        .nationalCode
+                                                                        .value
+                                                                  };
+                                                                } catch (e) {
+                                                                  if (
+                                                                    e instanceof
+                                                                      TypeError ||
+                                                                    e?.plasmicType ===
+                                                                      "PlasmicUndefinedDataError"
+                                                                  ) {
+                                                                    return undefined;
+                                                                  }
+                                                                  throw e;
+                                                                }
+                                                              })()
+                                                            ]
+                                                          };
+                                                          return $globalActions[
+                                                            "Fragment.apiRequest"
+                                                          ]?.apply(null, [
+                                                            ...actionArgs.args
+                                                          ]);
+                                                        })()
+                                                      : undefined;
+                                                    if (
+                                                      $steps["bookApi"] !=
+                                                        null &&
+                                                      typeof $steps[
+                                                        "bookApi"
+                                                      ] === "object" &&
+                                                      typeof $steps["bookApi"]
+                                                        .then === "function"
+                                                    ) {
+                                                      $steps["bookApi"] =
+                                                        await $steps["bookApi"];
+                                                    }
+
+                                                    $steps["successToast"] =
+                                                      $steps.bookApi.data
+                                                        .status == "28" ||
+                                                      $steps.bookApi.data
+                                                        .status == "0"
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              args: [
+                                                                undefined,
+                                                                "\u0646\u0648\u0628\u062a \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f."
+                                                              ]
+                                                            };
+                                                            return $globalActions[
+                                                              "Fragment.showToast"
+                                                            ]?.apply(null, [
+                                                              ...actionArgs.args
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps["successToast"] !=
+                                                        null &&
+                                                      typeof $steps[
+                                                        "successToast"
+                                                      ] === "object" &&
+                                                      typeof $steps[
+                                                        "successToast"
+                                                      ].then === "function"
+                                                    ) {
+                                                      $steps["successToast"] =
+                                                        await $steps[
+                                                          "successToast"
+                                                        ];
+                                                    }
+
+                                                    $steps[
+                                                      "updateBooktimeOpen"
+                                                    ] =
+                                                      $steps.bookApi.data
+                                                        .status == "28" ||
+                                                      $steps.bookApi.data
+                                                        .status == "0"
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              variable: {
+                                                                objRoot: $state,
+                                                                variablePath: [
+                                                                  "booktime",
+                                                                  "open"
+                                                                ]
+                                                              },
+                                                              operation: 0,
+                                                              value: false
+                                                            };
+                                                            return (({
+                                                              variable,
+                                                              value,
+                                                              startIndex,
+                                                              deleteCount
+                                                            }) => {
+                                                              if (!variable) {
+                                                                return;
+                                                              }
+                                                              const {
+                                                                objRoot,
+                                                                variablePath
+                                                              } = variable;
+
+                                                              $stateSet(
+                                                                objRoot,
+                                                                variablePath,
+                                                                value
+                                                              );
+                                                              return value;
+                                                            })?.apply(null, [
+                                                              actionArgs
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps[
+                                                        "updateBooktimeOpen"
+                                                      ] != null &&
+                                                      typeof $steps[
+                                                        "updateBooktimeOpen"
+                                                      ] === "object" &&
+                                                      typeof $steps[
+                                                        "updateBooktimeOpen"
+                                                      ].then === "function"
+                                                    ) {
+                                                      $steps[
+                                                        "updateBooktimeOpen"
+                                                      ] = await $steps[
+                                                        "updateBooktimeOpen"
+                                                      ];
+                                                    }
+
+                                                    $steps["finishLoading"] =
+                                                      true
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              variable: {
+                                                                objRoot: $state,
+                                                                variablePath: [
+                                                                  "loadingButton"
+                                                                ]
+                                                              },
+                                                              operation: 0,
+                                                              value: false
+                                                            };
+                                                            return (({
+                                                              variable,
+                                                              value,
+                                                              startIndex,
+                                                              deleteCount
+                                                            }) => {
+                                                              if (!variable) {
+                                                                return;
+                                                              }
+                                                              const {
+                                                                objRoot,
+                                                                variablePath
+                                                              } = variable;
+
+                                                              $stateSet(
+                                                                objRoot,
+                                                                variablePath,
+                                                                value
+                                                              );
+                                                              return value;
+                                                            })?.apply(null, [
+                                                              actionArgs
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps["finishLoading"] !=
+                                                        null &&
+                                                      typeof $steps[
+                                                        "finishLoading"
+                                                      ] === "object" &&
+                                                      typeof $steps[
+                                                        "finishLoading"
+                                                      ].then === "function"
+                                                    ) {
+                                                      $steps["finishLoading"] =
+                                                        await $steps[
+                                                          "finishLoading"
+                                                        ];
+                                                    }
+
+                                                    $steps["eventSubmitBook"] =
+                                                      $steps.bookApi.data
+                                                        .status == "28" ||
+                                                      $steps.bookApi.data
+                                                        .status == "0"
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              args: [
+                                                                (() => {
+                                                                  try {
+                                                                    return {
+                                                                      group:
+                                                                        "add-book",
+                                                                      data: {
+                                                                        center_id:
+                                                                          $props.centerId,
+                                                                        user_center_id:
+                                                                          $props.userCenterId,
+                                                                        type: 3,
+                                                                        fullname:
+                                                                          $state.fullname ??
+                                                                          $state
+                                                                            .inputfullname
+                                                                            .value,
+                                                                        cell:
+                                                                          $state.cell ??
+                                                                          $state
+                                                                            .inputcell
+                                                                            .value,
+                                                                        national_code:
+                                                                          $state
+                                                                            .nationalCode
+                                                                            .value
+                                                                      },
+                                                                      type: "add-new-time-book"
+                                                                    };
+                                                                  } catch (e) {
+                                                                    if (
+                                                                      e instanceof
+                                                                        TypeError ||
+                                                                      e?.plasmicType ===
+                                                                        "PlasmicUndefinedDataError"
+                                                                    ) {
+                                                                      return undefined;
+                                                                    }
+                                                                    throw e;
+                                                                  }
+                                                                })()
+                                                              ]
+                                                            };
+                                                            return $globalActions[
+                                                              "Splunk.sendLog"
+                                                            ]?.apply(null, [
+                                                              ...actionArgs.args
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps[
+                                                        "eventSubmitBook"
+                                                      ] != null &&
+                                                      typeof $steps[
+                                                        "eventSubmitBook"
+                                                      ] === "object" &&
+                                                      typeof $steps[
+                                                        "eventSubmitBook"
+                                                      ].then === "function"
+                                                    ) {
+                                                      $steps[
+                                                        "eventSubmitBook"
+                                                      ] = await $steps[
+                                                        "eventSubmitBook"
+                                                      ];
+                                                    }
+
+                                                    $steps["runBooked"] =
+                                                      $steps.bookApi.data
+                                                        .status == "28" ||
+                                                      $steps.bookApi.data
+                                                        .status == "0"
+                                                        ? (() => {
+                                                            const actionArgs = {
+                                                              eventRef:
+                                                                $props["booked"]
+                                                            };
+                                                            return (({
+                                                              eventRef,
+                                                              args
+                                                            }) => {
+                                                              return eventRef?.(
+                                                                ...(args ?? [])
+                                                              );
+                                                            })?.apply(null, [
+                                                              actionArgs
+                                                            ]);
+                                                          })()
+                                                        : undefined;
+                                                    if (
+                                                      $steps["runBooked"] !=
+                                                        null &&
+                                                      typeof $steps[
+                                                        "runBooked"
+                                                      ] === "object" &&
+                                                      typeof $steps["runBooked"]
+                                                        .then === "function"
+                                                    ) {
+                                                      $steps["runBooked"] =
+                                                        await $steps[
+                                                          "runBooked"
+                                                        ];
+                                                    }
+                                                  }}
+                                                  space={undefined}
+                                                  startIcon={
+                                                    <ChevronRightIcon
+                                                      className={classNames(
+                                                        projectcss.all,
+                                                        sty.svg__iM9Te
+                                                      )}
+                                                      role={"img"}
+                                                    />
+                                                  }
                                                 />
-                                              </div>
+                                              </Stack__>
                                             }
                                             className={classNames(
                                               "__wab_instance",

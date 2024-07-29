@@ -950,7 +950,7 @@
           "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
           "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicRules.tsx",
           "importSpec": {
-            "modulePath": "../src/pages/Rules&regulations.tsx"
+            "modulePath": "../src/pages/rules.tsx"
           },
           "cssFilePath": "plasmic/opium_dashboard/PlasmicRules.module.css",
           "scheme": "blackbox",

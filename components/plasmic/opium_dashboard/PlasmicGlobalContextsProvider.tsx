@@ -70,12 +70,12 @@ export default function GlobalContextsProvider(
         defaultApiHost={
           splunkProps && "defaultApiHost" in splunkProps
             ? splunkProps.defaultApiHost!
-            : "6e3a6345-2bb8-4f60-bd64-bf33f14dcdae.hsvc.ir"
+            : "https://p24splk.paziresh24.com"
         }
         defaultApiKey={
           splunkProps && "defaultApiKey" in splunkProps
             ? splunkProps.defaultApiKey!
-            : "5cb3cd6e-f7a1-4f3e-8c97-73bf410f8740"
+            : "6d18640a-95c3-4368-a8d0-dc0beae3a44b"
         }
       >
         <GrowthBook

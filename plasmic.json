@@ -942,6 +942,20 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicAvailabilitySuggestionsSpecialities.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "SCx7I85imXzG",
+          "name": "Rules",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicRules.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/Rules&regulations.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicRules.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/Rules&regulations"
         }
       ],
       "icons": [
@@ -1041,7 +1055,18 @@
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon12.tsx"
         }
       ],
-      "images": [],
+      "images": [
+        {
+          "id": "j1pw1ZfXNSvB",
+          "name": "image",
+          "filePath": "../public/plasmic/opium_dashboard/images/image.png"
+        },
+        {
+          "id": "OjzCrWm2xhbS",
+          "name": "image 2",
+          "filePath": "../public/plasmic/opium_dashboard/images/image2.png"
+        }
+      ],
       "indirect": false,
       "globalContextsFilePath": "plasmic/opium_dashboard/PlasmicGlobalContextsProvider.tsx",
       "splitsProviderFilePath": "",

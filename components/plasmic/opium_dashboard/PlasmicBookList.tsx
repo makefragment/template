@@ -67,7 +67,7 @@ import PatientList from "../../PatientList"; // plasmic-import: uw2UKvNlq2Yr/com
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import AddPatient from "../../AddPatient"; // plasmic-import: tPaqHhQ134RQ/component
 
-import { useScreenVariants as useScreenVariantsbr2UhI7UlpvR } from "../fragment_icons/PlasmicGlobalVariant__Screen"; // plasmic-import: BR2UhI7ulpvR/globalVariant
+import { useScreenVariants as useScreenVariantsfobTirRaixGf } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: fobTIRRaixGf/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -218,7 +218,7 @@ function PlasmicBookList__RenderFunc(props: {
   });
 
   const globalVariants = ensureGlobalVariants({
-    screen: useScreenVariantsbr2UhI7UlpvR()
+    screen: useScreenVariantsfobTirRaixGf()
   });
 
   return (

@@ -431,7 +431,13 @@ function PlasmicRules__RenderFunc(props: {
                             args: [
                               (() => {
                                 try {
-                                  return $state.me.users[0];
+                                  return {
+                                    group: "dr-rules",
+                                    data: {
+                                      doctor: $state.me.users[0]
+                                    },
+                                    type: "accept-rules"
+                                  };
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||

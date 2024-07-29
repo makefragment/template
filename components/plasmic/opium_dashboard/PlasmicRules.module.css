@@ -98,7 +98,7 @@
   max-width: 100%;
   min-width: 0;
   min-height: 0;
-  padding: 8px;
+  padding: var(--token-QcxRWQfhgyJI);
 }
 .text__n2Zjg {
   font-weight: 400;

@@ -228,6 +228,42 @@ function PlasmicRules__RenderFunc(props: {
               ) {
                 $steps["me"] = await $steps["me"];
               }
+
+              $steps["loadRulesEvent"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        (() => {
+                          try {
+                            return {
+                              group: "dr-rules",
+                              data: { doctor: $state.me.users[0] },
+                              type: "load-rules"
+                            };
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["Splunk.sendLog"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["loadRulesEvent"] != null &&
+                typeof $steps["loadRulesEvent"] === "object" &&
+                typeof $steps["loadRulesEvent"].then === "function"
+              ) {
+                $steps["loadRulesEvent"] = await $steps["loadRulesEvent"];
+              }
             }}
           />
 

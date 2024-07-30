@@ -107,7 +107,6 @@
   text-align: justify;
 }
 .checkbox2 {
-  display: flex;
   flex-direction: column;
   position: relative;
   align-items: flex-start;
@@ -116,6 +115,7 @@
   height: auto;
   max-width: 100%;
   min-width: 0;
+  display: none;
   padding: 8px 0px 8px 8px;
 }
 .checkbox:global(.__wab_instance) {

@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { CodeComponentMeta, useSelector } from "@plasmicapp/host";
-import * as InputPrimitive from "@/components/ui/input";
+import * as TextareaPrimitive from "@/components/ui/textarea";
 import { HTMLInputTypeAttribute } from "react";
 
 type InputType = {
@@ -10,60 +10,34 @@ type InputType = {
   disabled?: boolean;
   className?: string;
   name?: string;
-  type?: HTMLInputTypeAttribute;
 };
 
-export const Input = (props: InputType) => {
-  const {
-    placeholder,
-    value,
-    onChange,
-    disabled,
-    className,
-    name,
-    type = "text",
-  } = props;
+export const Textarea = (props: InputType) => {
+  const { placeholder, value, onChange, disabled, className, name } = props;
   const fragmentConfig = useSelector("Fragment");
   return (
-    <InputPrimitive.Input
+    <TextareaPrimitive.Textarea
       disabled={disabled}
       onChange={(e) => onChange?.(e.target?.value ?? "")}
       value={value}
-      dir={type !== "text" ? "ltr" : fragmentConfig.rtl ? "rtl" : "ltr"}
+      dir={fragmentConfig.rtl ? "rtl" : "ltr"}
       name={name}
       placeholder={placeholder}
       className={className}
-      type={type}
     />
   );
 };
 
-export const inputMeta: CodeComponentMeta<InputType> = {
-  name: "Input",
-  displayName: "Fragment/Input",
-  importPath: "@/fragment/components/input",
-  figmaMappings: [{ figmaComponentName: "Input" }],
+export const textareaMeta: CodeComponentMeta<InputType> = {
+  name: "Textarea",
+  displayName: "Fragment/Textarea",
+  importPath: "@/fragment/components/textarea",
+  figmaMappings: [{ figmaComponentName: "Textarea" }],
   props: {
     placeholder: "string",
     value: {
       type: "string",
       defaultValue: "",
-    },
-    type: {
-      type: "choice",
-      options: [
-        "text",
-        "password",
-        "hidden",
-        "number",
-        "date",
-        "datetime-local",
-        "time",
-        "email",
-        "tel",
-      ],
-      defaultValue: "text",
-      defaultValueHint: "text",
     },
     disabled: "boolean",
     name: {

@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { CodeComponentMeta, useSelector } from "@plasmicapp/host";
 import * as TextareaPrimitive from "@/components/ui/textarea";
-import { HTMLInputTypeAttribute } from "react";
+import { RefAttributes } from "react";
 
 type InputType = {
   placeholder?: string;
@@ -10,10 +10,20 @@ type InputType = {
   disabled?: boolean;
   className?: string;
   name?: string;
+  attributes?: TextareaPrimitive.TextareaProps &
+    RefAttributes<HTMLTextAreaElement>;
 };
 
 export const Textarea = (props: InputType) => {
-  const { placeholder, value, onChange, disabled, className, name } = props;
+  const {
+    placeholder,
+    value,
+    onChange,
+    disabled,
+    className,
+    name,
+    attributes,
+  } = props;
   const fragmentConfig = useSelector("Fragment");
   return (
     <TextareaPrimitive.Textarea
@@ -24,6 +34,7 @@ export const Textarea = (props: InputType) => {
       name={name}
       placeholder={placeholder}
       className={className}
+      {...attributes}
     />
   );
 };
@@ -44,6 +55,10 @@ export const textareaMeta: CodeComponentMeta<InputType> = {
       type: "string",
       advanced: true,
       description: "The HTML name of the input",
+    },
+    attributes: {
+      type: "object",
+      advanced: true,
     },
     onChange: {
       type: "eventHandler",

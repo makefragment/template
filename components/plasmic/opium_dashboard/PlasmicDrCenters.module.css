@@ -90,6 +90,7 @@
   max-width: 100%;
   box-shadow: 0px 4px 16px 0px #00000033;
   background: white;
+  cursor: pointer;
   border-radius: 8px;
   padding: 16px;
   border: 1px solid #e2e8f0;
@@ -134,4 +135,7 @@
   min-height: 0;
   -webkit-transition-property: all;
   -webkit-transition-duration: 1s;
+}
+.activeVisitOnline:global(.__wab_instance) {
+  max-width: 100%;
 }

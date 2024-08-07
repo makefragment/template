@@ -956,6 +956,32 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/Rules&regulations"
+        },
+        {
+          "id": "ERjsSdu3ls0T",
+          "name": "GetTransaction",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicGetTransaction.tsx",
+          "importSpec": {
+            "modulePath": "GetTransaction.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicGetTransaction.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "JRdpm2ALL90Q",
+          "name": "ActiveVisitOnline",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicActiveVisitOnline.tsx",
+          "importSpec": {
+            "modulePath": "ActiveVisitOnline.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicActiveVisitOnline.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

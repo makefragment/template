@@ -61,6 +61,7 @@ import {
 
 import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
 import DrCenter from "../../DrCenter"; // plasmic-import: Y5f_I7uzx8ZQ/component
+import ActiveVisitOnline from "../../ActiveVisitOnline"; // plasmic-import: JRdpm2ALL90Q/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -96,6 +97,7 @@ export type PlasmicDrCenters__OverridesType = {
   root?: Flex__<"div">;
   fragmentPopover?: Flex__<typeof Popover>;
   text?: Flex__<"div">;
+  activeVisitOnline?: Flex__<typeof ActiveVisitOnline>;
 };
 
 export interface DefaultDrCentersProps {
@@ -142,6 +144,8 @@ function PlasmicDrCenters__RenderFunc(props: {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+
+  const $globalActions = useGlobalActions?.();
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -447,6 +451,105 @@ function PlasmicDrCenters__RenderFunc(props: {
                 />
               );
             })}
+            {(() => {
+              try {
+                return !$props.centers.some(center => center.id === "5532");
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return true;
+                }
+                throw e;
+              }
+            })() ? (
+              <ActiveVisitOnline
+                data-plasmic-name={"activeVisitOnline"}
+                data-plasmic-override={overrides.activeVisitOnline}
+                className={classNames("__wab_instance", sty.activeVisitOnline)}
+                onselected={async () => {
+                  const $steps = {};
+
+                  $steps["goToHttpsdrpaziresh24Comactivationconsultrules"] =
+                    true
+                      ? (() => {
+                          const actionArgs = {
+                            destination:
+                              "https://dr.paziresh24.com/activation/consult/rules"
+                          };
+                          return (({ destination }) => {
+                            if (
+                              typeof destination === "string" &&
+                              destination.startsWith("#")
+                            ) {
+                              document
+                                .getElementById(destination.substr(1))
+                                .scrollIntoView({ behavior: "smooth" });
+                            } else {
+                              __nextRouter?.push(destination);
+                            }
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["goToHttpsdrpaziresh24Comactivationconsultrules"] !=
+                      null &&
+                    typeof $steps[
+                      "goToHttpsdrpaziresh24Comactivationconsultrules"
+                    ] === "object" &&
+                    typeof $steps[
+                      "goToHttpsdrpaziresh24Comactivationconsultrules"
+                    ].then === "function"
+                  ) {
+                    $steps["goToHttpsdrpaziresh24Comactivationconsultrules"] =
+                      await $steps[
+                        "goToHttpsdrpaziresh24Comactivationconsultrules"
+                      ];
+                  }
+
+                  $steps["sendEvent"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            (() => {
+                              try {
+                                return {
+                                  group: "active-online-visit",
+                                  data: {
+                                    center_id: $props.centers.map(
+                                      center => center.id
+                                    )
+                                  },
+                                  type: "click-button-dr-centers"
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Splunk.sendLog"]?.apply(null, [
+                          ...actionArgs.args
+                        ]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["sendEvent"] != null &&
+                    typeof $steps["sendEvent"] === "object" &&
+                    typeof $steps["sendEvent"].then === "function"
+                  ) {
+                    $steps["sendEvent"] = await $steps["sendEvent"];
+                  }
+                }}
+              />
+            ) : null}
           </Stack__>
         }
         onOpenChange={generateStateOnChangeProp($state, [
@@ -544,9 +647,10 @@ function PlasmicDrCenters__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "fragmentPopover", "text"],
-  fragmentPopover: ["fragmentPopover", "text"],
-  text: ["text"]
+  root: ["root", "fragmentPopover", "text", "activeVisitOnline"],
+  fragmentPopover: ["fragmentPopover", "text", "activeVisitOnline"],
+  text: ["text"],
+  activeVisitOnline: ["activeVisitOnline"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -555,6 +659,7 @@ type NodeDefaultElementType = {
   root: "div";
   fragmentPopover: typeof Popover;
   text: "div";
+  activeVisitOnline: typeof ActiveVisitOnline;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -619,6 +724,7 @@ export const PlasmicDrCenters = Object.assign(
     // Helper components rendering sub-elements
     fragmentPopover: makeNodeComponent("fragmentPopover"),
     text: makeNodeComponent("text"),
+    activeVisitOnline: makeNodeComponent("activeVisitOnline"),
 
     // Metadata about props expected for PlasmicDrCenters
     internalVariantProps: PlasmicDrCenters__VariantProps,

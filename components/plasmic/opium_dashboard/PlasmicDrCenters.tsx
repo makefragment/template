@@ -226,7 +226,7 @@ function PlasmicDrCenters__RenderFunc(props: {
                   e instanceof TypeError ||
                   e?.plasmicType === "PlasmicUndefinedDataError"
                 ) {
-                  return true;
+                  return false;
                 }
                 throw e;
               }
@@ -348,9 +348,10 @@ function PlasmicDrCenters__RenderFunc(props: {
                   officeBook={(() => {
                     try {
                       return (
-                        currentItem.name.includes("مطب") &&
-                        currentItem.type_id === 1 &&
-                        currentItem.id !== "5532"
+                        currentItem.name.includes("مطب") ||
+                        (currentItem.name.includes("دکتر") &&
+                          currentItem.type_id === 1 &&
+                          currentItem.id !== "5532")
                       );
                     } catch (e) {
                       if (

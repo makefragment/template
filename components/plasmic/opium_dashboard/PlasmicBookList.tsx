@@ -549,7 +549,19 @@ function PlasmicBookList__RenderFunc(props: {
                     }
                   })()}
                   className={classNames("__wab_instance", sty.drCenters)}
-                  hasAllOption={true}
+                  hasAllOption={(() => {
+                    try {
+                      return $state.centers?.length > 1;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })()}
                   onSelectedCenterChange={async (...eventArgs: any) => {
                     generateStateOnChangeProp($state, [
                       "drCenters",

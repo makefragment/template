@@ -60,9 +60,10 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import Checkbox from "../../Checkbox"; // plasmic-import: IDR0sAqN5tth/component
-import Select from "../../Select"; // plasmic-import: C-JgjGWfRxfZ/component
+import { Select } from "@/fragment/components/select"; // plasmic-import: n8ioKZzFQxrO/codeComponent
 import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
 import DaysOfWeek from "../../DaysOfWeek"; // plasmic-import: WbPt8L2jActx/component
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -172,16 +173,6 @@ function PlasmicWorkhours__RenderFunc(props: {
         onChangeProp: "onCheckboxIsCheckedChange"
       },
       {
-        path: "to[].value",
-        type: "private",
-        variableType: "text"
-      },
-      {
-        path: "from[].value",
-        type: "private",
-        variableType: "text"
-      },
-      {
         path: "selectedhoure",
         type: "private",
         variableType: "object",
@@ -250,6 +241,26 @@ function PlasmicWorkhours__RenderFunc(props: {
         variableType: "boolean",
 
         refName: "popoverConflictHour2"
+      },
+      {
+        path: "from[].value",
+        type: "private",
+        variableType: "text"
+      },
+      {
+        path: "from[].open",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "to[].value",
+        type: "private",
+        variableType: "text"
+      },
+      {
+        path: "to[].open",
+        type: "private",
+        variableType: "boolean"
       }
     ],
     [$props, $ctx, $refs]
@@ -350,15 +361,12 @@ function PlasmicWorkhours__RenderFunc(props: {
               >
                 {(() => {
                   const child$Props = {
-                    className: classNames("__wab_instance", sty.to),
                     onChange: async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "to",
-                          __plasmic_idx_0,
-                          "value"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                      generateStateOnChangeProp($state, [
+                        "to",
+                        __plasmic_idx_0,
+                        "value"
+                      ]).apply(null, eventArgs);
                       (async value => {
                         const $steps = {};
 
@@ -449,6 +457,16 @@ function PlasmicWorkhours__RenderFunc(props: {
                         }
                       }).apply(null, eventArgs);
                     },
+                    onOpenChange: generateStateOnChangeProp($state, [
+                      "to",
+                      __plasmic_idx_0,
+                      "open"
+                    ]),
+                    open: generateStateValueProp($state, [
+                      "to",
+                      __plasmic_idx_0,
+                      "open"
+                    ]),
                     options: (() => {
                       try {
                         return (() => {
@@ -474,9 +492,10 @@ function PlasmicWorkhours__RenderFunc(props: {
                                 initialMinute < 10
                                   ? `0${initialMinute}`
                                   : `${initialMinute}`;
-                              options.push(
-                                `${formattedHour}:${formattedMinute}`
-                              );
+                              options.push({
+                                label: `${formattedHour}:${formattedMinute}`,
+                                value: `${formattedHour}:${formattedMinute}`
+                              });
                             }
                             return options;
                           })();
@@ -486,19 +505,34 @@ function PlasmicWorkhours__RenderFunc(props: {
                           e instanceof TypeError ||
                           e?.plasmicType === "PlasmicUndefinedDataError"
                         ) {
-                          return [];
+                          return undefined;
                         }
                         throw e;
                       }
                     })(),
-                    placeholder: "\u06f2\u06f1:\u06f0\u06f0",
+                    triggerClassName: classNames("__wab_instance", sty.to),
                     value: generateStateValueProp($state, [
                       "to",
                       __plasmic_idx_0,
                       "value"
                     ])
                   };
-
+                  initializeCodeComponentStates(
+                    $state,
+                    [
+                      {
+                        name: "value",
+                        plasmicStateName: "to[].value"
+                      },
+                      {
+                        name: "open",
+                        plasmicStateName: "to[].open"
+                      }
+                    ],
+                    [__plasmic_idx_0],
+                    undefined ?? {},
+                    child$Props
+                  );
                   initializePlasmicStates(
                     $state,
                     [
@@ -513,11 +547,15 @@ function PlasmicWorkhours__RenderFunc(props: {
                                 e instanceof TypeError ||
                                 e?.plasmicType === "PlasmicUndefinedDataError"
                               ) {
-                                return undefined;
+                                return "17:40";
                               }
                               throw e;
                             }
                           })()
+                      },
+                      {
+                        name: "to[].open",
+                        initFunc: ({ $props, $state, $queries }) => undefined
                       }
                     ],
                     [__plasmic_idx_0]
@@ -537,15 +575,12 @@ function PlasmicWorkhours__RenderFunc(props: {
 
                 {(() => {
                   const child$Props = {
-                    className: classNames("__wab_instance", sty.from),
                     onChange: async (...eventArgs: any) => {
-                      ((...eventArgs) => {
-                        generateStateOnChangeProp($state, [
-                          "from",
-                          __plasmic_idx_0,
-                          "value"
-                        ])(eventArgs[0]);
-                      }).apply(null, eventArgs);
+                      generateStateOnChangeProp($state, [
+                        "from",
+                        __plasmic_idx_0,
+                        "value"
+                      ]).apply(null, eventArgs);
                       (async value => {
                         const $steps = {};
 
@@ -569,6 +604,58 @@ function PlasmicWorkhours__RenderFunc(props: {
                           typeof $steps["runCode"].then === "function"
                         ) {
                           $steps["runCode"] = await $steps["runCode"];
+                        }
+
+                        $steps["runCode2"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return (() => {
+                                    return ($state.listOfWorkhoureCopy[
+                                      currentIndex
+                                    ].to = (() => {
+                                      const duration = $props.duration;
+                                      const options = [];
+                                      let [initialHour, initialMinute] =
+                                        currentItem.from.split(":").map(Number);
+                                      while (true) {
+                                        initialHour += Math.floor(
+                                          (initialMinute + duration) / 60
+                                        );
+                                        initialMinute =
+                                          (initialMinute + duration) % 60;
+                                        if (initialHour >= 24) {
+                                          break;
+                                        }
+                                        const formattedHour =
+                                          initialHour < 10
+                                            ? `0${initialHour}`
+                                            : `${initialHour}`;
+                                        const formattedMinute =
+                                          initialMinute < 10
+                                            ? `0${initialMinute}`
+                                            : `${initialMinute}`;
+                                        options.push({
+                                          label: `${formattedHour}:${formattedMinute}`,
+                                          value: `${formattedHour}:${formattedMinute}`
+                                        });
+                                      }
+                                      return options;
+                                    })()[0].value);
+                                  })();
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["runCode2"] != null &&
+                          typeof $steps["runCode2"] === "object" &&
+                          typeof $steps["runCode2"].then === "function"
+                        ) {
+                          $steps["runCode2"] = await $steps["runCode2"];
                         }
 
                         $steps["updateWarning"] = true
@@ -636,6 +723,16 @@ function PlasmicWorkhours__RenderFunc(props: {
                         }
                       }).apply(null, eventArgs);
                     },
+                    onOpenChange: generateStateOnChangeProp($state, [
+                      "from",
+                      __plasmic_idx_0,
+                      "open"
+                    ]),
+                    open: generateStateValueProp($state, [
+                      "from",
+                      __plasmic_idx_0,
+                      "open"
+                    ]),
                     options: (() => {
                       try {
                         return (() => {
@@ -654,9 +751,10 @@ function PlasmicWorkhours__RenderFunc(props: {
                               const formattedMinute = minute
                                 .toString()
                                 .padStart(2, "0");
-                              options.push(
-                                `${formattedHour}:${formattedMinute}`
-                              );
+                              options.push({
+                                label: `${formattedHour}:${formattedMinute}`,
+                                value: `${formattedHour}:${formattedMinute}`
+                              });
                             }
                             return options;
                           })();
@@ -666,19 +764,35 @@ function PlasmicWorkhours__RenderFunc(props: {
                           e instanceof TypeError ||
                           e?.plasmicType === "PlasmicUndefinedDataError"
                         ) {
-                          return [];
+                          return undefined;
                         }
                         throw e;
                       }
                     })(),
-                    placeholder: "\u06f1\u06f7:\u06f0\u06f0",
+                    placeholder: ``,
+                    triggerClassName: classNames("__wab_instance", sty.from),
                     value: generateStateValueProp($state, [
                       "from",
                       __plasmic_idx_0,
                       "value"
                     ])
                   };
-
+                  initializeCodeComponentStates(
+                    $state,
+                    [
+                      {
+                        name: "value",
+                        plasmicStateName: "from[].value"
+                      },
+                      {
+                        name: "open",
+                        plasmicStateName: "from[].open"
+                      }
+                    ],
+                    [__plasmic_idx_0],
+                    undefined ?? {},
+                    child$Props
+                  );
                   initializePlasmicStates(
                     $state,
                     [
@@ -698,6 +812,10 @@ function PlasmicWorkhours__RenderFunc(props: {
                               throw e;
                             }
                           })()
+                      },
+                      {
+                        name: "from[].open",
+                        initFunc: ({ $props, $state, $queries }) => undefined
                       }
                     ],
                     [__plasmic_idx_0]
@@ -736,29 +854,72 @@ function PlasmicWorkhours__RenderFunc(props: {
                                 variablePath: ["listOfWorkhoureCopy"]
                               },
                               operation: 5,
-                              value: {
-                                from: $state.to[
-                                  $state.listOfWorkhoureCopy.length - 1
-                                ].value,
-                                to: (() => {
-                                  const toValue =
+                              value: (() => {
+                                const toValues = (() => {
+                                  const duration = $props.duration;
+                                  const options = [];
+                                  let [initialHour, initialMinute] =
+                                    currentItem.from.split(":").map(Number);
+                                  while (true) {
+                                    initialHour += Math.floor(
+                                      (initialMinute + duration) / 60
+                                    );
+                                    initialMinute =
+                                      (initialMinute + duration) % 60;
+                                    if (initialHour >= 24) {
+                                      break;
+                                    }
+                                    const formattedHour =
+                                      initialHour < 10
+                                        ? `0${initialHour}`
+                                        : `${initialHour}`;
+                                    const formattedMinute =
+                                      initialMinute < 10
+                                        ? `0${initialMinute}`
+                                        : `${initialMinute}`;
+                                    options.push({
+                                      label: `${formattedHour}:${formattedMinute}`,
+                                      value: `${formattedHour}:${formattedMinute}`
+                                    });
+                                  }
+                                  return options;
+                                })();
+                                return {
+                                  from:
+                                    toValues[toValues.length - 1].value ===
                                     $state.to[
                                       $state.listOfWorkhoureCopy.length - 1
-                                    ].value;
-                                  const duration = $props.duration;
-                                  const newTime = new Date(
-                                    `2000-01-01T${toValue}`
-                                  );
-                                  newTime.setMinutes(
-                                    newTime.getMinutes() + duration
-                                  );
-                                  return newTime.toLocaleTimeString("en-Gb", {
-                                    hour12: false,
-                                    hour: "2-digit",
-                                    minute: "2-digit"
-                                  });
-                                })()
-                              }
+                                    ].value
+                                      ? "00:00"
+                                      : $state.to[
+                                          $state.listOfWorkhoureCopy.length - 1
+                                        ].value,
+                                  to: (() => {
+                                    const toValue =
+                                      toValues[toValues.length - 1].value ===
+                                      $state.to[
+                                        $state.listOfWorkhoureCopy.length - 1
+                                      ].value
+                                        ? "00:00"
+                                        : $state.to[
+                                            $state.listOfWorkhoureCopy.length -
+                                              1
+                                          ].value;
+                                    const duration = $props.duration;
+                                    const newTime = new Date(
+                                      `2000-01-01T${toValue}`
+                                    );
+                                    newTime.setMinutes(
+                                      newTime.getMinutes() + duration
+                                    );
+                                    return newTime.toLocaleTimeString("en-Gb", {
+                                      hour12: false,
+                                      hour: "2-digit",
+                                      minute: "2-digit"
+                                    });
+                                  })()
+                                };
+                              })()
                             };
                             return (({
                               variable,

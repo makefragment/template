@@ -66,7 +66,8 @@
 }
 .to:global(.__wab_instance) {
   max-width: 100%;
-  position: relative;
+  object-fit: cover;
+  width: auto;
 }
 .svg__oUoA2 {
   position: relative;
@@ -76,7 +77,8 @@
 }
 .from:global(.__wab_instance) {
   max-width: 100%;
-  position: relative;
+  object-fit: cover;
+  width: auto;
 }
 .svg__zLXoO {
   position: relative;

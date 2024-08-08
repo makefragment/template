@@ -758,20 +758,6 @@
           "componentType": "component"
         },
         {
-          "id": "la8Z2HMwL1Zp",
-          "name": "Workhour",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicWorkhour.tsx",
-          "importSpec": {
-            "modulePath": "../src/pages/workhour.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicWorkhour.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/workhour"
-        },
-        {
           "id": "Ita2Jf6_aAkK",
           "name": "BookList",
           "type": "managed",
@@ -982,6 +968,20 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicActiveVisitOnline.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "RPoKJwDI8F3t",
+          "name": "WorkhoursPage",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicWorkhoursPage.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/workhours.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicWorkhoursPage.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/workhours"
         }
       ],
       "icons": [

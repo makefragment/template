@@ -193,191 +193,205 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
           )}
           dir={"rtl"}
         >
-          <SideEffect
-            data-plasmic-name={"sideEffect"}
-            data-plasmic-override={overrides.sideEffect}
-            className={classNames("__wab_instance", sty.sideEffect)}
-            onMount={async () => {
-              const $steps = {};
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__d4Ycy)}
+          >
+            <SideEffect
+              data-plasmic-name={"sideEffect"}
+              data-plasmic-override={overrides.sideEffect}
+              className={classNames("__wab_instance", sty.sideEffect)}
+              onMount={async () => {
+                const $steps = {};
 
-              $steps["apiCenters"] = true
-                ? (() => {
-                    const actionArgs = {
-                      args: [
-                        "GET",
-                        "https://api.paziresh24.com/V1/doctor/centers"
-                      ]
-                    };
-                    return $globalActions["Fragment.apiRequest"]?.apply(null, [
-                      ...actionArgs.args
-                    ]);
-                  })()
-                : undefined;
-              if (
-                $steps["apiCenters"] != null &&
-                typeof $steps["apiCenters"] === "object" &&
-                typeof $steps["apiCenters"].then === "function"
-              ) {
-                $steps["apiCenters"] = await $steps["apiCenters"];
-              }
+                $steps["apiCenters"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "GET",
+                          "https://api.paziresh24.com/V1/doctor/centers"
+                        ]
+                      };
+                      return $globalActions["Fragment.apiRequest"]?.apply(
+                        null,
+                        [...actionArgs.args]
+                      );
+                    })()
+                  : undefined;
+                if (
+                  $steps["apiCenters"] != null &&
+                  typeof $steps["apiCenters"] === "object" &&
+                  typeof $steps["apiCenters"].then === "function"
+                ) {
+                  $steps["apiCenters"] = await $steps["apiCenters"];
+                }
 
-              $steps["updateCenters"] = true
-                ? (() => {
-                    const actionArgs = {
-                      variable: {
-                        objRoot: $state,
-                        variablePath: ["centers"]
-                      },
-                      operation: 0,
-                      value: $steps.apiCenters.data.data
-                    };
-                    return (({ variable, value, startIndex, deleteCount }) => {
-                      if (!variable) {
-                        return;
-                      }
-                      const { objRoot, variablePath } = variable;
+                $steps["updateCenters"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["centers"]
+                        },
+                        operation: 0,
+                        value: $steps.apiCenters.data.data
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
 
-                      $stateSet(objRoot, variablePath, value);
-                      return value;
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["updateCenters"] != null &&
-                typeof $steps["updateCenters"] === "object" &&
-                typeof $steps["updateCenters"].then === "function"
-              ) {
-                $steps["updateCenters"] = await $steps["updateCenters"];
-              }
-            }}
-          />
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateCenters"] != null &&
+                  typeof $steps["updateCenters"] === "object" &&
+                  typeof $steps["updateCenters"].then === "function"
+                ) {
+                  $steps["updateCenters"] = await $steps["updateCenters"];
+                }
+              }}
+            />
 
-          <div className={classNames(projectcss.all, sty.freeBox___9HgIy)}>
-            <div
-              data-plasmic-name={"text"}
-              data-plasmic-override={overrides.text}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text
-              )}
-            >
-              {"\u0633\u0627\u0639\u0627\u062a \u06a9\u0627\u0631\u06cc"}
+            <div className={classNames(projectcss.all, sty.freeBox___9HgIy)}>
+              <div
+                data-plasmic-name={"text"}
+                data-plasmic-override={overrides.text}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text
+                )}
+              >
+                {"\u0633\u0627\u0639\u0627\u062a \u06a9\u0627\u0631\u06cc"}
+              </div>
+              <DrCenters
+                data-plasmic-name={"drCenters"}
+                data-plasmic-override={overrides.drCenters}
+                centers={(() => {
+                  try {
+                    return $state.centers;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
+                className={classNames("__wab_instance", sty.drCenters)}
+                hasAllOption={false}
+                onSelectedCenterChange={async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
+                    "drCenters",
+                    "selectedCenter"
+                  ]).apply(null, eventArgs);
+                  (async val => {
+                    const $steps = {};
+
+                    $steps["updateSelectedCenter"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["selectedCenter"]
+                            },
+                            operation: 0,
+                            value: val
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateSelectedCenter"] != null &&
+                      typeof $steps["updateSelectedCenter"] === "object" &&
+                      typeof $steps["updateSelectedCenter"].then === "function"
+                    ) {
+                      $steps["updateSelectedCenter"] = await $steps[
+                        "updateSelectedCenter"
+                      ];
+                    }
+                  }).apply(null, eventArgs);
+                }}
+              />
             </div>
-            <DrCenters
-              data-plasmic-name={"drCenters"}
-              data-plasmic-override={overrides.drCenters}
-              centers={(() => {
+            <div className={classNames(projectcss.all, sty.freeBox__lw8Cb)}>
+              {(() => {
                 try {
-                  return $state.centers;
+                  return (
+                    $state.centers?.length !== 0 && !!$state.selectedCenter
+                  );
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
                     e?.plasmicType === "PlasmicUndefinedDataError"
                   ) {
-                    return undefined;
+                    return true;
                   }
                   throw e;
                 }
-              })()}
-              className={classNames("__wab_instance", sty.drCenters)}
-              hasAllOption={false}
-              onSelectedCenterChange={async (...eventArgs: any) => {
-                generateStateOnChangeProp($state, [
-                  "drCenters",
-                  "selectedCenter"
-                ]).apply(null, eventArgs);
-                (async val => {
-                  const $steps = {};
-
-                  $steps["updateSelectedCenter"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["selectedCenter"]
-                          },
-                          operation: 0,
-                          value: val
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateSelectedCenter"] != null &&
-                    typeof $steps["updateSelectedCenter"] === "object" &&
-                    typeof $steps["updateSelectedCenter"].then === "function"
-                  ) {
-                    $steps["updateSelectedCenter"] = await $steps[
-                      "updateSelectedCenter"
-                    ];
-                  }
-                }).apply(null, eventArgs);
-              }}
-            />
-          </div>
-          <div className={classNames(projectcss.all, sty.freeBox__lw8Cb)}>
-            {(() => {
-              try {
-                return $state.centers?.length !== 0 && !!$state.selectedCenter;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return true;
-                }
-                throw e;
-              }
-            })() ? (
-              <HoursDaysOfWeek
-                data-plasmic-name={"hoursDaysOfWeek"}
-                data-plasmic-override={overrides.hoursDaysOfWeek}
-                centerId={(() => {
-                  try {
-                    return $state.selectedCenter;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return undefined;
+              })() ? (
+                <HoursDaysOfWeek
+                  data-plasmic-name={"hoursDaysOfWeek"}
+                  data-plasmic-override={overrides.hoursDaysOfWeek}
+                  centerId={(() => {
+                    try {
+                      return $state.selectedCenter;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
                     }
-                    throw e;
-                  }
-                })()}
-                className={classNames("__wab_instance", sty.hoursDaysOfWeek)}
-                userCenterId={(() => {
-                  try {
-                    return $state.centers.find(
-                      center => center.id === $state.selectedCenter
-                    ).user_center_id;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return undefined;
+                  })()}
+                  className={classNames("__wab_instance", sty.hoursDaysOfWeek)}
+                  userCenterId={(() => {
+                    try {
+                      return $state.centers.find(
+                        center => center.id === $state.selectedCenter
+                      ).user_center_id;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
                     }
-                    throw e;
-                  }
-                })()}
-              />
-            ) : null}
-          </div>
+                  })()}
+                />
+              ) : null}
+            </div>
+          </Stack__>
         </div>
       </div>
     </React.Fragment>

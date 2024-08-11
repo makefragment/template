@@ -59,6 +59,8 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
+
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
@@ -73,15 +75,20 @@ export type PlasmicDuration__VariantsArgs = {};
 type VariantPropType = keyof PlasmicDuration__VariantsArgs;
 export const PlasmicDuration__VariantProps = new Array<VariantPropType>();
 
-export type PlasmicDuration__ArgsType = {};
+export type PlasmicDuration__ArgsType = {
+  centerId?: string;
+};
 type ArgPropType = keyof PlasmicDuration__ArgsType;
-export const PlasmicDuration__ArgProps = new Array<ArgPropType>();
+export const PlasmicDuration__ArgProps = new Array<ArgPropType>("centerId");
 
 export type PlasmicDuration__OverridesType = {
   root?: Flex__<"div">;
+  sideEffect?: Flex__<typeof SideEffect>;
+  text?: Flex__<"div">;
 };
 
 export interface DefaultDurationProps {
+  centerId?: string;
   className?: string;
 }
 
@@ -102,7 +109,16 @@ function PlasmicDuration__RenderFunc(props: {
 }) {
   const { variants, overrides, forNode } = props;
 
-  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+  const args = React.useMemo(
+    () =>
+      Object.assign(
+        {
+          centerId: "5532"
+        },
+        props.args
+      ),
+    [props.args]
+  );
 
   const $props = {
     ...args,
@@ -113,6 +129,26 @@ function PlasmicDuration__RenderFunc(props: {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+
+  const $globalActions = useGlobalActions?.();
+
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "duration",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
 
   return (
     <div
@@ -130,18 +166,108 @@ function PlasmicDuration__RenderFunc(props: {
         plasmic_antd_5_hostless_css.plasmic_tokens,
         sty.root
       )}
-    />
+    >
+      <SideEffect
+        data-plasmic-name={"sideEffect"}
+        data-plasmic-override={overrides.sideEffect}
+        className={classNames("__wab_instance", sty.sideEffect)}
+        onMount={async () => {
+          const $steps = {};
+
+          $steps["apiWorkhours"] = true
+            ? (() => {
+                const actionArgs = {
+                  args: [
+                    "GET",
+                    "https://api.paziresh24.com/V1/doctor/center/workhours",
+                    (() => {
+                      try {
+                        return (() => {
+                          {
+                            centers: $props.centerId;
+                          }
+                        })();
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
+                        }
+                        throw e;
+                      }
+                    })()
+                  ]
+                };
+                return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
+          if (
+            $steps["apiWorkhours"] != null &&
+            typeof $steps["apiWorkhours"] === "object" &&
+            typeof $steps["apiWorkhours"].then === "function"
+          ) {
+            $steps["apiWorkhours"] = await $steps["apiWorkhours"];
+          }
+
+          $steps["updateDuration"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["duration"]
+                  },
+                  operation: 0,
+                  value: $steps.apiWorkhours.data.duration
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateDuration"] != null &&
+            typeof $steps["updateDuration"] === "object" &&
+            typeof $steps["updateDuration"].then === "function"
+          ) {
+            $steps["updateDuration"] = await $steps["updateDuration"];
+          }
+        }}
+      />
+
+      <div
+        data-plasmic-name={"text"}
+        data-plasmic-override={overrides.text}
+        className={classNames(projectcss.all, projectcss.__wab_text, sty.text)}
+      >
+        {
+          "\u0645\u062f\u062a \u0632\u0645\u0627\u0646\u200c \u0627\u06cc\u062f\u0647\u200c\u0622\u0644 \u0634\u0645\u0627 \u0628\u0631\u0627\u06cc \u0627\u0631\u0627\u0626\u0647 \u06cc\u06a9 \u0648\u06cc\u0632\u06cc\u062a \u062c\u0627\u0645\u0639 \u0648 \u067e\u06cc\u0648\u0633\u062a\u0647 \u0628\u0647 \u06cc\u06a9 \u0628\u06cc\u0645\u0627\u0631 \u0686\u0642\u062f\u0631 \u0627\u0633\u062a\u061f"
+        }
+      </div>
+    </div>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root"]
+  root: ["root", "sideEffect", "text"],
+  sideEffect: ["sideEffect"],
+  text: ["text"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  sideEffect: typeof SideEffect;
+  text: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -204,6 +330,8 @@ export const PlasmicDuration = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    sideEffect: makeNodeComponent("sideEffect"),
+    text: makeNodeComponent("text"),
 
     // Metadata about props expected for PlasmicDuration
     internalVariantProps: PlasmicDuration__VariantProps,

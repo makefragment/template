@@ -70,7 +70,7 @@ export default function GlobalContextsProvider(
         defaultApiHost={
           splunkProps && "defaultApiHost" in splunkProps
             ? splunkProps.defaultApiHost!
-            : "https://nelson-splunk.paziresh24.com/services/collector/event"
+            : "https://nelson-splunk.paziresh24.com"
         }
         defaultApiKey={
           splunkProps && "defaultApiKey" in splunkProps

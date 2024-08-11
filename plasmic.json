@@ -982,6 +982,19 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/workhours"
+        },
+        {
+          "id": "s9QYwyQBTqhJ",
+          "name": "ActiveOfficeBooking",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicActiveOfficeBooking.tsx",
+          "importSpec": {
+            "modulePath": "ActiveOfficeBooking.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicActiveOfficeBooking.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

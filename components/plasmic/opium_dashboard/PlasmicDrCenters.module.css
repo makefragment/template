@@ -139,3 +139,6 @@
 .activeVisitOnline:global(.__wab_instance) {
   max-width: 100%;
 }
+.activeOfficeBooking:global(.__wab_instance) {
+  max-width: 100%;
+}

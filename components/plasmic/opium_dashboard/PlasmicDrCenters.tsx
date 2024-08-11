@@ -62,6 +62,7 @@ import {
 import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
 import DrCenter from "../../DrCenter"; // plasmic-import: Y5f_I7uzx8ZQ/component
 import ActiveVisitOnline from "../../ActiveVisitOnline"; // plasmic-import: JRdpm2ALL90Q/component
+import ActiveOfficeBooking from "../../ActiveOfficeBooking"; // plasmic-import: s9QYwyQBTqhJ/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -98,6 +99,7 @@ export type PlasmicDrCenters__OverridesType = {
   fragmentPopover?: Flex__<typeof Popover>;
   text?: Flex__<"div">;
   activeVisitOnline?: Flex__<typeof ActiveVisitOnline>;
+  activeOfficeBooking?: Flex__<typeof ActiveOfficeBooking>;
 };
 
 export interface DefaultDrCentersProps {
@@ -311,47 +313,26 @@ function PlasmicDrCenters__RenderFunc(props: {
                 })()}
               />
             ) : null}
-            {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-              (() => {
-                try {
-                  return $props.centers;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return [];
-                  }
-                  throw e;
+            {(() => {
+              try {
+                return true;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return true;
                 }
-              })()
-            ).map((__plasmic_item_0, __plasmic_idx_0) => {
-              const currentItem = __plasmic_item_0;
-              const currentIndex = __plasmic_idx_0;
-              return (
-                <DrCenter
-                  className={classNames("__wab_instance", sty.drCenter__j931)}
-                  key={currentIndex}
-                  name={(() => {
+                throw e;
+              }
+            })()
+              ? (_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                  (() => {
                     try {
-                      return currentItem.name;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()}
-                  officeBook={(() => {
-                    try {
-                      return (
-                        currentItem.name.includes("مطب") ||
-                        (currentItem.name.includes("دکتر") &&
-                          currentItem.type_id === 1 &&
-                          currentItem.id !== "5532")
+                      return $props.centers.filter(
+                        center =>
+                          (center.id !== "5532" && center.is_active_booking) ||
+                          center.id === "5532"
                       );
                     } catch (e) {
                       if (
@@ -362,96 +343,142 @@ function PlasmicDrCenters__RenderFunc(props: {
                       }
                       throw e;
                     }
-                  })()}
-                  onlineBook={(() => {
-                    try {
-                      return currentItem.id === "5532";
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return [];
-                      }
-                      throw e;
-                    }
-                  })()}
-                  onselected={async () => {
-                    const $steps = {};
+                  })()
+                ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                  const currentItem = __plasmic_item_0;
+                  const currentIndex = __plasmic_idx_0;
+                  return (
+                    <DrCenter
+                      className={classNames(
+                        "__wab_instance",
+                        sty.drCenter__j931
+                      )}
+                      key={currentIndex}
+                      name={(() => {
+                        try {
+                          return currentItem.name;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()}
+                      officeBook={(() => {
+                        try {
+                          return (
+                            currentItem.name.includes("مطب") ||
+                            (currentItem.name.includes("دکتر") &&
+                              currentItem.type_id === 1 &&
+                              currentItem.id !== "5532")
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()}
+                      onlineBook={(() => {
+                        try {
+                          return currentItem.id === "5532";
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()}
+                      onselected={async () => {
+                        const $steps = {};
 
-                    $steps["updateSelectedCenter"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            variable: {
-                              objRoot: $state,
-                              variablePath: ["selectedCenter"]
-                            },
-                            operation: 0,
-                            value: currentItem.id
-                          };
-                          return (({
-                            variable,
-                            value,
-                            startIndex,
-                            deleteCount
-                          }) => {
-                            if (!variable) {
-                              return;
-                            }
-                            const { objRoot, variablePath } = variable;
+                        $steps["updateSelectedCenter"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["selectedCenter"]
+                                },
+                                operation: 0,
+                                value: currentItem.id
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
 
-                            $stateSet(objRoot, variablePath, value);
-                            return value;
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["updateSelectedCenter"] != null &&
-                      typeof $steps["updateSelectedCenter"] === "object" &&
-                      typeof $steps["updateSelectedCenter"].then === "function"
-                    ) {
-                      $steps["updateSelectedCenter"] = await $steps[
-                        "updateSelectedCenter"
-                      ];
-                    }
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSelectedCenter"] != null &&
+                          typeof $steps["updateSelectedCenter"] === "object" &&
+                          typeof $steps["updateSelectedCenter"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSelectedCenter"] = await $steps[
+                            "updateSelectedCenter"
+                          ];
+                        }
 
-                    $steps["updateSelectedCenter2"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            tplRef: "fragmentPopover",
-                            action: "close"
-                          };
-                          return (({ tplRef, action, args }) => {
-                            return $refs?.[tplRef]?.[action]?.(...(args ?? []));
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["updateSelectedCenter2"] != null &&
-                      typeof $steps["updateSelectedCenter2"] === "object" &&
-                      typeof $steps["updateSelectedCenter2"].then === "function"
-                    ) {
-                      $steps["updateSelectedCenter2"] = await $steps[
-                        "updateSelectedCenter2"
-                      ];
-                    }
-                  }}
-                  selected={(() => {
-                    try {
-                      return $state.selectedCenter == currentItem.id;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return [];
-                      }
-                      throw e;
-                    }
-                  })()}
-                />
-              );
-            })}
+                        $steps["updateSelectedCenter2"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                tplRef: "fragmentPopover",
+                                action: "close"
+                              };
+                              return (({ tplRef, action, args }) => {
+                                return $refs?.[tplRef]?.[action]?.(
+                                  ...(args ?? [])
+                                );
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSelectedCenter2"] != null &&
+                          typeof $steps["updateSelectedCenter2"] === "object" &&
+                          typeof $steps["updateSelectedCenter2"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSelectedCenter2"] = await $steps[
+                            "updateSelectedCenter2"
+                          ];
+                        }
+                      }}
+                      selected={(() => {
+                        try {
+                          return $state.selectedCenter == currentItem.id;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()}
+                    />
+                  );
+                })
+              : null}
             {(() => {
               try {
                 return !$props.centers.some(center => center.id === "5532");
@@ -517,6 +544,115 @@ function PlasmicDrCenters__RenderFunc(props: {
                               try {
                                 return {
                                   group: "active-online-visit",
+                                  data: {
+                                    center_id: $props.centers.map(
+                                      center => center.id
+                                    )
+                                  },
+                                  type: "click-button-dr-centers"
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Splunk.sendLog"]?.apply(null, [
+                          ...actionArgs.args
+                        ]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["sendEvent"] != null &&
+                    typeof $steps["sendEvent"] === "object" &&
+                    typeof $steps["sendEvent"].then === "function"
+                  ) {
+                    $steps["sendEvent"] = await $steps["sendEvent"];
+                  }
+                }}
+              />
+            ) : null}
+            {(() => {
+              try {
+                return (
+                  ($props.centers.length === 1 &&
+                    $props.centers[0].id === "5532") ||
+                  $props.centers.some(
+                    center =>
+                      center.id !== "5532" && center.is_active_booking === false
+                  )
+                );
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return false;
+                }
+                throw e;
+              }
+            })() ? (
+              <ActiveOfficeBooking
+                data-plasmic-name={"activeOfficeBooking"}
+                data-plasmic-override={overrides.activeOfficeBooking}
+                className={classNames(
+                  "__wab_instance",
+                  sty.activeOfficeBooking
+                )}
+                onselected={async () => {
+                  const $steps = {};
+
+                  $steps["goToHttpsdrpaziresh24Comactivationofficecenter"] =
+                    true
+                      ? (() => {
+                          const actionArgs = {
+                            destination:
+                              "https://dr.paziresh24.com/activation/office/center"
+                          };
+                          return (({ destination }) => {
+                            if (
+                              typeof destination === "string" &&
+                              destination.startsWith("#")
+                            ) {
+                              document
+                                .getElementById(destination.substr(1))
+                                .scrollIntoView({ behavior: "smooth" });
+                            } else {
+                              __nextRouter?.push(destination);
+                            }
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["goToHttpsdrpaziresh24Comactivationofficecenter"] !=
+                      null &&
+                    typeof $steps[
+                      "goToHttpsdrpaziresh24Comactivationofficecenter"
+                    ] === "object" &&
+                    typeof $steps[
+                      "goToHttpsdrpaziresh24Comactivationofficecenter"
+                    ].then === "function"
+                  ) {
+                    $steps["goToHttpsdrpaziresh24Comactivationofficecenter"] =
+                      await $steps[
+                        "goToHttpsdrpaziresh24Comactivationofficecenter"
+                      ];
+                  }
+
+                  $steps["sendEvent"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            (() => {
+                              try {
+                                return {
+                                  group: "active-office-booking",
                                   data: {
                                     center_id: $props.centers.map(
                                       center => center.id
@@ -648,10 +784,22 @@ function PlasmicDrCenters__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "fragmentPopover", "text", "activeVisitOnline"],
-  fragmentPopover: ["fragmentPopover", "text", "activeVisitOnline"],
+  root: [
+    "root",
+    "fragmentPopover",
+    "text",
+    "activeVisitOnline",
+    "activeOfficeBooking"
+  ],
+  fragmentPopover: [
+    "fragmentPopover",
+    "text",
+    "activeVisitOnline",
+    "activeOfficeBooking"
+  ],
   text: ["text"],
-  activeVisitOnline: ["activeVisitOnline"]
+  activeVisitOnline: ["activeVisitOnline"],
+  activeOfficeBooking: ["activeOfficeBooking"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -661,6 +809,7 @@ type NodeDefaultElementType = {
   fragmentPopover: typeof Popover;
   text: "div";
   activeVisitOnline: typeof ActiveVisitOnline;
+  activeOfficeBooking: typeof ActiveOfficeBooking;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -726,6 +875,7 @@ export const PlasmicDrCenters = Object.assign(
     fragmentPopover: makeNodeComponent("fragmentPopover"),
     text: makeNodeComponent("text"),
     activeVisitOnline: makeNodeComponent("activeVisitOnline"),
+    activeOfficeBooking: makeNodeComponent("activeOfficeBooking"),
 
     // Metadata about props expected for PlasmicDrCenters
     internalVariantProps: PlasmicDrCenters__VariantProps,

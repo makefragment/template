@@ -252,7 +252,7 @@ function PlasmicActiveOfficeBooking__RenderFunc(props: {
               style={{ fontWeight: 700 }}
             >
               {
-                "+ \u0641\u0639\u0627\u0644\u0633\u0627\u0632\u06cc \u0648\u06cc\u0632\u06cc\u062a \u0622\u0646\u0644\u0627\u06cc\u0646"
+                "+ \u0641\u0639\u0627\u0644\u0633\u0627\u0632\u06cc \u0646\u0648\u0628\u062a \u062f\u0647\u06cc \u0645\u0637\u0628"
               }
             </span>
           </React.Fragment>

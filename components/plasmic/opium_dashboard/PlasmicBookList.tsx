@@ -961,8 +961,11 @@ function PlasmicBookList__RenderFunc(props: {
                                       return {
                                         group: "add-book",
                                         data: {
-                                          center_id:
-                                            $state.selectedCenterInAddPatient
+                                          center_id: $state.centers
+                                            .filter(
+                                              center => center.id !== "5532"
+                                            )
+                                            .map(center => center.id)
                                         },
                                         type: "click-add-book-button"
                                       };

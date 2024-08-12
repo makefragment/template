@@ -61,6 +61,7 @@ import {
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import DrCenters from "../../DrCenters"; // plasmic-import: IkLsGKQP_uPj/component
+import Duration from "../../Duration"; // plasmic-import: hYLHU_pJKp9-/component
 import HoursDaysOfWeek from "../../HoursDaysOfWeek"; // plasmic-import: lSLy8Nehd6MM/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -86,6 +87,7 @@ export type PlasmicWorkhoursPage__OverridesType = {
   sideEffect?: Flex__<typeof SideEffect>;
   text?: Flex__<"div">;
   drCenters?: Flex__<typeof DrCenters>;
+  duration?: Flex__<typeof Duration>;
   hoursDaysOfWeek?: Flex__<typeof HoursDaysOfWeek>;
 };
 
@@ -141,6 +143,18 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => "all"
+      },
+      {
+        path: "duration.newduration",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "hoursDaysOfWeek.duration",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
       }
     ],
     [$props, $ctx, $refs]
@@ -340,6 +354,21 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                 }}
               />
             </div>
+            <div className={classNames(projectcss.all, sty.freeBox__vuYsq)}>
+              <Duration
+                data-plasmic-name={"duration"}
+                data-plasmic-override={overrides.duration}
+                className={classNames("__wab_instance", sty.duration)}
+                newduration={generateStateValueProp($state, [
+                  "duration",
+                  "newduration"
+                ])}
+                onNewdurationChange={generateStateOnChangeProp($state, [
+                  "duration",
+                  "newduration"
+                ])}
+              />
+            </div>
             <div className={classNames(projectcss.all, sty.freeBox__lw8Cb)}>
               {(() => {
                 try {
@@ -373,6 +402,14 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                     }
                   })()}
                   className={classNames("__wab_instance", sty.hoursDaysOfWeek)}
+                  duration={generateStateValueProp($state, [
+                    "hoursDaysOfWeek",
+                    "duration"
+                  ])}
+                  onDurationChange={generateStateOnChangeProp($state, [
+                    "hoursDaysOfWeek",
+                    "duration"
+                  ])}
                   userCenterId={(() => {
                     try {
                       return $state.centers.find(
@@ -399,10 +436,18 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  bookList: ["bookList", "sideEffect", "text", "drCenters", "hoursDaysOfWeek"],
+  bookList: [
+    "bookList",
+    "sideEffect",
+    "text",
+    "drCenters",
+    "duration",
+    "hoursDaysOfWeek"
+  ],
   sideEffect: ["sideEffect"],
   text: ["text"],
   drCenters: ["drCenters"],
+  duration: ["duration"],
   hoursDaysOfWeek: ["hoursDaysOfWeek"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -413,6 +458,7 @@ type NodeDefaultElementType = {
   sideEffect: typeof SideEffect;
   text: "div";
   drCenters: typeof DrCenters;
+  duration: typeof Duration;
   hoursDaysOfWeek: typeof HoursDaysOfWeek;
 };
 
@@ -479,6 +525,7 @@ export const PlasmicWorkhoursPage = Object.assign(
     sideEffect: makeNodeComponent("sideEffect"),
     text: makeNodeComponent("text"),
     drCenters: makeNodeComponent("drCenters"),
+    duration: makeNodeComponent("duration"),
     hoursDaysOfWeek: makeNodeComponent("hoursDaysOfWeek"),
 
     // Metadata about props expected for PlasmicWorkhoursPage

@@ -60,6 +60,9 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
+import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
+import { TimePicker } from "@/fragment/components/time-picker"; // plasmic-import: 0Mwoeihejk-H/codeComponent
+import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -67,6 +70,11 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicDuration.module.css"; // plasmic-import: hYLHU_pJKp9-/css
+
+import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: q8mRvXMvOrv9/icon
+import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
+import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
+import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: BMYyZW6g83gg/icon
 
 createPlasmicElementProxy;
 
@@ -77,18 +85,28 @@ export const PlasmicDuration__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicDuration__ArgsType = {
   centerId?: string;
+  newduration?: string;
+  onNewdurationChange?: (val: string) => void;
 };
 type ArgPropType = keyof PlasmicDuration__ArgsType;
-export const PlasmicDuration__ArgProps = new Array<ArgPropType>("centerId");
+export const PlasmicDuration__ArgProps = new Array<ArgPropType>(
+  "centerId",
+  "newduration",
+  "onNewdurationChange"
+);
 
 export type PlasmicDuration__OverridesType = {
   root?: Flex__<"div">;
   sideEffect?: Flex__<typeof SideEffect>;
-  text?: Flex__<"div">;
+  dialog?: Flex__<typeof Dialog>;
+  fragmentTimePicker?: Flex__<typeof TimePicker>;
+  button?: Flex__<typeof Button>;
 };
 
 export interface DefaultDurationProps {
   centerId?: string;
+  newduration?: string;
+  onNewdurationChange?: (val: string) => void;
   className?: string;
 }
 
@@ -137,8 +155,40 @@ function PlasmicDuration__RenderFunc(props: {
       {
         path: "duration",
         type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "dialog.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "fragmentTimePicker.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => "00:00"
+      },
+      {
+        path: "sampleDuration",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "variable",
+        type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "newduration",
+        type: "writable",
+        variableType: "text",
+
+        valueProp: "newduration",
+        onChangeProp: "onNewdurationChange"
       }
     ],
     [$props, $ctx, $refs]
@@ -151,11 +201,13 @@ function PlasmicDuration__RenderFunc(props: {
   });
 
   return (
-    <div
+    <Stack__
+      as={"div"}
       data-plasmic-name={"root"}
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
+      hasGap={true}
       className={classNames(
         projectcss.all,
         projectcss.root_reset,
@@ -182,11 +234,9 @@ function PlasmicDuration__RenderFunc(props: {
                     "https://api.paziresh24.com/V1/doctor/center/workhours",
                     (() => {
                       try {
-                        return (() => {
-                          {
-                            centers: $props.centerId;
-                          }
-                        })();
+                        return {
+                          center_id: $props.centerId
+                        };
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
@@ -220,7 +270,7 @@ function PlasmicDuration__RenderFunc(props: {
                     variablePath: ["duration"]
                   },
                   operation: 0,
-                  value: $steps.apiWorkhours.data.duration
+                  value: $steps.apiWorkhours.data
                 };
                 return (({ variable, value, startIndex, deleteCount }) => {
                   if (!variable) {
@@ -240,26 +290,340 @@ function PlasmicDuration__RenderFunc(props: {
           ) {
             $steps["updateDuration"] = await $steps["updateDuration"];
           }
+
+          $steps["sampleDuration"] = true
+            ? (() => {
+                const actionArgs = {
+                  args: [
+                    "GET",
+                    "https://apigw.paziresh24.com/v1/sample-duration"
+                  ]
+                };
+                return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
+          if (
+            $steps["sampleDuration"] != null &&
+            typeof $steps["sampleDuration"] === "object" &&
+            typeof $steps["sampleDuration"].then === "function"
+          ) {
+            $steps["sampleDuration"] = await $steps["sampleDuration"];
+          }
+
+          $steps["updateSampleDuration"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["sampleDuration"]
+                  },
+                  operation: 0,
+                  value: $steps.sampleDuration.data
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateSampleDuration"] != null &&
+            typeof $steps["updateSampleDuration"] === "object" &&
+            typeof $steps["updateSampleDuration"].then === "function"
+          ) {
+            $steps["updateSampleDuration"] = await $steps[
+              "updateSampleDuration"
+            ];
+          }
         }}
       />
 
       <div
-        data-plasmic-name={"text"}
-        data-plasmic-override={overrides.text}
-        className={classNames(projectcss.all, projectcss.__wab_text, sty.text)}
+        className={classNames(
+          projectcss.all,
+          projectcss.__wab_text,
+          sty.text__bE5G
+        )}
       >
         {
           "\u0645\u062f\u062a \u0632\u0645\u0627\u0646\u200c \u0627\u06cc\u062f\u0647\u200c\u0622\u0644 \u0634\u0645\u0627 \u0628\u0631\u0627\u06cc \u0627\u0631\u0627\u0626\u0647 \u06cc\u06a9 \u0648\u06cc\u0632\u06cc\u062a \u062c\u0627\u0645\u0639 \u0648 \u067e\u06cc\u0648\u0633\u062a\u0647 \u0628\u0647 \u06cc\u06a9 \u0628\u06cc\u0645\u0627\u0631 \u0686\u0642\u062f\u0631 \u0627\u0633\u062a\u061f"
         }
       </div>
-    </div>
+      <div className={classNames(projectcss.all, sty.freeBox__mljoZ)}>
+        <Stack__
+          as={"div"}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.freeBox___6E1Ri)}
+        >
+          <div className={classNames(projectcss.all, sty.freeBox__uH8A)}>
+            <Dialog
+              data-plasmic-name={"dialog"}
+              data-plasmic-override={overrides.dialog}
+              body={
+                <Stack__
+                  as={"div"}
+                  hasGap={true}
+                  className={classNames(projectcss.all, sty.freeBox__vXIx)}
+                >
+                  <TimePicker
+                    data-plasmic-name={"fragmentTimePicker"}
+                    data-plasmic-override={overrides.fragmentTimePicker}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.fragmentTimePicker
+                    )}
+                    onChange={generateStateOnChangeProp($state, [
+                      "fragmentTimePicker",
+                      "value"
+                    ])}
+                    value={generateStateValueProp($state, [
+                      "fragmentTimePicker",
+                      "value"
+                    ])}
+                  />
+
+                  <Button
+                    data-plasmic-name={"button"}
+                    data-plasmic-override={overrides.button}
+                    children2={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text___7V3Od
+                        )}
+                      >
+                        {"\u062b\u0628\u062a"}
+                      </div>
+                    }
+                    className={classNames("__wab_instance", sty.button)}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateNewduration"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["newduration"]
+                              },
+                              operation: 0,
+                              value: $state.fragmentTimePicker.value
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateNewduration"] != null &&
+                        typeof $steps["updateNewduration"] === "object" &&
+                        typeof $steps["updateNewduration"].then === "function"
+                      ) {
+                        $steps["updateNewduration"] = await $steps[
+                          "updateNewduration"
+                        ];
+                      }
+
+                      $steps["updateDialogOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["dialog", "open"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateDialogOpen"] != null &&
+                        typeof $steps["updateDialogOpen"] === "object" &&
+                        typeof $steps["updateDialogOpen"].then === "function"
+                      ) {
+                        $steps["updateDialogOpen"] = await $steps[
+                          "updateDialogOpen"
+                        ];
+                      }
+                    }}
+                  />
+                </Stack__>
+              }
+              className={classNames("__wab_instance", sty.dialog)}
+              onOpenChange={generateStateOnChangeProp($state, [
+                "dialog",
+                "open"
+              ])}
+              open={generateStateValueProp($state, ["dialog", "open"])}
+              title={
+                "\u0632\u0645\u0627\u0646 \u062f\u0644\u062e\u0648\u0627\u0647"
+              }
+              trigger={
+                <Icon2Icon
+                  className={classNames(projectcss.all, sty.svg__l9OeP)}
+                  role={"img"}
+                />
+              }
+            />
+          </div>
+          {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+            (() => {
+              try {
+                return $state.sampleDuration["sample-duration"]
+                  .split(",")
+                  .map(item => ({ name: item }));
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return [];
+                }
+                throw e;
+              }
+            })()
+          ).map((__plasmic_item_0, __plasmic_idx_0) => {
+            const currentItem = __plasmic_item_0;
+            const currentIndex = __plasmic_idx_0;
+            return (
+              <div
+                className={classNames(projectcss.all, sty.freeBox__itxxt)}
+                dir={"rtl"}
+                key={currentIndex}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["updateNewduration"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["newduration"]
+                          },
+                          operation: 0,
+                          value: currentItem.name
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateNewduration"] != null &&
+                    typeof $steps["updateNewduration"] === "object" &&
+                    typeof $steps["updateNewduration"].then === "function"
+                  ) {
+                    $steps["updateNewduration"] = await $steps[
+                      "updateNewduration"
+                    ];
+                  }
+                }}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__pcO2
+                  )}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return `${parseInt(currentItem.name).toLocaleString(
+                          "fa"
+                        )} دقیقه`;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "5 \u062f\u0642\u06cc\u0642\u0647";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </div>
+                {(() => {
+                  try {
+                    return (
+                      currentItem.name ===
+                      $state.duration.data.duration.toString()
+                    );
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return false;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <ChecksvgIcon
+                    className={classNames(projectcss.all, sty.svg__cBvHc)}
+                    role={"img"}
+                  />
+                ) : null}
+              </div>
+            );
+          })}
+        </Stack__>
+      </div>
+    </Stack__>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "sideEffect", "text"],
+  root: ["root", "sideEffect", "dialog", "fragmentTimePicker", "button"],
   sideEffect: ["sideEffect"],
-  text: ["text"]
+  dialog: ["dialog", "fragmentTimePicker", "button"],
+  fragmentTimePicker: ["fragmentTimePicker"],
+  button: ["button"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -267,7 +631,9 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   sideEffect: typeof SideEffect;
-  text: "div";
+  dialog: typeof Dialog;
+  fragmentTimePicker: typeof TimePicker;
+  button: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -331,7 +697,9 @@ export const PlasmicDuration = Object.assign(
   {
     // Helper components rendering sub-elements
     sideEffect: makeNodeComponent("sideEffect"),
-    text: makeNodeComponent("text"),
+    dialog: makeNodeComponent("dialog"),
+    fragmentTimePicker: makeNodeComponent("fragmentTimePicker"),
+    button: makeNodeComponent("button"),
 
     // Metadata about props expected for PlasmicDuration
     internalVariantProps: PlasmicDuration__VariantProps,

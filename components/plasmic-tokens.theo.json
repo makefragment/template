@@ -1211,6 +1211,16 @@
       }
     },
     {
+      "name": "nelson green",
+      "type": "color",
+      "value": "#27BDA00D",
+      "category": "color",
+      "meta": {
+        "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+        "id": "IOWZQyrdKsEL"
+      }
+    },
+    {
       "name": "primary",
       "type": "color",
       "value": "#3861FB",

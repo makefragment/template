@@ -82,11 +82,15 @@ export const PlasmicHoursDaysOfWeek__VariantProps =
   new Array<VariantPropType>();
 
 export type PlasmicHoursDaysOfWeek__ArgsType = {
+  duration?: any;
+  onDurationChange?: (val: string) => void;
   centerId?: string;
   userCenterId?: string;
 };
 type ArgPropType = keyof PlasmicHoursDaysOfWeek__ArgsType;
 export const PlasmicHoursDaysOfWeek__ArgProps = new Array<ArgPropType>(
+  "duration",
+  "onDurationChange",
   "centerId",
   "userCenterId"
 );
@@ -99,6 +103,8 @@ export type PlasmicHoursDaysOfWeek__OverridesType = {
 };
 
 export interface DefaultHoursDaysOfWeekProps {
+  duration?: any;
+  onDurationChange?: (val: string) => void;
   centerId?: string;
   userCenterId?: string;
   className?: string;
@@ -139,9 +145,11 @@ function PlasmicHoursDaysOfWeek__RenderFunc(props: {
     () => [
       {
         path: "duration",
-        type: "private",
+        type: "writable",
         variableType: "object",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+
+        valueProp: "duration",
+        onChangeProp: "onDurationChange"
       },
       {
         path: "workhours[].listOfWorkhoureCopy",

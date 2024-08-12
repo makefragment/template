@@ -551,13 +551,17 @@ function PlasmicBookList__RenderFunc(props: {
                   className={classNames("__wab_instance", sty.drCenters)}
                   hasAllOption={(() => {
                     try {
-                      return $state.centers?.length > 1;
+                      return (
+                        $state.centers?.filter(
+                          center => center.is_active_booking
+                        )?.length > 1
+                      );
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
                         e?.plasmicType === "PlasmicUndefinedDataError"
                       ) {
-                        return true;
+                        return false;
                       }
                       throw e;
                     }

@@ -330,9 +330,7 @@ function PlasmicDrCenters__RenderFunc(props: {
                   (() => {
                     try {
                       return $props.centers.filter(
-                        center =>
-                          (center.id !== "5532" && center.is_active_booking) ||
-                          center.id === "5532"
+                        center => center.is_active_booking
                       );
                     } catch (e) {
                       if (
@@ -481,7 +479,9 @@ function PlasmicDrCenters__RenderFunc(props: {
               : null}
             {(() => {
               try {
-                return !$props.centers.some(center => center.id === "5532");
+                return !$props.centers.some(
+                  center => center.id === "5532" && center.is_active_booking
+                );
               } catch (e) {
                 if (
                   e instanceof TypeError ||

@@ -269,6 +269,19 @@ function PlasmicHoursDaysOfWeek__RenderFunc(props: {
         data-plasmic-name={"sideEffect"}
         data-plasmic-override={overrides.sideEffect}
         className={classNames("__wab_instance", sty.sideEffect)}
+        deps={(() => {
+          try {
+            return [$props.centerId, $props.userCenterId, $props.duration];
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return undefined;
+            }
+            throw e;
+          }
+        })()}
         onMount={async () => {
           const $steps = {};
 

@@ -290,7 +290,9 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                 data-plasmic-override={overrides.drCenters}
                 centers={(() => {
                   try {
-                    return $state.centers;
+                    return $state.centers.filter(
+                      center => center.is_active_booking
+                    );
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -319,7 +321,7 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                               variablePath: ["selectedCenter"]
                             },
                             operation: 0,
-                            value: val
+                            value: $state.drCenters.selectedCenter
                           };
                           return (({
                             variable,
@@ -361,7 +363,7 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                     e instanceof TypeError ||
                     e?.plasmicType === "PlasmicUndefinedDataError"
                   ) {
-                    return true;
+                    return false;
                   }
                   throw e;
                 }
@@ -371,7 +373,7 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                   data-plasmic-override={overrides.hoursDaysOfWeek}
                   centerId={(() => {
                     try {
-                      return $state.selectedCenter;
+                      return $state.drCenters.selectedCenter;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||

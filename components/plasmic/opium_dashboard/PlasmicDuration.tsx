@@ -78,10 +78,16 @@ import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: BMY
 
 createPlasmicElementProxy;
 
-export type PlasmicDuration__VariantMembers = {};
-export type PlasmicDuration__VariantsArgs = {};
+export type PlasmicDuration__VariantMembers = {
+  check: "check";
+};
+export type PlasmicDuration__VariantsArgs = {
+  check?: SingleBooleanChoiceArg<"check">;
+};
 type VariantPropType = keyof PlasmicDuration__VariantsArgs;
-export const PlasmicDuration__VariantProps = new Array<VariantPropType>();
+export const PlasmicDuration__VariantProps = new Array<VariantPropType>(
+  "check"
+);
 
 export type PlasmicDuration__ArgsType = {
   centerId?: string;
@@ -107,6 +113,7 @@ export interface DefaultDurationProps {
   centerId?: string;
   newduration?: string;
   onNewdurationChange?: (val: string) => void;
+  check?: SingleBooleanChoiceArg<"check">;
   className?: string;
 }
 
@@ -189,6 +196,12 @@ function PlasmicDuration__RenderFunc(props: {
 
         valueProp: "newduration",
         onChangeProp: "onNewdurationChange"
+      },
+      {
+        path: "check",
+        type: "private",
+        variableType: "variant",
+        initFunc: ({ $props, $state, $queries, $ctx }) => $props.check
       }
     ],
     [$props, $ctx, $refs]
@@ -222,7 +235,9 @@ function PlasmicDuration__RenderFunc(props: {
       <SideEffect
         data-plasmic-name={"sideEffect"}
         data-plasmic-override={overrides.sideEffect}
-        className={classNames("__wab_instance", sty.sideEffect)}
+        className={classNames("__wab_instance", sty.sideEffect, {
+          [sty.sideEffectcheck]: hasVariant($state, "check", "check")
+        })}
         onMount={async () => {
           const $steps = {};
 
@@ -379,6 +394,22 @@ function PlasmicDuration__RenderFunc(props: {
                       "__wab_instance",
                       sty.fragmentTimePicker
                     )}
+                    minuteExclude={(() => {
+                      try {
+                        return [...Array(61).keys()].filter(
+                          num => num % 5 !== 0 || num === 0
+                        );
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
+                        }
+                        throw e;
+                      }
+                    })()}
+                    notShowExclude={true}
                     onChange={generateStateOnChangeProp($state, [
                       "fragmentTimePicker",
                       "value"
@@ -415,7 +446,15 @@ function PlasmicDuration__RenderFunc(props: {
                                 variablePath: ["newduration"]
                               },
                               operation: 0,
-                              value: $state.fragmentTimePicker.value
+                              value: `${
+                                parseInt(
+                                  $state.fragmentTimePicker.value.split(":")[0]
+                                ) *
+                                  60 +
+                                parseInt(
+                                  $state.fragmentTimePicker.value.split(":")[1]
+                                )
+                              }`
                             };
                             return (({
                               variable,
@@ -478,6 +517,52 @@ function PlasmicDuration__RenderFunc(props: {
                           "updateDialogOpen"
                         ];
                       }
+
+                      $steps["updateDurationDataDuration"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["duration", "data", "duration"]
+                              },
+                              operation: 0,
+                              value: `${
+                                parseInt(
+                                  $state.fragmentTimePicker.value.split(":")[0]
+                                ) *
+                                  60 +
+                                parseInt(
+                                  $state.fragmentTimePicker.value.split(":")[1]
+                                )
+                              }`
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateDurationDataDuration"] != null &&
+                        typeof $steps["updateDurationDataDuration"] ===
+                          "object" &&
+                        typeof $steps["updateDurationDataDuration"].then ===
+                          "function"
+                      ) {
+                        $steps["updateDurationDataDuration"] = await $steps[
+                          "updateDurationDataDuration"
+                        ];
+                      }
                     }}
                   />
                 </Stack__>
@@ -499,6 +584,58 @@ function PlasmicDuration__RenderFunc(props: {
               }
             />
           </div>
+          {(() => {
+            try {
+              return (
+                !$state.sampleDuration["sample-duration"].includes(
+                  $state.newduration
+                ) ||
+                !$state.sampleDuration["sample-duration"].includes(
+                  $state.duration.data.duration
+                )
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })() ? (
+            <div className={classNames(projectcss.all, sty.freeBox__waRdG)}>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__mwWqf
+                )}
+              >
+                <React.Fragment>
+                  {(() => {
+                    try {
+                      return `${
+                        $state.newduration || $state.duration.data.duration
+                      } دقیقه`;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "";
+                      }
+                      throw e;
+                    }
+                  })()}
+                </React.Fragment>
+              </div>
+              <ChecksvgIcon
+                className={classNames(projectcss.all, sty.svg__xGfkX)}
+                role={"img"}
+              />
+            </div>
+          ) : null}
           {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
             (() => {
               try {
@@ -561,6 +698,72 @@ function PlasmicDuration__RenderFunc(props: {
                       "updateNewduration"
                     ];
                   }
+
+                  $steps["updateDuration"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["duration", "data", "duration"]
+                          },
+                          operation: 0,
+                          value: currentItem.name
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateDuration"] != null &&
+                    typeof $steps["updateDuration"] === "object" &&
+                    typeof $steps["updateDuration"].then === "function"
+                  ) {
+                    $steps["updateDuration"] = await $steps["updateDuration"];
+                  }
+
+                  $steps["sendEvent"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            (() => {
+                              try {
+                                return undefined;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Splunk.sendLog"]?.apply(null, [
+                          ...actionArgs.args
+                        ]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["sendEvent"] != null &&
+                    typeof $steps["sendEvent"] === "object" &&
+                    typeof $steps["sendEvent"].then === "function"
+                  ) {
+                    $steps["sendEvent"] = await $steps["sendEvent"];
+                  }
                 }}
               >
                 <div
@@ -588,24 +791,84 @@ function PlasmicDuration__RenderFunc(props: {
                     })()}
                   </React.Fragment>
                 </div>
-                {(() => {
-                  try {
-                    return (
-                      currentItem.name ===
-                      $state.duration.data.duration.toString()
-                    );
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return false;
-                    }
-                    throw e;
-                  }
-                })() ? (
+                {(
+                  hasVariant($state, "check", "check")
+                    ? (() => {
+                        try {
+                          return $state.check === true;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return false;
+                          }
+                          throw e;
+                        }
+                      })()
+                    : (() => {
+                        try {
+                          return (
+                            currentItem.name ===
+                            $state.duration.data.duration.toString()
+                          );
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return false;
+                          }
+                          throw e;
+                        }
+                      })()
+                ) ? (
                   <ChecksvgIcon
-                    className={classNames(projectcss.all, sty.svg__cBvHc)}
+                    className={classNames(projectcss.all, sty.svg__cBvHc, {
+                      [sty.svgcheck__cBvHcRijdN]: hasVariant(
+                        $state,
+                        "check",
+                        "check"
+                      )
+                    })}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateDuration"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["duration"]
+                              },
+                              operation: 0
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateDuration"] != null &&
+                        typeof $steps["updateDuration"] === "object" &&
+                        typeof $steps["updateDuration"].then === "function"
+                      ) {
+                        $steps["updateDuration"] = await $steps[
+                          "updateDuration"
+                        ];
+                      }
+                    }}
                     role={"img"}
                   />
                 ) : null}

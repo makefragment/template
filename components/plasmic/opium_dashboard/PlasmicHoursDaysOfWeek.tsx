@@ -271,7 +271,7 @@ function PlasmicHoursDaysOfWeek__RenderFunc(props: {
         className={classNames("__wab_instance", sty.sideEffect)}
         deps={(() => {
           try {
-            return [$props.centerId, $props.userCenterId, $props.duration];
+            return [$props.centerId];
           } catch (e) {
             if (
               e instanceof TypeError ||
@@ -314,7 +314,7 @@ function PlasmicHoursDaysOfWeek__RenderFunc(props: {
             $steps["startLoading"] = await $steps["startLoading"];
           }
 
-          $steps["getWorkhours"] = !$state.duration
+          $steps["getWorkhours"] = true
             ? (() => {
                 const actionArgs = {
                   args: [
@@ -377,28 +377,27 @@ function PlasmicHoursDaysOfWeek__RenderFunc(props: {
             $steps["updateDuration"] = await $steps["updateDuration"];
           }
 
-          $steps["finishLoading"] =
-            $state.duration.lenght > 0
-              ? (() => {
-                  const actionArgs = {
-                    variable: {
-                      objRoot: $state,
-                      variablePath: ["loading"]
-                    },
-                    operation: 0,
-                    value: false
-                  };
-                  return (({ variable, value, startIndex, deleteCount }) => {
-                    if (!variable) {
-                      return;
-                    }
-                    const { objRoot, variablePath } = variable;
+          $steps["finishLoading"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["loading"]
+                  },
+                  operation: 0,
+                  value: false
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
 
-                    $stateSet(objRoot, variablePath, value);
-                    return value;
-                  })?.apply(null, [actionArgs]);
-                })()
-              : undefined;
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
           if (
             $steps["finishLoading"] != null &&
             typeof $steps["finishLoading"] === "object" &&

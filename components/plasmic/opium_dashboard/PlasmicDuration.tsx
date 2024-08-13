@@ -241,35 +241,34 @@ function PlasmicDuration__RenderFunc(props: {
         onMount={async () => {
           const $steps = {};
 
-          $steps["apiWorkhours"] =
-            $state.duration.length < 0
-              ? (() => {
-                  const actionArgs = {
-                    args: [
-                      "GET",
-                      "https://api.paziresh24.com/V1/doctor/center/workhours",
-                      (() => {
-                        try {
-                          return {
-                            center_id: $props.centerId
-                          };
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return undefined;
-                          }
-                          throw e;
+          $steps["apiWorkhours"] = true
+            ? (() => {
+                const actionArgs = {
+                  args: [
+                    "GET",
+                    "https://api.paziresh24.com/V1/doctor/center/workhours",
+                    (() => {
+                      try {
+                        return {
+                          center_id: $props.centerId
+                        };
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
                         }
-                      })()
-                    ]
-                  };
-                  return $globalActions["Fragment.apiRequest"]?.apply(null, [
-                    ...actionArgs.args
-                  ]);
-                })()
-              : undefined;
+                        throw e;
+                      }
+                    })()
+                  ]
+                };
+                return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
           if (
             $steps["apiWorkhours"] != null &&
             typeof $steps["apiWorkhours"] === "object" &&
@@ -307,7 +306,7 @@ function PlasmicDuration__RenderFunc(props: {
             $steps["updateDuration"] = await $steps["updateDuration"];
           }
 
-          $steps["sampleDuration"] = !$state.sampleDuration
+          $steps["sampleDuration"] = true
             ? (() => {
                 const actionArgs = {
                   args: [

@@ -285,7 +285,36 @@ function PlasmicHoursDaysOfWeek__RenderFunc(props: {
         onMount={async () => {
           const $steps = {};
 
-          $steps["getWorkhours"] = true
+          $steps["startLoading"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["loading"]
+                  },
+                  operation: 0,
+                  value: true
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["startLoading"] != null &&
+            typeof $steps["startLoading"] === "object" &&
+            typeof $steps["startLoading"].then === "function"
+          ) {
+            $steps["startLoading"] = await $steps["startLoading"];
+          }
+
+          $steps["getWorkhours"] = !$state.duration
             ? (() => {
                 const actionArgs = {
                   args: [
@@ -346,6 +375,36 @@ function PlasmicHoursDaysOfWeek__RenderFunc(props: {
             typeof $steps["updateDuration"].then === "function"
           ) {
             $steps["updateDuration"] = await $steps["updateDuration"];
+          }
+
+          $steps["finishLoading"] =
+            $state.duration.lenght > 0
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["loading"]
+                    },
+                    operation: 0,
+                    value: false
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+
+                    $stateSet(objRoot, variablePath, value);
+                    return value;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+          if (
+            $steps["finishLoading"] != null &&
+            typeof $steps["finishLoading"] === "object" &&
+            typeof $steps["finishLoading"].then === "function"
+          ) {
+            $steps["finishLoading"] = await $steps["finishLoading"];
           }
         }}
       />

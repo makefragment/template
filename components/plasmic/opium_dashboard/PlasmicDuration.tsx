@@ -377,7 +377,55 @@ function PlasmicDuration__RenderFunc(props: {
           hasGap={true}
           className={classNames(projectcss.all, sty.freeBox___6E1Ri)}
         >
-          <div className={classNames(projectcss.all, sty.freeBox__uH8A)}>
+          <div
+            className={classNames(projectcss.all, sty.freeBox__uH8A)}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["sendEvent"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        (() => {
+                          try {
+                            return {
+                              group: "workhour",
+                              data: {
+                                center_id: $props.centerId,
+                                user_center_id:
+                                  $state.duration.data.workhours[0]
+                                    .user_center_id,
+                                Service:
+                                  $state.duration.data.workhours[0].service
+                              },
+                              type: "click-plus-button-duration"
+                            };
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["Splunk.sendLog"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["sendEvent"] != null &&
+                typeof $steps["sendEvent"] === "object" &&
+                typeof $steps["sendEvent"].then === "function"
+              ) {
+                $steps["sendEvent"] = await $steps["sendEvent"];
+              }
+            }}
+          >
             <Dialog
               data-plasmic-name={"dialog"}
               data-plasmic-override={overrides.dialog}
@@ -410,10 +458,61 @@ function PlasmicDuration__RenderFunc(props: {
                       }
                     })()}
                     notShowExclude={true}
-                    onChange={generateStateOnChangeProp($state, [
-                      "fragmentTimePicker",
-                      "value"
-                    ])}
+                    onChange={async (...eventArgs: any) => {
+                      generateStateOnChangeProp($state, [
+                        "fragmentTimePicker",
+                        "value"
+                      ]).apply(null, eventArgs);
+                      (async time => {
+                        const $steps = {};
+
+                        $steps["sendEvent"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  (() => {
+                                    try {
+                                      return {
+                                        group: "workhour",
+                                        data: {
+                                          center_id: $props.centerId,
+                                          user_center_id:
+                                            $state.duration.data.workhours[0]
+                                              .user_center_id,
+                                          Service:
+                                            $state.duration.data.workhours[0]
+                                              .service
+                                        },
+                                        type: "change-timepicker-for-new-duration"
+                                      };
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                ]
+                              };
+                              return $globalActions["Splunk.sendLog"]?.apply(
+                                null,
+                                [...actionArgs.args]
+                              );
+                            })()
+                          : undefined;
+                        if (
+                          $steps["sendEvent"] != null &&
+                          typeof $steps["sendEvent"] === "object" &&
+                          typeof $steps["sendEvent"].then === "function"
+                        ) {
+                          $steps["sendEvent"] = await $steps["sendEvent"];
+                        }
+                      }).apply(null, eventArgs);
+                    }}
                     value={generateStateValueProp($state, [
                       "fragmentTimePicker",
                       "value"
@@ -563,6 +662,54 @@ function PlasmicDuration__RenderFunc(props: {
                           "updateDurationDataDuration"
                         ];
                       }
+
+                      $steps["sendEvent"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                (() => {
+                                  try {
+                                    return {
+                                      group: "workhour",
+                                      data: {
+                                        center_id: $props.centerId,
+                                        user_center_id:
+                                          $state.duration.data.workhours[0]
+                                            .user_center_id,
+                                        Service:
+                                          $state.duration.data.workhours[0]
+                                            .service,
+                                        duration:
+                                          $state.fragmentTimePicker.value
+                                      },
+                                      type: "click-submit-button-new-duration"
+                                    };
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })()
+                              ]
+                            };
+                            return $globalActions["Splunk.sendLog"]?.apply(
+                              null,
+                              [...actionArgs.args]
+                            );
+                          })()
+                        : undefined;
+                      if (
+                        $steps["sendEvent"] != null &&
+                        typeof $steps["sendEvent"] === "object" &&
+                        typeof $steps["sendEvent"].then === "function"
+                      ) {
+                        $steps["sendEvent"] = await $steps["sendEvent"];
+                      }
                     }}
                   />
                 </Stack__>
@@ -604,7 +751,56 @@ function PlasmicDuration__RenderFunc(props: {
               throw e;
             }
           })() ? (
-            <div className={classNames(projectcss.all, sty.freeBox__waRdG)}>
+            <div
+              className={classNames(projectcss.all, sty.freeBox__waRdG)}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["sendEvent"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          (() => {
+                            try {
+                              return {
+                                group: "workhour",
+                                data: {
+                                  center_id: $props.centerId,
+                                  user_center_id:
+                                    $state.duration.data.workhours[0]
+                                      .user_center_id,
+                                  Service:
+                                    $state.duration.data.workhours[0].service,
+                                  duration: $state.duration.data.duration
+                                },
+                                type: "click-button-duration"
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
+                      };
+                      return $globalActions["Splunk.sendLog"]?.apply(null, [
+                        ...actionArgs.args
+                      ]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["sendEvent"] != null &&
+                  typeof $steps["sendEvent"] === "object" &&
+                  typeof $steps["sendEvent"].then === "function"
+                ) {
+                  $steps["sendEvent"] = await $steps["sendEvent"];
+                }
+              }}
+            >
               <div
                 className={classNames(
                   projectcss.all,
@@ -739,7 +935,19 @@ function PlasmicDuration__RenderFunc(props: {
                           args: [
                             (() => {
                               try {
-                                return undefined;
+                                return {
+                                  group: "workhour",
+                                  data: {
+                                    center_id: $props.centerId,
+                                    user_center_id:
+                                      $state.duration.data.workhours[0]
+                                        .user_center_id,
+                                    Service:
+                                      $state.duration.data.workhours[0].service,
+                                    duration: currentItem.name
+                                  },
+                                  type: "click-button-duration"
+                                };
                               } catch (e) {
                                 if (
                                   e instanceof TypeError ||

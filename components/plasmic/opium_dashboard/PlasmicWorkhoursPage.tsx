@@ -269,7 +269,11 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
               }}
             />
 
-            <div className={classNames(projectcss.all, sty.freeBox___9HgIy)}>
+            <Stack__
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox___9HgIy)}
+            >
               <div
                 data-plasmic-name={"text"}
                 data-plasmic-override={overrides.text}
@@ -345,7 +349,7 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                   }).apply(null, eventArgs);
                 }}
               />
-            </div>
+            </Stack__>
             <div className={classNames(projectcss.all, sty.freeBox__lw8Cb)}>
               {(() => {
                 try {

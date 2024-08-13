@@ -29,7 +29,8 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 14px;
   min-width: 0;
 }
 .freeBox__mljoZ {
@@ -199,6 +200,7 @@
   height: auto;
   max-width: 100%;
   font-weight: 500;
+  font-size: 14px;
   min-width: 0;
 }
 .svg__cBvHc {

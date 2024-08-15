@@ -232,7 +232,7 @@
     right: auto;
   }
 }
-.button:global(.__wab_instance) {
+.button__i3Jch:global(.__wab_instance) {
   left: auto;
   top: auto;
   z-index: 1;
@@ -241,7 +241,7 @@
   bottom: 66px;
 }
 @media (min-width: 0px) and (max-width: 768px) {
-  .button:global(.__wab_instance) {
+  .button__i3Jch:global(.__wab_instance) {
     bottom: 70px;
   }
 }
@@ -284,4 +284,37 @@
 .addPatient___4S6X:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
+}
+.activedeactiveOnlineVisit {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.button__sq6MC:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg___4BVxa {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__xUjSv {
+  object-fit: cover;
+  max-width: 100%;
+  width: var(--token-QcxRWQfhgyJI);
+  height: var(--token-QcxRWQfhgyJI);
+}
+.svg__hr6Za {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }

@@ -112,6 +112,7 @@ export type PlasmicBookList__OverridesType = {
   patientList?: Flex__<typeof PatientList>;
   addPatient?: Flex__<"div">;
   dialog?: Flex__<typeof Dialog>;
+  button?: Flex__<typeof Button>;
   drCenters2?: Flex__<typeof DrCenters>;
   activedeactiveOnlineVisit?: Flex__<"div">;
 };
@@ -1110,6 +1111,8 @@ function PlasmicBookList__RenderFunc(props: {
                     }
                   })() ? (
                     <Button
+                      data-plasmic-name={"button"}
+                      data-plasmic-override={overrides.button}
                       children2={
                         <div
                           className={classNames(
@@ -1123,10 +1126,7 @@ function PlasmicBookList__RenderFunc(props: {
                           }
                         </div>
                       }
-                      className={classNames(
-                        "__wab_instance",
-                        sty.button__i3Jch
-                      )}
+                      className={classNames("__wab_instance", sty.button)}
                       endIcon={
                         <ChevronLeftIcon
                           className={classNames(projectcss.all, sty.svg__yU2QN)}
@@ -1197,203 +1197,19 @@ function PlasmicBookList__RenderFunc(props: {
               />
             </div>
           ) : null}
-          {(() => {
-            try {
-              return (
-                $state.userCenterService.data[0].can_booking === 0 ||
-                $state.userCenterService.data[0].can_booking === 1
-              );
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return false;
-              }
-              throw e;
-            }
-          })() ? (
-            <div
-              data-plasmic-name={"activedeactiveOnlineVisit"}
-              data-plasmic-override={overrides.activedeactiveOnlineVisit}
-              className={classNames(
-                projectcss.all,
-                sty.activedeactiveOnlineVisit
-              )}
-            >
-              <Button
-                children2={
-                  <Icon13Icon
-                    className={classNames(projectcss.all, sty.svg__xUjSv)}
-                    role={"img"}
-                  />
-                }
-                className={classNames("__wab_instance", sty.button__sq6MC)}
-                color={"softGreen"}
-                onClick={async event => {
-                  const $steps = {};
-
-                  $steps["deactiveOnlineVisit"] =
-                    $state.userCenterService.data[0].can_booking === 1
-                      ? (() => {
-                          const actionArgs = {
-                            args: [
-                              "PATCH",
-                              "https://apigw.paziresh24.com/v1/user-center-services",
-                              undefined,
-                              (() => {
-                                try {
-                                  return {
-                                    can_booking: "0",
-                                    user_center_id: $state.centers.find(
-                                      center => center.id === "5532"
-                                    ).user_center_id
-                                  };
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
-                                  }
-                                  throw e;
-                                }
-                              })()
-                            ]
-                          };
-                          return $globalActions["Fragment.apiRequest"]?.apply(
-                            null,
-                            [...actionArgs.args]
-                          );
-                        })()
-                      : undefined;
-                  if (
-                    $steps["deactiveOnlineVisit"] != null &&
-                    typeof $steps["deactiveOnlineVisit"] === "object" &&
-                    typeof $steps["deactiveOnlineVisit"].then === "function"
-                  ) {
-                    $steps["deactiveOnlineVisit"] = await $steps[
-                      "deactiveOnlineVisit"
-                    ];
-                  }
-
-                  $steps["updateDeactive"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["deactive"]
-                          },
-                          operation: 0,
-                          value: true
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateDeactive"] != null &&
-                    typeof $steps["updateDeactive"] === "object" &&
-                    typeof $steps["updateDeactive"].then === "function"
-                  ) {
-                    $steps["updateDeactive"] = await $steps["updateDeactive"];
-                  }
-
-                  $steps["activeOnlineVisit"] =
-                    $state.userCenterService.data[0].can_booking === 0
-                      ? (() => {
-                          const actionArgs = {
-                            args: [
-                              "PATCH",
-                              "https://apigw.paziresh24.com/v1/user-center-services",
-                              undefined,
-                              (() => {
-                                try {
-                                  return {
-                                    can_booking: "1",
-                                    user_center_id: $state.centers.find(
-                                      center => center.id === "5532"
-                                    ).user_center_id
-                                  };
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
-                                  }
-                                  throw e;
-                                }
-                              })()
-                            ]
-                          };
-                          return $globalActions["Fragment.apiRequest"]?.apply(
-                            null,
-                            [...actionArgs.args]
-                          );
-                        })()
-                      : undefined;
-                  if (
-                    $steps["activeOnlineVisit"] != null &&
-                    typeof $steps["activeOnlineVisit"] === "object" &&
-                    typeof $steps["activeOnlineVisit"].then === "function"
-                  ) {
-                    $steps["activeOnlineVisit"] = await $steps[
-                      "activeOnlineVisit"
-                    ];
-                  }
-
-                  $steps["updateActive"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["active"]
-                          },
-                          operation: 0,
-                          value: true
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateActive"] != null &&
-                    typeof $steps["updateActive"] === "object" &&
-                    typeof $steps["updateActive"].then === "function"
-                  ) {
-                    $steps["updateActive"] = await $steps["updateActive"];
-                  }
-                }}
-              />
-            </div>
-          ) : null}
+          <div
+            data-plasmic-name={"activedeactiveOnlineVisit"}
+            data-plasmic-override={overrides.activedeactiveOnlineVisit}
+            className={classNames(
+              projectcss.all,
+              sty.activedeactiveOnlineVisit
+            )}
+          >
+            <Icon13Icon
+              className={classNames(projectcss.all, sty.svg__xUjSv)}
+              role={"img"}
+            />
+          </div>
         </div>
       </div>
     </React.Fragment>
@@ -1412,6 +1228,7 @@ const PlasmicDescendants = {
     "patientList",
     "addPatient",
     "dialog",
+    "button",
     "drCenters2",
     "activedeactiveOnlineVisit"
   ],
@@ -1431,8 +1248,9 @@ const PlasmicDescendants = {
   center: ["center", "drCenters", "patientList"],
   drCenters: ["drCenters"],
   patientList: ["patientList"],
-  addPatient: ["addPatient", "dialog", "drCenters2"],
-  dialog: ["dialog", "drCenters2"],
+  addPatient: ["addPatient", "dialog", "button", "drCenters2"],
+  dialog: ["dialog", "button", "drCenters2"],
+  button: ["button"],
   drCenters2: ["drCenters2"],
   activedeactiveOnlineVisit: ["activedeactiveOnlineVisit"]
 } as const;
@@ -1450,6 +1268,7 @@ type NodeDefaultElementType = {
   patientList: typeof PatientList;
   addPatient: "div";
   dialog: typeof Dialog;
+  button: typeof Button;
   drCenters2: typeof DrCenters;
   activedeactiveOnlineVisit: "div";
 };
@@ -1525,6 +1344,7 @@ export const PlasmicBookList = Object.assign(
     patientList: makeNodeComponent("patientList"),
     addPatient: makeNodeComponent("addPatient"),
     dialog: makeNodeComponent("dialog"),
+    button: makeNodeComponent("button"),
     drCenters2: makeNodeComponent("drCenters2"),
     activedeactiveOnlineVisit: makeNodeComponent("activedeactiveOnlineVisit"),
 

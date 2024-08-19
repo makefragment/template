@@ -4,11 +4,11 @@
   position: relative;
   width: auto;
   height: auto;
-  background: var(--token-DbGdjBpQ6R_X);
+  background: var(--token-OQs2OqKHzgAx);
   justify-self: flex-start;
   border-radius: 5px;
   padding: 10px;
-  border: 1px solid var(--token-Pxe4wDL2kJpb);
+  border: 1px solid var(--token-9ml8Bu7TYsyp);
 }
 .root > :global(.__wab_flex-container) {
   flex-direction: column;

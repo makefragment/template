@@ -3,6 +3,22 @@
 .plasmic_tokens {
   --token-IOWZQyrdKsEL: #27bda00d;
   --plasmic-token-nelson-green: var(--token-IOWZQyrdKsEL);
+  --token-PeJTH_WMN3fq: var(--antd-colorBgSpotlight);
+  --plasmic-token-system-bg-spotlight: var(--token-PeJTH_WMN3fq);
+  --token-rElHb1O_jV7y: var(--antd-colorBorderSecondary);
+  --plasmic-token-system-border-secondary: var(--token-rElHb1O_jV7y);
+  --token-9ml8Bu7TYsyp: var(--antd-colorBorder);
+  --plasmic-token-system-border: var(--token-9ml8Bu7TYsyp);
+  --token-cVpG0mQLNBOP: var(--antd-colorWarningBg);
+  --plasmic-token-system-warning-bg: var(--token-cVpG0mQLNBOP);
+  --token-WR9d568ToYeY: var(--antd-colorError);
+  --plasmic-token-system-error: var(--token-WR9d568ToYeY);
+  --token-AlQs476uRq4B: var(--antd-colorInfoBg);
+  --plasmic-token-system-info-bg: var(--token-AlQs476uRq4B);
+  --token-OQs2OqKHzgAx: var(--antd-colorBgLayout);
+  --plasmic-token-system-bg-layout: var(--token-OQs2OqKHzgAx);
+  --token-yHtMhUE4LmGt: var(--antd-colorBgElevated);
+  --plasmic-token-system-bg-elevated: var(--token-yHtMhUE4LmGt);
 }
 
 .plasmic_tokens {

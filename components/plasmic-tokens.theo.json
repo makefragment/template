@@ -121,6 +121,16 @@
       }
     },
     {
+      "name": "System: Bg Elevated",
+      "type": "color",
+      "value": "var(--antd-colorBgElevated)",
+      "category": "color",
+      "meta": {
+        "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+        "id": "yHtMhUE4LmGt"
+      }
+    },
+    {
       "name": "System: Bg Layout",
       "type": "color",
       "value": "var(--antd-colorBgLayout)",
@@ -128,6 +138,16 @@
       "meta": {
         "projectId": "ohDidvG9XsCeFumugENU3J",
         "id": "DbGdjBpQ6R_X"
+      }
+    },
+    {
+      "name": "System: Bg Layout",
+      "type": "color",
+      "value": "var(--antd-colorBgLayout)",
+      "category": "color",
+      "meta": {
+        "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+        "id": "OQs2OqKHzgAx"
       }
     },
     {
@@ -151,6 +171,16 @@
       }
     },
     {
+      "name": "System: Bg Spotlight",
+      "type": "color",
+      "value": "var(--antd-colorBgSpotlight)",
+      "category": "color",
+      "meta": {
+        "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+        "id": "PeJTH_WMN3fq"
+      }
+    },
+    {
       "name": "System: Border",
       "type": "color",
       "value": "var(--antd-colorBorder)",
@@ -158,6 +188,16 @@
       "meta": {
         "projectId": "ohDidvG9XsCeFumugENU3J",
         "id": "Pxe4wDL2kJpb"
+      }
+    },
+    {
+      "name": "System: Border",
+      "type": "color",
+      "value": "var(--antd-colorBorder)",
+      "category": "color",
+      "meta": {
+        "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+        "id": "9ml8Bu7TYsyp"
       }
     },
     {
@@ -171,6 +211,16 @@
       }
     },
     {
+      "name": "System: Border Secondary",
+      "type": "color",
+      "value": "var(--antd-colorBorderSecondary)",
+      "category": "color",
+      "meta": {
+        "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+        "id": "rElHb1O_jV7y"
+      }
+    },
+    {
       "name": "System: Error",
       "type": "color",
       "value": "var(--antd-colorError)",
@@ -178,6 +228,16 @@
       "meta": {
         "projectId": "ohDidvG9XsCeFumugENU3J",
         "id": "-ypw6enySR1T"
+      }
+    },
+    {
+      "name": "System: Error",
+      "type": "color",
+      "value": "var(--antd-colorError)",
+      "category": "color",
+      "meta": {
+        "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+        "id": "WR9d568ToYeY"
       }
     },
     {
@@ -458,6 +518,16 @@
       "meta": {
         "projectId": "ohDidvG9XsCeFumugENU3J",
         "id": "pi_amP1jS-3_"
+      }
+    },
+    {
+      "name": "System: Info Bg",
+      "type": "color",
+      "value": "var(--antd-colorInfoBg)",
+      "category": "color",
+      "meta": {
+        "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+        "id": "AlQs476uRq4B"
       }
     },
     {
@@ -1028,6 +1098,16 @@
       "meta": {
         "projectId": "ohDidvG9XsCeFumugENU3J",
         "id": "KrBMMqlPClZi"
+      }
+    },
+    {
+      "name": "System: Warning Bg",
+      "type": "color",
+      "value": "var(--antd-colorWarningBg)",
+      "category": "color",
+      "meta": {
+        "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+        "id": "cVpG0mQLNBOP"
       }
     },
     {

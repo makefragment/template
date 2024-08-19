@@ -349,19 +349,6 @@
       "cssFilePath": "plasmic/fragment_design_system/plasmic.module.css",
       "components": [
         {
-          "id": "Rg8wZ0CpGCye",
-          "name": "RtlProvider",
-          "type": "managed",
-          "projectId": "h9Dbk9ygddw7UVEq1NNhKi",
-          "renderModuleFilePath": "plasmic/fragment_design_system/PlasmicRtlProvider.tsx",
-          "importSpec": {
-            "modulePath": "RtlProvider.tsx"
-          },
-          "cssFilePath": "plasmic/fragment_design_system/PlasmicRtlProvider.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
           "id": "3i84rYjQRrs4",
           "name": "Avatar",
           "type": "managed",
@@ -481,8 +468,7 @@
           "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
@@ -993,33 +979,6 @@
             "modulePath": "ActiveOfficeBooking.tsx"
           },
           "cssFilePath": "plasmic/opium_dashboard/PlasmicActiveOfficeBooking.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "EqLFxR1GyXtD",
-          "name": "Button",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicButton.tsx",
-          "importSpec": {
-            "modulePath": "Button.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicButton.module.css",
-          "scheme": "blackbox",
-          "componentType": "component",
-          "plumeType": "button"
-        },
-        {
-          "id": "OcDG1mliFzAt",
-          "name": "Dialog",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicDialog.tsx",
-          "importSpec": {
-            "modulePath": "Dialog.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicDialog.module.css",
           "scheme": "blackbox",
           "componentType": "component"
         }

@@ -565,7 +565,6 @@
 .safeCall:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
-  flex-shrink: 0;
 }
 .specifyBookStatusButton:global(.__wab_instance) {
   max-width: 100%;

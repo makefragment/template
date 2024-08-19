@@ -533,11 +533,14 @@
 .safeCall:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
-  flex-shrink: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .safeCall:global(.__wab_instance) {
+    width: auto;
+  }
 }
 .bookStatusButton:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
-  width: 100%;
-  min-width: 0;
+  width: auto;
 }

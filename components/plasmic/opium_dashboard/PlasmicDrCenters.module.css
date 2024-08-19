@@ -12,7 +12,7 @@
 .root > :global(.__wab_flex-container) {
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   min-width: 0;
   min-height: 0;
   margin-top: calc(0px - var(--token-_c276Gs_1FIE));

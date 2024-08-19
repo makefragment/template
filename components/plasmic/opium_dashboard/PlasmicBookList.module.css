@@ -232,7 +232,7 @@
     right: auto;
   }
 }
-.button:global(.__wab_instance) {
+.button__i3Jch:global(.__wab_instance) {
   left: auto;
   top: auto;
   z-index: 1;
@@ -241,7 +241,7 @@
   bottom: 66px;
 }
 @media (min-width: 0px) and (max-width: 768px) {
-  .button:global(.__wab_instance) {
+  .button__i3Jch:global(.__wab_instance) {
     bottom: 70px;
   }
 }
@@ -285,22 +285,186 @@
   max-width: 100%;
   position: relative;
 }
-.activedeactiveOnlineVisit {
+.freeBox__k97Kh {
+  display: flex;
   flex-direction: column;
   position: relative;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
-  display: none;
   padding: 8px;
+}
+.activedeactiveOnlineVisit {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  padding: 8px;
+}
+.determiningTheSituationDialog:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+}
+.freeBox___1Kmg {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.text__mTkQu {
+  text-align: center;
+}
+.freeBox__gGaQu {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.freeBox__gGaQu > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-top: calc(0px - var(--token-Fv8-L_kN-2Ma));
+  height: calc(100% + var(--token-Fv8-L_kN-2Ma));
+}
+.freeBox__gGaQu > :global(.__wab_flex-container) > *,
+.freeBox__gGaQu > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__gGaQu > :global(.__wab_flex-container) > picture > img,
+.freeBox__gGaQu
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: var(--token-Fv8-L_kN-2Ma);
+}
+.text__sVh9P {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  min-width: 0;
+  padding: 0px;
+}
+.text__pkn3O {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  min-width: 0;
+}
+.text__pado2 {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  background: var(--token-KrBMMqlPClZi);
+  min-width: 0;
+  display: none;
+  padding: 10px;
+}
+.freeBox__vRjaR {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: #ffffff;
+  min-width: 0;
+  padding: 8px;
+}
+.freeBox__vRjaR > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-top: calc(0px - var(--token-W6cMLA0AZVBO));
+  height: calc(100% + var(--token-W6cMLA0AZVBO));
+}
+.freeBox__vRjaR > :global(.__wab_flex-container) > *,
+.freeBox__vRjaR > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__vRjaR > :global(.__wab_flex-container) > picture > img,
+.freeBox__vRjaR
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: var(--token-W6cMLA0AZVBO);
+}
+.cancelbook:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.svg__fmXs0 {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.text__yyMh5 {
+  color: var(--token--ypw6enySR1T);
+  font-size: var(--token-6NbVMeD6zQwn);
+}
+.svg__lmjOp {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.button__ckE3U:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.svg___80DNv {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.svg__gaAmq {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
+}
+.button___8I0Vg:global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__jayKz {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }
 .svg__xUjSv {
   object-fit: cover;
   max-width: 100%;
   width: var(--token-QcxRWQfhgyJI);
   height: var(--token-QcxRWQfhgyJI);
-  flex-shrink: 0;
+}
+.svg__nAnus {
+  position: relative;
+  object-fit: cover;
+  width: auto;
+  height: 1em;
 }

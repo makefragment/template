@@ -1100,6 +1100,11 @@
           "id": "HIVxXykiyWcr",
           "name": "Icon13Icon",
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon13.tsx"
+        },
+        {
+          "id": "tgZrqAaEEOY7",
+          "name": "Icon14Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon14.tsx"
         }
       ],
       "images": [

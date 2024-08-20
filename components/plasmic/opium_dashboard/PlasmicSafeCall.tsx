@@ -68,6 +68,7 @@ import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJ
 import sty from "./PlasmicSafeCall.module.css"; // plasmic-import: m0lwAXhykBZV/css
 
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
+import Icon14Icon from "./icons/PlasmicIcon__Icon14"; // plasmic-import: tgZrqAaEEOY7/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 
 createPlasmicElementProxy;
@@ -86,6 +87,7 @@ export const PlasmicSafeCall__ArgProps = new Array<ArgPropType>("onclick");
 export type PlasmicSafeCall__OverridesType = {
   root?: Flex__<"div">;
   button?: Flex__<typeof Button>;
+  text?: Flex__<"div">;
 };
 
 export interface DefaultSafeCallProps {
@@ -160,7 +162,25 @@ function PlasmicSafeCall__RenderFunc(props: {
       <Button
         data-plasmic-name={"button"}
         data-plasmic-override={overrides.button}
-        children2={"\u062a\u0645\u0627\u0633 \u0627\u0645\u0646"}
+        children2={
+          <React.Fragment>
+            <div
+              data-plasmic-name={"text"}
+              data-plasmic-override={overrides.text}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text
+              )}
+            >
+              {"\u062a\u0645\u0627\u0633 \u0627\u0645\u0646"}
+            </div>
+            <Icon14Icon
+              className={classNames(projectcss.all, sty.svg__rKplu)}
+              role={"img"}
+            />
+          </React.Fragment>
+        }
         className={classNames("__wab_instance", sty.button)}
         endIcon={
           <ChevronLeftIcon
@@ -200,8 +220,9 @@ function PlasmicSafeCall__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "button"],
-  button: ["button"]
+  root: ["root", "button", "text"],
+  button: ["button", "text"],
+  text: ["text"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -209,6 +230,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   button: typeof Button;
+  text: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -272,6 +294,7 @@ export const PlasmicSafeCall = Object.assign(
   {
     // Helper components rendering sub-elements
     button: makeNodeComponent("button"),
+    text: makeNodeComponent("text"),
 
     // Metadata about props expected for PlasmicSafeCall
     internalVariantProps: PlasmicSafeCall__VariantProps,

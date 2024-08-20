@@ -1,18 +1,25 @@
 .root {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   position: relative;
-  width: auto;
   height: auto;
   justify-content: flex-start;
   align-items: center;
   justify-self: flex-start;
 }
+.rootdeleted {
+  width: auto;
+  justify-self: flex-start;
+  display: inline-flex;
+}
 .button:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
   width: auto;
-  min-width: 110px;
+  min-width: auto;
+}
+.buttondeleted:global(.__wab_instance) {
+  min-width: auto;
 }
 .svg__cGuhN {
   position: relative;

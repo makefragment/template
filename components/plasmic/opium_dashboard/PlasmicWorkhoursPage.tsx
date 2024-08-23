@@ -61,6 +61,7 @@ import {
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import DrCenters from "../../DrCenters"; // plasmic-import: IkLsGKQP_uPj/component
+import AvailabilitySuggestionsSpecialities from "../../AvailabilitySuggestionsSpecialities"; // plasmic-import: bBN7I3yc6plC/component
 import HoursDaysOfWeek from "../../HoursDaysOfWeek"; // plasmic-import: lSLy8Nehd6MM/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -85,6 +86,9 @@ export type PlasmicWorkhoursPage__OverridesType = {
   sideEffect?: Flex__<typeof SideEffect>;
   text?: Flex__<"div">;
   drCenters?: Flex__<typeof DrCenters>;
+  availabilitySuggestionsSpecialities?: Flex__<
+    typeof AvailabilitySuggestionsSpecialities
+  >;
   hoursDaysOfWeek?: Flex__<typeof HoursDaysOfWeek>;
 };
 
@@ -143,6 +147,12 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
       },
       {
         path: "hoursDaysOfWeek.duration",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "speciality",
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
@@ -264,6 +274,62 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                 ) {
                   $steps["updateCenters"] = await $steps["updateCenters"];
                 }
+
+                $steps["apiSpeciality"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "GET",
+                          "https://apigw.paziresh24.com/v1/availability-suggestions-specialities"
+                        ]
+                      };
+                      return $globalActions["Fragment.apiRequest"]?.apply(
+                        null,
+                        [...actionArgs.args]
+                      );
+                    })()
+                  : undefined;
+                if (
+                  $steps["apiSpeciality"] != null &&
+                  typeof $steps["apiSpeciality"] === "object" &&
+                  typeof $steps["apiSpeciality"].then === "function"
+                ) {
+                  $steps["apiSpeciality"] = await $steps["apiSpeciality"];
+                }
+
+                $steps["updateSpeciality"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["speciality"]
+                        },
+                        operation: 0,
+                        value: $steps.apiSpeciality.data
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateSpeciality"] != null &&
+                  typeof $steps["updateSpeciality"] === "object" &&
+                  typeof $steps["updateSpeciality"].then === "function"
+                ) {
+                  $steps["updateSpeciality"] = await $steps["updateSpeciality"];
+                }
               }}
             />
 
@@ -350,6 +416,78 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                 }}
               />
             </Stack__>
+            {(() => {
+              try {
+                return $state.speciality["speciality-id"] === "206";
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return false;
+                }
+                throw e;
+              }
+            })() ? (
+              <div
+                className={classNames(projectcss.all, sty.freeBox__bic)}
+                onLoad={async event => {
+                  const $steps = {};
+
+                  $steps["invokeGlobalAction"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            (() => {
+                              try {
+                                return {
+                                  group:
+                                    "availability-suggestions-specialities",
+                                  data: {
+                                    center_data: $state.centers
+                                  },
+                                  type: "workhour-page"
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Splunk.sendLog"]?.apply(null, [
+                          ...actionArgs.args
+                        ]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["invokeGlobalAction"] != null &&
+                    typeof $steps["invokeGlobalAction"] === "object" &&
+                    typeof $steps["invokeGlobalAction"].then === "function"
+                  ) {
+                    $steps["invokeGlobalAction"] = await $steps[
+                      "invokeGlobalAction"
+                    ];
+                  }
+                }}
+              >
+                <AvailabilitySuggestionsSpecialities
+                  data-plasmic-name={"availabilitySuggestionsSpecialities"}
+                  data-plasmic-override={
+                    overrides.availabilitySuggestionsSpecialities
+                  }
+                  className={classNames(
+                    "__wab_instance",
+                    sty.availabilitySuggestionsSpecialities
+                  )}
+                />
+              </div>
+            ) : null}
             <div className={classNames(projectcss.all, sty.freeBox__lw8Cb)}>
               {(() => {
                 try {
@@ -417,10 +555,18 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  bookList: ["bookList", "sideEffect", "text", "drCenters", "hoursDaysOfWeek"],
+  bookList: [
+    "bookList",
+    "sideEffect",
+    "text",
+    "drCenters",
+    "availabilitySuggestionsSpecialities",
+    "hoursDaysOfWeek"
+  ],
   sideEffect: ["sideEffect"],
   text: ["text"],
   drCenters: ["drCenters"],
+  availabilitySuggestionsSpecialities: ["availabilitySuggestionsSpecialities"],
   hoursDaysOfWeek: ["hoursDaysOfWeek"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -431,6 +577,7 @@ type NodeDefaultElementType = {
   sideEffect: typeof SideEffect;
   text: "div";
   drCenters: typeof DrCenters;
+  availabilitySuggestionsSpecialities: typeof AvailabilitySuggestionsSpecialities;
   hoursDaysOfWeek: typeof HoursDaysOfWeek;
 };
 
@@ -497,6 +644,9 @@ export const PlasmicWorkhoursPage = Object.assign(
     sideEffect: makeNodeComponent("sideEffect"),
     text: makeNodeComponent("text"),
     drCenters: makeNodeComponent("drCenters"),
+    availabilitySuggestionsSpecialities: makeNodeComponent(
+      "availabilitySuggestionsSpecialities"
+    ),
     hoursDaysOfWeek: makeNodeComponent("hoursDaysOfWeek"),
 
     // Metadata about props expected for PlasmicWorkhoursPage

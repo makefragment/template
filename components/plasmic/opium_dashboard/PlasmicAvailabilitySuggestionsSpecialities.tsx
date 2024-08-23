@@ -263,7 +263,9 @@ function PlasmicAvailabilitySuggestionsSpecialities__RenderFunc(props: {
             className={"plasmic_default__all plasmic_default__span"}
             style={{ fontWeight: 700 }}
           >
-            {"\u06cc\u06a9\u0634\u0646\u0628\u0647\u200c\u0647\u0627"}
+            {
+              "\u0634\u0646\u0628\u0647\u200c\u0647\u0627 \u0648 \u06cc\u06a9\u0634\u0646\u0628\u0647\u200c\u0647\u0627"
+            }
           </span>
           <React.Fragment>
             {
@@ -274,21 +276,7 @@ function PlasmicAvailabilitySuggestionsSpecialities__RenderFunc(props: {
             className={"plasmic_default__all plasmic_default__span"}
             style={{ fontWeight: 700 }}
           >
-            {"0 \u0627\u0644\u06cc 2 \u0628\u0627\u0645\u062f\u0627\u062f"}
-          </span>
-          <React.Fragment>{"\u060c "}</React.Fragment>
-          <span
-            className={"plasmic_default__all plasmic_default__span"}
-            style={{ fontWeight: 700 }}
-          >
-            {"8 \u0627\u0644\u06cc 18"}
-          </span>
-          <React.Fragment>{" \u0648 "}</React.Fragment>
-          <span
-            className={"plasmic_default__all plasmic_default__span"}
-            style={{ fontWeight: 700 }}
-          >
-            {"22 \u0627\u0644\u06cc 24"}
+            {"\u06f1\u06f7 \u0627\u0644\u06cc24"}
           </span>
           <React.Fragment>
             {
@@ -297,9 +285,16 @@ function PlasmicAvailabilitySuggestionsSpecialities__RenderFunc(props: {
           </React.Fragment>
           <span
             className={"plasmic_default__all plasmic_default__span"}
+            style={{ fontWeight: 700, color: "#2A7B4F" }}
+          >
+            {"\u00ab137 \u0628\u06cc\u0645\u0627\u0631\u00bb"}
+          </span>
+          <React.Fragment>{""}</React.Fragment>
+          <span
+            className={"plasmic_default__all plasmic_default__span"}
             style={{ fontWeight: 700, color: "#3AAD4C" }}
           >
-            {"157 \u0628\u06cc\u0645\u0627\u0631 "}
+            {" "}
           </span>
           <React.Fragment>
             {

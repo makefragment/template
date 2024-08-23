@@ -74,6 +74,7 @@
   margin-left: var(--token-vMUQwr5Jto1d);
 }
 .freeBox__uH8A {
+  display: flex;
   flex-direction: row;
   position: relative;
   align-items: flex-start;
@@ -82,7 +83,6 @@
   height: auto;
   max-width: 100%;
   background: #27bda00d;
-  display: none;
   border-radius: 8px;
   padding: 8px;
   border: 1px solid #27bda03d;

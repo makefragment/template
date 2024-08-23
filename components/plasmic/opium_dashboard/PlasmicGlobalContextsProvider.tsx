@@ -16,12 +16,10 @@ export interface GlobalContextsProviderProps {
   fragmentProps?: Partial<
     Omit<React.ComponentProps<typeof Fragment>, "children">
   >;
-
   splunkProps?: Partial<Omit<React.ComponentProps<typeof Splunk>, "children">>;
   growthBookProps?: Partial<
     Omit<React.ComponentProps<typeof GrowthBook>, "children">
   >;
-
   hamdastProps?: Partial<
     Omit<React.ComponentProps<typeof Hamdast>, "children">
   >;
@@ -55,7 +53,7 @@ export default function GlobalContextsProvider(
         fragmentProps && "primaryColor" in fragmentProps
           ? fragmentProps.primaryColor!
           : true
-          ? "var(--antd-colorBgSpotlight)"
+          ? "#2B2F33"
           : undefined
       }
       rtl={fragmentProps && "rtl" in fragmentProps ? fragmentProps.rtl! : true}

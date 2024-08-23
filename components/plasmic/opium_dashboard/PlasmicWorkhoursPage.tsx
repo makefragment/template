@@ -83,7 +83,6 @@ export const PlasmicWorkhoursPage__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicWorkhoursPage__OverridesType = {
   bookList?: Flex__<"div">;
-  sideEffect?: Flex__<typeof SideEffect>;
   text?: Flex__<"div">;
   drCenters?: Flex__<typeof DrCenters>;
   availabilitySuggestionsSpecialities?: Flex__<
@@ -213,9 +212,7 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
             className={classNames(projectcss.all, sty.freeBox__d4Ycy)}
           >
             <SideEffect
-              data-plasmic-name={"sideEffect"}
-              data-plasmic-override={overrides.sideEffect}
-              className={classNames("__wab_instance", sty.sideEffect)}
+              className={classNames("__wab_instance", sty.sideEffect___6NILs)}
               onMount={async () => {
                 const $steps = {};
 
@@ -429,53 +426,56 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                 throw e;
               }
             })() ? (
-              <div
-                className={classNames(projectcss.all, sty.freeBox__bic)}
-                onLoad={async event => {
-                  const $steps = {};
+              <div className={classNames(projectcss.all, sty.freeBox__bic)}>
+                <SideEffect
+                  className={classNames("__wab_instance", sty.sideEffect__jgXZ)}
+                  onMount={async () => {
+                    const $steps = {};
 
-                  $steps["invokeGlobalAction"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          args: [
-                            (() => {
-                              try {
-                                return {
-                                  group:
-                                    "availability-suggestions-specialities",
-                                  data: {
-                                    center_data: $state.centers
-                                  },
-                                  type: "workhour-page"
-                                };
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
+                    $steps["invokeGlobalAction"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              (() => {
+                                try {
+                                  return {
+                                    group:
+                                      "availability-suggestions-specialities",
+                                    data: {
+                                      center_data: $state.centers
+                                    },
+                                    type: "workhour-page"
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
                                 }
-                                throw e;
-                              }
-                            })()
-                          ]
-                        };
-                        return $globalActions["Splunk.sendLog"]?.apply(null, [
-                          ...actionArgs.args
-                        ]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["invokeGlobalAction"] != null &&
-                    typeof $steps["invokeGlobalAction"] === "object" &&
-                    typeof $steps["invokeGlobalAction"].then === "function"
-                  ) {
-                    $steps["invokeGlobalAction"] = await $steps[
-                      "invokeGlobalAction"
-                    ];
-                  }
-                }}
-              >
+                              })()
+                            ]
+                          };
+                          return $globalActions["Splunk.sendLog"]?.apply(null, [
+                            ...actionArgs.args
+                          ]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["invokeGlobalAction"] != null &&
+                      typeof $steps["invokeGlobalAction"] === "object" &&
+                      typeof $steps["invokeGlobalAction"].then === "function"
+                    ) {
+                      $steps["invokeGlobalAction"] = await $steps[
+                        "invokeGlobalAction"
+                      ];
+                    }
+                  }}
+                />
+
                 <AvailabilitySuggestionsSpecialities
                   data-plasmic-name={"availabilitySuggestionsSpecialities"}
                   data-plasmic-override={
@@ -557,13 +557,11 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
 const PlasmicDescendants = {
   bookList: [
     "bookList",
-    "sideEffect",
     "text",
     "drCenters",
     "availabilitySuggestionsSpecialities",
     "hoursDaysOfWeek"
   ],
-  sideEffect: ["sideEffect"],
   text: ["text"],
   drCenters: ["drCenters"],
   availabilitySuggestionsSpecialities: ["availabilitySuggestionsSpecialities"],
@@ -574,7 +572,6 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   bookList: "div";
-  sideEffect: typeof SideEffect;
   text: "div";
   drCenters: typeof DrCenters;
   availabilitySuggestionsSpecialities: typeof AvailabilitySuggestionsSpecialities;
@@ -641,7 +638,6 @@ export const PlasmicWorkhoursPage = Object.assign(
   makeNodeComponent("bookList"),
   {
     // Helper components rendering sub-elements
-    sideEffect: makeNodeComponent("sideEffect"),
     text: makeNodeComponent("text"),
     drCenters: makeNodeComponent("drCenters"),
     availabilitySuggestionsSpecialities: makeNodeComponent(

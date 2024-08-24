@@ -489,63 +489,47 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
               </div>
             ) : null}
             <div className={classNames(projectcss.all, sty.freeBox__lw8Cb)}>
-              {(() => {
-                try {
-                  return (
-                    $state.centers?.length !== 0 && !!$state.selectedCenter
-                  );
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return false;
+              <HoursDaysOfWeek
+                data-plasmic-name={"hoursDaysOfWeek"}
+                data-plasmic-override={overrides.hoursDaysOfWeek}
+                centerId={(() => {
+                  try {
+                    return $state.drCenters.selectedCenter;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
                   }
-                  throw e;
-                }
-              })() ? (
-                <HoursDaysOfWeek
-                  data-plasmic-name={"hoursDaysOfWeek"}
-                  data-plasmic-override={overrides.hoursDaysOfWeek}
-                  centerId={(() => {
-                    try {
-                      return $state.drCenters.selectedCenter;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
+                })()}
+                className={classNames("__wab_instance", sty.hoursDaysOfWeek)}
+                duration={generateStateValueProp($state, [
+                  "hoursDaysOfWeek",
+                  "duration"
+                ])}
+                onDurationChange={generateStateOnChangeProp($state, [
+                  "hoursDaysOfWeek",
+                  "duration"
+                ])}
+                userCenterId={(() => {
+                  try {
+                    return $state.centers.find(
+                      center => center.id === $state.selectedCenter
+                    ).user_center_id;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
                     }
-                  })()}
-                  className={classNames("__wab_instance", sty.hoursDaysOfWeek)}
-                  duration={generateStateValueProp($state, [
-                    "hoursDaysOfWeek",
-                    "duration"
-                  ])}
-                  onDurationChange={generateStateOnChangeProp($state, [
-                    "hoursDaysOfWeek",
-                    "duration"
-                  ])}
-                  userCenterId={(() => {
-                    try {
-                      return $state.centers.find(
-                        center => center.id === $state.selectedCenter
-                      ).user_center_id;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()}
-                />
-              ) : null}
+                    throw e;
+                  }
+                })()}
+              />
             </div>
           </Stack__>
         </div>

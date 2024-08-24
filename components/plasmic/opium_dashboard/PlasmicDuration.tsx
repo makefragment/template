@@ -60,9 +60,13 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
+import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
+import Card from "../../Card"; // plasmic-import: QMzVdopOLfBM/component
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { TimePicker } from "@/fragment/components/time-picker"; // plasmic-import: 0Mwoeihejk-H/codeComponent
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
+
+import { useScreenVariants as useScreenVariantsfobTirRaixGf } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: fobTIRRaixGf/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -104,6 +108,8 @@ export const PlasmicDuration__ArgProps = new Array<ArgPropType>(
 export type PlasmicDuration__OverridesType = {
   root?: Flex__<"div">;
   sideEffect?: Flex__<typeof SideEffect>;
+  fragmentPopover?: Flex__<typeof Popover>;
+  card?: Flex__<typeof Card>;
   dialog?: Flex__<typeof Dialog>;
   fragmentTimePicker?: Flex__<typeof TimePicker>;
   button?: Flex__<typeof Button>;
@@ -202,6 +208,14 @@ function PlasmicDuration__RenderFunc(props: {
         type: "private",
         variableType: "variant",
         initFunc: ({ $props, $state, $queries, $ctx }) => $props.check
+      },
+      {
+        path: "fragmentPopover.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false,
+
+        refName: "fragmentPopover"
       }
     ],
     [$props, $ctx, $refs]
@@ -211,6 +225,10 @@ function PlasmicDuration__RenderFunc(props: {
     $ctx,
     $queries: {},
     $refs
+  });
+
+  const globalVariants = ensureGlobalVariants({
+    screen: useScreenVariantsfobTirRaixGf()
   });
 
   return (
@@ -375,9 +393,99 @@ function PlasmicDuration__RenderFunc(props: {
             "\u0645\u062f\u062a \u0632\u0645\u0627\u0646\u200c \u0627\u06cc\u062f\u0647\u200c\u0622\u0644 \u0634\u0645\u0627 \u0628\u0631\u0627\u06cc \u0627\u0631\u0627\u0626\u0647 \u06cc\u06a9 \u0648\u06cc\u0632\u06cc\u062a \u062c\u0627\u0645\u0639 \u0648 \u067e\u06cc\u0648\u0633\u062a\u0647 \u0628\u0647 \u06cc\u06a9 \u0628\u06cc\u0645\u0627\u0631 \u0686\u0642\u062f\u0631 \u0627\u0633\u062a\u061f"
           }
         </div>
-        <Icon15Icon
-          className={classNames(projectcss.all, sty.svg___1TN60)}
-          role={"img"}
+        <Popover
+          data-plasmic-name={"fragmentPopover"}
+          data-plasmic-override={overrides.fragmentPopover}
+          className={classNames("__wab_instance", sty.fragmentPopover)}
+          content={
+            <Card
+              data-plasmic-name={"card"}
+              data-plasmic-override={overrides.card}
+              className={classNames("__wab_instance", sty.card)}
+              title={"\u062a\u0648\u062c\u0647!"}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__ofLcQ
+                )}
+              >
+                <React.Fragment>
+                  <React.Fragment>
+                    {
+                      "\u0648\u06cc\u0632\u06cc\u062a \u0622\u0646\u0644\u0627\u06cc\u0646 \u0645\u06cc\u200c\u0628\u0627\u06cc\u0633\u062a \u062f\u0631"
+                    }
+                  </React.Fragment>
+                  <span
+                    className={"plasmic_default__all plasmic_default__span"}
+                    style={{ color: "var(--token-kpM4b4mG4f2d)" }}
+                  >
+                    {
+                      " \u0632\u0645\u0627\u0646 \u0645\u0642\u0631\u0631 \u0646\u0648\u0628\u062a"
+                    }
+                  </span>
+                  <React.Fragment>
+                    {
+                      "\u060c \u062f\u0631 \u0645\u062f\u062a \u0632\u0645\u0627\u0646 \u0627\u0639\u0644\u0627\u0645\u06cc \u0634\u0645\u0627 \u0628\u0647 \u0635\u0648\u0631\u062a "
+                    }
+                  </React.Fragment>
+                  <span
+                    className={"plasmic_default__all plasmic_default__span"}
+                    style={{ color: "var(--token-kpM4b4mG4f2d)" }}
+                  >
+                    {
+                      "\u062c\u0627\u0645\u0639 \u0648 \u067e\u06cc\u0648\u0633\u062a\u0647"
+                    }
+                  </span>
+                  <React.Fragment>
+                    {
+                      " \u0627\u0646\u062c\u0627\u0645 \u0634\u0648\u062f. \u062a\u0648\u062c\u0647 \u062f\u0627\u0634\u062a\u0647 \u0628\u0627\u0634\u06cc\u062f \u06a9\u0647 \u0628\u0647 \u0645\u062f\u062a "
+                    }
+                  </React.Fragment>
+                  <span
+                    className={"plasmic_default__all plasmic_default__span"}
+                    style={{ color: "var(--token-kpM4b4mG4f2d)" }}
+                  >
+                    {"\u06f3 \u0631\u0648\u0632"}
+                  </span>
+                  <React.Fragment>
+                    {
+                      "\u060c \u067e\u0633 \u0627\u0632 \u0648\u06cc\u0632\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631 \u0628\u0631\u0627\u06cc \u067e\u0627\u0633\u062e\u06af\u0648\u06cc\u06cc \u0628\u0647 \u0633\u0648\u0627\u0644\u0627\u062a \u0627\u062d\u062a\u0645\u0627\u0644\u06cc \u0628\u06cc\u0645\u0627\u0631 \u062f\u0631 \u062f\u0633\u062a\u0631\u0633 \u0628\u0627\u0634\u06cc\u062f."
+                    }
+                  </React.Fragment>
+                </React.Fragment>
+              </div>
+            </Card>
+          }
+          onOpenChange={generateStateOnChangeProp($state, [
+            "fragmentPopover",
+            "open"
+          ])}
+          open={generateStateValueProp($state, ["fragmentPopover", "open"])}
+          ref={ref => {
+            $refs["fragmentPopover"] = ref;
+          }}
+          trigger={
+            (() => {
+              try {
+                return ($props.centerId = 5532);
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return false;
+                }
+                throw e;
+              }
+            })() ? (
+              <Icon15Icon
+                className={classNames(projectcss.all, sty.svg___1TN60)}
+                role={"img"}
+              />
+            ) : null
+          }
         />
       </Stack__>
       <div className={classNames(projectcss.all, sty.freeBox__mljoZ)}>
@@ -1099,8 +1207,18 @@ function PlasmicDuration__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "sideEffect", "dialog", "fragmentTimePicker", "button"],
+  root: [
+    "root",
+    "sideEffect",
+    "fragmentPopover",
+    "card",
+    "dialog",
+    "fragmentTimePicker",
+    "button"
+  ],
   sideEffect: ["sideEffect"],
+  fragmentPopover: ["fragmentPopover", "card"],
+  card: ["card"],
   dialog: ["dialog", "fragmentTimePicker", "button"],
   fragmentTimePicker: ["fragmentTimePicker"],
   button: ["button"]
@@ -1111,6 +1229,8 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   sideEffect: typeof SideEffect;
+  fragmentPopover: typeof Popover;
+  card: typeof Card;
   dialog: typeof Dialog;
   fragmentTimePicker: typeof TimePicker;
   button: typeof Button;
@@ -1177,6 +1297,8 @@ export const PlasmicDuration = Object.assign(
   {
     // Helper components rendering sub-elements
     sideEffect: makeNodeComponent("sideEffect"),
+    fragmentPopover: makeNodeComponent("fragmentPopover"),
+    card: makeNodeComponent("card"),
     dialog: makeNodeComponent("dialog"),
     fragmentTimePicker: makeNodeComponent("fragmentTimePicker"),
     button: makeNodeComponent("button"),

@@ -1003,8 +1003,8 @@
       "icons": [
         {
           "id": "BMYyZW6g83gg",
-          "name": "ChecksvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Checksvg.tsx"
+          "name": "CheckSvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__CheckSvg.tsx"
         },
         {
           "id": "0RFRFbiZZc8Z",
@@ -1013,33 +1013,33 @@
         },
         {
           "id": "euu18ryAtnAt",
-          "name": "SearchsvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Searchsvg.tsx"
+          "name": "SearchSvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SearchSvg.tsx"
         },
         {
           "id": "YNCiTLFL-fSE",
-          "name": "SquaresvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Squaresvg.tsx"
+          "name": "SquareSvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SquareSvg.tsx"
         },
         {
           "id": "VwLeMZcZaumF",
-          "name": "SquareCheckFilledsvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SquareCheckFilledsvg.tsx"
+          "name": "SquareCheckFilledSvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SquareCheckFilledSvg.tsx"
         },
         {
           "id": "SUgNEqYWmuPX",
-          "name": "SquareMinussvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SquareMinussvg.tsx"
+          "name": "SquareMinusSvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SquareMinusSvg.tsx"
         },
         {
           "id": "vyArbbpHyA3h",
-          "name": "ChevronDownsvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__ChevronDownsvg.tsx"
+          "name": "ChevronDownSvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__ChevronDownSvg.tsx"
         },
         {
           "id": "fNYF7afgfzXN",
-          "name": "ChevronUpsvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__ChevronUpsvg.tsx"
+          "name": "ChevronUpSvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__ChevronUpSvg.tsx"
         },
         {
           "id": "q8mRvXMvOrv9",

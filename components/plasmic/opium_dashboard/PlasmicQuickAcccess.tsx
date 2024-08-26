@@ -148,7 +148,7 @@ function PlasmicQuickAcccess__RenderFunc(props: {
             onClick={async event => {
               const $steps = {};
 
-              $steps["goToHttpsdrpaziresh24Comsettingpayment"] = true
+              $steps["goToHttpsDrPaziresh24ComSettingPayment"] = true
                 ? (() => {
                     const actionArgs = {
                       destination: "https://dr.paziresh24.com/setting/payment"
@@ -168,14 +168,14 @@ function PlasmicQuickAcccess__RenderFunc(props: {
                   })()
                 : undefined;
               if (
-                $steps["goToHttpsdrpaziresh24Comsettingpayment"] != null &&
-                typeof $steps["goToHttpsdrpaziresh24Comsettingpayment"] ===
+                $steps["goToHttpsDrPaziresh24ComSettingPayment"] != null &&
+                typeof $steps["goToHttpsDrPaziresh24ComSettingPayment"] ===
                   "object" &&
-                typeof $steps["goToHttpsdrpaziresh24Comsettingpayment"].then ===
+                typeof $steps["goToHttpsDrPaziresh24ComSettingPayment"].then ===
                   "function"
               ) {
-                $steps["goToHttpsdrpaziresh24Comsettingpayment"] = await $steps[
-                  "goToHttpsdrpaziresh24Comsettingpayment"
+                $steps["goToHttpsDrPaziresh24ComSettingPayment"] = await $steps[
+                  "goToHttpsDrPaziresh24ComSettingPayment"
                 ];
               }
             }}

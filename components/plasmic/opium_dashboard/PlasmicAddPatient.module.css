@@ -297,7 +297,7 @@
   text-align: center;
   cursor: pointer;
 }
-.تقوم:global(.__wab_instance):global(.__wab_instance) {
+.تقویم:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }

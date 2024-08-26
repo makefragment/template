@@ -102,7 +102,7 @@ export type PlasmicBookList__OverridesType = {
   bookList?: Flex__<"div">;
   date?: Flex__<"div">;
   calendar?: Flex__<typeof Dialog>;
-  تقومماهانه?: Flex__<"div">;
+  تقویمماهانه?: Flex__<"div">;
   fragmentDatePicker?: Flex__<typeof DatePicker>;
   center?: Flex__<"div">;
   drCenters?: Flex__<typeof DrCenters>;
@@ -110,7 +110,7 @@ export type PlasmicBookList__OverridesType = {
   addPatient?: Flex__<"div">;
   dialog?: Flex__<typeof Dialog>;
   drCenters2?: Flex__<typeof DrCenters>;
-  activedeactiveOnlineVisit?: Flex__<"div">;
+  activeDeactiveOnlineVisit?: Flex__<"div">;
   determiningTheSituationDialog?: Flex__<typeof Dialog>;
   cancelbook?: Flex__<typeof Button>;
 };
@@ -253,7 +253,7 @@ function PlasmicBookList__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
-        path: "loadingOnoff",
+        path: "loadingOnOff",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -352,6 +352,42 @@ function PlasmicBookList__RenderFunc(props: {
                 typeof $steps["updateHoliday"].then === "function"
               ) {
                 $steps["updateHoliday"] = await $steps["updateHoliday"];
+              }
+
+              $steps["sendEvent"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        (() => {
+                          try {
+                            return {
+                              group: "load-page",
+                              data: { center_id: $state.centers },
+                              type: "book_list"
+                            };
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["Splunk.sendLog"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["sendEvent"] != null &&
+                typeof $steps["sendEvent"] === "object" &&
+                typeof $steps["sendEvent"].then === "function"
+              ) {
+                $steps["sendEvent"] = await $steps["sendEvent"];
               }
             }}
           />
@@ -534,13 +570,13 @@ function PlasmicBookList__RenderFunc(props: {
                 title={
                   <div
                     data-plasmic-name={
-                      "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
+                      "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
                     }
-                    data-plasmic-override={overrides.تقومماهانه}
+                    data-plasmic-override={overrides.تقویمماهانه}
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.تقومماهانه
+                      sty.تقویمماهانه
                     )}
                   >
                     {
@@ -1241,13 +1277,13 @@ function PlasmicBookList__RenderFunc(props: {
               }
             })() ? (
               <div
-                data-plasmic-name={"activedeactiveOnlineVisit"}
-                data-plasmic-override={overrides.activedeactiveOnlineVisit}
+                data-plasmic-name={"activeDeactiveOnlineVisit"}
+                data-plasmic-override={overrides.activeDeactiveOnlineVisit}
                 className={classNames(
                   projectcss.all,
-                  sty.activedeactiveOnlineVisit,
+                  sty.activeDeactiveOnlineVisit,
                   {
-                    [sty.activedeactiveOnlineVisitactive]: hasVariant(
+                    [sty.activeDeactiveOnlineVisitactive]: hasVariant(
                       $state,
                       "active",
                       "active"
@@ -2003,7 +2039,7 @@ function PlasmicBookList__RenderFunc(props: {
                         await $steps["updateDeterminingTheSituationDialogOpen"];
                     }
 
-                    $steps["apiActvedeactiveVisitOnline"] = true
+                    $steps["apiActveDeactiveVisitOnline"] = true
                       ? (() => {
                           const actionArgs = {
                             args: [
@@ -2039,14 +2075,14 @@ function PlasmicBookList__RenderFunc(props: {
                         })()
                       : undefined;
                     if (
-                      $steps["apiActvedeactiveVisitOnline"] != null &&
-                      typeof $steps["apiActvedeactiveVisitOnline"] ===
+                      $steps["apiActveDeactiveVisitOnline"] != null &&
+                      typeof $steps["apiActveDeactiveVisitOnline"] ===
                         "object" &&
-                      typeof $steps["apiActvedeactiveVisitOnline"].then ===
+                      typeof $steps["apiActveDeactiveVisitOnline"].then ===
                         "function"
                     ) {
-                      $steps["apiActvedeactiveVisitOnline"] = await $steps[
-                        "apiActvedeactiveVisitOnline"
+                      $steps["apiActveDeactiveVisitOnline"] = await $steps[
+                        "apiActveDeactiveVisitOnline"
                       ];
                     }
 
@@ -2124,7 +2160,7 @@ function PlasmicBookList__RenderFunc(props: {
                       $steps["updateActive"] = await $steps["updateActive"];
                     }
 
-                    $steps["eventOnoff"] = true
+                    $steps["eventOnOff"] = true
                       ? (() => {
                           const actionArgs = {
                             args: [
@@ -2158,11 +2194,11 @@ function PlasmicBookList__RenderFunc(props: {
                         })()
                       : undefined;
                     if (
-                      $steps["eventOnoff"] != null &&
-                      typeof $steps["eventOnoff"] === "object" &&
-                      typeof $steps["eventOnoff"].then === "function"
+                      $steps["eventOnOff"] != null &&
+                      typeof $steps["eventOnOff"] === "object" &&
+                      typeof $steps["eventOnOff"].then === "function"
                     ) {
-                      $steps["eventOnoff"] = await $steps["eventOnoff"];
+                      $steps["eventOnOff"] = await $steps["eventOnOff"];
                     }
 
                     $steps["loadingFinish"] =
@@ -2216,7 +2252,7 @@ const PlasmicDescendants = {
     "bookList",
     "date",
     "calendar",
-    "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
+    "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
     "fragmentDatePicker",
     "center",
     "drCenters",
@@ -2224,22 +2260,24 @@ const PlasmicDescendants = {
     "addPatient",
     "dialog",
     "drCenters2",
-    "activedeactiveOnlineVisit",
+    "activeDeactiveOnlineVisit",
     "determiningTheSituationDialog",
     "cancelbook"
   ],
   date: [
     "date",
     "calendar",
-    "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
+    "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
     "fragmentDatePicker"
   ],
   calendar: [
     "calendar",
-    "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
+    "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
     "fragmentDatePicker"
   ],
-  تقومماهانه: ["\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647"],
+  تقویمماهانه: [
+    "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
+  ],
   fragmentDatePicker: ["fragmentDatePicker"],
   center: ["center", "drCenters", "patientList"],
   drCenters: ["drCenters"],
@@ -2247,8 +2285,8 @@ const PlasmicDescendants = {
   addPatient: ["addPatient", "dialog", "drCenters2"],
   dialog: ["dialog", "drCenters2"],
   drCenters2: ["drCenters2"],
-  activedeactiveOnlineVisit: [
-    "activedeactiveOnlineVisit",
+  activeDeactiveOnlineVisit: [
+    "activeDeactiveOnlineVisit",
     "determiningTheSituationDialog",
     "cancelbook"
   ],
@@ -2265,7 +2303,7 @@ type NodeDefaultElementType = {
   bookList: "div";
   date: "div";
   calendar: typeof Dialog;
-  تقومماهانه: "div";
+  تقویمماهانه: "div";
   fragmentDatePicker: typeof DatePicker;
   center: "div";
   drCenters: typeof DrCenters;
@@ -2273,7 +2311,7 @@ type NodeDefaultElementType = {
   addPatient: "div";
   dialog: typeof Dialog;
   drCenters2: typeof DrCenters;
-  activedeactiveOnlineVisit: "div";
+  activeDeactiveOnlineVisit: "div";
   determiningTheSituationDialog: typeof Dialog;
   cancelbook: typeof Button;
 };
@@ -2340,8 +2378,8 @@ export const PlasmicBookList = Object.assign(
     // Helper components rendering sub-elements
     date: makeNodeComponent("date"),
     calendar: makeNodeComponent("calendar"),
-    تقومماهانه: makeNodeComponent(
-      "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
+    تقویمماهانه: makeNodeComponent(
+      "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
     ),
     fragmentDatePicker: makeNodeComponent("fragmentDatePicker"),
     center: makeNodeComponent("center"),
@@ -2350,7 +2388,7 @@ export const PlasmicBookList = Object.assign(
     addPatient: makeNodeComponent("addPatient"),
     dialog: makeNodeComponent("dialog"),
     drCenters2: makeNodeComponent("drCenters2"),
-    activedeactiveOnlineVisit: makeNodeComponent("activedeactiveOnlineVisit"),
+    activeDeactiveOnlineVisit: makeNodeComponent("activeDeactiveOnlineVisit"),
     determiningTheSituationDialog: makeNodeComponent(
       "determiningTheSituationDialog"
     ),

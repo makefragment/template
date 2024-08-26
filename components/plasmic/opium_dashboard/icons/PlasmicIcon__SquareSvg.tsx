@@ -5,11 +5,11 @@
 import React from "react";
 import { classNames } from "@plasmicapp/react-web";
 
-export type ChevronDownsvgIconProps = React.ComponentProps<"svg"> & {
+export type SquareSvgIconProps = React.ComponentProps<"svg"> & {
   title?: string;
 };
 
-export function ChevronDownsvgIcon(props: ChevronDownsvgIconProps) {
+export function SquareSvgIcon(props: SquareSvgIconProps) {
   const { className, style, title, ...restProps } = props;
   return (
     <svg
@@ -18,22 +18,28 @@ export function ChevronDownsvgIcon(props: ChevronDownsvgIconProps) {
       viewBox={"0 0 24 24"}
       height={"1em"}
       width={"1em"}
+      style={{
+        stroke: "currentcolor",
+
+        ...(style || {}),
+      }}
       className={classNames("plasmic-default__svg", className)}
-      style={style}
       {...restProps}
     >
       {title && <title>{title}</title>}
 
       <path
+        d={
+          "M17.25 19.25H6.75a2 2 0 01-2-2V6.75a2 2 0 012-2h10.5a2 2 0 012 2v10.5a2 2 0 01-2 2z"
+        }
         stroke={"currentColor"}
+        strokeWidth={"1.5"}
         strokeLinecap={"round"}
         strokeLinejoin={"round"}
-        strokeWidth={"1.5"}
-        d={"M15.25 10.75L12 14.25l-3.25-3.5"}
       ></path>
     </svg>
   );
 }
 
-export default ChevronDownsvgIcon;
+export default SquareSvgIcon;
 /* prettier-ignore-end */

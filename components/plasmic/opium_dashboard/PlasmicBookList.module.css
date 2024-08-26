@@ -319,7 +319,7 @@
   min-width: 0;
   padding: 8px;
 }
-.activedeactiveOnlineVisit {
+.activeDeactiveOnlineVisit {
   display: flex;
   flex-direction: column;
   position: relative;

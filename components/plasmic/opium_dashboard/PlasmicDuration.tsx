@@ -78,7 +78,7 @@ import Icon15Icon from "./icons/PlasmicIcon__Icon15"; // plasmic-import: dLXaRsS
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: q8mRvXMvOrv9/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: BMYyZW6g83gg/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: BMYyZW6g83gg/icon
 
 createPlasmicElementProxy;
 
@@ -255,6 +255,19 @@ function PlasmicDuration__RenderFunc(props: {
         className={classNames("__wab_instance", sty.sideEffect, {
           [sty.sideEffectcheck]: hasVariant($state, "check", "check")
         })}
+        deps={(() => {
+          try {
+            return [$props.centerId];
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return undefined;
+            }
+            throw e;
+          }
+        })()}
         onMount={async () => {
           const $steps = {};
 
@@ -469,7 +482,7 @@ function PlasmicDuration__RenderFunc(props: {
           trigger={
             (() => {
               try {
-                return ($props.centerId = 5532);
+                return $props.centerId == 5532;
               } catch (e) {
                 if (
                   e instanceof TypeError ||
@@ -943,7 +956,7 @@ function PlasmicDuration__RenderFunc(props: {
                   })()}
                 </React.Fragment>
               </div>
-              <ChecksvgIcon
+              <CheckSvgIcon
                 className={classNames(projectcss.all, sty.svg__xGfkX)}
                 role={"img"}
               />
@@ -1148,7 +1161,7 @@ function PlasmicDuration__RenderFunc(props: {
                         }
                       })()
                 ) ? (
-                  <ChecksvgIcon
+                  <CheckSvgIcon
                     className={classNames(projectcss.all, sty.svg__cBvHc, {
                       [sty.svgcheck__cBvHcRijdN]: hasVariant(
                         $state,

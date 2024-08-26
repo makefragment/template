@@ -70,8 +70,8 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicSelect.module.css"; // plasmic-import: C-JgjGWfRxfZ/css
 
-import ChevronDownsvgIcon from "./icons/PlasmicIcon__ChevronDownsvg"; // plasmic-import: vyArbbpHyA3h/icon
-import ChevronUpsvgIcon from "./icons/PlasmicIcon__ChevronUpsvg"; // plasmic-import: fNYF7afgfzXN/icon
+import ChevronDownSvgIcon from "./icons/PlasmicIcon__ChevronDownSvg"; // plasmic-import: vyArbbpHyA3h/icon
+import ChevronUpSvgIcon from "./icons/PlasmicIcon__ChevronUpSvg"; // plasmic-import: fNYF7afgfzXN/icon
 
 createPlasmicElementProxy;
 
@@ -122,10 +122,16 @@ export type PlasmicSelect__ArgsType = {
   children?: React.ReactNode;
   value?: "Dynamic options";
   name?: string;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
+  arialabel?: string;
+  arialabelledby?: string;
   options?: any;
   onChange?: (value: string) => void;
+  arialabel?: string;
+  arialabelledby?: string;
+  arialabel?: string;
+  arialabelledby?: string;
+  arialabel?: string;
+  arialabelledby?: string;
 };
 type ArgPropType = keyof PlasmicSelect__ArgsType;
 export const PlasmicSelect__ArgProps = new Array<ArgPropType>(
@@ -134,10 +140,16 @@ export const PlasmicSelect__ArgProps = new Array<ArgPropType>(
   "children",
   "value",
   "name",
-  "aria-label",
-  "aria-labelledby",
+  "arialabel",
+  "arialabelledby",
   "options",
-  "onChange"
+  "onChange",
+  "arialabel",
+  "arialabelledby",
+  "arialabel",
+  "arialabelledby",
+  "arialabel",
+  "arialabelledby"
 );
 
 export type PlasmicSelect__OverridesType = {
@@ -150,9 +162,15 @@ export type PlasmicSelect__OverridesType = {
 };
 
 export interface DefaultSelectProps extends pp.BaseSelectProps {
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
+  arialabel?: string;
+  arialabelledby?: string;
   options?: any;
+  arialabel?: string;
+  arialabelledby?: string;
+  arialabel?: string;
+  arialabelledby?: string;
+  arialabel?: string;
+  arialabelledby?: string;
   color?: SingleChoiceArg<
     | "softBlue"
     | "softCyan"
@@ -540,8 +558,8 @@ function PlasmicSelect__RenderFunc(props: {
             data-plasmic-override={overrides.dropdownIcon}
             PlasmicIconType={
               hasVariant($state, "isOpen", "isOpen")
-                ? ChevronUpsvgIcon
-                : ChevronDownsvgIcon
+                ? ChevronUpSvgIcon
+                : ChevronDownSvgIcon
             }
             className={classNames(projectcss.all, sty.dropdownIcon, {
               [sty.dropdownIcon___focusVisibleWithin]:

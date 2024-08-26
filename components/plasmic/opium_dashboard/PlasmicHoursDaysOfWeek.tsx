@@ -423,6 +423,19 @@ function PlasmicHoursDaysOfWeek__RenderFunc(props: {
           <Duration
             data-plasmic-name={"durationOfWorkhour"}
             data-plasmic-override={overrides.durationOfWorkhour}
+            centerId={(() => {
+              try {
+                return $props.centerId;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             className={classNames("__wab_instance", sty.durationOfWorkhour)}
             newduration={generateStateValueProp($state, [
               "durationOfWorkhour",

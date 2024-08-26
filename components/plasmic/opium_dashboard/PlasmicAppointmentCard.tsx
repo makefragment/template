@@ -77,8 +77,8 @@ import EitaaIcon from "../fragment_icons/icons/PlasmicIcon__Eitaa"; // plasmic-i
 import WhatsappIcon from "../fragment_icons/icons/PlasmicIcon__Whatsapp"; // plasmic-import: oob3UzcKBsd_/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
-import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: euu18ryAtnAt/icon
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: BMYyZW6g83gg/icon
+import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: euu18ryAtnAt/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: BMYyZW6g83gg/icon
 
 import { v4 as __lib_uuid__v4 } from "uuid";
 
@@ -146,8 +146,8 @@ export const PlasmicAppointmentCard__ArgProps = new Array<ArgPropType>(
 export type PlasmicAppointmentCard__OverridesType = {
   root?: Flex__<"div">;
   dialog?: Flex__<typeof Dialog>;
-  ساعتوتارخ?: Flex__<"div">;
-  دالوحذفنوبت?: Flex__<typeof Dialog>;
+  ساعتوتاریخ?: Flex__<"div">;
+  دیالوگحذفنوبت?: Flex__<typeof Dialog>;
   bookState?: Flex__<"div">;
   dialog2?: Flex__<typeof Dialog>;
   descriptionInput?: Flex__<typeof TextInput>;
@@ -234,7 +234,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "دالوحذفنوبت.open",
+        path: "دیالوگحذفنوبت.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -333,10 +333,10 @@ function PlasmicAppointmentCard__RenderFunc(props: {
           >
             <div
               data-plasmic-name={
-                "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u062e"
+                "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e"
               }
-              data-plasmic-override={overrides.ساعتوتارخ}
-              className={classNames(projectcss.all, sty.ساعتوتارخ)}
+              data-plasmic-override={overrides.ساعتوتاریخ}
+              className={classNames(projectcss.all, sty.ساعتوتاریخ)}
             >
               <div className={classNames(projectcss.all, sty.freeBox__fagh6)}>
                 <div
@@ -941,9 +941,9 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             ) : null}
             <Dialog
               data-plasmic-name={
-                "\u062f\u0627\u0644\u0648\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
+                "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
               }
-              data-plasmic-override={overrides.دالوحذفنوبت}
+              data-plasmic-override={overrides.دیالوگحذفنوبت}
               body={
                 <Stack__
                   as={"div"}
@@ -1369,12 +1369,12 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                   />
                 </Stack__>
               }
-              className={classNames("__wab_instance", sty.دالوحذفنوبت)}
+              className={classNames("__wab_instance", sty.دیالوگحذفنوبت)}
               onOpenChange={generateStateOnChangeProp($state, [
-                "دالوحذفنوبت",
+                "دیالوگحذفنوبت",
                 "open"
               ])}
-              open={generateStateValueProp($state, ["دالوحذفنوبت", "open"])}
+              open={generateStateValueProp($state, ["دیالوگحذفنوبت", "open"])}
               title={
                 <div
                   className={classNames(
@@ -2355,8 +2355,8 @@ const PlasmicDescendants = {
   root: [
     "root",
     "dialog",
-    "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u062e",
-    "\u062f\u0627\u0644\u0648\u062d\u0630\u0641\u0646\u0648\u0628\u062a",
+    "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e",
+    "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a",
     "bookState",
     "dialog2",
     "descriptionInput",
@@ -2365,12 +2365,12 @@ const PlasmicDescendants = {
   ],
   dialog: [
     "dialog",
-    "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u062e",
-    "\u062f\u0627\u0644\u0648\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
+    "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e",
+    "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
   ],
-  ساعتوتارخ: ["\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u062e"],
-  دالوحذفنوبت: [
-    "\u062f\u0627\u0644\u0648\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
+  ساعتوتاریخ: ["\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e"],
+  دیالوگحذفنوبت: [
+    "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
   ],
   bookState: [
     "bookState",
@@ -2390,8 +2390,8 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   dialog: typeof Dialog;
-  ساعتوتارخ: "div";
-  دالوحذفنوبت: typeof Dialog;
+  ساعتوتاریخ: "div";
+  دیالوگحذفنوبت: typeof Dialog;
   bookState: "div";
   dialog2: typeof Dialog;
   descriptionInput: typeof TextInput;
@@ -2460,11 +2460,11 @@ export const PlasmicAppointmentCard = Object.assign(
   {
     // Helper components rendering sub-elements
     dialog: makeNodeComponent("dialog"),
-    ساعتوتارخ: makeNodeComponent(
-      "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u062e"
+    ساعتوتاریخ: makeNodeComponent(
+      "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e"
     ),
-    دالوحذفنوبت: makeNodeComponent(
-      "\u062f\u0627\u0644\u0648\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
+    دیالوگحذفنوبت: makeNodeComponent(
+      "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
     ),
     bookState: makeNodeComponent("bookState"),
     dialog2: makeNodeComponent("dialog2"),

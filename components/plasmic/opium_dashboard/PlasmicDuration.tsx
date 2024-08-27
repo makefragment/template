@@ -78,7 +78,7 @@ import Icon15Icon from "./icons/PlasmicIcon__Icon15"; // plasmic-import: dLXaRsS
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: q8mRvXMvOrv9/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
-import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: BMYyZW6g83gg/icon
+import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: BMYyZW6g83gg/icon
 
 createPlasmicElementProxy;
 
@@ -956,7 +956,7 @@ function PlasmicDuration__RenderFunc(props: {
                   })()}
                 </React.Fragment>
               </div>
-              <CheckSvgIcon
+              <ChecksvgIcon
                 className={classNames(projectcss.all, sty.svg__xGfkX)}
                 role={"img"}
               />
@@ -1161,7 +1161,7 @@ function PlasmicDuration__RenderFunc(props: {
                         }
                       })()
                 ) ? (
-                  <CheckSvgIcon
+                  <ChecksvgIcon
                     className={classNames(projectcss.all, sty.svg__cBvHc, {
                       [sty.svgcheck__cBvHcRijdN]: hasVariant(
                         $state,

@@ -497,7 +497,7 @@ function PlasmicDrCenters__RenderFunc(props: {
                 onselected={async () => {
                   const $steps = {};
 
-                  $steps["goToHttpsDrPaziresh24ComActivationConsultRules"] =
+                  $steps["goToHttpsdrpaziresh24Comactivationconsultrules"] =
                     true
                       ? (() => {
                           const actionArgs = {
@@ -519,18 +519,18 @@ function PlasmicDrCenters__RenderFunc(props: {
                         })()
                       : undefined;
                   if (
-                    $steps["goToHttpsDrPaziresh24ComActivationConsultRules"] !=
+                    $steps["goToHttpsdrpaziresh24Comactivationconsultrules"] !=
                       null &&
                     typeof $steps[
-                      "goToHttpsDrPaziresh24ComActivationConsultRules"
+                      "goToHttpsdrpaziresh24Comactivationconsultrules"
                     ] === "object" &&
                     typeof $steps[
-                      "goToHttpsDrPaziresh24ComActivationConsultRules"
+                      "goToHttpsdrpaziresh24Comactivationconsultrules"
                     ].then === "function"
                   ) {
-                    $steps["goToHttpsDrPaziresh24ComActivationConsultRules"] =
+                    $steps["goToHttpsdrpaziresh24Comactivationconsultrules"] =
                       await $steps[
-                        "goToHttpsDrPaziresh24ComActivationConsultRules"
+                        "goToHttpsdrpaziresh24Comactivationconsultrules"
                       ];
                   }
 
@@ -606,7 +606,7 @@ function PlasmicDrCenters__RenderFunc(props: {
                 onselected={async () => {
                   const $steps = {};
 
-                  $steps["goToHttpsDrPaziresh24ComActivationOfficeCenter"] =
+                  $steps["goToHttpsdrpaziresh24Comactivationofficecenter"] =
                     true
                       ? (() => {
                           const actionArgs = {
@@ -628,18 +628,18 @@ function PlasmicDrCenters__RenderFunc(props: {
                         })()
                       : undefined;
                   if (
-                    $steps["goToHttpsDrPaziresh24ComActivationOfficeCenter"] !=
+                    $steps["goToHttpsdrpaziresh24Comactivationofficecenter"] !=
                       null &&
                     typeof $steps[
-                      "goToHttpsDrPaziresh24ComActivationOfficeCenter"
+                      "goToHttpsdrpaziresh24Comactivationofficecenter"
                     ] === "object" &&
                     typeof $steps[
-                      "goToHttpsDrPaziresh24ComActivationOfficeCenter"
+                      "goToHttpsdrpaziresh24Comactivationofficecenter"
                     ].then === "function"
                   ) {
-                    $steps["goToHttpsDrPaziresh24ComActivationOfficeCenter"] =
+                    $steps["goToHttpsdrpaziresh24Comactivationofficecenter"] =
                       await $steps[
-                        "goToHttpsDrPaziresh24ComActivationOfficeCenter"
+                        "goToHttpsdrpaziresh24Comactivationofficecenter"
                       ];
                   }
 

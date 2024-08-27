@@ -107,7 +107,7 @@ export type PlasmicUncertainBookStatusList__OverridesType = {
   root?: Flex__<"div">;
   sideEffect?: Flex__<typeof SideEffect>;
   dialog?: Flex__<typeof Dialog>;
-  yesSure?: Flex__<typeof Button>;
+  yessure?: Flex__<typeof Button>;
   no?: Flex__<typeof Button>;
   uncertainBookStatusBookCard?: Flex__<typeof UncertainBookStatusBookCard>;
   svg?: Flex__<"svg">;
@@ -545,12 +545,12 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
               className={classNames(projectcss.all, sty.freeBox__epDHv)}
             >
               <Button
-                data-plasmic-name={"yesSure"}
-                data-plasmic-override={overrides.yesSure}
+                data-plasmic-name={"yessure"}
+                data-plasmic-override={overrides.yessure}
                 children2={
                   "\u0628\u0644\u0647\u060c \u0627\u0637\u0645\u06cc\u0646\u0627\u0646 \u062f\u0627\u0631\u0645"
                 }
-                className={classNames("__wab_instance", sty.yesSure)}
+                className={classNames("__wab_instance", sty.yessure)}
                 loading={(() => {
                   try {
                     return $state.loading;
@@ -1251,14 +1251,14 @@ const PlasmicDescendants = {
     "root",
     "sideEffect",
     "dialog",
-    "yesSure",
+    "yessure",
     "no",
     "uncertainBookStatusBookCard",
     "svg"
   ],
   sideEffect: ["sideEffect"],
-  dialog: ["dialog", "yesSure", "no"],
-  yesSure: ["yesSure"],
+  dialog: ["dialog", "yessure", "no"],
+  yessure: ["yessure"],
   no: ["no"],
   uncertainBookStatusBookCard: ["uncertainBookStatusBookCard"],
   svg: ["svg"]
@@ -1270,7 +1270,7 @@ type NodeDefaultElementType = {
   root: "div";
   sideEffect: typeof SideEffect;
   dialog: typeof Dialog;
-  yesSure: typeof Button;
+  yessure: typeof Button;
   no: typeof Button;
   uncertainBookStatusBookCard: typeof UncertainBookStatusBookCard;
   svg: "svg";
@@ -1338,7 +1338,7 @@ export const PlasmicUncertainBookStatusList = Object.assign(
     // Helper components rendering sub-elements
     sideEffect: makeNodeComponent("sideEffect"),
     dialog: makeNodeComponent("dialog"),
-    yesSure: makeNodeComponent("yesSure"),
+    yessure: makeNodeComponent("yessure"),
     no: makeNodeComponent("no"),
     uncertainBookStatusBookCard: makeNodeComponent(
       "uncertainBookStatusBookCard"

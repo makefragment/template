@@ -227,7 +227,7 @@
   > img {
   margin-top: var(--token-vMUQwr5Jto1d);
 }
-.ساعتوتاریخ {
+.ساعتوتارخ {
   display: flex;
   position: relative;
   flex-direction: row;
@@ -391,7 +391,7 @@
   width: auto;
   height: 1em;
 }
-.دیالوگحذفنوبت:global(.__wab_instance):global(.__wab_instance) {
+.دالوحذفنوبت:global(.__wab_instance):global(.__wab_instance) {
   position: relative;
   width: 100%;
   min-width: 0;

@@ -74,8 +74,8 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicAddPatient.module.css"; // plasmic-import: tPaqHhQ134RQ/css
 
-import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: euu18ryAtnAt/icon
-import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: BMYyZW6g83gg/icon
+import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: euu18ryAtnAt/icon
+import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: BMYyZW6g83gg/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 import CalendarIcon from "../fragment_icons/icons/PlasmicIcon__Calendar"; // plasmic-import: e2zWN9c_lxv7/icon
@@ -117,7 +117,7 @@ export type PlasmicAddPatient__OverridesType = {
   freeturnBook?: Flex__<typeof Button>;
   preferBooktimeButton?: Flex__<typeof Button>;
   preferBooktime?: Flex__<typeof Dialog>;
-  تقویم?: Flex__<typeof Dialog>;
+  تقوم?: Flex__<typeof Dialog>;
   datePicker?: Flex__<typeof DatePicker>;
   addNewBookTime?: Flex__<"div">;
   dialogNewTimePicker?: Flex__<typeof Dialog>;
@@ -239,7 +239,7 @@ function PlasmicAddPatient__RenderFunc(props: {
           })()
       },
       {
-        path: "تقویم.open",
+        path: "تقوم.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -1051,7 +1051,7 @@ function PlasmicAddPatient__RenderFunc(props: {
                       "\u062a\u0644\u0641\u0646 \u0647\u0645\u0631\u0627\u0647"
                     }
                     startIcon={
-                      <SearchSvgIcon
+                      <SearchsvgIcon
                         className={classNames(projectcss.all, sty.svg__xyx5)}
                         role={"img"}
                       />
@@ -1823,10 +1823,8 @@ function PlasmicAddPatient__RenderFunc(props: {
                                 </React.Fragment>
                               </div>
                               <Dialog
-                                data-plasmic-name={
-                                  "\u062a\u0642\u0648\u06cc\u0645"
-                                }
-                                data-plasmic-override={overrides.تقویم}
+                                data-plasmic-name={"\u062a\u0642\u0648\u0645"}
+                                data-plasmic-override={overrides.تقوم}
                                 body={
                                   <div
                                     className={classNames(
@@ -1937,14 +1935,14 @@ function PlasmicAddPatient__RenderFunc(props: {
                                 }
                                 className={classNames(
                                   "__wab_instance",
-                                  sty.تقویم
+                                  sty.تقوم
                                 )}
                                 onOpenChange={generateStateOnChangeProp(
                                   $state,
-                                  ["تقویم", "open"]
+                                  ["تقوم", "open"]
                                 )}
                                 open={generateStateValueProp($state, [
-                                  "تقویم",
+                                  "تقوم",
                                   "open"
                                 ])}
                                 title={
@@ -4066,7 +4064,7 @@ const PlasmicDescendants = {
     "freeturnBook",
     "preferBooktimeButton",
     "preferBooktime",
-    "\u062a\u0642\u0648\u06cc\u0645",
+    "\u062a\u0642\u0648\u0645",
     "datePicker",
     "addNewBookTime",
     "dialogNewTimePicker",
@@ -4091,7 +4089,7 @@ const PlasmicDescendants = {
     "freeturnBook",
     "preferBooktimeButton",
     "preferBooktime",
-    "\u062a\u0642\u0648\u06cc\u0645",
+    "\u062a\u0642\u0648\u0645",
     "datePicker",
     "addNewBookTime",
     "dialogNewTimePicker",
@@ -4112,7 +4110,7 @@ const PlasmicDescendants = {
     "freeturnBook",
     "preferBooktimeButton",
     "preferBooktime",
-    "\u062a\u0642\u0648\u06cc\u0645",
+    "\u062a\u0642\u0648\u0645",
     "datePicker",
     "addNewBookTime",
     "dialogNewTimePicker",
@@ -4128,7 +4126,7 @@ const PlasmicDescendants = {
   preferBooktimeButton: ["preferBooktimeButton"],
   preferBooktime: [
     "preferBooktime",
-    "\u062a\u0642\u0648\u06cc\u0645",
+    "\u062a\u0642\u0648\u0645",
     "datePicker",
     "addNewBookTime",
     "dialogNewTimePicker",
@@ -4140,7 +4138,7 @@ const PlasmicDescendants = {
     "toTimePicker",
     "submitNewBook"
   ],
-  تقویم: ["\u062a\u0642\u0648\u06cc\u0645", "datePicker"],
+  تقوم: ["\u062a\u0642\u0648\u0645", "datePicker"],
   datePicker: ["datePicker"],
   addNewBookTime: ["addNewBookTime"],
   dialogNewTimePicker: [
@@ -4178,7 +4176,7 @@ type NodeDefaultElementType = {
   freeturnBook: typeof Button;
   preferBooktimeButton: typeof Button;
   preferBooktime: typeof Dialog;
-  تقویم: typeof Dialog;
+  تقوم: typeof Dialog;
   datePicker: typeof DatePicker;
   addNewBookTime: "div";
   dialogNewTimePicker: typeof Dialog;
@@ -4263,7 +4261,7 @@ export const PlasmicAddPatient = Object.assign(
     freeturnBook: makeNodeComponent("freeturnBook"),
     preferBooktimeButton: makeNodeComponent("preferBooktimeButton"),
     preferBooktime: makeNodeComponent("preferBooktime"),
-    تقویم: makeNodeComponent("\u062a\u0642\u0648\u06cc\u0645"),
+    تقوم: makeNodeComponent("\u062a\u0642\u0648\u0645"),
     datePicker: makeNodeComponent("datePicker"),
     addNewBookTime: makeNodeComponent("addNewBookTime"),
     dialogNewTimePicker: makeNodeComponent("dialogNewTimePicker"),

@@ -60,6 +60,7 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
+import QuickAccessWallet from "../../QuickAccessWallet"; // plasmic-import: GvtgrqQf9C66/component
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { DatePicker } from "@/fragment/components/date-picker"; // plasmic-import: b38lDo6Nm8Rh/codeComponent
 import DrCenters from "../../DrCenters"; // plasmic-import: IkLsGKQP_uPj/component
@@ -100,9 +101,12 @@ export const PlasmicBookList__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicBookList__OverridesType = {
   bookList?: Flex__<"div">;
+  quickAccess?: Flex__<"div">;
+  quickAccessWallet?: Flex__<typeof QuickAccessWallet>;
   date?: Flex__<"div">;
+  date2?: Flex__<"div">;
   calendar?: Flex__<typeof Dialog>;
-  تقویمماهانه?: Flex__<"div">;
+  تقومماهانه?: Flex__<"div">;
   fragmentDatePicker?: Flex__<typeof DatePicker>;
   center?: Flex__<"div">;
   drCenters?: Flex__<typeof DrCenters>;
@@ -110,7 +114,8 @@ export type PlasmicBookList__OverridesType = {
   addPatient?: Flex__<"div">;
   dialog?: Flex__<typeof Dialog>;
   drCenters2?: Flex__<typeof DrCenters>;
-  activeDeactiveOnlineVisit?: Flex__<"div">;
+  onoffButton?: Flex__<"div">;
+  activedeactiveOnlineVisit?: Flex__<"div">;
   determiningTheSituationDialog?: Flex__<typeof Dialog>;
   cancelbook?: Flex__<typeof Button>;
 };
@@ -253,7 +258,7 @@ function PlasmicBookList__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
-        path: "loadingOnOff",
+        path: "loadingOnoff",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -393,14 +398,104 @@ function PlasmicBookList__RenderFunc(props: {
           />
 
           <div
+            data-plasmic-name={"quickAccess"}
+            data-plasmic-override={overrides.quickAccess}
+            className={classNames(projectcss.all, sty.quickAccess)}
+          >
+            <div
+              className={classNames(projectcss.all, sty.freeBox___5X51W)}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["goToHttpsdrpaziresh24Comsettingpaymentutmnelson"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination:
+                          "https://dr.paziresh24.com/setting/payment?utm=nelson"
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToHttpsdrpaziresh24Comsettingpaymentutmnelson"] !=
+                    null &&
+                  typeof $steps[
+                    "goToHttpsdrpaziresh24Comsettingpaymentutmnelson"
+                  ] === "object" &&
+                  typeof $steps[
+                    "goToHttpsdrpaziresh24Comsettingpaymentutmnelson"
+                  ].then === "function"
+                ) {
+                  $steps["goToHttpsdrpaziresh24Comsettingpaymentutmnelson"] =
+                    await $steps[
+                      "goToHttpsdrpaziresh24Comsettingpaymentutmnelson"
+                    ];
+                }
+
+                $steps["sendEvent"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          (() => {
+                            try {
+                              return {
+                                group: "quick access",
+                                type: "wallet",
+                                center: $state.centers
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
+                      };
+                      return $globalActions["Splunk.sendLog"]?.apply(null, [
+                        ...actionArgs.args
+                      ]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["sendEvent"] != null &&
+                  typeof $steps["sendEvent"] === "object" &&
+                  typeof $steps["sendEvent"].then === "function"
+                ) {
+                  $steps["sendEvent"] = await $steps["sendEvent"];
+                }
+              }}
+            >
+              <QuickAccessWallet
+                data-plasmic-name={"quickAccessWallet"}
+                data-plasmic-override={overrides.quickAccessWallet}
+                className={classNames("__wab_instance", sty.quickAccessWallet)}
+              />
+            </div>
+          </div>
+          <div
             data-plasmic-name={"date"}
             data-plasmic-override={overrides.date}
             className={classNames(projectcss.all, sty.date)}
           >
-            <Stack__
-              as={"div"}
-              hasGap={true}
-              className={classNames(projectcss.all, sty.freeBox___64VOz)}
+            <div
+              data-plasmic-name={"date2"}
+              data-plasmic-override={overrides.date2}
+              className={classNames(projectcss.all, sty.date2)}
             >
               <div
                 className={classNames(
@@ -570,13 +665,13 @@ function PlasmicBookList__RenderFunc(props: {
                 title={
                   <div
                     data-plasmic-name={
-                      "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
+                      "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
                     }
-                    data-plasmic-override={overrides.تقویمماهانه}
+                    data-plasmic-override={overrides.تقومماهانه}
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.تقویمماهانه
+                      sty.تقومماهانه
                     )}
                   >
                     {
@@ -591,7 +686,7 @@ function PlasmicBookList__RenderFunc(props: {
                   />
                 }
               />
-            </Stack__>
+            </div>
           </div>
           <div
             data-plasmic-name={"center"}
@@ -1262,7 +1357,11 @@ function PlasmicBookList__RenderFunc(props: {
               />
             </div>
           ) : null}
-          <div className={classNames(projectcss.all, sty.freeBox__k97Kh)}>
+          <div
+            data-plasmic-name={"onoffButton"}
+            data-plasmic-override={overrides.onoffButton}
+            className={classNames(projectcss.all, sty.onoffButton)}
+          >
             {(() => {
               try {
                 return $state.selectedCenter === "5532";
@@ -1277,13 +1376,13 @@ function PlasmicBookList__RenderFunc(props: {
               }
             })() ? (
               <div
-                data-plasmic-name={"activeDeactiveOnlineVisit"}
-                data-plasmic-override={overrides.activeDeactiveOnlineVisit}
+                data-plasmic-name={"activedeactiveOnlineVisit"}
+                data-plasmic-override={overrides.activedeactiveOnlineVisit}
                 className={classNames(
                   projectcss.all,
-                  sty.activeDeactiveOnlineVisit,
+                  sty.activedeactiveOnlineVisit,
                   {
-                    [sty.activeDeactiveOnlineVisitactive]: hasVariant(
+                    [sty.activedeactiveOnlineVisitactive]: hasVariant(
                       $state,
                       "active",
                       "active"
@@ -2039,7 +2138,7 @@ function PlasmicBookList__RenderFunc(props: {
                         await $steps["updateDeterminingTheSituationDialogOpen"];
                     }
 
-                    $steps["apiActveDeactiveVisitOnline"] = true
+                    $steps["apiActvedeactiveVisitOnline"] = true
                       ? (() => {
                           const actionArgs = {
                             args: [
@@ -2075,14 +2174,14 @@ function PlasmicBookList__RenderFunc(props: {
                         })()
                       : undefined;
                     if (
-                      $steps["apiActveDeactiveVisitOnline"] != null &&
-                      typeof $steps["apiActveDeactiveVisitOnline"] ===
+                      $steps["apiActvedeactiveVisitOnline"] != null &&
+                      typeof $steps["apiActvedeactiveVisitOnline"] ===
                         "object" &&
-                      typeof $steps["apiActveDeactiveVisitOnline"].then ===
+                      typeof $steps["apiActvedeactiveVisitOnline"].then ===
                         "function"
                     ) {
-                      $steps["apiActveDeactiveVisitOnline"] = await $steps[
-                        "apiActveDeactiveVisitOnline"
+                      $steps["apiActvedeactiveVisitOnline"] = await $steps[
+                        "apiActvedeactiveVisitOnline"
                       ];
                     }
 
@@ -2160,7 +2259,7 @@ function PlasmicBookList__RenderFunc(props: {
                       $steps["updateActive"] = await $steps["updateActive"];
                     }
 
-                    $steps["eventOnOff"] = true
+                    $steps["eventOnoff"] = true
                       ? (() => {
                           const actionArgs = {
                             args: [
@@ -2194,11 +2293,11 @@ function PlasmicBookList__RenderFunc(props: {
                         })()
                       : undefined;
                     if (
-                      $steps["eventOnOff"] != null &&
-                      typeof $steps["eventOnOff"] === "object" &&
-                      typeof $steps["eventOnOff"].then === "function"
+                      $steps["eventOnoff"] != null &&
+                      typeof $steps["eventOnoff"] === "object" &&
+                      typeof $steps["eventOnoff"].then === "function"
                     ) {
-                      $steps["eventOnOff"] = await $steps["eventOnOff"];
+                      $steps["eventOnoff"] = await $steps["eventOnoff"];
                     }
 
                     $steps["loadingFinish"] =
@@ -2250,9 +2349,12 @@ function PlasmicBookList__RenderFunc(props: {
 const PlasmicDescendants = {
   bookList: [
     "bookList",
+    "quickAccess",
+    "quickAccessWallet",
     "date",
+    "date2",
     "calendar",
-    "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
+    "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
     "fragmentDatePicker",
     "center",
     "drCenters",
@@ -2260,24 +2362,32 @@ const PlasmicDescendants = {
     "addPatient",
     "dialog",
     "drCenters2",
-    "activeDeactiveOnlineVisit",
+    "onoffButton",
+    "activedeactiveOnlineVisit",
     "determiningTheSituationDialog",
     "cancelbook"
   ],
+  quickAccess: ["quickAccess", "quickAccessWallet"],
+  quickAccessWallet: ["quickAccessWallet"],
   date: [
     "date",
+    "date2",
     "calendar",
-    "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
+    "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
+    "fragmentDatePicker"
+  ],
+  date2: [
+    "date2",
+    "calendar",
+    "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
     "fragmentDatePicker"
   ],
   calendar: [
     "calendar",
-    "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
+    "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647",
     "fragmentDatePicker"
   ],
-  تقویمماهانه: [
-    "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
-  ],
+  تقومماهانه: ["\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647"],
   fragmentDatePicker: ["fragmentDatePicker"],
   center: ["center", "drCenters", "patientList"],
   drCenters: ["drCenters"],
@@ -2285,8 +2395,14 @@ const PlasmicDescendants = {
   addPatient: ["addPatient", "dialog", "drCenters2"],
   dialog: ["dialog", "drCenters2"],
   drCenters2: ["drCenters2"],
-  activeDeactiveOnlineVisit: [
-    "activeDeactiveOnlineVisit",
+  onoffButton: [
+    "onoffButton",
+    "activedeactiveOnlineVisit",
+    "determiningTheSituationDialog",
+    "cancelbook"
+  ],
+  activedeactiveOnlineVisit: [
+    "activedeactiveOnlineVisit",
     "determiningTheSituationDialog",
     "cancelbook"
   ],
@@ -2301,9 +2417,12 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   bookList: "div";
+  quickAccess: "div";
+  quickAccessWallet: typeof QuickAccessWallet;
   date: "div";
+  date2: "div";
   calendar: typeof Dialog;
-  تقویمماهانه: "div";
+  تقومماهانه: "div";
   fragmentDatePicker: typeof DatePicker;
   center: "div";
   drCenters: typeof DrCenters;
@@ -2311,7 +2430,8 @@ type NodeDefaultElementType = {
   addPatient: "div";
   dialog: typeof Dialog;
   drCenters2: typeof DrCenters;
-  activeDeactiveOnlineVisit: "div";
+  onoffButton: "div";
+  activedeactiveOnlineVisit: "div";
   determiningTheSituationDialog: typeof Dialog;
   cancelbook: typeof Button;
 };
@@ -2376,10 +2496,13 @@ export const PlasmicBookList = Object.assign(
   makeNodeComponent("bookList"),
   {
     // Helper components rendering sub-elements
+    quickAccess: makeNodeComponent("quickAccess"),
+    quickAccessWallet: makeNodeComponent("quickAccessWallet"),
     date: makeNodeComponent("date"),
+    date2: makeNodeComponent("date2"),
     calendar: makeNodeComponent("calendar"),
-    تقویمماهانه: makeNodeComponent(
-      "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
+    تقومماهانه: makeNodeComponent(
+      "\u062a\u0642\u0648\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
     ),
     fragmentDatePicker: makeNodeComponent("fragmentDatePicker"),
     center: makeNodeComponent("center"),
@@ -2388,7 +2511,8 @@ export const PlasmicBookList = Object.assign(
     addPatient: makeNodeComponent("addPatient"),
     dialog: makeNodeComponent("dialog"),
     drCenters2: makeNodeComponent("drCenters2"),
-    activeDeactiveOnlineVisit: makeNodeComponent("activeDeactiveOnlineVisit"),
+    onoffButton: makeNodeComponent("onoffButton"),
+    activedeactiveOnlineVisit: makeNodeComponent("activedeactiveOnlineVisit"),
     determiningTheSituationDialog: makeNodeComponent(
       "determiningTheSituationDialog"
     ),

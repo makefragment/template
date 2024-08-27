@@ -9,6 +9,7 @@
   justify-content: flex-start;
   align-items: center;
   background: #ffffff;
+  grid-row-gap: 0px;
   min-width: 0;
   min-height: 0;
   grid-template-columns:
@@ -32,6 +33,42 @@
   object-fit: cover;
   position: relative;
 }
+.quickAccess {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-top-color: var(--token-Y3HOiwZmAcAF);
+  border-right-color: var(--token-Y3HOiwZmAcAF);
+  border-bottom-color: #ffffff;
+  border-left-color: var(--token-Y3HOiwZmAcAF);
+  min-width: 0;
+  border-radius: 8px 8px 0px 0px;
+  padding: 0px 0px 0px 5px;
+  border-width: 1px;
+  border-style: solid;
+}
+.freeBox___5X51W {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0px;
+}
+.quickAccessWallet:global(.__wab_instance) {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
 .date {
   display: flex;
   position: relative;
@@ -41,37 +78,25 @@
   width: auto;
   height: auto;
   max-width: 100%;
-  border-radius: 8px;
+  border-top-color: var(--token-Y3HOiwZmAcAF);
+  border-right-color: #e5e9f0;
+  border-bottom-color: var(--token-Y3HOiwZmAcAF);
+  border-left-color: #e5e9f0;
+  border-radius: 0px 0px 8px 8px;
   padding: 8px;
-  border: 1px solid #e5e9f0;
+  border-width: 1px;
+  border-style: solid;
 }
-.freeBox___64VOz {
+.date2 {
   display: flex;
-  position: relative;
   flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
-  padding: 8px;
-}
-.freeBox___64VOz > :global(.__wab_flex-container) {
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-  margin-left: calc(0px - var(--token-fhaz6q6bl-fW));
-  width: calc(100% + var(--token-fhaz6q6bl-fW));
-}
-.freeBox___64VOz > :global(.__wab_flex-container) > *,
-.freeBox___64VOz > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
-.freeBox___64VOz > :global(.__wab_flex-container) > picture > img,
-.freeBox___64VOz
-  > :global(.__wab_flex-container)
-  > :global(.__wab_slot)
-  > picture
-  > img {
-  margin-left: var(--token-fhaz6q6bl-fW);
 }
 .text__qxVhq {
   position: relative;
@@ -80,6 +105,12 @@
   max-width: 100%;
   text-align: center;
   font-weight: 600;
+  font-size: 16px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .text__qxVhq {
+    font-size: 14px;
+  }
 }
 .calendar:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
@@ -307,7 +338,7 @@
   max-width: 100%;
   position: relative;
 }
-.freeBox__k97Kh {
+.onoffButton {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -319,7 +350,7 @@
   min-width: 0;
   padding: 8px;
 }
-.activeDeactiveOnlineVisit {
+.activedeactiveOnlineVisit {
   display: flex;
   flex-direction: column;
   position: relative;

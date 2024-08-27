@@ -67,8 +67,8 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicTextInput.module.css"; // plasmic-import: 4D7TNkkkVIcw/css
 
-import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: euu18ryAtnAt/icon
-import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: BMYyZW6g83gg/icon
+import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: euu18ryAtnAt/icon
+import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: BMYyZW6g83gg/icon
 
 createPlasmicElementProxy;
 
@@ -99,8 +99,8 @@ export type PlasmicTextInput__ArgsType = {
   value?: string;
   name?: string;
   required?: boolean;
-  arialabel?: string;
-  arialabelledby?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
   onChange?: (event: any) => void;
   type?:
     | "text"
@@ -113,12 +113,14 @@ export type PlasmicTextInput__ArgsType = {
     | "email"
     | "tel";
   autoFocus?: boolean;
-  arialabel?: string;
-  arialabelledby?: string;
-  arialabel?: string;
-  arialabelledby?: string;
-  arialabel?: string;
-  arialabelledby?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
 };
 type ArgPropType = keyof PlasmicTextInput__ArgsType;
 export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
@@ -128,17 +130,19 @@ export const PlasmicTextInput__ArgProps = new Array<ArgPropType>(
   "value",
   "name",
   "required",
-  "arialabel",
-  "arialabelledby",
+  "aria-label",
+  "aria-labelledby",
   "onChange",
   "type",
   "autoFocus",
-  "arialabel",
-  "arialabelledby",
-  "arialabel",
-  "arialabelledby",
-  "arialabel",
-  "arialabelledby"
+  "aria-label",
+  "aria-labelledby",
+  "aria-label",
+  "aria-labelledby",
+  "aria-label",
+  "aria-labelledby",
+  "aria-label",
+  "aria-labelledby"
 );
 
 export type PlasmicTextInput__OverridesType = {
@@ -153,8 +157,8 @@ export interface DefaultTextInputProps extends pp.BaseTextInputProps {
   value?: string;
   name?: string;
   required?: boolean;
-  arialabel?: string;
-  arialabelledby?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
   onChange?: (event: any) => void;
   type?:
     | "text"
@@ -167,12 +171,14 @@ export interface DefaultTextInputProps extends pp.BaseTextInputProps {
     | "email"
     | "tel";
   autoFocus?: boolean;
-  arialabel?: string;
-  arialabelledby?: string;
-  arialabel?: string;
-  arialabelledby?: string;
-  arialabel?: string;
-  arialabelledby?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
   color?: SingleChoiceArg<"dark">;
 }
 
@@ -324,7 +330,7 @@ function PlasmicTextInput__RenderFunc(props: {
       >
         {renderPlasmicSlot({
           defaultContents: (
-            <SearchSvgIcon
+            <SearchsvgIcon
               className={classNames(projectcss.all, sty.svg__rrQh0)}
               role={"img"}
             />
@@ -348,8 +354,8 @@ function PlasmicTextInput__RenderFunc(props: {
       <input
         data-plasmic-name={"input"}
         data-plasmic-override={overrides.input}
-        aria-label={args.arialabel}
-        aria-labelledby={args.arialabelledby}
+        aria-label={args["aria-label"]}
+        aria-labelledby={args["aria-labelledby"]}
         autoFocus={args.autoFocus}
         className={classNames(projectcss.all, projectcss.input, sty.input, {
           [sty.input___focusVisibleWithin]: triggers.focusVisibleWithin_root,
@@ -391,7 +397,7 @@ function PlasmicTextInput__RenderFunc(props: {
       >
         {renderPlasmicSlot({
           defaultContents: (
-            <CheckSvgIcon
+            <ChecksvgIcon
               className={classNames(projectcss.all, sty.svg__pJpwt)}
               role={"img"}
             />

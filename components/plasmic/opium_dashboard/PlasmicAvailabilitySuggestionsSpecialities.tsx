@@ -84,7 +84,7 @@ export const PlasmicAvailabilitySuggestionsSpecialities__ArgProps =
 export type PlasmicAvailabilitySuggestionsSpecialities__OverridesType = {
   root?: Flex__<"div">;
   sideEffect?: Flex__<typeof SideEffect>;
-  ساعاتپربازدید?: Flex__<"div">;
+  ساعاتربازدد?: Flex__<"div">;
   text?: Flex__<"div">;
 };
 
@@ -228,13 +228,13 @@ function PlasmicAvailabilitySuggestionsSpecialities__RenderFunc(props: {
 
       <div
         data-plasmic-name={
-          "\u0633\u0627\u0639\u0627\u062a\u067e\u0631\u0628\u0627\u0632\u062f\u06cc\u062f"
+          "\u0633\u0627\u0639\u0627\u062a\u0631\u0628\u0627\u0632\u062f\u062f"
         }
-        data-plasmic-override={overrides.ساعاتپربازدید}
+        data-plasmic-override={overrides.ساعاتربازدد}
         className={classNames(
           projectcss.all,
           projectcss.__wab_text,
-          sty.ساعاتپربازدید
+          sty.ساعاتربازدد
         )}
       >
         {
@@ -311,12 +311,12 @@ const PlasmicDescendants = {
   root: [
     "root",
     "sideEffect",
-    "\u0633\u0627\u0639\u0627\u062a\u067e\u0631\u0628\u0627\u0632\u062f\u06cc\u062f",
+    "\u0633\u0627\u0639\u0627\u062a\u0631\u0628\u0627\u0632\u062f\u062f",
     "text"
   ],
   sideEffect: ["sideEffect"],
-  ساعاتپربازدید: [
-    "\u0633\u0627\u0639\u0627\u062a\u067e\u0631\u0628\u0627\u0632\u062f\u06cc\u062f"
+  ساعاتربازدد: [
+    "\u0633\u0627\u0639\u0627\u062a\u0631\u0628\u0627\u0632\u062f\u062f"
   ],
   text: ["text"]
 } as const;
@@ -326,7 +326,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   sideEffect: typeof SideEffect;
-  ساعاتپربازدید: "div";
+  ساعاتربازدد: "div";
   text: "div";
 };
 
@@ -396,8 +396,8 @@ export const PlasmicAvailabilitySuggestionsSpecialities = Object.assign(
   {
     // Helper components rendering sub-elements
     sideEffect: makeNodeComponent("sideEffect"),
-    ساعاتپربازدید: makeNodeComponent(
-      "\u0633\u0627\u0639\u0627\u062a\u067e\u0631\u0628\u0627\u0632\u062f\u06cc\u062f"
+    ساعاتربازدد: makeNodeComponent(
+      "\u0633\u0627\u0639\u0627\u062a\u0631\u0628\u0627\u0632\u062f\u062f"
     ),
     text: makeNodeComponent("text"),
 

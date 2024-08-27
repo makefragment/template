@@ -998,13 +998,27 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicActiveOfficeBooking.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "Rm8MeSoy4UAw",
+          "name": "BookSetting",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicBookSetting.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/new-page-2.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicBookSetting.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/new-page-2"
         }
       ],
       "icons": [
         {
           "id": "BMYyZW6g83gg",
-          "name": "CheckSvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__CheckSvg.tsx"
+          "name": "ChecksvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Checksvg.tsx"
         },
         {
           "id": "0RFRFbiZZc8Z",
@@ -1013,33 +1027,33 @@
         },
         {
           "id": "euu18ryAtnAt",
-          "name": "SearchSvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SearchSvg.tsx"
+          "name": "SearchsvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Searchsvg.tsx"
         },
         {
           "id": "YNCiTLFL-fSE",
-          "name": "SquareSvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SquareSvg.tsx"
+          "name": "SquaresvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Squaresvg.tsx"
         },
         {
           "id": "VwLeMZcZaumF",
-          "name": "SquareCheckFilledSvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SquareCheckFilledSvg.tsx"
+          "name": "SquareCheckFilledsvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SquareCheckFilledsvg.tsx"
         },
         {
           "id": "SUgNEqYWmuPX",
-          "name": "SquareMinusSvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SquareMinusSvg.tsx"
+          "name": "SquareMinussvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__SquareMinussvg.tsx"
         },
         {
           "id": "vyArbbpHyA3h",
-          "name": "ChevronDownSvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__ChevronDownSvg.tsx"
+          "name": "ChevronDownsvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__ChevronDownsvg.tsx"
         },
         {
           "id": "fNYF7afgfzXN",
-          "name": "ChevronUpSvgIcon",
-          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__ChevronUpSvg.tsx"
+          "name": "ChevronUpsvgIcon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__ChevronUpsvg.tsx"
         },
         {
           "id": "q8mRvXMvOrv9",

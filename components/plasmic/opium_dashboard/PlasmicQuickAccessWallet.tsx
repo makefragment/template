@@ -159,74 +159,6 @@ function PlasmicQuickAccessWallet__RenderFunc(props: {
       )}
       onClick={async event => {
         const $steps = {};
-
-        $steps["goToHttpsDrPaziresh24ComSettingPayment"] = true
-          ? (() => {
-              const actionArgs = {
-                destination: "https://dr.paziresh24.com/setting/payment"
-              };
-              return (({ destination }) => {
-                if (
-                  typeof destination === "string" &&
-                  destination.startsWith("#")
-                ) {
-                  document
-                    .getElementById(destination.substr(1))
-                    .scrollIntoView({ behavior: "smooth" });
-                } else {
-                  __nextRouter?.push(destination);
-                }
-              })?.apply(null, [actionArgs]);
-            })()
-          : undefined;
-        if (
-          $steps["goToHttpsDrPaziresh24ComSettingPayment"] != null &&
-          typeof $steps["goToHttpsDrPaziresh24ComSettingPayment"] ===
-            "object" &&
-          typeof $steps["goToHttpsDrPaziresh24ComSettingPayment"].then ===
-            "function"
-        ) {
-          $steps["goToHttpsDrPaziresh24ComSettingPayment"] = await $steps[
-            "goToHttpsDrPaziresh24ComSettingPayment"
-          ];
-        }
-
-        $steps["eventClickQuikAccessWallet"] = true
-          ? (() => {
-              const actionArgs = {
-                args: [
-                  (() => {
-                    try {
-                      return {
-                        group: "quick access",
-                        type: "wallet"
-                      };
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return undefined;
-                      }
-                      throw e;
-                    }
-                  })()
-                ]
-              };
-              return $globalActions["Splunk.sendLog"]?.apply(null, [
-                ...actionArgs.args
-              ]);
-            })()
-          : undefined;
-        if (
-          $steps["eventClickQuikAccessWallet"] != null &&
-          typeof $steps["eventClickQuikAccessWallet"] === "object" &&
-          typeof $steps["eventClickQuikAccessWallet"].then === "function"
-        ) {
-          $steps["eventClickQuikAccessWallet"] = await $steps[
-            "eventClickQuikAccessWallet"
-          ];
-        }
       }}
     >
       <SideEffect
@@ -294,7 +226,8 @@ function PlasmicQuickAccessWallet__RenderFunc(props: {
         try {
           return (
             $state.detailsPayment !== undefined &&
-            $state.detailsPayment !== null
+            $state.detailsPayment !== null &&
+            $state.detailsPayment !== ""
           );
         } catch (e) {
           if (

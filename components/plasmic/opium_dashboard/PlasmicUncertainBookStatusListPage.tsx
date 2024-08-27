@@ -547,7 +547,7 @@ function PlasmicUncertainBookStatusListPage__RenderFunc(props: {
                   onClick={async event => {
                     const $steps = {};
 
-                    $steps["goToHttpsDrPaziresh24ComSettingPayment"] = true
+                    $steps["goToHttpsdrpaziresh24Comsettingpayment"] = true
                       ? (() => {
                           const actionArgs = {
                             destination:
@@ -568,16 +568,16 @@ function PlasmicUncertainBookStatusListPage__RenderFunc(props: {
                         })()
                       : undefined;
                     if (
-                      $steps["goToHttpsDrPaziresh24ComSettingPayment"] !=
+                      $steps["goToHttpsdrpaziresh24Comsettingpayment"] !=
                         null &&
                       typeof $steps[
-                        "goToHttpsDrPaziresh24ComSettingPayment"
+                        "goToHttpsdrpaziresh24Comsettingpayment"
                       ] === "object" &&
-                      typeof $steps["goToHttpsDrPaziresh24ComSettingPayment"]
+                      typeof $steps["goToHttpsdrpaziresh24Comsettingpayment"]
                         .then === "function"
                     ) {
-                      $steps["goToHttpsDrPaziresh24ComSettingPayment"] =
-                        await $steps["goToHttpsDrPaziresh24ComSettingPayment"];
+                      $steps["goToHttpsdrpaziresh24Comsettingpayment"] =
+                        await $steps["goToHttpsdrpaziresh24Comsettingpayment"];
                     }
 
                     $steps["eventClickCheckLater"] = true

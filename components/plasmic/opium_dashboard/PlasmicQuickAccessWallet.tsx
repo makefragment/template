@@ -197,9 +197,10 @@ function PlasmicQuickAccessWallet__RenderFunc(props: {
                     variablePath: ["detailsPayment"]
                   },
                   operation: 0,
-                  value: $steps.apiDetailsPayment.data.find(
-                    item => item.sum_Unpaid_Amount
-                  ).sum_Unpaid_Amount
+                  value:
+                    $steps.apiDetailsPayment.data.find(
+                      item => item.sum_Unpaid_Amount
+                    )?.sum_Unpaid_Amount || "0"
                 };
                 return (({ variable, value, startIndex, deleteCount }) => {
                   if (!variable) {

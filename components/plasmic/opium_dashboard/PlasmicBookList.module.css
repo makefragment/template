@@ -58,10 +58,10 @@
   position: relative;
   align-items: center;
   justify-content: flex-end;
-  width: 100%;
+  width: auto;
   height: auto;
   max-width: 100%;
-  min-width: 0;
+  cursor: pointer;
   padding: 0px;
 }
 .quickAccessWallet:global(.__wab_instance) {
@@ -106,6 +106,7 @@
   text-align: center;
   font-weight: 600;
   font-size: 16px;
+  cursor: pointer;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .text__qxVhq {

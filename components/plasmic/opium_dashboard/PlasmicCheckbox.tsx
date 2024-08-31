@@ -64,12 +64,13 @@ import * as pp from "@plasmicapp/react-web";
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicCheckbox.module.css"; // plasmic-import: IDR0sAqN5tth/css
 
-import SquaresvgIcon from "./icons/PlasmicIcon__Squaresvg"; // plasmic-import: YNCiTLFL-fSE/icon
-import SquareCheckFilledsvgIcon from "./icons/PlasmicIcon__SquareCheckFilledsvg"; // plasmic-import: VwLeMZcZaumF/icon
-import SquareMinussvgIcon from "./icons/PlasmicIcon__SquareMinussvg"; // plasmic-import: SUgNEqYWmuPX/icon
+import SquareSvgIcon from "./icons/PlasmicIcon__SquareSvg"; // plasmic-import: YNCiTLFL-fSE/icon
+import SquareCheckFilledSvgIcon from "./icons/PlasmicIcon__SquareCheckFilledSvg"; // plasmic-import: VwLeMZcZaumF/icon
+import SquareMinusSvgIcon from "./icons/PlasmicIcon__SquareMinusSvg"; // plasmic-import: SUgNEqYWmuPX/icon
 
 createPlasmicElementProxy;
 
@@ -100,14 +101,6 @@ export type PlasmicCheckbox__ArgsType = {
   "aria-label"?: string;
   "aria-labelledby"?: string;
   onChange?: (isChecked: boolean) => void;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
 };
 type ArgPropType = keyof PlasmicCheckbox__ArgsType;
 export const PlasmicCheckbox__ArgProps = new Array<ArgPropType>(
@@ -116,15 +109,7 @@ export const PlasmicCheckbox__ArgProps = new Array<ArgPropType>(
   "value",
   "aria-label",
   "aria-labelledby",
-  "onChange",
-  "aria-label",
-  "aria-labelledby",
-  "aria-label",
-  "aria-labelledby",
-  "aria-label",
-  "aria-labelledby",
-  "aria-label",
-  "aria-labelledby"
+  "onChange"
 );
 
 export type PlasmicCheckbox__OverridesType = {
@@ -138,14 +123,6 @@ export interface DefaultCheckboxProps extends pp.CheckboxProps {
   "aria-label"?: string;
   "aria-labelledby"?: string;
   onChange?: (isChecked: boolean) => void;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
-  "aria-label"?: string;
-  "aria-labelledby"?: string;
 }
 
 const $$ = {};
@@ -238,6 +215,7 @@ function PlasmicCheckbox__RenderFunc(props: {
         projectcss.plasmic_mixins,
         projectcss.plasmic_tokens,
         plasmic_fragment_design_system_css.plasmic_tokens,
+        plasmic_antd_5_hostless_css.plasmic_tokens,
         sty.root,
         {
           [sty.root___focusVisibleWithin]: triggers.focusVisibleWithin_root,
@@ -277,10 +255,10 @@ function PlasmicCheckbox__RenderFunc(props: {
           data-plasmic-override={overrides.svg}
           PlasmicIconType={
             hasVariant($state, "isIndeterminate", "isIndeterminate")
-              ? SquareMinussvgIcon
+              ? SquareMinusSvgIcon
               : hasVariant($state, "isChecked", "isChecked")
-              ? SquareCheckFilledsvgIcon
-              : SquaresvgIcon
+              ? SquareCheckFilledSvgIcon
+              : SquareSvgIcon
           }
           className={classNames(projectcss.all, sty.svg, {
             [sty.svg___focusVisibleWithin]: triggers.focusVisibleWithin_root,

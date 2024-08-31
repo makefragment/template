@@ -71,6 +71,7 @@ import { useScreenVariants as useScreenVariantsfobTirRaixGf } from "./PlasmicGlo
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
+import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicDuration.module.css"; // plasmic-import: hYLHU_pJKp9-/css
 
@@ -78,7 +79,7 @@ import Icon15Icon from "./icons/PlasmicIcon__Icon15"; // plasmic-import: dLXaRsS
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: q8mRvXMvOrv9/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: BMYyZW6g83gg/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: BMYyZW6g83gg/icon
 
 createPlasmicElementProxy;
 
@@ -246,6 +247,7 @@ function PlasmicDuration__RenderFunc(props: {
         projectcss.plasmic_mixins,
         projectcss.plasmic_tokens,
         plasmic_fragment_design_system_css.plasmic_tokens,
+        plasmic_antd_5_hostless_css.plasmic_tokens,
         sty.root
       )}
     >
@@ -956,7 +958,7 @@ function PlasmicDuration__RenderFunc(props: {
                   })()}
                 </React.Fragment>
               </div>
-              <ChecksvgIcon
+              <CheckSvgIcon
                 className={classNames(projectcss.all, sty.svg__xGfkX)}
                 role={"img"}
               />
@@ -1161,7 +1163,7 @@ function PlasmicDuration__RenderFunc(props: {
                         }
                       })()
                 ) ? (
-                  <ChecksvgIcon
+                  <CheckSvgIcon
                     className={classNames(projectcss.all, sty.svg__cBvHc, {
                       [sty.svgcheck__cBvHcRijdN]: hasVariant(
                         $state,

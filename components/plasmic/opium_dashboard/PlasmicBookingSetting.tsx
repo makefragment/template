@@ -1385,6 +1385,48 @@ function PlasmicBookingSetting__RenderFunc(props: {
                 data-plasmic-name={"cancellationPolicy"}
                 data-plasmic-override={overrides.cancellationPolicy}
                 className={classNames(projectcss.all, sty.cancellationPolicy)}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["sendEvent"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            (() => {
+                              try {
+                                return {
+                                  group: "settings",
+                                  data: {
+                                    settingdetails:
+                                      $state.settingBookingRefundValue
+                                  },
+                                  type: "click-accordion-cancellation-range-booking"
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Splunk.sendLog"]?.apply(null, [
+                          ...actionArgs.args
+                        ]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["sendEvent"] != null &&
+                    typeof $steps["sendEvent"] === "object" &&
+                    typeof $steps["sendEvent"].then === "function"
+                  ) {
+                    $steps["sendEvent"] = await $steps["sendEvent"];
+                  }
+                }}
               >
                 {(() => {
                   const child$Props = {

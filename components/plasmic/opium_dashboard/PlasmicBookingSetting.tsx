@@ -92,6 +92,7 @@ export const PlasmicBookingSetting__ArgProps = new Array<ArgPropType>();
 export type PlasmicBookingSetting__OverridesType = {
   root?: Flex__<"div">;
   sideEffect?: Flex__<typeof SideEffect>;
+  h4?: Flex__<"h4">;
   rangOfBooking?: Flex__<"div">;
   accordion?: Flex__<typeof AntdAccordion>;
   from?: Flex__<typeof Input>;
@@ -570,6 +571,45 @@ function PlasmicBookingSetting__RenderFunc(props: {
             Dir={"rtl"}
             className={classNames(projectcss.all, sty.freeBox__oNzqi)}
           >
+            <div className={classNames(projectcss.all, sty.freeBox__ge59)}>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text___4Bhmm
+                )}
+              >
+                <React.Fragment>
+                  <React.Fragment>{""}</React.Fragment>
+                  {
+                    <h4
+                      data-plasmic-name={"h4"}
+                      data-plasmic-override={overrides.h4}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.h4,
+                        projectcss.__wab_text,
+                        sty.h4
+                      )}
+                    >
+                      <React.Fragment>
+                        <span
+                          className={
+                            "plasmic_default__all plasmic_default__span"
+                          }
+                          style={{ fontWeight: 700 }}
+                        >
+                          {
+                            "\u062a\u0646\u0638\u06cc\u0645\u0627\u062a \u0646\u0648\u0628\u062a\u200c\u062f\u0647\u06cc \u0645\u0637\u0628"
+                          }
+                        </span>
+                      </React.Fragment>
+                    </h4>
+                  }
+                  <React.Fragment>{""}</React.Fragment>
+                </React.Fragment>
+              </div>
+            </div>
             <div
               data-plasmic-name={"rangOfBooking"}
               data-plasmic-override={overrides.rangOfBooking}
@@ -1704,6 +1744,7 @@ const PlasmicDescendants = {
   root: [
     "root",
     "sideEffect",
+    "h4",
     "rangOfBooking",
     "accordion",
     "from",
@@ -1713,6 +1754,7 @@ const PlasmicDescendants = {
     "refundrange"
   ],
   sideEffect: ["sideEffect"],
+  h4: ["h4"],
   rangOfBooking: ["rangOfBooking", "accordion", "from", "to"],
   accordion: ["accordion", "from", "to"],
   from: ["from"],
@@ -1731,6 +1773,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   sideEffect: typeof SideEffect;
+  h4: "h4";
   rangOfBooking: "div";
   accordion: typeof AntdAccordion;
   from: typeof Input;
@@ -1801,6 +1844,7 @@ export const PlasmicBookingSetting = Object.assign(
   {
     // Helper components rendering sub-elements
     sideEffect: makeNodeComponent("sideEffect"),
+    h4: makeNodeComponent("h4"),
     rangOfBooking: makeNodeComponent("rangOfBooking"),
     accordion: makeNodeComponent("accordion"),
     from: makeNodeComponent("from"),

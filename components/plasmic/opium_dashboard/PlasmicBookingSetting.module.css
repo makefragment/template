@@ -442,7 +442,7 @@
     margin-top: 0px;
   }
 }
-.value:global(.__wab_instance) {
+.refundrange:global(.__wab_instance) {
   width: auto;
   max-width: 100%;
   object-fit: cover;
@@ -450,7 +450,7 @@
   font-weight: 500;
 }
 @media (min-width: 0px) and (max-width: 768px) {
-  .value:global(.__wab_instance) {
+  .refundrange:global(.__wab_instance) {
     width: 70px;
     flex-shrink: 0;
   }

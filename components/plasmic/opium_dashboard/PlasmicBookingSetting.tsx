@@ -98,7 +98,7 @@ export type PlasmicBookingSetting__OverridesType = {
   to?: Flex__<typeof Input>;
   cancellationPolicy?: Flex__<"div">;
   accordionCancellationPolicy?: Flex__<typeof AntdAccordion>;
-  value?: Flex__<typeof Input>;
+  refundrange?: Flex__<typeof Input>;
 };
 
 export interface DefaultBookingSettingProps {}
@@ -154,7 +154,12 @@ function PlasmicBookingSetting__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return JSON.parse($state.settingBookingDateRange[0].value).to;
+              return (() => {
+                return $state.settingBookingDateRange.message ===
+                  "این تنظیم برای کاربر وجود ندارد"
+                  ? 60
+                  : JSON.parse($state.settingBookingDateRange[0].value).to;
+              })();
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -173,7 +178,12 @@ function PlasmicBookingSetting__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return JSON.parse($state.settingBookingDateRange[0].value).from;
+              return (() => {
+                return $state.settingBookingDateRange.message ===
+                  "این تنظیم برای کاربر وجود ندارد"
+                  ? 0
+                  : JSON.parse($state.settingBookingDateRange[0].value).from;
+              })();
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -215,13 +225,18 @@ function PlasmicBookingSetting__RenderFunc(props: {
         )
       },
       {
-        path: "value.value",
+        path: "refundrange.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.settingBookingRefundValue[0].value;
+              return (() => {
+                return $state.settingBookingRefundValue.message ===
+                  "این تنظیم برای کاربر وجود ندارد"
+                  ? 5
+                  : $state.settingBookingRefundValue[0].value;
+              })();
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -244,6 +259,18 @@ function PlasmicBookingSetting__RenderFunc(props: {
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "loadingBookingDateRange",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "loadingDeleteBookingTimeRange",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -717,10 +744,18 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                     initFunc: ({ $props, $state, $queries }) =>
                                       (() => {
                                         try {
-                                          return JSON.parse(
-                                            $state.settingBookingDateRange[0]
-                                              .value
-                                          ).from;
+                                          return (() => {
+                                            return $state
+                                              .settingBookingDateRange
+                                              .message ===
+                                              "این تنظیم برای کاربر وجود ندارد"
+                                              ? 0
+                                              : JSON.parse(
+                                                  $state
+                                                    .settingBookingDateRange[0]
+                                                    .value
+                                                ).from;
+                                          })();
                                         } catch (e) {
                                           if (
                                             e instanceof TypeError ||
@@ -786,10 +821,18 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                     initFunc: ({ $props, $state, $queries }) =>
                                       (() => {
                                         try {
-                                          return JSON.parse(
-                                            $state.settingBookingDateRange[0]
-                                              .value
-                                          ).to;
+                                          return (() => {
+                                            return $state
+                                              .settingBookingDateRange
+                                              .message ===
+                                              "این تنظیم برای کاربر وجود ندارد"
+                                              ? 60
+                                              : JSON.parse(
+                                                  $state
+                                                    .settingBookingDateRange[0]
+                                                    .value
+                                                ).to;
+                                          })();
                                         } catch (e) {
                                           if (
                                             e instanceof TypeError ||
@@ -829,8 +872,61 @@ function PlasmicBookingSetting__RenderFunc(props: {
                               "__wab_instance",
                               sty.button___7IIwg
                             )}
+                            loading={(() => {
+                              try {
+                                return $state.loadingBookingDateRange;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return [];
+                                }
+                                throw e;
+                              }
+                            })()}
                             onClick={async event => {
                               const $steps = {};
+
+                              $steps["startLoading"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: [
+                                          "loadingBookingDateRange"
+                                        ]
+                                      },
+                                      operation: 0,
+                                      value: true
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["startLoading"] != null &&
+                                typeof $steps["startLoading"] === "object" &&
+                                typeof $steps["startLoading"].then ===
+                                  "function"
+                              ) {
+                                $steps["startLoading"] = await $steps[
+                                  "startLoading"
+                                ];
+                              }
 
                               $steps["apiPatchSetting"] = true
                                 ? (() => {
@@ -875,6 +971,68 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                 ];
                               }
 
+                              $steps["loadingFinish"] = true
+                                ? (() => {
+                                    const actionArgs = {
+                                      variable: {
+                                        objRoot: $state,
+                                        variablePath: [
+                                          "loadingBookingDateRange"
+                                        ]
+                                      },
+                                      operation: 0,
+                                      value: false
+                                    };
+                                    return (({
+                                      variable,
+                                      value,
+                                      startIndex,
+                                      deleteCount
+                                    }) => {
+                                      if (!variable) {
+                                        return;
+                                      }
+                                      const { objRoot, variablePath } =
+                                        variable;
+
+                                      $stateSet(objRoot, variablePath, value);
+                                      return value;
+                                    })?.apply(null, [actionArgs]);
+                                  })()
+                                : undefined;
+                              if (
+                                $steps["loadingFinish"] != null &&
+                                typeof $steps["loadingFinish"] === "object" &&
+                                typeof $steps["loadingFinish"].then ===
+                                  "function"
+                              ) {
+                                $steps["loadingFinish"] = await $steps[
+                                  "loadingFinish"
+                                ];
+                              }
+
+                              $steps["showToast"] =
+                                $steps.apiPatchSetting.data.success === true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        args: [
+                                          undefined,
+                                          "\u0628\u0627\u0632\u0647\u200c\u06cc \u0646\u0648\u0628\u062a\u200c\u062f\u0647\u06cc \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0630\u062e\u06cc\u0631\u0647 \u0634\u062f."
+                                        ]
+                                      };
+                                      return $globalActions[
+                                        "Fragment.showToast"
+                                      ]?.apply(null, [...actionArgs.args]);
+                                    })()
+                                  : undefined;
+                              if (
+                                $steps["showToast"] != null &&
+                                typeof $steps["showToast"] === "object" &&
+                                typeof $steps["showToast"].then === "function"
+                              ) {
+                                $steps["showToast"] = await $steps["showToast"];
+                              }
+
                               $steps["sendEvent"] = true
                                 ? (() => {
                                     const actionArgs = {
@@ -915,28 +1073,6 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                 typeof $steps["sendEvent"].then === "function"
                               ) {
                                 $steps["sendEvent"] = await $steps["sendEvent"];
-                              }
-
-                              $steps["showToast"] =
-                                $steps.apiPatchSetting.data.success === true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        args: [
-                                          undefined,
-                                          "\u0628\u0627\u0632\u0647\u200c\u06cc \u0646\u0648\u0628\u062a\u200c\u062f\u0647\u06cc \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0630\u062e\u06cc\u0631\u0647 \u0634\u062f."
-                                        ]
-                                      };
-                                      return $globalActions[
-                                        "Fragment.showToast"
-                                      ]?.apply(null, [...actionArgs.args]);
-                                    })()
-                                  : undefined;
-                              if (
-                                $steps["showToast"] != null &&
-                                typeof $steps["showToast"] === "object" &&
-                                typeof $steps["showToast"].then === "function"
-                              ) {
-                                $steps["showToast"] = await $steps["showToast"];
                               }
                             }}
                           />
@@ -1074,10 +1210,7 @@ function PlasmicBookingSetting__RenderFunc(props: {
                             >
                               {(() => {
                                 try {
-                                  return (
-                                    $state.settingBookingRefundValue[0]
-                                      .value !== undefined
-                                  );
+                                  return !!$state.settingBookingRefundValue;
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
@@ -1100,7 +1233,7 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                     {(() => {
                                       try {
                                         return `در صورت لغو نوبت تا «${
-                                          $state.value.value ||
+                                          $state.refundrange.value ||
                                           $state.settingBookingRefundValue.value
                                         }» ساعت قبل از زمان ویزیت، وجه بیمار مسترد خواهد شد.`.replace(
                                           /\d/g,
@@ -1142,19 +1275,120 @@ function PlasmicBookingSetting__RenderFunc(props: {
                               )}
                             >
                               <Input
-                                data-plasmic-name={"value"}
-                                data-plasmic-override={overrides.value}
+                                data-plasmic-name={"refundrange"}
+                                data-plasmic-override={overrides.refundrange}
                                 className={classNames(
                                   "__wab_instance",
-                                  sty.value
+                                  sty.refundrange
                                 )}
-                                onChange={generateStateOnChangeProp($state, [
-                                  "value",
-                                  "value"
-                                ])}
+                                onChange={async (...eventArgs: any) => {
+                                  generateStateOnChangeProp($state, [
+                                    "refundrange",
+                                    "value"
+                                  ]).apply(null, eventArgs);
+                                  (async value => {
+                                    const $steps = {};
+
+                                    $steps["updateRefundrangeValue"] =
+                                      value >= 0
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "refundrange",
+                                                  "value"
+                                                ]
+                                              },
+                                              operation: 0,
+                                              value: value
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              $stateSet(
+                                                objRoot,
+                                                variablePath,
+                                                value
+                                              );
+                                              return value;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                    if (
+                                      $steps["updateRefundrangeValue"] !=
+                                        null &&
+                                      typeof $steps[
+                                        "updateRefundrangeValue"
+                                      ] === "object" &&
+                                      typeof $steps["updateRefundrangeValue"]
+                                        .then === "function"
+                                    ) {
+                                      $steps["updateRefundrangeValue"] =
+                                        await $steps["updateRefundrangeValue"];
+                                    }
+
+                                    $steps["updateRefundrangeValue2"] =
+                                      value < 0
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "refundrange",
+                                                  "value"
+                                                ]
+                                              },
+                                              operation: 0,
+                                              value: "0"
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              $stateSet(
+                                                objRoot,
+                                                variablePath,
+                                                value
+                                              );
+                                              return value;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                    if (
+                                      $steps["updateRefundrangeValue2"] !=
+                                        null &&
+                                      typeof $steps[
+                                        "updateRefundrangeValue2"
+                                      ] === "object" &&
+                                      typeof $steps["updateRefundrangeValue2"]
+                                        .then === "function"
+                                    ) {
+                                      $steps["updateRefundrangeValue2"] =
+                                        await $steps["updateRefundrangeValue2"];
+                                    }
+                                  }).apply(null, eventArgs);
+                                }}
                                 type={"number"}
                                 value={generateStateValueProp($state, [
-                                  "value",
+                                  "refundrange",
                                   "value"
                                 ])}
                               />
@@ -1175,8 +1409,62 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                 "__wab_instance",
                                 sty.button__zvsIw
                               )}
+                              loading={(() => {
+                                try {
+                                  return $state.loadingDeleteBookingTimeRange;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return [];
+                                  }
+                                  throw e;
+                                }
+                              })()}
                               onClick={async event => {
                                 const $steps = {};
+
+                                $steps["startLoading"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "loadingDeleteBookingTimeRange"
+                                          ]
+                                        },
+                                        operation: 0,
+                                        value: true
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["startLoading"] != null &&
+                                  typeof $steps["startLoading"] === "object" &&
+                                  typeof $steps["startLoading"].then ===
+                                    "function"
+                                ) {
+                                  $steps["startLoading"] = await $steps[
+                                    "startLoading"
+                                  ];
+                                }
 
                                 $steps["apiUpdateValueOfRefundPollicy"] = true
                                   ? (() => {
@@ -1188,7 +1476,7 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                             try {
                                               return {
                                                 key: "booking:delay_to_delete_book_refund",
-                                                value: $state.value.value,
+                                                value: $state.refundrange.value,
                                                 pattern_base: 1,
                                                 settingdetails:
                                                   $state
@@ -1236,7 +1524,8 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                               return {
                                                 group: "settings",
                                                 data: {
-                                                  value: $state.value.value,
+                                                  value:
+                                                    $state.refundrange.value,
                                                   settingdetails:
                                                     $state.settingBookingDateRange
                                                 },
@@ -1292,6 +1581,46 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                 ) {
                                   $steps["showToast"] = await $steps[
                                     "showToast"
+                                  ];
+                                }
+
+                                $steps["finishLoading"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        variable: {
+                                          objRoot: $state,
+                                          variablePath: [
+                                            "loadingDeleteBookingTimeRange"
+                                          ]
+                                        },
+                                        operation: 0,
+                                        value: false
+                                      };
+                                      return (({
+                                        variable,
+                                        value,
+                                        startIndex,
+                                        deleteCount
+                                      }) => {
+                                        if (!variable) {
+                                          return;
+                                        }
+                                        const { objRoot, variablePath } =
+                                          variable;
+
+                                        $stateSet(objRoot, variablePath, value);
+                                        return value;
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  $steps["finishLoading"] != null &&
+                                  typeof $steps["finishLoading"] === "object" &&
+                                  typeof $steps["finishLoading"].then ===
+                                    "function"
+                                ) {
+                                  $steps["finishLoading"] = await $steps[
+                                    "finishLoading"
                                   ];
                                 }
                               }}
@@ -1381,7 +1710,7 @@ const PlasmicDescendants = {
     "to",
     "cancellationPolicy",
     "accordionCancellationPolicy",
-    "value"
+    "refundrange"
   ],
   sideEffect: ["sideEffect"],
   rangOfBooking: ["rangOfBooking", "accordion", "from", "to"],
@@ -1391,10 +1720,10 @@ const PlasmicDescendants = {
   cancellationPolicy: [
     "cancellationPolicy",
     "accordionCancellationPolicy",
-    "value"
+    "refundrange"
   ],
-  accordionCancellationPolicy: ["accordionCancellationPolicy", "value"],
-  value: ["value"]
+  accordionCancellationPolicy: ["accordionCancellationPolicy", "refundrange"],
+  refundrange: ["refundrange"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -1408,7 +1737,7 @@ type NodeDefaultElementType = {
   to: typeof Input;
   cancellationPolicy: "div";
   accordionCancellationPolicy: typeof AntdAccordion;
-  value: typeof Input;
+  refundrange: typeof Input;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -1480,7 +1809,7 @@ export const PlasmicBookingSetting = Object.assign(
     accordionCancellationPolicy: makeNodeComponent(
       "accordionCancellationPolicy"
     ),
-    value: makeNodeComponent("value"),
+    refundrange: makeNodeComponent("refundrange"),
 
     // Metadata about props expected for PlasmicBookingSetting
     internalVariantProps: PlasmicBookingSetting__VariantProps,

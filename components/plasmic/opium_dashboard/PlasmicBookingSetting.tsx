@@ -722,6 +722,8 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                     return `بیماران برای ${
                                       $state.from.value === "0"
                                         ? "امروز"
+                                        : $state.from.value === "1"
+                                        ? "فردا"
                                         : $state.from.value
                                     } تا ${
                                       $state.to.value
@@ -754,10 +756,103 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                   "__wab_instance",
                                   sty.from
                                 ),
-                                onChange: generateStateOnChangeProp($state, [
-                                  "from",
-                                  "value"
-                                ]),
+                                onChange: async (...eventArgs: any) => {
+                                  generateStateOnChangeProp($state, [
+                                    "from",
+                                    "value"
+                                  ]).apply(null, eventArgs);
+                                  (async value => {
+                                    const $steps = {};
+
+                                    $steps["updateFromValue"] =
+                                      value >= 0
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: ["from", "value"]
+                                              },
+                                              operation: 0,
+                                              value: value
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              $stateSet(
+                                                objRoot,
+                                                variablePath,
+                                                value
+                                              );
+                                              return value;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                    if (
+                                      $steps["updateFromValue"] != null &&
+                                      typeof $steps["updateFromValue"] ===
+                                        "object" &&
+                                      typeof $steps["updateFromValue"].then ===
+                                        "function"
+                                    ) {
+                                      $steps["updateFromValue"] = await $steps[
+                                        "updateFromValue"
+                                      ];
+                                    }
+
+                                    $steps["updateFromValue2"] =
+                                      value < 0
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: ["from", "value"]
+                                              },
+                                              operation: 0,
+                                              value: "0"
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              $stateSet(
+                                                objRoot,
+                                                variablePath,
+                                                value
+                                              );
+                                              return value;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                    if (
+                                      $steps["updateFromValue2"] != null &&
+                                      typeof $steps["updateFromValue2"] ===
+                                        "object" &&
+                                      typeof $steps["updateFromValue2"].then ===
+                                        "function"
+                                    ) {
+                                      $steps["updateFromValue2"] = await $steps[
+                                        "updateFromValue2"
+                                      ];
+                                    }
+                                  }).apply(null, eventArgs);
+                                },
                                 type: "number",
                                 value: generateStateValueProp($state, [
                                   "from",
@@ -831,10 +926,103 @@ function PlasmicBookingSetting__RenderFunc(props: {
                             {(() => {
                               const child$Props = {
                                 className: classNames("__wab_instance", sty.to),
-                                onChange: generateStateOnChangeProp($state, [
-                                  "to",
-                                  "value"
-                                ]),
+                                onChange: async (...eventArgs: any) => {
+                                  generateStateOnChangeProp($state, [
+                                    "to",
+                                    "value"
+                                  ]).apply(null, eventArgs);
+                                  (async value => {
+                                    const $steps = {};
+
+                                    $steps["updateToValue"] =
+                                      value >= 0
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: ["to", "value"]
+                                              },
+                                              operation: 0,
+                                              value: value
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              $stateSet(
+                                                objRoot,
+                                                variablePath,
+                                                value
+                                              );
+                                              return value;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                    if (
+                                      $steps["updateToValue"] != null &&
+                                      typeof $steps["updateToValue"] ===
+                                        "object" &&
+                                      typeof $steps["updateToValue"].then ===
+                                        "function"
+                                    ) {
+                                      $steps["updateToValue"] = await $steps[
+                                        "updateToValue"
+                                      ];
+                                    }
+
+                                    $steps["updateToValue2"] =
+                                      value < 0
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: ["to", "value"]
+                                              },
+                                              operation: 0,
+                                              value: "0"
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              $stateSet(
+                                                objRoot,
+                                                variablePath,
+                                                value
+                                              );
+                                              return value;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                    if (
+                                      $steps["updateToValue2"] != null &&
+                                      typeof $steps["updateToValue2"] ===
+                                        "object" &&
+                                      typeof $steps["updateToValue2"].then ===
+                                        "function"
+                                    ) {
+                                      $steps["updateToValue2"] = await $steps[
+                                        "updateToValue2"
+                                      ];
+                                    }
+                                  }).apply(null, eventArgs);
+                                },
                                 type: "number",
                                 value: generateStateValueProp($state, [
                                   "to",

@@ -263,6 +263,12 @@ function PlasmicBookList__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "settingBookingPayment",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
       }
     ],
     [$props, $ctx, $refs]
@@ -396,18 +402,88 @@ function PlasmicBookList__RenderFunc(props: {
               ) {
                 $steps["sendEvent"] = await $steps["sendEvent"];
               }
+
+              $steps["apiGetPaymentSetting"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        "GET",
+                        "https://apigw.paziresh24.com/nelson/v1/setting",
+                        (() => {
+                          try {
+                            return { key: "booking:activate_online_payment" };
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["apiGetPaymentSetting"] != null &&
+                typeof $steps["apiGetPaymentSetting"] === "object" &&
+                typeof $steps["apiGetPaymentSetting"].then === "function"
+              ) {
+                $steps["apiGetPaymentSetting"] = await $steps[
+                  "apiGetPaymentSetting"
+                ];
+              }
+
+              $steps["updateStatePaymentSetting"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["settingBookingPayment"]
+                      },
+                      operation: 0,
+                      value: $steps.apiGetPaymentSetting.data
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateStatePaymentSetting"] != null &&
+                typeof $steps["updateStatePaymentSetting"] === "object" &&
+                typeof $steps["updateStatePaymentSetting"].then === "function"
+              ) {
+                $steps["updateStatePaymentSetting"] = await $steps[
+                  "updateStatePaymentSetting"
+                ];
+              }
             }}
           />
 
           {(() => {
             try {
-              return true;
+              return (
+                $state.centers.some(center => center.id === "5532") ||
+                $state.settingBookingPayment[0].value == 1
+              );
             } catch (e) {
               if (
                 e instanceof TypeError ||
                 e?.plasmicType === "PlasmicUndefinedDataError"
               ) {
-                return true;
+                return false;
               }
               throw e;
             }

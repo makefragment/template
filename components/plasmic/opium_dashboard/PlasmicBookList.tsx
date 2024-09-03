@@ -259,7 +259,7 @@ function PlasmicBookList__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
-        path: "loadingonOff",
+        path: "loadingonoff",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -1988,7 +1988,7 @@ function PlasmicBookList__RenderFunc(props: {
                   }
                   loading={(() => {
                     try {
-                      return $state.loadingOnoff;
+                      return $state.loadingonoff;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -2007,7 +2007,7 @@ function PlasmicBookList__RenderFunc(props: {
                           const actionArgs = {
                             variable: {
                               objRoot: $state,
-                              variablePath: ["loadingonOff"]
+                              variablePath: ["loadingonoff"]
                             },
                             operation: 0,
                             value: true
@@ -2327,7 +2327,7 @@ function PlasmicBookList__RenderFunc(props: {
                             const actionArgs = {
                               variable: {
                                 objRoot: $state,
-                                variablePath: ["loadingonOff"]
+                                variablePath: ["loadingonoff"]
                               },
                               operation: 0,
                               value: false

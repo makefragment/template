@@ -2213,7 +2213,7 @@ function PlasmicBookList__RenderFunc(props: {
                               variablePath: ["userCenterService"]
                             },
                             operation: 0,
-                            value: $steps.apiActvedeactiveVisitOnline.data
+                            value: $steps.apiActveDeactiveVisitOnline.data
                           };
                           return (({
                             variable,
@@ -2327,7 +2327,7 @@ function PlasmicBookList__RenderFunc(props: {
                             const actionArgs = {
                               variable: {
                                 objRoot: $state,
-                                variablePath: ["loadingOnoff"]
+                                variablePath: ["loadingonOff"]
                               },
                               operation: 0,
                               value: false

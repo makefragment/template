@@ -259,7 +259,7 @@ function PlasmicBookList__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
-        path: "loadingOnOff",
+        path: "loadingonOff",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -2002,12 +2002,12 @@ function PlasmicBookList__RenderFunc(props: {
                   onClick={async event => {
                     const $steps = {};
 
-                    $steps["updateLoadingOnoff"] = true
+                    $steps["updateLoadingonOff"] = true
                       ? (() => {
                           const actionArgs = {
                             variable: {
                               objRoot: $state,
-                              variablePath: ["loadingOnoff"]
+                              variablePath: ["loadingonOff"]
                             },
                             operation: 0,
                             value: true
@@ -2029,12 +2029,12 @@ function PlasmicBookList__RenderFunc(props: {
                         })()
                       : undefined;
                     if (
-                      $steps["updateLoadingOnoff"] != null &&
-                      typeof $steps["updateLoadingOnoff"] === "object" &&
-                      typeof $steps["updateLoadingOnoff"].then === "function"
+                      $steps["updateLoadingonOff"] != null &&
+                      typeof $steps["updateLoadingonOff"] === "object" &&
+                      typeof $steps["updateLoadingonOff"].then === "function"
                     ) {
-                      $steps["updateLoadingOnoff"] = await $steps[
-                        "updateLoadingOnoff"
+                      $steps["updateLoadingonOff"] = await $steps[
+                        "updateLoadingonOff"
                       ];
                     }
 

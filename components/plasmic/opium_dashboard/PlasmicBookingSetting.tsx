@@ -707,7 +707,10 @@ function PlasmicBookingSetting__RenderFunc(props: {
                         >
                           {(() => {
                             try {
-                              return $state.to.value && $state.from.value;
+                              return (
+                                $state.to.value !== "" &&
+                                $state.from.value !== ""
+                              );
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||

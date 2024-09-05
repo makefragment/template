@@ -481,96 +481,117 @@ function PlasmicBookList__RenderFunc(props: {
             }}
           />
 
-          <div
-            data-plasmic-name={"quickAccess"}
-            data-plasmic-override={overrides.quickAccess}
-            className={classNames(projectcss.all, sty.quickAccess)}
-          >
+          {(() => {
+            try {
+              return (
+                $state.centers.some(center => center.id === "5532") ||
+                $state.settingBookingPayment[0].value === 1
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })() ? (
             <div
-              className={classNames(projectcss.all, sty.freeBox___5X51W)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        destination:
-                          "https://dr.paziresh24.com/setting/payment?utm=nelson"
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"] !=
-                    null &&
-                  typeof $steps[
-                    "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
-                  ] === "object" &&
-                  typeof $steps[
-                    "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
-                  ].then === "function"
-                ) {
-                  $steps["goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"] =
-                    await $steps[
-                      "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
-                    ];
-                }
-
-                $steps["sendEvent"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        args: [
-                          (() => {
-                            try {
-                              return {
-                                group: "quick access",
-                                type: "wallet",
-                                center: $state.centers
-                              };
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })()
-                        ]
-                      };
-                      return $globalActions["Splunk.sendLog"]?.apply(null, [
-                        ...actionArgs.args
-                      ]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["sendEvent"] != null &&
-                  typeof $steps["sendEvent"] === "object" &&
-                  typeof $steps["sendEvent"].then === "function"
-                ) {
-                  $steps["sendEvent"] = await $steps["sendEvent"];
-                }
-              }}
+              data-plasmic-name={"quickAccess"}
+              data-plasmic-override={overrides.quickAccess}
+              className={classNames(projectcss.all, sty.quickAccess)}
             >
-              <QuickAccessWallet
-                data-plasmic-name={"quickAccessWallet"}
-                data-plasmic-override={overrides.quickAccessWallet}
-                className={classNames("__wab_instance", sty.quickAccessWallet)}
-              />
+              <div
+                className={classNames(projectcss.all, sty.freeBox___5X51W)}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"] =
+                    true
+                      ? (() => {
+                          const actionArgs = {
+                            destination:
+                              "https://dr.paziresh24.com/setting/payment?utm=nelson"
+                          };
+                          return (({ destination }) => {
+                            if (
+                              typeof destination === "string" &&
+                              destination.startsWith("#")
+                            ) {
+                              document
+                                .getElementById(destination.substr(1))
+                                .scrollIntoView({ behavior: "smooth" });
+                            } else {
+                              __nextRouter?.push(destination);
+                            }
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                  if (
+                    $steps["goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"] !=
+                      null &&
+                    typeof $steps[
+                      "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
+                    ] === "object" &&
+                    typeof $steps[
+                      "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
+                    ].then === "function"
+                  ) {
+                    $steps["goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"] =
+                      await $steps[
+                        "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
+                      ];
+                  }
+
+                  $steps["sendEvent"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            (() => {
+                              try {
+                                return {
+                                  group: "quick access",
+                                  type: "wallet",
+                                  center: $state.centers
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Splunk.sendLog"]?.apply(null, [
+                          ...actionArgs.args
+                        ]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["sendEvent"] != null &&
+                    typeof $steps["sendEvent"] === "object" &&
+                    typeof $steps["sendEvent"].then === "function"
+                  ) {
+                    $steps["sendEvent"] = await $steps["sendEvent"];
+                  }
+                }}
+              >
+                <QuickAccessWallet
+                  data-plasmic-name={"quickAccessWallet"}
+                  data-plasmic-override={overrides.quickAccessWallet}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.quickAccessWallet
+                  )}
+                />
+              </div>
             </div>
-          </div>
+          ) : null}
           <div
             data-plasmic-name={"date"}
             data-plasmic-override={overrides.date}

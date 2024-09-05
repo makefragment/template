@@ -152,51 +152,64 @@ function PlasmicQuickAcccess__RenderFunc(props: {
             sty.root
           )}
         >
-          <div
-            data-plasmic-name={"freeBox"}
-            data-plasmic-override={overrides.freeBox}
-            className={classNames(projectcss.all, sty.freeBox)}
-            onClick={async event => {
-              const $steps = {};
-
-              $steps["goToHttpsDrPaziresh24ComSettingPayment"] = true
-                ? (() => {
-                    const actionArgs = {
-                      destination: "https://dr.paziresh24.com/setting/payment"
-                    };
-                    return (({ destination }) => {
-                      if (
-                        typeof destination === "string" &&
-                        destination.startsWith("#")
-                      ) {
-                        document
-                          .getElementById(destination.substr(1))
-                          .scrollIntoView({ behavior: "smooth" });
-                      } else {
-                        __nextRouter?.push(destination);
-                      }
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
+          {(() => {
+            try {
+              return true;
+            } catch (e) {
               if (
-                $steps["goToHttpsDrPaziresh24ComSettingPayment"] != null &&
-                typeof $steps["goToHttpsDrPaziresh24ComSettingPayment"] ===
-                  "object" &&
-                typeof $steps["goToHttpsDrPaziresh24ComSettingPayment"].then ===
-                  "function"
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
               ) {
-                $steps["goToHttpsDrPaziresh24ComSettingPayment"] = await $steps[
-                  "goToHttpsDrPaziresh24ComSettingPayment"
-                ];
+                return true;
               }
-            }}
-          >
-            <QuickAccessWallet
-              data-plasmic-name={"quickAccessWallet"}
-              data-plasmic-override={overrides.quickAccessWallet}
-              className={classNames("__wab_instance", sty.quickAccessWallet)}
-            />
-          </div>
+              throw e;
+            }
+          })() ? (
+            <div
+              data-plasmic-name={"freeBox"}
+              data-plasmic-override={overrides.freeBox}
+              className={classNames(projectcss.all, sty.freeBox)}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["goToHttpsDrPaziresh24ComSettingPayment"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: "https://dr.paziresh24.com/setting/payment"
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToHttpsDrPaziresh24ComSettingPayment"] != null &&
+                  typeof $steps["goToHttpsDrPaziresh24ComSettingPayment"] ===
+                    "object" &&
+                  typeof $steps["goToHttpsDrPaziresh24ComSettingPayment"]
+                    .then === "function"
+                ) {
+                  $steps["goToHttpsDrPaziresh24ComSettingPayment"] =
+                    await $steps["goToHttpsDrPaziresh24ComSettingPayment"];
+                }
+              }}
+            >
+              <QuickAccessWallet
+                data-plasmic-name={"quickAccessWallet"}
+                data-plasmic-override={overrides.quickAccessWallet}
+                className={classNames("__wab_instance", sty.quickAccessWallet)}
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     </React.Fragment>

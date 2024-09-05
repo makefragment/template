@@ -814,9 +814,7 @@ function PlasmicBookList__RenderFunc(props: {
                   data-plasmic-override={overrides.drCenters}
                   centers={(() => {
                     try {
-                      return $state.centers.filter(
-                        center => center.is_active_booking
-                      );
+                      return $state.centers;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||

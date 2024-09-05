@@ -99,7 +99,6 @@ export type PlasmicDrCenters__OverridesType = {
   fragmentPopover?: Flex__<typeof Popover>;
   text?: Flex__<"div">;
   activeVisitOnline?: Flex__<typeof ActiveVisitOnline>;
-  activeOfficeBooking?: Flex__<typeof ActiveOfficeBooking>;
 };
 
 export interface DefaultDrCentersProps {
@@ -580,13 +579,102 @@ function PlasmicDrCenters__RenderFunc(props: {
             ) : null}
             {(() => {
               try {
-                return (
-                  ($props.centers.length === 1 &&
-                    $props.centers[0].id === "5532") ||
-                  $props.centers.some(
-                    center =>
-                      center.id !== "5532" && center.is_active_booking === false
-                  )
+                return $props.centers.some(center => center.type_id != 1);
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return false;
+                }
+                throw e;
+              }
+            })() ? (
+              <ActiveOfficeBooking
+                className={classNames(
+                  "__wab_instance",
+                  sty.activeOfficeBooking__jmJal
+                )}
+                onselected={async () => {
+                  const $steps = {};
+
+                  $steps["goToHttpsDrPaziresh24ComCreateCenter"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: "https://dr.paziresh24.com/create-center"
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToHttpsDrPaziresh24ComCreateCenter"] != null &&
+                    typeof $steps["goToHttpsDrPaziresh24ComCreateCenter"] ===
+                      "object" &&
+                    typeof $steps["goToHttpsDrPaziresh24ComCreateCenter"]
+                      .then === "function"
+                  ) {
+                    $steps["goToHttpsDrPaziresh24ComCreateCenter"] =
+                      await $steps["goToHttpsDrPaziresh24ComCreateCenter"];
+                  }
+
+                  $steps["sendEvent"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            (() => {
+                              try {
+                                return {
+                                  group: "active-office-booking",
+                                  data: {
+                                    center_id: $props.centers.map(
+                                      center => center.id
+                                    )
+                                  },
+                                  type: "click-button-dr-centers"
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Splunk.sendLog"]?.apply(null, [
+                          ...actionArgs.args
+                        ]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["sendEvent"] != null &&
+                    typeof $steps["sendEvent"] === "object" &&
+                    typeof $steps["sendEvent"].then === "function"
+                  ) {
+                    $steps["sendEvent"] = await $steps["sendEvent"];
+                  }
+                }}
+              />
+            ) : null}
+            {(() => {
+              try {
+                return $props.centers.some(
+                  center =>
+                    center.type_id === 1 && center.is_active_booking === false
                 );
               } catch (e) {
                 if (
@@ -599,50 +687,42 @@ function PlasmicDrCenters__RenderFunc(props: {
               }
             })() ? (
               <ActiveOfficeBooking
-                data-plasmic-name={"activeOfficeBooking"}
-                data-plasmic-override={overrides.activeOfficeBooking}
                 className={classNames(
                   "__wab_instance",
-                  sty.activeOfficeBooking
+                  sty.activeOfficeBooking__huSrL
                 )}
                 onselected={async () => {
                   const $steps = {};
 
-                  $steps["goToHttpsDrPaziresh24ComActivationOfficeCenter"] =
-                    true
-                      ? (() => {
-                          const actionArgs = {
-                            destination:
-                              "https://dr.paziresh24.com/activation/office/center"
-                          };
-                          return (({ destination }) => {
-                            if (
-                              typeof destination === "string" &&
-                              destination.startsWith("#")
-                            ) {
-                              document
-                                .getElementById(destination.substr(1))
-                                .scrollIntoView({ behavior: "smooth" });
-                            } else {
-                              __nextRouter?.push(destination);
-                            }
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
+                  $steps["goToHttpsDrPaziresh24ComActivation"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          destination: "https://dr.paziresh24.com/activation"
+                        };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
                   if (
-                    $steps["goToHttpsDrPaziresh24ComActivationOfficeCenter"] !=
-                      null &&
-                    typeof $steps[
-                      "goToHttpsDrPaziresh24ComActivationOfficeCenter"
-                    ] === "object" &&
-                    typeof $steps[
-                      "goToHttpsDrPaziresh24ComActivationOfficeCenter"
-                    ].then === "function"
+                    $steps["goToHttpsDrPaziresh24ComActivation"] != null &&
+                    typeof $steps["goToHttpsDrPaziresh24ComActivation"] ===
+                      "object" &&
+                    typeof $steps["goToHttpsDrPaziresh24ComActivation"].then ===
+                      "function"
                   ) {
-                    $steps["goToHttpsDrPaziresh24ComActivationOfficeCenter"] =
-                      await $steps[
-                        "goToHttpsDrPaziresh24ComActivationOfficeCenter"
-                      ];
+                    $steps["goToHttpsDrPaziresh24ComActivation"] = await $steps[
+                      "goToHttpsDrPaziresh24ComActivation"
+                    ];
                   }
 
                   $steps["sendEvent"] = true
@@ -784,22 +864,10 @@ function PlasmicDrCenters__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: [
-    "root",
-    "fragmentPopover",
-    "text",
-    "activeVisitOnline",
-    "activeOfficeBooking"
-  ],
-  fragmentPopover: [
-    "fragmentPopover",
-    "text",
-    "activeVisitOnline",
-    "activeOfficeBooking"
-  ],
+  root: ["root", "fragmentPopover", "text", "activeVisitOnline"],
+  fragmentPopover: ["fragmentPopover", "text", "activeVisitOnline"],
   text: ["text"],
-  activeVisitOnline: ["activeVisitOnline"],
-  activeOfficeBooking: ["activeOfficeBooking"]
+  activeVisitOnline: ["activeVisitOnline"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -809,7 +877,6 @@ type NodeDefaultElementType = {
   fragmentPopover: typeof Popover;
   text: "div";
   activeVisitOnline: typeof ActiveVisitOnline;
-  activeOfficeBooking: typeof ActiveOfficeBooking;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -875,7 +942,6 @@ export const PlasmicDrCenters = Object.assign(
     fragmentPopover: makeNodeComponent("fragmentPopover"),
     text: makeNodeComponent("text"),
     activeVisitOnline: makeNodeComponent("activeVisitOnline"),
-    activeOfficeBooking: makeNodeComponent("activeOfficeBooking"),
 
     // Metadata about props expected for PlasmicDrCenters
     internalVariantProps: PlasmicDrCenters__VariantProps,

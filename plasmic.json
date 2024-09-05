@@ -230,14 +230,14 @@
       "components": [
         {
           "id": "5nirPCGmCnRD",
-          "name": "Button",
+          "name": "RadixUiButton",
           "type": "managed",
           "projectId": "sqPBLwEBBKHA2WDuGb17eV",
-          "renderModuleFilePath": "plasmic/radix_ui/PlasmicButton.tsx",
+          "renderModuleFilePath": "plasmic/radix_ui/PlasmicRadixUiButton.tsx",
           "importSpec": {
-            "modulePath": "Button.tsx"
+            "modulePath": "RadixUiButton.tsx"
           },
-          "cssFilePath": "plasmic/radix_ui/PlasmicButton.module.css",
+          "cssFilePath": "plasmic/radix_ui/PlasmicRadixUiButton.module.css",
           "scheme": "blackbox",
           "componentType": "component",
           "plumeType": "button"
@@ -246,8 +246,8 @@
       "icons": [
         {
           "id": "Wyt3GMMsLefj",
-          "name": "ChecksvgIcon",
-          "moduleFilePath": "plasmic/radix_ui/icons/PlasmicIcon__Checksvg.tsx"
+          "name": "CheckSvgIcon",
+          "moduleFilePath": "plasmic/radix_ui/icons/PlasmicIcon__CheckSvg.tsx"
         },
         {
           "id": "MbDRsJU0e3bw",
@@ -309,8 +309,7 @@
           "componentImportPath": "@plasmicpkgs/radix-ui"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "a3pmZtcpA5asHkNtN3SGoF",

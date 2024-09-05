@@ -159,7 +159,9 @@ function PlasmicDrCenters__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $props.hasAllOption ? "all" : $props.centers[0].id;
+              return $props.hasAllOption
+                ? "all"
+                : $props.centers.find(center => center.is_active_booking).id;
             } catch (e) {
               if (
                 e instanceof TypeError ||

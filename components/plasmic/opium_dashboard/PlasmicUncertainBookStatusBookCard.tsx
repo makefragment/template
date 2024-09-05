@@ -188,7 +188,9 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
         {
           secureCall: false
         },
-        props.args
+        Object.fromEntries(
+          Object.entries(props.args).filter(([_, v]) => v !== undefined)
+        )
       ),
     [props.args]
   );

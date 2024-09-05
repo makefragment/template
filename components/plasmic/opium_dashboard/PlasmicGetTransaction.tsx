@@ -119,7 +119,9 @@ function PlasmicGetTransaction__RenderFunc(props: {
         {
           slug: "\u062f\u06a9\u062a\u0631-\u0633\u06cc\u0627\u0645\u06a9-\u0631\u062d\u0645\u0627\u0646\u06cc-3"
         },
-        props.args
+        Object.fromEntries(
+          Object.entries(props.args).filter(([_, v]) => v !== undefined)
+        )
       ),
     [props.args]
   );

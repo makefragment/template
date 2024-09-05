@@ -148,7 +148,9 @@ function PlasmicUncertainBookStatusList__RenderFunc(props: {
         {
           selectedCenter: "all"
         },
-        props.args
+        Object.fromEntries(
+          Object.entries(props.args).filter(([_, v]) => v !== undefined)
+        )
       ),
     [props.args]
   );

@@ -131,7 +131,9 @@ function PlasmicDrCenters__RenderFunc(props: {
         {
           hasAllOption: false
         },
-        props.args
+        Object.fromEntries(
+          Object.entries(props.args).filter(([_, v]) => v !== undefined)
+        )
       ),
     [props.args]
   );
@@ -579,7 +581,7 @@ function PlasmicDrCenters__RenderFunc(props: {
             ) : null}
             {(() => {
               try {
-                return $props.centers.some(center => center.type_id != 1);
+                return !$props.centers.some(center => center.type_id == 1);
               } catch (e) {
                 if (
                   e instanceof TypeError ||

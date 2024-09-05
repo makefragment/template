@@ -153,167 +153,149 @@ function PlasmicQuickAccessWallet__RenderFunc(props: {
   });
 
   return (
-    (() => {
-      try {
-        return (
-          $state.detailsPayment !== null &&
-          $state.detailsPayment !== undefined &&
-          $state.detailsPayment !== "" &&
-          $state.detailsPayment >= 0
-        );
-      } catch (e) {
-        if (
-          e instanceof TypeError ||
-          e?.plasmicType === "PlasmicUndefinedDataError"
-        ) {
-          return false;
-        }
-        throw e;
-      }
-    })() ? (
-      <div
-        data-plasmic-name={"root"}
-        data-plasmic-override={overrides.root}
-        data-plasmic-root={true}
-        data-plasmic-for-node={forNode}
-        className={classNames(
-          projectcss.all,
-          projectcss.root_reset,
-          projectcss.plasmic_default_styles,
-          projectcss.plasmic_mixins,
-          projectcss.plasmic_tokens,
-          plasmic_fragment_design_system_css.plasmic_tokens,
-          plasmic_antd_5_hostless_css.plasmic_tokens,
-          sty.root
-        )}
-        onClick={async event => {
+    <div
+      data-plasmic-name={"root"}
+      data-plasmic-override={overrides.root}
+      data-plasmic-root={true}
+      data-plasmic-for-node={forNode}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        plasmic_fragment_design_system_css.plasmic_tokens,
+        plasmic_antd_5_hostless_css.plasmic_tokens,
+        sty.root
+      )}
+      onClick={async event => {
+        const $steps = {};
+      }}
+    >
+      <SideEffect
+        data-plasmic-name={"sideEffect"}
+        data-plasmic-override={overrides.sideEffect}
+        className={classNames("__wab_instance", sty.sideEffect)}
+        onMount={async () => {
           const $steps = {};
-        }}
-      >
-        <SideEffect
-          data-plasmic-name={"sideEffect"}
-          data-plasmic-override={overrides.sideEffect}
-          className={classNames("__wab_instance", sty.sideEffect)}
-          onMount={async () => {
-            const $steps = {};
 
-            $steps["apiDetailsPayment"] = true
-              ? (() => {
-                  const actionArgs = {
-                    args: [
-                      "GET",
-                      "https://apigw.paziresh24.com/v1/details-payment"
-                    ]
-                  };
-                  return $globalActions["Fragment.apiRequest"]?.apply(null, [
-                    ...actionArgs.args
-                  ]);
-                })()
-              : undefined;
-            if (
-              $steps["apiDetailsPayment"] != null &&
-              typeof $steps["apiDetailsPayment"] === "object" &&
-              typeof $steps["apiDetailsPayment"].then === "function"
-            ) {
-              $steps["apiDetailsPayment"] = await $steps["apiDetailsPayment"];
-            }
-
-            $steps["detailsPayment"] = true
-              ? (() => {
-                  const actionArgs = {
-                    variable: {
-                      objRoot: $state,
-                      variablePath: ["detailsPayment"]
-                    },
-                    operation: 0,
-                    value:
-                      $steps.apiDetailsPayment.data.find(
-                        item => item.sum_Unpaid_Amount
-                      )?.sum_Unpaid_Amount || "0"
-                  };
-                  return (({ variable, value, startIndex, deleteCount }) => {
-                    if (!variable) {
-                      return;
-                    }
-                    const { objRoot, variablePath } = variable;
-
-                    $stateSet(objRoot, variablePath, value);
-                    return value;
-                  })?.apply(null, [actionArgs]);
-                })()
-              : undefined;
-            if (
-              $steps["detailsPayment"] != null &&
-              typeof $steps["detailsPayment"] === "object" &&
-              typeof $steps["detailsPayment"].then === "function"
-            ) {
-              $steps["detailsPayment"] = await $steps["detailsPayment"];
-            }
-          }}
-        />
-
-        {(() => {
-          try {
-            return (
-              $state.detailsPayment !== undefined &&
-              $state.detailsPayment !== null &&
-              $state.detailsPayment !== ""
-            );
-          } catch (e) {
-            if (
-              e instanceof TypeError ||
-              e?.plasmicType === "PlasmicUndefinedDataError"
-            ) {
-              return false;
-            }
-            throw e;
+          $steps["apiDetailsPayment"] = true
+            ? (() => {
+                const actionArgs = {
+                  args: [
+                    "GET",
+                    "https://apigw.paziresh24.com/v1/details-payment"
+                  ]
+                };
+                return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
+          if (
+            $steps["apiDetailsPayment"] != null &&
+            typeof $steps["apiDetailsPayment"] === "object" &&
+            typeof $steps["apiDetailsPayment"].then === "function"
+          ) {
+            $steps["apiDetailsPayment"] = await $steps["apiDetailsPayment"];
           }
-        })() ? (
-          <div
-            data-plasmic-name={"freeBox"}
-            data-plasmic-override={overrides.freeBox}
-            className={classNames(projectcss.all, sty.freeBox)}
-          >
-            <Icon12Icon
-              data-plasmic-name={"svg"}
-              data-plasmic-override={overrides.svg}
-              className={classNames(projectcss.all, sty.svg)}
-              role={"img"}
-            />
 
-            <div
-              data-plasmic-name={"text"}
-              data-plasmic-override={overrides.text}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text
-              )}
-            >
-              <React.Fragment>
-                {(() => {
-                  try {
-                    return (
-                      new Intl.NumberFormat("fa-IR").format(
-                        $state.detailsPayment / 10
-                      ) + " تومان"
-                    );
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return "";
-                    }
-                    throw e;
+          $steps["detailsPayment"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["detailsPayment"]
+                  },
+                  operation: 0,
+                  value:
+                    $steps.apiDetailsPayment.data.find(
+                      item => item.sum_Unpaid_Amount
+                    )?.sum_Unpaid_Amount || "0"
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
                   }
-                })()}
-              </React.Fragment>
-            </div>
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["detailsPayment"] != null &&
+            typeof $steps["detailsPayment"] === "object" &&
+            typeof $steps["detailsPayment"].then === "function"
+          ) {
+            $steps["detailsPayment"] = await $steps["detailsPayment"];
+          }
+        }}
+      />
+
+      {(() => {
+        try {
+          return (
+            $state.detailsPayment !== null &&
+            $state.detailsPayment !== undefined &&
+            $state.detailsPayment !== "" &&
+            $state.detailsPayment >= 0
+          );
+        } catch (e) {
+          if (
+            e instanceof TypeError ||
+            e?.plasmicType === "PlasmicUndefinedDataError"
+          ) {
+            return true;
+          }
+          throw e;
+        }
+      })() ? (
+        <div
+          data-plasmic-name={"freeBox"}
+          data-plasmic-override={overrides.freeBox}
+          className={classNames(projectcss.all, sty.freeBox)}
+        >
+          <Icon12Icon
+            data-plasmic-name={"svg"}
+            data-plasmic-override={overrides.svg}
+            className={classNames(projectcss.all, sty.svg)}
+            role={"img"}
+          />
+
+          <div
+            data-plasmic-name={"text"}
+            data-plasmic-override={overrides.text}
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text
+            )}
+          >
+            <React.Fragment>
+              {(() => {
+                try {
+                  return (
+                    new Intl.NumberFormat("fa-IR").format(
+                      $state.detailsPayment / 10
+                    ) + " تومان"
+                  );
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return "";
+                  }
+                  throw e;
+                }
+              })()}
+            </React.Fragment>
           </div>
-        ) : null}
-      </div>
-    ) : null
+        </div>
+      ) : null}
+    </div>
   ) as React.ReactElement | null;
 }
 

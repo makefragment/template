@@ -732,6 +732,7 @@ function PlasmicBookingSetting__RenderFunc(props: {
                                 {(() => {
                                   try {
                                     return `بیماران برای ${
+                                      $state.from.value === 0 ||
                                       $state.from.value === "0"
                                         ? "امروز"
                                         : $state.from.value === "1"

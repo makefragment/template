@@ -813,7 +813,7 @@ function PlasmicBookList__RenderFunc(props: {
                       style={{ fontWeight: 700 }}
                     >
                       {
-                        "\u0644\u06cc\u0633\u062a \u0628\u06cc\u0645\u0627\u0631\u0627\u0646"
+                        "\u0644\u06cc\u0633\u062a \u0646\u0648\u0628\u062a\u200c\u0647\u0627"
                       }
                     </span>
                   </React.Fragment>

@@ -2362,6 +2362,82 @@ function PlasmicBookList__RenderFunc(props: {
                       $steps["updateActive"] = await $steps["updateActive"];
                     }
 
+                    $steps["loadingFinish"] =
+                      !$state.determiningTheSituationDialog.open ||
+                      $steps.updateActive > 0
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["loadingonoff"]
+                              },
+                              operation: 0,
+                              value: false
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps["loadingFinish"] != null &&
+                      typeof $steps["loadingFinish"] === "object" &&
+                      typeof $steps["loadingFinish"].then === "function"
+                    ) {
+                      $steps["loadingFinish"] = await $steps["loadingFinish"];
+                    }
+
+                    $steps["showToast"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              undefined,
+                              (() => {
+                                try {
+                                  return $state.userCenterService.data[0]
+                                    .can_booking === 1
+                                    ? "نوبت دهی ویزیت آنلاین در ساعت کاری تعریف شده فعال شد."
+                                    : "ویزیت آنلاین شما غیرفعال شد. در زمانی که قادر به پاسخگویی به بیماران در راس زمان نوبت‌ بیمار هستید وضعیت ویزیت آنلاین خود را فعال کنید.";
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })(),
+                              undefined,
+                              5000
+                            ]
+                          };
+                          return $globalActions["Fragment.showToast"]?.apply(
+                            null,
+                            [...actionArgs.args]
+                          );
+                        })()
+                      : undefined;
+                    if (
+                      $steps["showToast"] != null &&
+                      typeof $steps["showToast"] === "object" &&
+                      typeof $steps["showToast"].then === "function"
+                    ) {
+                      $steps["showToast"] = await $steps["showToast"];
+                    }
+
                     $steps["eventOnOff"] = true
                       ? (() => {
                           const actionArgs = {
@@ -2401,42 +2477,6 @@ function PlasmicBookList__RenderFunc(props: {
                       typeof $steps["eventOnOff"].then === "function"
                     ) {
                       $steps["eventOnOff"] = await $steps["eventOnOff"];
-                    }
-
-                    $steps["loadingFinish"] =
-                      !$state.determiningTheSituationDialog.open ||
-                      $steps.updateActive > 0
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["loadingonoff"]
-                              },
-                              operation: 0,
-                              value: false
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                    if (
-                      $steps["loadingFinish"] != null &&
-                      typeof $steps["loadingFinish"] === "object" &&
-                      typeof $steps["loadingFinish"].then === "function"
-                    ) {
-                      $steps["loadingFinish"] = await $steps["loadingFinish"];
                     }
                   }}
                 />

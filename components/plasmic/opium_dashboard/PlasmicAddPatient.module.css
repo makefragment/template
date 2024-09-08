@@ -76,17 +76,30 @@
 .booktime:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
   position: relative;
+  width: 100%;
+  min-width: 0;
 }
 .fragmentTimePicker:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
 }
-.text__oxki4 {
+.freeBox__xM9W3 {
+  display: flex;
+  flex-direction: column;
   position: relative;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
+  padding: 8px;
+}
+.text__oxki4 {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
 }
 .verticalStackData {
   display: flex;
@@ -179,8 +192,9 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  background: #ffffff;
   min-width: 0;
-  padding: 8px;
+  padding: 8px 25px;
 }
 .verticalStackFunction > :global(.__wab_flex-container) {
   flex-direction: column;
@@ -207,7 +221,16 @@
   max-width: 100%;
   position: relative;
   width: 100%;
+  margin-right: 25px;
+  margin-left: 25px;
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeturnBook:global(.__wab_instance) {
+    margin-right: 100px;
+    margin-left: 100px;
+    width: 350px;
+  }
 }
 .svg__nchar {
   position: relative;
@@ -225,7 +248,16 @@
   max-width: 100%;
   position: relative;
   width: 100%;
+  margin-right: 25px;
+  margin-left: 25px;
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .preferBooktimeButton:global(.__wab_instance) {
+    margin-right: 100px;
+    margin-left: 100px;
+    width: 350px;
+  }
 }
 .svg__fwPna {
   position: relative;
@@ -247,6 +279,27 @@
   width: 100%;
   min-width: 0;
 }
+.freeBox___1K98 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  border-radius: 8px;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox___1K98 {
+    margin-right: 0px;
+    padding-right: 100px;
+    padding-left: 100px;
+    border: 1px solid var(--token-Y3HOiwZmAcAF);
+  }
+}
 .freeBox__xnFeB {
   display: flex;
   position: relative;
@@ -257,7 +310,16 @@
   height: auto;
   max-width: 100%;
   min-width: 0;
+  border-radius: 8px;
   padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox__xnFeB {
+    width: auto;
+    margin-right: 0px;
+    padding-right: 100px;
+    padding-left: 100px;
+  }
 }
 .freeBox__kqRc {
   display: flex;
@@ -268,7 +330,9 @@
   max-width: 100%;
   background: #ffffff;
   min-width: 0;
+  border-radius: 8px;
   padding: 8px;
+  border: 1px solid var(--token-Y3HOiwZmAcAF);
 }
 .freeBox__kqRc > :global(.__wab_flex-container) {
   flex-direction: row;
@@ -287,6 +351,12 @@
   > picture
   > img {
   margin-left: var(--token-fhaz6q6bl-fW);
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox__kqRc {
+    border-radius: 8px;
+    border: 1px solid var(--token-Y3HOiwZmAcAF);
+  }
 }
 .text__skZB {
   position: relative;
@@ -328,14 +398,30 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   height: auto;
   max-width: 100%;
   width: 100%;
   background: none;
   min-width: 0;
   border-radius: 1px;
+}
+.freeBox__mTcO > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-top: calc(0px - 1px);
+  height: calc(100% + 1px);
+}
+.freeBox__mTcO > :global(.__wab_flex-container) > *,
+.freeBox__mTcO > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__mTcO > :global(.__wab_flex-container) > picture > img,
+.freeBox__mTcO
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 1px;
 }
 .httpRestApiFetcher__nyQGf:global(.__wab_instance) {
   width: 100%;
@@ -458,15 +544,32 @@
 }
 .dialogNewTimePicker:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
+  width: auto;
+}
+.freeBox__sScTo {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .text__u8H7 {
+    text-align: right;
+  }
 }
 .freeBox___6SJkA {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 100%;
+  width: auto;
   height: auto;
   max-width: 100%;
-  min-width: 0;
   border-radius: 4px;
   padding: 8px;
   border: 1px solid var(--token-Y3HOiwZmAcAF);
@@ -475,7 +578,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 0;
   margin-top: calc(0px - var(--token-vMUQwr5Jto1d));
   height: calc(100% + var(--token-vMUQwr5Jto1d));
 }
@@ -502,6 +604,11 @@
   padding: 8px;
   border: 1px solid var(--token-rElHb1O_jV7y);
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .fromHorizental {
+    width: auto;
+  }
+}
 .fromText {
   position: relative;
   width: 100%;
@@ -526,6 +633,11 @@
   padding: 8px;
   border: 1px solid var(--token-9ml8Bu7TYsyp);
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .toHorizental {
+    width: auto;
+  }
+}
 .toText {
   position: relative;
   width: 100%;
@@ -542,6 +654,16 @@
   position: relative;
   width: 100%;
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .submitNewBook:global(.__wab_instance) {
+    width: 100%;
+    margin-right: var(--token-QcxRWQfhgyJI);
+    margin-left: var(--token-QcxRWQfhgyJI);
+    margin-top: var(--token-QcxRWQfhgyJI) !important;
+    margin-bottom: var(--token-QcxRWQfhgyJI);
+    min-width: 0;
+  }
 }
 .svg__iM9Te {
   position: relative;

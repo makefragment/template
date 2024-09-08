@@ -68,6 +68,8 @@ import { DataFetcher } from "@plasmicpkgs/plasmic-query";
 import { DatePicker } from "@/fragment/components/date-picker"; // plasmic-import: b38lDo6Nm8Rh/codeComponent
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
+import { useScreenVariants as useScreenVariantsfobTirRaixGf } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: fobTIRRaixGf/globalVariant
+
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
@@ -334,6 +336,10 @@ function PlasmicAddPatient__RenderFunc(props: {
     $ctx,
     $queries: {},
     $refs
+  });
+
+  const globalVariants = ensureGlobalVariants({
+    screen: useScreenVariantsfobTirRaixGf()
   });
 
   return (
@@ -1002,7 +1008,7 @@ function PlasmicAddPatient__RenderFunc(props: {
             e instanceof TypeError ||
             e?.plasmicType === "PlasmicUndefinedDataError"
           ) {
-            return true;
+            return false;
           }
           throw e;
         }
@@ -1630,6 +1636,7 @@ function PlasmicAddPatient__RenderFunc(props: {
                           "__wab_instance",
                           sty.preferBooktimeButton
                         )}
+                        color={"softBlue"}
                         endIcon={
                           <ChevronLeftIcon
                             className={classNames(
@@ -1765,6 +1772,12 @@ function PlasmicAddPatient__RenderFunc(props: {
                             ];
                           }
                         }}
+                        outline={true}
+                        shape={
+                          hasVariant(globalVariants, "screen", "mobileOnly")
+                            ? undefined
+                            : undefined
+                        }
                         startIcon={
                           <ChevronRightIcon
                             className={classNames(
@@ -1883,13 +1896,13 @@ function PlasmicAddPatient__RenderFunc(props: {
                                         (async date => {
                                           const $steps = {};
 
-                                          $steps["updateStateتقومOpen"] = true
+                                          $steps["updateStateتقویمOpen"] = true
                                             ? (() => {
                                                 const actionArgs = {
                                                   variable: {
                                                     objRoot: $state,
                                                     variablePath: [
-                                                      "تقوم",
+                                                      "تقویم",
                                                       "open"
                                                     ]
                                                   },
@@ -1920,17 +1933,18 @@ function PlasmicAddPatient__RenderFunc(props: {
                                               })()
                                             : undefined;
                                           if (
-                                            $steps["updateStateتقومOpen"] !=
+                                            $steps["updateStateتقویمOpen"] !=
                                               null &&
                                             typeof $steps[
-                                              "updateStateتقومOpen"
+                                              "updateStateتقویمOpen"
                                             ] === "object" &&
-                                            typeof $steps["updateStateتقومOpen"]
-                                              .then === "function"
+                                            typeof $steps[
+                                              "updateStateتقویمOpen"
+                                            ].then === "function"
                                           ) {
-                                            $steps["updateStateتقومOpen"] =
+                                            $steps["updateStateتقویمOpen"] =
                                               await $steps[
-                                                "updateStateتقومOpen"
+                                                "updateStateتقویمOpen"
                                               ];
                                           }
                                         }).apply(null, eventArgs);
@@ -1972,7 +1986,9 @@ function PlasmicAddPatient__RenderFunc(props: {
                                 }
                               />
                             </Stack__>
-                            <div
+                            <Stack__
+                              as={"div"}
+                              hasGap={true}
                               className={classNames(
                                 projectcss.all,
                                 sty.freeBox__mTcO
@@ -3350,25 +3366,52 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                                 ]
                                                               },
                                                               operation: 0,
-                                                              value: Math.floor(
-                                                                new Date(
+                                                              value: (() => {
+                                                                if (
                                                                   $state
                                                                     .datePicker
-                                                                    .value *
-                                                                    1000
-                                                                ).setHours(
-                                                                  parseInt(
-                                                                    $state.fromTimePicker.value.split(
-                                                                      ":"
-                                                                    )[0]
-                                                                  ),
-                                                                  parseInt(
-                                                                    $state.fromTimePicker.value.split(
-                                                                      ":"
-                                                                    )[1]
-                                                                  )
-                                                                ) / 1000
-                                                              )
+                                                                    .value
+                                                                ) {
+                                                                  return Math.floor(
+                                                                    new Date(
+                                                                      $state
+                                                                        .datePicker
+                                                                        .value *
+                                                                        1000
+                                                                    ).setHours(
+                                                                      parseInt(
+                                                                        $state.fromTimePicker.value.split(
+                                                                          ":"
+                                                                        )[0]
+                                                                      ),
+                                                                      parseInt(
+                                                                        $state.fromTimePicker.value.split(
+                                                                          ":"
+                                                                        )[1]
+                                                                      ),
+                                                                      0,
+                                                                      0
+                                                                    ) / 1000
+                                                                  );
+                                                                } else {
+                                                                  return Math.floor(
+                                                                    new Date().setHours(
+                                                                      parseInt(
+                                                                        $state.fromTimePicker.value.split(
+                                                                          ":"
+                                                                        )[0]
+                                                                      ),
+                                                                      parseInt(
+                                                                        $state.fromTimePicker.value.split(
+                                                                          ":"
+                                                                        )[1]
+                                                                      ),
+                                                                      0,
+                                                                      0
+                                                                    ) / 1000
+                                                                  );
+                                                                }
+                                                              })()
                                                             };
                                                             return (({
                                                               variable,
@@ -3424,25 +3467,52 @@ function PlasmicAddPatient__RenderFunc(props: {
                                                                 ]
                                                               },
                                                               operation: 0,
-                                                              value: Math.floor(
-                                                                new Date(
+                                                              value: (() => {
+                                                                if (
                                                                   $state
                                                                     .datePicker
-                                                                    .value *
-                                                                    1000
-                                                                ).setHours(
-                                                                  parseInt(
-                                                                    $state.toTimePicker.value.split(
-                                                                      ":"
-                                                                    )[0]
-                                                                  ),
-                                                                  parseInt(
-                                                                    $state.toTimePicker.value.split(
-                                                                      ":"
-                                                                    )[1]
-                                                                  )
-                                                                ) / 1000
-                                                              )
+                                                                    .value
+                                                                ) {
+                                                                  return Math.floor(
+                                                                    new Date(
+                                                                      $state
+                                                                        .datePicker
+                                                                        .value *
+                                                                        1000
+                                                                    ).setHours(
+                                                                      parseInt(
+                                                                        $state.toTimePicker.value.split(
+                                                                          ":"
+                                                                        )[0]
+                                                                      ),
+                                                                      parseInt(
+                                                                        $state.toTimePicker.value.split(
+                                                                          ":"
+                                                                        )[1]
+                                                                      ),
+                                                                      0,
+                                                                      0
+                                                                    ) / 1000
+                                                                  );
+                                                                } else {
+                                                                  return Math.floor(
+                                                                    new Date().setHours(
+                                                                      parseInt(
+                                                                        $state.toTimePicker.value.split(
+                                                                          ":"
+                                                                        )[0]
+                                                                      ),
+                                                                      parseInt(
+                                                                        $state.toTimePicker.value.split(
+                                                                          ":"
+                                                                        )[1]
+                                                                      ),
+                                                                      0,
+                                                                      0
+                                                                    ) / 1000
+                                                                  );
+                                                                }
+                                                              })()
                                                             };
                                                             return (({
                                                               variable,
@@ -3918,7 +3988,28 @@ function PlasmicAddPatient__RenderFunc(props: {
                                               ["dialogNewTimePicker", "open"]
                                             )}
                                             title={
-                                              "\u0627\u0641\u0632\u0648\u062f\u0646 \u0646\u0648\u0628\u062a \u062f\u0631 \u0632\u0645\u0627\u0646 \u062f\u0644\u062e\u0648\u0627\u0647"
+                                              <div
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  sty.freeBox__sScTo
+                                                )}
+                                              >
+                                                <div
+                                                  className={classNames(
+                                                    projectcss.all,
+                                                    projectcss.__wab_text,
+                                                    sty.text__u8H7
+                                                  )}
+                                                >
+                                                  {hasVariant(
+                                                    globalVariants,
+                                                    "screen",
+                                                    "mobileOnly"
+                                                  )
+                                                    ? "\u062b\u0628\u062a \u0646\u0648\u0628\u062a \u0628\u0631\u0627\u06cc \u0632\u0645\u0627\u0646 \u062f\u0644\u062e\u0648\u0627\u0647"
+                                                    : "\u062b\u0628\u062a \u0646\u0648\u0628\u062a \u0628\u0631\u0627\u06cc \u0632\u0645\u0627\u0646 \u062f\u0644\u062e\u0648\u0627\u0647"}
+                                                </div>
+                                              </div>
                                             }
                                             trigger={null}
                                           />
@@ -3928,7 +4019,7 @@ function PlasmicAddPatient__RenderFunc(props: {
                                   )}
                                 </DataCtxReader__>
                               </DataFetcher>
-                            </div>
+                            </Stack__>
                           </div>
                         }
                         className={classNames(
@@ -3948,13 +4039,20 @@ function PlasmicAddPatient__RenderFunc(props: {
                           <div
                             className={classNames(
                               projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text___1RvX
+                              sty.freeBox___1K98
                             )}
                           >
-                            {
-                              "\u0646\u0648\u0628\u062a\u200c\u0647\u0627\u06cc \u062e\u0627\u0644\u06cc"
-                            }
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text___1RvX
+                              )}
+                            >
+                              {
+                                "\u0646\u0648\u0628\u062a\u200c\u0647\u0627\u06cc \u062e\u0627\u0644\u06cc"
+                              }
+                            </div>
                           </div>
                         }
                         trigger={null}
@@ -3978,7 +4076,7 @@ function PlasmicAddPatient__RenderFunc(props: {
           }}
           open={generateStateValueProp($state, ["booktime", "open"])}
           title={
-            <React.Fragment>
+            <div className={classNames(projectcss.all, sty.freeBox__xM9W3)}>
               <div
                 className={classNames(
                   projectcss.all,
@@ -4039,7 +4137,7 @@ function PlasmicAddPatient__RenderFunc(props: {
                   </React.Fragment>
                 </div>
               ) : null}
-            </React.Fragment>
+            </div>
           }
           trigger={
             <TimePicker

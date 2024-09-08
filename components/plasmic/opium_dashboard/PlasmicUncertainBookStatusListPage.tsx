@@ -444,11 +444,11 @@ function PlasmicUncertainBookStatusListPage__RenderFunc(props: {
                           className={classNames(
                             projectcss.all,
                             projectcss.__wab_text,
-                            sty.text__rTs0P
+                            sty.text__ie7ND
                           )}
                         >
                           {
-                            '\u067e\u0632\u0634\u06a9 \u06af\u0631\u0627\u0645\u06cc\n \u062f\u0631 \u0635\u0648\u0631\u062a \u0627\u0646\u062c\u0627\u0645 \u0648\u06cc\u0632\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631\u060c \u06af\u0632\u06cc\u0646\u0647 "\u0648\u06cc\u0632\u06cc\u062a \u06a9\u0631\u062f\u0647 \u0627\u0645" \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f.\n \u062f\u0631 \u063a\u06cc\u0631 \u0627\u06cc\u0646\u0635\u0648\u0631\u062a\u060c \u0646\u0648\u0628\u062a \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u0628\u0627 \u06a9\u0644\u06cc\u06a9 \u0628\u0631 \u0631\u0648\u06cc \u0646\u0627\u0645 \u0628\u06cc\u0645\u0627\u0631 \u062d\u0630\u0641 \u06a9\u0646\u06cc\u062f.'
+                            '\u067e\u0632\u0634\u06a9 \u06af\u0631\u0627\u0645\u06cc\n\u062f\u0631 \u0635\u0648\u0631\u062a \u0627\u0646\u062c\u0627\u0645 \u0648\u06cc\u0632\u06cc\u062a \u0628\u06cc\u0645\u0627\u0631\u060c \u06af\u0632\u06cc\u0646\u0647 \u201c\u067e\u0627\u06cc\u0627\u0646 \u0648\u06cc\u0632\u06cc\u062a\u201d\u06cc\u0627\u201d\u0648\u06cc\u0632\u06cc\u062a \u06a9\u0631\u062f\u0647 \u0627\u0645" \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f.\n\u062f\u0631 \u063a\u06cc\u0631 \u0627\u06cc\u0646\u0635\u0648\u0631\u062a\u060c \u0646\u0648\u0628\u062a \u0628\u06cc\u0645\u0627\u0631 \u0631\u0627 \u0628\u0627 \u06a9\u0644\u06cc\u06a9 \u0628\u0631 \u0631\u0648\u06cc \u0646\u0627\u0645 \u0628\u06cc\u0645\u0627\u0631 \u062d\u0630\u0641 \u06a9\u0646\u06cc\u062f.\n'
                           }
                         </div>
                       </div>
@@ -493,7 +493,7 @@ function PlasmicUncertainBookStatusListPage__RenderFunc(props: {
                       data-plasmic-name={"checkNow"}
                       data-plasmic-override={overrides.checkNow}
                       children2={
-                        "\u0627\u0644\u0627\u0646 \u0628\u0631\u0631\u0633\u06cc \u0645\u06cc\u06a9\u0646\u0645"
+                        "\u0645\u0634\u0627\u0647\u062f\u0647 \u0644\u06cc\u0633\u062a \u0646\u0648\u0628\u062a\u200c\u0647\u0627"
                       }
                       className={classNames("__wab_instance", sty.checkNow)}
                       onClick={async event => {
@@ -552,7 +552,7 @@ function PlasmicUncertainBookStatusListPage__RenderFunc(props: {
                   data-plasmic-name={"checkLater"}
                   data-plasmic-override={overrides.checkLater}
                   children2={
-                    "\u0628\u0639\u062f\u0627 \u0628\u0631\u0631\u0633\u06cc \u0645\u06cc\u06a9\u0646\u0645"
+                    "\u0628\u0639\u062f\u0627 \u0645\u0634\u0627\u0647\u062f\u0647 \u0645\u06cc\u06a9\u0646\u0645"
                   }
                   className={classNames("__wab_instance", sty.checkLater)}
                   onClick={async event => {

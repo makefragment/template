@@ -21,9 +21,9 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  background: #ffffff;
+  background: var(--token-VY6DggwR9lvs);
   cursor: pointer;
-  box-shadow: 0px 4px 16px 0px var(--token-AlQs476uRq4B);
+  box-shadow: 3px 4px 16px 3px var(--token-6G9-A5vsJlrH);
   min-width: 0;
   border-radius: 8px;
   padding: 8px;
@@ -52,7 +52,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  color: var(--token-n7oRIobFxMYD);
+  color: var(--token-jgohepLVeKvh);
   font-weight: 800;
   text-align: center;
   min-width: 0;

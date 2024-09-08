@@ -555,6 +555,7 @@ function PlasmicUncertainBookStatusListPage__RenderFunc(props: {
                     "\u0628\u0639\u062f\u0627 \u0645\u0634\u0627\u0647\u062f\u0647 \u0645\u06cc\u06a9\u0646\u0645"
                   }
                   className={classNames("__wab_instance", sty.checkLater)}
+                  color={"softBlue"}
                   onClick={async event => {
                     const $steps = {};
 

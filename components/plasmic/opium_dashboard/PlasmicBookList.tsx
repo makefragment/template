@@ -1382,7 +1382,7 @@ function PlasmicBookList__RenderFunc(props: {
                           )}
                         >
                           {
-                            "\u062f\u0631\u062c \u0646\u0648\u0628\u062a \u062c\u062f\u06cc\u062f"
+                            "\u062b\u0628\u062a \u0646\u0648\u0628\u062a \u062c\u062f\u06cc\u062f"
                           }
                         </div>
                       }

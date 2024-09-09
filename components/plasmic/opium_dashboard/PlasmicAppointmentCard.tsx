@@ -1109,7 +1109,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                             const actionArgs = {
                               variable: {
                                 objRoot: $state,
-                                variablePath: ["دالوحذفنوبت", "open"]
+                                variablePath: ["deletebookdialog", "open"]
                               },
                               operation: 0,
                               value: false

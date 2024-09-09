@@ -148,7 +148,7 @@ export type PlasmicAppointmentCard__OverridesType = {
   root?: Flex__<"div">;
   dialog?: Flex__<typeof Dialog>;
   ساعتوتاریخ?: Flex__<"div">;
-  دیالوگحذفنوبت?: Flex__<typeof Dialog>;
+  deletebookdialog?: Flex__<typeof Dialog>;
   bookState?: Flex__<"div">;
   dialog2?: Flex__<typeof Dialog>;
   descriptionInput?: Flex__<typeof TextInput>;
@@ -237,7 +237,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "دیالوگحذفنوبت.open",
+        path: "deletebookdialog.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -588,12 +588,12 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                 onClick={async event => {
                   const $steps = {};
 
-                  $steps["updateStateدالوحذفنوبتOpen"] = true
+                  $steps["updateDeletebookdialogOpen"] = true
                     ? (() => {
                         const actionArgs = {
                           variable: {
                             objRoot: $state,
-                            variablePath: ["دالوحذفنوبت", "open"]
+                            variablePath: ["deletebookdialog", "open"]
                           },
                           operation: 0,
                           value: true
@@ -615,13 +615,13 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
-                    $steps["updateStateدالوحذفنوبتOpen"] != null &&
-                    typeof $steps["updateStateدالوحذفنوبتOpen"] === "object" &&
-                    typeof $steps["updateStateدالوحذفنوبتOpen"].then ===
+                    $steps["updateDeletebookdialogOpen"] != null &&
+                    typeof $steps["updateDeletebookdialogOpen"] === "object" &&
+                    typeof $steps["updateDeletebookdialogOpen"].then ===
                       "function"
                   ) {
-                    $steps["updateStateدالوحذفنوبتOpen"] = await $steps[
-                      "updateStateدالوحذفنوبتOpen"
+                    $steps["updateDeletebookdialogOpen"] = await $steps[
+                      "updateDeletebookdialogOpen"
                     ];
                   }
 
@@ -944,10 +944,8 @@ function PlasmicAppointmentCard__RenderFunc(props: {
               />
             ) : null}
             <Dialog
-              data-plasmic-name={
-                "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
-              }
-              data-plasmic-override={overrides.دیالوگحذفنوبت}
+              data-plasmic-name={"deletebookdialog"}
+              data-plasmic-override={overrides.deletebookdialog}
               body={
                 <Stack__
                   as={"div"}
@@ -1373,12 +1371,15 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                   />
                 </Stack__>
               }
-              className={classNames("__wab_instance", sty.دیالوگحذفنوبت)}
+              className={classNames("__wab_instance", sty.deletebookdialog)}
               onOpenChange={generateStateOnChangeProp($state, [
-                "دیالوگحذفنوبت",
+                "deletebookdialog",
                 "open"
               ])}
-              open={generateStateValueProp($state, ["دیالوگحذفنوبت", "open"])}
+              open={generateStateValueProp($state, [
+                "deletebookdialog",
+                "open"
+              ])}
               title={
                 <div
                   className={classNames(
@@ -2360,7 +2361,7 @@ const PlasmicDescendants = {
     "root",
     "dialog",
     "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e",
-    "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a",
+    "deletebookdialog",
     "bookState",
     "dialog2",
     "descriptionInput",
@@ -2370,12 +2371,10 @@ const PlasmicDescendants = {
   dialog: [
     "dialog",
     "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e",
-    "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
+    "deletebookdialog"
   ],
   ساعتوتاریخ: ["\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e"],
-  دیالوگحذفنوبت: [
-    "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
-  ],
+  deletebookdialog: ["deletebookdialog"],
   bookState: [
     "bookState",
     "dialog2",
@@ -2395,7 +2394,7 @@ type NodeDefaultElementType = {
   root: "div";
   dialog: typeof Dialog;
   ساعتوتاریخ: "div";
-  دیالوگحذفنوبت: typeof Dialog;
+  deletebookdialog: typeof Dialog;
   bookState: "div";
   dialog2: typeof Dialog;
   descriptionInput: typeof TextInput;
@@ -2467,9 +2466,7 @@ export const PlasmicAppointmentCard = Object.assign(
     ساعتوتاریخ: makeNodeComponent(
       "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e"
     ),
-    دیالوگحذفنوبت: makeNodeComponent(
-      "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
-    ),
+    deletebookdialog: makeNodeComponent("deletebookdialog"),
     bookState: makeNodeComponent("bookState"),
     dialog2: makeNodeComponent("dialog2"),
     descriptionInput: makeNodeComponent("descriptionInput"),

@@ -1038,7 +1038,11 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                                 undefined,
                                 (() => {
                                   try {
-                                    return { book_id: $props.bookId };
+                                    return (() => {
+                                      {
+                                        book_id: $props.bookId;
+                                      }
+                                    })();
                                   } catch (e) {
                                     if (
                                       e instanceof TypeError ||
@@ -1256,6 +1260,28 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                         $steps["eventDeleteBook"] = await $steps[
                           "eventDeleteBook"
                         ];
+                      }
+
+                      $steps["showToast"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                undefined,
+                                "\u0646\u0648\u0628\u062a \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0644\u063a\u0648 \u0634\u062f."
+                              ]
+                            };
+                            return $globalActions["Fragment.showToast"]?.apply(
+                              null,
+                              [...actionArgs.args]
+                            );
+                          })()
+                        : undefined;
+                      if (
+                        $steps["showToast"] != null &&
+                        typeof $steps["showToast"] === "object" &&
+                        typeof $steps["showToast"].then === "function"
+                      ) {
+                        $steps["showToast"] = await $steps["showToast"];
                       }
                     }}
                     startIcon={

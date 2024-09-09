@@ -152,3 +152,11 @@
 .hoursDaysOfWeek:global(.__wab_instance) {
   max-width: 100%;
 }
+.runCodeGtmMetrica:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.gtm:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}

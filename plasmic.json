@@ -1026,6 +1026,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/book-sms"
+        },
+        {
+          "id": "Hn899DdPmkT9",
+          "name": "HelpEitaa",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicHelpEitaa.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/help-eitaa.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicHelpEitaa.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/help-eitaa"
         }
       ],
       "icons": [
@@ -1150,6 +1164,36 @@
           "id": "OjzCrWm2xhbS",
           "name": "image 2",
           "filePath": "../public/plasmic/opium_dashboard/images/image2.png"
+        },
+        {
+          "id": "iAe3m1ZML0lV",
+          "name": "android1.jpg",
+          "filePath": "../public/plasmic/opium_dashboard/images/android1Jpg.jpg"
+        },
+        {
+          "id": "0UtU1OleGJ-d",
+          "name": "android2.jpg",
+          "filePath": "../public/plasmic/opium_dashboard/images/android2Jpg.jpg"
+        },
+        {
+          "id": "cCaqWSA_p_Sd",
+          "name": "android3.jpg",
+          "filePath": "../public/plasmic/opium_dashboard/images/android3Jpg.jpg"
+        },
+        {
+          "id": "e-9oUwtxve1P",
+          "name": "iphone2.jpg",
+          "filePath": "../public/plasmic/opium_dashboard/images/iphone2Jpg.jpg"
+        },
+        {
+          "id": "jZGB1UN8jjQ5",
+          "name": "iphone3.jpg",
+          "filePath": "../public/plasmic/opium_dashboard/images/iphone3Jpg.jpg"
+        },
+        {
+          "id": "iZRmKMDCFCJz",
+          "name": "iphone1.jpg",
+          "filePath": "../public/plasmic/opium_dashboard/images/iphone1Jpg.jpg"
         }
       ],
       "indirect": false,

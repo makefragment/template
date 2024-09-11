@@ -10,6 +10,8 @@ import React from "react";
 
 export const DatePicker = ({
   onChange,
+  onMonthChange,
+  onYearChange,
   locale,
   holidays = [],
   value,
@@ -34,6 +36,12 @@ export const DatePicker = ({
           Array.isArray(value)
             ? onChange(value.map((item) => item.unix))
             : onChange(value.unix);
+        }}
+        onMonthChange={(value: DateObject) => {
+          onMonthChange(value.month);
+        }}
+        onYearChange={(value: DateObject) => {
+          onYearChange(value.year);
         }}
         className={cn("fragment", { "custom-day-cell": customDayCell })}
         {...(locale === "fa" && {
@@ -146,6 +154,24 @@ export const datePickerMeta: CodeComponentMeta<any> = {
         },
       ],
     },
+    onMonthChange: {
+      type: "eventHandler",
+      argTypes: [
+        {
+          name: "month",
+          type: "object",
+        },
+      ],
+    },
+    onYearChange: {
+      type: "eventHandler",
+      argTypes: [
+        {
+          name: "year",
+          type: "object",
+        },
+      ],
+    },
     locale: {
       defaultValue: "fa",
       type: "choice",
@@ -191,6 +217,16 @@ export const datePickerMeta: CodeComponentMeta<any> = {
       valueProp: "values",
       onChangeProp: "onChange",
       hidden: (ps) => ps.mode === "single",
+    },
+    month: {
+      type: "readonly",
+      variableType: "object",
+      onChangeProp: "onMonthChange",
+    },
+    year: {
+      type: "readonly",
+      variableType: "object",
+      onChangeProp: "onYearChange",
     },
   },
 };

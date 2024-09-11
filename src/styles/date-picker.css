@@ -6,6 +6,30 @@
   @apply !w-full !h-auto;
 }
 
+.fragment.fragment.custom-day-cell {
+  @apply !w-full !h-auto;
+}
+
+.fragment.fragment.custom-day-cell .rmdp-top-class {
+  @apply !w-full !h-auto;
+}
+
+.fragment.fragment.custom-day-cell .rmdp-calendar {
+  @apply !w-full !h-auto;
+}
+
+.fragment.fragment.custom-day-cell .rmdp-calendar > div {
+  @apply !w-full !h-auto;
+}
+
+.fragment.fragment.custom-day-cell .rmdp-calendar > div > div {
+  @apply !w-full !h-auto;
+}
+
+.fragment.fragment.custom-day-cell .rmdp-calendar > div > div > div {
+  @apply !w-full !h-auto;
+}
+
 .fragment.fragment.custom-day-cell .rmdp-week .rmdp-day span {
   font-size: inherit;
   @apply !text-inherit !inset-auto !static !rounded-none !shadow-none !p-0 select-none hover:!bg-transparent !bg-transparent;

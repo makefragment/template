@@ -2,9 +2,10 @@
 // This file is owned by you, feel free to edit as you see fit.
 import * as React from "react";
 import {
-  PlasmicDialog,
-  DefaultDialogProps
-} from "./plasmic/opium_dashboard/PlasmicDialog";
+  PlasmicSpecificnotification,
+  DefaultSpecificnotificationProps
+} from "./plasmic/opium_dashboard/PlasmicSpecificnotification";
+import { HTMLElementRefOf } from "@plasmicapp/react-web";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -13,31 +14,36 @@ import {
 // If you don't want to expose certain variants or slots as a prop, you can use
 // Omit to hide them:
 //
-// interface DialogProps extends Omit<DefaultDialogProps, "hideProps1"|"hideProp2"> {
+// interface SpecificnotificationProps extends Omit<DefaultSpecificnotificationProps, "hideProps1"|"hideProp2"> {
 //   // etc.
 // }
 //
-// You can also stop extending from DefaultDialogProps altogether and have
+// You can also stop extending from DefaultSpecificnotificationProps altogether and have
 // total control over the props for your component.
-export interface DialogProps extends DefaultDialogProps {}
+export interface SpecificnotificationProps
+  extends DefaultSpecificnotificationProps {}
 
-function Dialog(props: DialogProps) {
-  // Use PlasmicDialog to render this component as it was
+function Specificnotification_(
+  props: SpecificnotificationProps,
+  ref: HTMLElementRefOf<"div">
+) {
+  // Use PlasmicSpecificnotification to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicDialog are:
+  // Props you can pass into PlasmicSpecificnotification are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, we are just piping all DialogProps here, but feel free
+  // By default, we are just piping all SpecificnotificationProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicDialog {...props} />;
+  return <PlasmicSpecificnotification root={{ ref }} {...props} />;
 }
 
-export default Dialog;
+const Specificnotification = React.forwardRef(Specificnotification_);
+export default Specificnotification;

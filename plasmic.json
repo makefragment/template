@@ -77,8 +77,7 @@
           "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "oBJtsp5RgVpcN6KCrDTuQT",
@@ -309,8 +308,7 @@
           "componentImportPath": "@plasmicpkgs/radix-ui"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "a3pmZtcpA5asHkNtN3SGoF",
@@ -354,8 +352,7 @@
           "componentImportPath": "@plasmicpkgs/plasmic-query"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "h9Dbk9ygddw7UVEq1NNhKi",
@@ -1014,20 +1011,6 @@
           "path": "/setting"
         },
         {
-          "id": "UArZKKjjYgCc",
-          "name": "BookSms",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicBookSms.tsx",
-          "importSpec": {
-            "modulePath": "../src/pages/book-sms.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicBookSms.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/book-sms"
-        },
-        {
           "id": "Hn899DdPmkT9",
           "name": "HelpEitaa",
           "type": "managed",
@@ -1040,6 +1023,114 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/help-eitaa"
+        },
+        {
+          "id": "WruHPcUoA-DQ",
+          "name": "BookGenerallNotification",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicBookGenerallNotification.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/book-generall-notification.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicBookGenerallNotification.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/book-generall-notification"
+        },
+        {
+          "id": "FvhQs2_HZKSE",
+          "name": "Text",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicText.tsx",
+          "importSpec": {
+            "modulePath": "Text.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicText.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "8VbbT-d7nJtc",
+          "name": "ListOfNotofications",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicListOfNotofications.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/list-of-notofications.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicListOfNotofications.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/list-of-notofications"
+        },
+        {
+          "id": "StTDWQBuYL05",
+          "name": "EventsList",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicEventsList.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/events-list.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicEventsList.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/events-list"
+        },
+        {
+          "id": "YyFEgO_p-AFf",
+          "name": "Button",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicButton.tsx",
+          "importSpec": {
+            "modulePath": "Button.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicButton.module.css",
+          "scheme": "blackbox",
+          "componentType": "component",
+          "plumeType": "button"
+        },
+        {
+          "id": "nWN_fvT2PF2_",
+          "name": "Dialog",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicDialog.tsx",
+          "importSpec": {
+            "modulePath": "Dialog.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicDialog.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "kyCg1wl1ZoV7",
+          "name": "Specificnotification",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicSpecificnotification.tsx",
+          "importSpec": {
+            "modulePath": "Specificnotification.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicSpecificnotification.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "bwh2kDzd78mD",
+          "name": "MetrikaYandex",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicMetrikaYandex.tsx",
+          "importSpec": {
+            "modulePath": "MetrikaYandex.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicMetrikaYandex.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -1152,6 +1243,31 @@
           "id": "dLXaRsSSHo3S",
           "name": "Icon15Icon",
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon15.tsx"
+        },
+        {
+          "id": "8j1U_g9afFrU",
+          "name": "Icon16Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon16.tsx"
+        },
+        {
+          "id": "0ELPoF5hq6sg",
+          "name": "Icon17Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon17.tsx"
+        },
+        {
+          "id": "IETA_lWaQX-x",
+          "name": "Icon18Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon18.tsx"
+        },
+        {
+          "id": "BizSW9L3o2cq",
+          "name": "Icon19Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon19.tsx"
+        },
+        {
+          "id": "-Tz8F-qJqqkr",
+          "name": "Icon20Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon20.tsx"
         }
       ],
       "images": [
@@ -1691,8 +1807,33 @@
           "componentImportPath": "@plasmicpkgs/antd5/skinny/registerBreadcrumb"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
+    },
+    {
+      "projectId": "vqeFwpZFQ6buChy6T9PGwQ",
+      "projectApiToken": "HoXrsW7thezPtv1YjHm4ylhJuxprHUDxJCCAqkbscy96N1h1mEgQ7wO2NZcpFk5lJnyvpOGcyI5XQsfu41Vg",
+      "projectName": "react-quill",
+      "version": ">0.0.0",
+      "cssFilePath": "plasmic/react_quill/plasmic.module.css",
+      "components": [],
+      "icons": [],
+      "images": [],
+      "indirect": true,
+      "globalContextsFilePath": "",
+      "splitsProviderFilePath": "",
+      "codeComponents": [
+        {
+          "id": "ttF1HVZMBGN",
+          "name": "Quill",
+          "displayName": "hostless-react-quill",
+          "componentImportPath": "@plasmicpkgs/react-quill",
+          "helper": {
+            "name": "quillHelpers",
+            "importPath": "@plasmicpkgs/react-quill"
+          }
+        }
+      ],
+      "customFunctions": []
     }
   ],
   "globalVariants": {

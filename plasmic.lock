@@ -915,26 +915,6 @@
         },
         {
           "type": "renderModule",
-          "assetId": "YyFEgO_p-AFf",
-          "checksum": "131ded2c42bd77af9045c6be9af3afb8"
-        },
-        {
-          "type": "cssRules",
-          "assetId": "YyFEgO_p-AFf",
-          "checksum": "131ded2c42bd77af9045c6be9af3afb8"
-        },
-        {
-          "type": "renderModule",
-          "assetId": "nWN_fvT2PF2_",
-          "checksum": "605f21fb8752e57e0b5c23928febbd7a"
-        },
-        {
-          "type": "cssRules",
-          "assetId": "nWN_fvT2PF2_",
-          "checksum": "605f21fb8752e57e0b5c23928febbd7a"
-        },
-        {
-          "type": "renderModule",
           "assetId": "kyCg1wl1ZoV7",
           "checksum": "7960909f195b8532082188e7e7e2fb32"
         },

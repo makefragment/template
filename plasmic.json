@@ -1069,33 +1069,6 @@
           "path": "/events-list"
         },
         {
-          "id": "YyFEgO_p-AFf",
-          "name": "Button",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicButton.tsx",
-          "importSpec": {
-            "modulePath": "Button.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicButton.module.css",
-          "scheme": "blackbox",
-          "componentType": "component",
-          "plumeType": "button"
-        },
-        {
-          "id": "nWN_fvT2PF2_",
-          "name": "Dialog",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicDialog.tsx",
-          "importSpec": {
-            "modulePath": "Dialog.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicDialog.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
           "id": "kyCg1wl1ZoV7",
           "name": "Specificnotification",
           "type": "managed",

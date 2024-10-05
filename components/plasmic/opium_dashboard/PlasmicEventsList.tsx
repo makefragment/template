@@ -456,9 +456,7 @@ function PlasmicEventsList__RenderFunc(props: {
 
                           $steps["goToBookGenerallNotification"] = true
                             ? (() => {
-                                const actionArgs = {
-                                  destination: `/book-generall-notification`
-                                };
+                                const actionArgs = {};
                                 return (({ destination }) => {
                                   if (
                                     typeof destination === "string" &&

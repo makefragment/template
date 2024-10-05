@@ -77,7 +77,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "oBJtsp5RgVpcN6KCrDTuQT",
@@ -308,7 +309,8 @@
           "componentImportPath": "@plasmicpkgs/radix-ui"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "a3pmZtcpA5asHkNtN3SGoF",
@@ -352,7 +354,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-query"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "h9Dbk9ygddw7UVEq1NNhKi",
@@ -1023,20 +1026,6 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/help-eitaa"
-        },
-        {
-          "id": "WruHPcUoA-DQ",
-          "name": "BookGenerallNotification",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicBookGenerallNotification.tsx",
-          "importSpec": {
-            "modulePath": "../src/pages/book-generall-notification.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicBookGenerallNotification.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/book-generall-notification"
         },
         {
           "id": "FvhQs2_HZKSE",
@@ -1807,7 +1796,8 @@
           "componentImportPath": "@plasmicpkgs/antd5/skinny/registerBreadcrumb"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "vqeFwpZFQ6buChy6T9PGwQ",
@@ -1833,7 +1823,8 @@
           }
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     }
   ],
   "globalVariants": {

@@ -13,6 +13,7 @@
     "@plasmicapp/cli": "^0.1.331",
     "@plasmicapp/host": "^1.0.196",
     "@plasmicapp/react-web": "^0.2.337",
+    "@plasmicpkgs/react-quill": "1.0.65",
     "@plasmicpkgs/antd5": "^0.0.241",
     "@plasmicpkgs/plasmic-basic-components": "^0.0.215",
     "@plasmicpkgs/plasmic-query": "^0.0.214",

@@ -1439,6 +1439,16 @@
         "projectId": "h9Dbk9ygddw7UVEq1NNhKi",
         "id": "6NbVMeD6zQwn"
       }
+    },
+    {
+      "name": "xs",
+      "type": "fontsize",
+      "value": "0.75rem",
+      "category": "fontsize",
+      "meta": {
+        "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+        "id": "aKAz0S7Xi5RN"
+      }
     }
   ],
   "global": {

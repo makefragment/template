@@ -60,6 +60,7 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
+import QuickAccessWorkhours from "../../QuickAccessWorkhours"; // plasmic-import: thJf7wC4giTS/component
 import QuickAccessWallet from "../../QuickAccessWallet"; // plasmic-import: GvtgrqQf9C66/component
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { DatePicker } from "@/fragment/components/date-picker"; // plasmic-import: b38lDo6Nm8Rh/codeComponent
@@ -104,6 +105,7 @@ export const PlasmicBookList__ArgProps = new Array<ArgPropType>();
 export type PlasmicBookList__OverridesType = {
   bookList?: Flex__<"div">;
   quickAccess?: Flex__<"div">;
+  quickAccessWorkhours?: Flex__<typeof QuickAccessWorkhours>;
   quickAccessWallet?: Flex__<typeof QuickAccessWallet>;
   date?: Flex__<"div">;
   date2?: Flex__<"div">;
@@ -505,94 +507,155 @@ function PlasmicBookList__RenderFunc(props: {
               data-plasmic-override={overrides.quickAccess}
               className={classNames(projectcss.all, sty.quickAccess)}
             >
-              <div
+              <Stack__
+                as={"div"}
+                hasGap={true}
                 className={classNames(projectcss.all, sty.freeBox___5X51W)}
-                onClick={async event => {
-                  const $steps = {};
+              >
+                <div
+                  className={classNames(projectcss.all, sty.freeBox__fnKuE)}
+                  onClick={async event => {
+                    const $steps = {};
 
-                  $steps["goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"] =
-                    true
+                    $steps["sendLog"] = true
                       ? (() => {
                           const actionArgs = {
-                            destination:
-                              "https://dr.paziresh24.com/setting/payment?utm=nelson"
+                            args: [
+                              (() => {
+                                try {
+                                  return {
+                                    group: "quick access",
+                                    type: "in-app-notification",
+                                    center: $state.centers
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            ]
                           };
-                          return (({ destination }) => {
-                            if (
-                              typeof destination === "string" &&
-                              destination.startsWith("#")
-                            ) {
-                              document
-                                .getElementById(destination.substr(1))
-                                .scrollIntoView({ behavior: "smooth" });
-                            } else {
-                              __nextRouter?.push(destination);
-                            }
-                          })?.apply(null, [actionArgs]);
+                          return $globalActions["Splunk.sendLog"]?.apply(null, [
+                            ...actionArgs.args
+                          ]);
                         })()
                       : undefined;
-                  if (
-                    $steps["goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"] !=
-                      null &&
-                    typeof $steps[
-                      "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
-                    ] === "object" &&
-                    typeof $steps[
-                      "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
-                    ].then === "function"
-                  ) {
+                    if (
+                      $steps["sendLog"] != null &&
+                      typeof $steps["sendLog"] === "object" &&
+                      typeof $steps["sendLog"].then === "function"
+                    ) {
+                      $steps["sendLog"] = await $steps["sendLog"];
+                    }
+                  }}
+                >
+                  <QuickAccessWorkhours
+                    data-plasmic-name={"quickAccessWorkhours"}
+                    data-plasmic-override={overrides.quickAccessWorkhours}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.quickAccessWorkhours
+                    )}
+                  />
+                </div>
+                <div
+                  className={classNames(projectcss.all, sty.freeBox__neu9)}
+                  onClick={async event => {
+                    const $steps = {};
+
                     $steps["goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"] =
-                      await $steps[
+                      true
+                        ? (() => {
+                            const actionArgs = {
+                              destination:
+                                "https://dr.paziresh24.com/setting/payment?utm=nelson"
+                            };
+                            return (({ destination }) => {
+                              if (
+                                typeof destination === "string" &&
+                                destination.startsWith("#")
+                              ) {
+                                document
+                                  .getElementById(destination.substr(1))
+                                  .scrollIntoView({ behavior: "smooth" });
+                              } else {
+                                __nextRouter?.push(destination);
+                              }
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                    if (
+                      $steps[
+                        "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
+                      ] != null &&
+                      typeof $steps[
+                        "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
+                      ] === "object" &&
+                      typeof $steps[
+                        "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
+                      ].then === "function"
+                    ) {
+                      $steps[
+                        "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
+                      ] = await $steps[
                         "goToHttpsDrPaziresh24ComSettingPaymentUtmNelson"
                       ];
-                  }
+                    }
 
-                  $steps["sendEvent"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          args: [
-                            (() => {
-                              try {
-                                return {
-                                  group: "quick access",
-                                  type: "wallet",
-                                  center: $state.centers
-                                };
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return undefined;
+                    $steps["sendLog"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              (() => {
+                                try {
+                                  return {
+                                    group: "quick access",
+                                    type: "wallet",
+                                    center: $state.centers
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
                                 }
-                                throw e;
-                              }
-                            })()
-                          ]
-                        };
-                        return $globalActions["Splunk.sendLog"]?.apply(null, [
-                          ...actionArgs.args
-                        ]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["sendEvent"] != null &&
-                    typeof $steps["sendEvent"] === "object" &&
-                    typeof $steps["sendEvent"].then === "function"
-                  ) {
-                    $steps["sendEvent"] = await $steps["sendEvent"];
-                  }
-                }}
-              >
-                <QuickAccessWallet
-                  data-plasmic-name={"quickAccessWallet"}
-                  data-plasmic-override={overrides.quickAccessWallet}
-                  className={classNames(
-                    "__wab_instance",
-                    sty.quickAccessWallet
-                  )}
-                />
-              </div>
+                              })()
+                            ]
+                          };
+                          return $globalActions["Splunk.sendLog"]?.apply(null, [
+                            ...actionArgs.args
+                          ]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["sendLog"] != null &&
+                      typeof $steps["sendLog"] === "object" &&
+                      typeof $steps["sendLog"].then === "function"
+                    ) {
+                      $steps["sendLog"] = await $steps["sendLog"];
+                    }
+                  }}
+                >
+                  <QuickAccessWallet
+                    data-plasmic-name={"quickAccessWallet"}
+                    data-plasmic-override={overrides.quickAccessWallet}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.quickAccessWallet
+                    )}
+                  />
+                </div>
+              </Stack__>
             </div>
           ) : null}
           <div
@@ -2598,6 +2661,7 @@ const PlasmicDescendants = {
   bookList: [
     "bookList",
     "quickAccess",
+    "quickAccessWorkhours",
     "quickAccessWallet",
     "date",
     "date2",
@@ -2617,7 +2681,8 @@ const PlasmicDescendants = {
     "runCodeGtmMetrica",
     "gtm"
   ],
-  quickAccess: ["quickAccess", "quickAccessWallet"],
+  quickAccess: ["quickAccess", "quickAccessWorkhours", "quickAccessWallet"],
+  quickAccessWorkhours: ["quickAccessWorkhours"],
   quickAccessWallet: ["quickAccessWallet"],
   date: [
     "date",
@@ -2672,6 +2737,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   bookList: "div";
   quickAccess: "div";
+  quickAccessWorkhours: typeof QuickAccessWorkhours;
   quickAccessWallet: typeof QuickAccessWallet;
   date: "div";
   date2: "div";
@@ -2753,6 +2819,7 @@ export const PlasmicBookList = Object.assign(
   {
     // Helper components rendering sub-elements
     quickAccess: makeNodeComponent("quickAccess"),
+    quickAccessWorkhours: makeNodeComponent("quickAccessWorkhours"),
     quickAccessWallet: makeNodeComponent("quickAccessWallet"),
     date: makeNodeComponent("date"),
     date2: makeNodeComponent("date2"),

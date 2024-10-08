@@ -19,6 +19,8 @@
   --plasmic-token-system-bg-layout: var(--token-OQs2OqKHzgAx);
   --token-yHtMhUE4LmGt: var(--antd-colorBgElevated);
   --plasmic-token-system-bg-elevated: var(--token-yHtMhUE4LmGt);
+  --token-aKAz0S7Xi5RN: 0.75rem;
+  --plasmic-token-xs: var(--token-aKAz0S7Xi5RN);
 }
 
 .plasmic_tokens {

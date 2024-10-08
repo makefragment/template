@@ -77,7 +77,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "oBJtsp5RgVpcN6KCrDTuQT",
@@ -217,7 +218,8 @@
           "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "sqPBLwEBBKHA2WDuGb17eV",
@@ -307,7 +309,8 @@
           "componentImportPath": "@plasmicpkgs/radix-ui"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "vqeFwpZFQ6buChy6T9PGwQ",
@@ -333,7 +336,8 @@
           }
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "ohDidvG9XsCeFumugENU3J",
@@ -733,7 +737,8 @@
           "componentImportPath": "@plasmicpkgs/antd5/skinny/registerBreadcrumb"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "a3pmZtcpA5asHkNtN3SGoF",
@@ -748,7 +753,8 @@
       "globalContextsFilePath": "",
       "splitsProviderFilePath": "",
       "codeComponents": [],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "YUiM7yqBWAqsh8KSnrdj7",
@@ -776,7 +782,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-query"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "h9Dbk9ygddw7UVEq1NNhKi",
@@ -905,7 +912,8 @@
           "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
@@ -1663,6 +1671,26 @@
           "id": "-Tz8F-qJqqkr",
           "name": "Icon20Icon",
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon20.tsx"
+        },
+        {
+          "id": "SV5KLB2o79W4",
+          "name": "Icon21Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon21.tsx"
+        },
+        {
+          "id": "vGTIEbeC2hCv",
+          "name": "Icon22Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon22.tsx"
+        },
+        {
+          "id": "25ksKHakGphW",
+          "name": "Icon23Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon23.tsx"
+        },
+        {
+          "id": "WiLor5jWTYZW",
+          "name": "Icon24Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon24.tsx"
         }
       ],
       "images": [
@@ -1705,6 +1733,11 @@
           "id": "iZRmKMDCFCJz",
           "name": "iphone1.jpg",
           "filePath": "../public/plasmic/opium_dashboard/images/iphone1Jpg.jpg"
+        },
+        {
+          "id": "BKPi8rJVQd-I",
+          "name": "image 3",
+          "filePath": "../public/plasmic/opium_dashboard/images/image3.svg"
         }
       ],
       "indirect": false,

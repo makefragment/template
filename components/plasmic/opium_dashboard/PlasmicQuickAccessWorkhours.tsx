@@ -60,6 +60,8 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
+import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
+import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -67,6 +69,10 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicQuickAccessWorkhours.module.css"; // plasmic-import: thJf7wC4giTS/css
+
+import Icon23Icon from "./icons/PlasmicIcon__Icon23"; // plasmic-import: 25ksKHakGphW/icon
+import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
+import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 
 createPlasmicElementProxy;
 
@@ -83,6 +89,11 @@ export const PlasmicQuickAccessWorkhours__ArgProps = new Array<ArgPropType>();
 export type PlasmicQuickAccessWorkhours__OverridesType = {
   root?: Flex__<"div">;
   sideEffect?: Flex__<typeof SideEffect>;
+  popover?: Flex__<typeof Popover>;
+  svg?: Flex__<"svg">;
+  img?: Flex__<typeof PlasmicImg__>;
+  text?: Flex__<"div">;
+  button?: Flex__<typeof Button>;
 };
 
 export interface DefaultQuickAccessWorkhoursProps {
@@ -132,7 +143,21 @@ function PlasmicQuickAccessWorkhours__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "checkWorkhours",
+        path: "checkNotification",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "popover.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false,
+
+        refName: "popover"
+      },
+      {
+        path: "me",
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
@@ -171,12 +196,12 @@ function PlasmicQuickAccessWorkhours__RenderFunc(props: {
         onMount={async () => {
           const $steps = {};
 
-          $steps["apiWorkhour"] = true
+          $steps["apiCheckNotification"] = true
             ? (() => {
                 const actionArgs = {
                   args: [
                     "GET",
-                    "https://apigw.paziresh24.com/v1/check-workhours"
+                    "https://apigw.paziresh24.com/v1/in-app-notification"
                   ]
                 };
                 return $globalActions["Fragment.apiRequest"]?.apply(null, [
@@ -185,11 +210,13 @@ function PlasmicQuickAccessWorkhours__RenderFunc(props: {
               })()
             : undefined;
           if (
-            $steps["apiWorkhour"] != null &&
-            typeof $steps["apiWorkhour"] === "object" &&
-            typeof $steps["apiWorkhour"].then === "function"
+            $steps["apiCheckNotification"] != null &&
+            typeof $steps["apiCheckNotification"] === "object" &&
+            typeof $steps["apiCheckNotification"].then === "function"
           ) {
-            $steps["apiWorkhour"] = await $steps["apiWorkhour"];
+            $steps["apiCheckNotification"] = await $steps[
+              "apiCheckNotification"
+            ];
           }
 
           $steps["updateCheckWorkhours"] = true
@@ -197,10 +224,10 @@ function PlasmicQuickAccessWorkhours__RenderFunc(props: {
                 const actionArgs = {
                   variable: {
                     objRoot: $state,
-                    variablePath: ["checkWorkhours"]
+                    variablePath: ["checkNotification"]
                   },
                   operation: 0,
-                  value: $steps.apiWorkhour.data
+                  value: $steps.apiCheckNotification.data
                 };
                 return (({ variable, value, startIndex, deleteCount }) => {
                   if (!variable) {
@@ -222,15 +249,317 @@ function PlasmicQuickAccessWorkhours__RenderFunc(props: {
               "updateCheckWorkhours"
             ];
           }
+
+          $steps["apiAuth"] = true
+            ? (() => {
+                const actionArgs = {
+                  args: ["GET", "https://api.paziresh24.com/V1/auth/me"]
+                };
+                return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
+          if (
+            $steps["apiAuth"] != null &&
+            typeof $steps["apiAuth"] === "object" &&
+            typeof $steps["apiAuth"].then === "function"
+          ) {
+            $steps["apiAuth"] = await $steps["apiAuth"];
+          }
+
+          $steps["updateMe"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["me"]
+                  },
+                  operation: 0,
+                  value: $steps.apiAuth.data
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateMe"] != null &&
+            typeof $steps["updateMe"] === "object" &&
+            typeof $steps["updateMe"].then === "function"
+          ) {
+            $steps["updateMe"] = await $steps["updateMe"];
+          }
         }}
       />
+
+      {(() => {
+        try {
+          return (
+            $state.checkNotification !== null &&
+            $state.checkNotification !== undefined &&
+            $state.checkNotification !== "" &&
+            JSON.stringify($state.checkNotification) !== JSON.stringify([{}])
+          );
+        } catch (e) {
+          if (
+            e instanceof TypeError ||
+            e?.plasmicType === "PlasmicUndefinedDataError"
+          ) {
+            return false;
+          }
+          throw e;
+        }
+      })() ? (
+        <div
+          className={classNames(projectcss.all, sty.freeBox___9Cm4O)}
+          dir={"rtl"}
+        >
+          <Popover
+            data-plasmic-name={"popover"}
+            data-plasmic-override={overrides.popover}
+            className={classNames("__wab_instance", sty.popover)}
+            content={
+              <div className={classNames(projectcss.all, sty.freeBox__w2KpE)}>
+                {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                  (() => {
+                    try {
+                      return $state.checkNotification;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return [];
+                      }
+                      throw e;
+                    }
+                  })()
+                ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                  const currentItem = __plasmic_item_0;
+                  const currentIndex = __plasmic_idx_0;
+                  return (
+                    <Stack__
+                      as={"div"}
+                      hasGap={true}
+                      className={classNames(projectcss.all, sty.freeBox__vQiU)}
+                      key={currentIndex}
+                    >
+                      <Stack__
+                        as={"div"}
+                        hasGap={true}
+                        className={classNames(
+                          projectcss.all,
+                          sty.freeBox__uBwji
+                        )}
+                      >
+                        <div
+                          data-plasmic-name={"text"}
+                          data-plasmic-override={overrides.text}
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text
+                          )}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return currentItem.message;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "";
+                                }
+                                throw e;
+                              }
+                            })()}
+                          </React.Fragment>
+                        </div>
+                        <Button
+                          data-plasmic-name={"button"}
+                          data-plasmic-override={overrides.button}
+                          children2={
+                            <React.Fragment>
+                              {(() => {
+                                try {
+                                  return currentItem.trigger_content;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return "Button";
+                                  }
+                                  throw e;
+                                }
+                              })()}
+                            </React.Fragment>
+                          }
+                          className={classNames("__wab_instance", sty.button)}
+                          onClick={async event => {
+                            const $steps = {};
+
+                            $steps["goToPage"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    destination: (() => {
+                                      try {
+                                        return currentItem.link;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
+                                  };
+                                  return (({ destination }) => {
+                                    if (
+                                      typeof destination === "string" &&
+                                      destination.startsWith("#")
+                                    ) {
+                                      document
+                                        .getElementById(destination.substr(1))
+                                        .scrollIntoView({ behavior: "smooth" });
+                                    } else {
+                                      __nextRouter?.push(destination);
+                                    }
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["goToPage"] != null &&
+                              typeof $steps["goToPage"] === "object" &&
+                              typeof $steps["goToPage"].then === "function"
+                            ) {
+                              $steps["goToPage"] = await $steps["goToPage"];
+                            }
+
+                            $steps["sendLog"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    args: [
+                                      (() => {
+                                        try {
+                                          return {
+                                            group: "notification-in-app",
+                                            data: { user: $state.me.data },
+                                            type: "click-button"
+                                          };
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return undefined;
+                                          }
+                                          throw e;
+                                        }
+                                      })()
+                                    ]
+                                  };
+                                  return $globalActions[
+                                    "Splunk.sendLog"
+                                  ]?.apply(null, [...actionArgs.args]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["sendLog"] != null &&
+                              typeof $steps["sendLog"] === "object" &&
+                              typeof $steps["sendLog"].then === "function"
+                            ) {
+                              $steps["sendLog"] = await $steps["sendLog"];
+                            }
+                          }}
+                        />
+                      </Stack__>
+                    </Stack__>
+                  );
+                })}
+              </div>
+            }
+            onOpenChange={generateStateOnChangeProp($state, [
+              "popover",
+              "open"
+            ])}
+            open={generateStateValueProp($state, ["popover", "open"])}
+            ref={ref => {
+              $refs["popover"] = ref;
+            }}
+            trigger={
+              <div className={classNames(projectcss.all, sty.freeBox__sKMne)}>
+                <Icon23Icon
+                  data-plasmic-name={"svg"}
+                  data-plasmic-override={overrides.svg}
+                  className={classNames(projectcss.all, sty.svg)}
+                  role={"img"}
+                />
+
+                {(() => {
+                  try {
+                    return true;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <PlasmicImg__
+                    data-plasmic-name={"img"}
+                    data-plasmic-override={overrides.img}
+                    alt={""}
+                    className={classNames(sty.img)}
+                    displayHeight={"auto"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"10px"}
+                    loading={"lazy"}
+                    src={{
+                      src: "/plasmic/opium_dashboard/images/image3.svg",
+                      fullWidth: 169,
+                      fullHeight: 150,
+                      aspectRatio: 1.125
+                    }}
+                  />
+                ) : null}
+              </div>
+            }
+          />
+        </div>
+      ) : null}
     </div>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "sideEffect"],
-  sideEffect: ["sideEffect"]
+  root: ["root", "sideEffect", "popover", "svg", "img", "text", "button"],
+  sideEffect: ["sideEffect"],
+  popover: ["popover", "svg", "img", "text", "button"],
+  svg: ["svg"],
+  img: ["img"],
+  text: ["text"],
+  button: ["button"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -238,6 +567,11 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   sideEffect: typeof SideEffect;
+  popover: typeof Popover;
+  svg: "svg";
+  img: typeof PlasmicImg__;
+  text: "div";
+  button: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -301,6 +635,11 @@ export const PlasmicQuickAccessWorkhours = Object.assign(
   {
     // Helper components rendering sub-elements
     sideEffect: makeNodeComponent("sideEffect"),
+    popover: makeNodeComponent("popover"),
+    svg: makeNodeComponent("svg"),
+    img: makeNodeComponent("img"),
+    text: makeNodeComponent("text"),
+    button: makeNodeComponent("button"),
 
     // Metadata about props expected for PlasmicQuickAccessWorkhours
     internalVariantProps: PlasmicQuickAccessWorkhours__VariantProps,

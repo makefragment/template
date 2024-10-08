@@ -60,7 +60,7 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
-import QuickAccessWorkhours from "../../QuickAccessWorkhours"; // plasmic-import: thJf7wC4giTS/component
+import QuickAccessInAppNotifications from "../../QuickAccessInAppNotifications"; // plasmic-import: thJf7wC4giTS/component
 import QuickAccessWallet from "../../QuickAccessWallet"; // plasmic-import: GvtgrqQf9C66/component
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { DatePicker } from "@/fragment/components/date-picker"; // plasmic-import: b38lDo6Nm8Rh/codeComponent
@@ -105,7 +105,7 @@ export const PlasmicBookList__ArgProps = new Array<ArgPropType>();
 export type PlasmicBookList__OverridesType = {
   bookList?: Flex__<"div">;
   quickAccess?: Flex__<"div">;
-  quickAccessWorkhours?: Flex__<typeof QuickAccessWorkhours>;
+  quickAccessInAppNotifications?: Flex__<typeof QuickAccessInAppNotifications>;
   quickAccessWallet?: Flex__<typeof QuickAccessWallet>;
   date?: Flex__<"div">;
   date2?: Flex__<"div">;
@@ -555,12 +555,14 @@ function PlasmicBookList__RenderFunc(props: {
                     }
                   }}
                 >
-                  <QuickAccessWorkhours
-                    data-plasmic-name={"quickAccessWorkhours"}
-                    data-plasmic-override={overrides.quickAccessWorkhours}
+                  <QuickAccessInAppNotifications
+                    data-plasmic-name={"quickAccessInAppNotifications"}
+                    data-plasmic-override={
+                      overrides.quickAccessInAppNotifications
+                    }
                     className={classNames(
                       "__wab_instance",
-                      sty.quickAccessWorkhours
+                      sty.quickAccessInAppNotifications
                     )}
                   />
                 </div>
@@ -2661,7 +2663,7 @@ const PlasmicDescendants = {
   bookList: [
     "bookList",
     "quickAccess",
-    "quickAccessWorkhours",
+    "quickAccessInAppNotifications",
     "quickAccessWallet",
     "date",
     "date2",
@@ -2681,8 +2683,12 @@ const PlasmicDescendants = {
     "runCodeGtmMetrica",
     "gtm"
   ],
-  quickAccess: ["quickAccess", "quickAccessWorkhours", "quickAccessWallet"],
-  quickAccessWorkhours: ["quickAccessWorkhours"],
+  quickAccess: [
+    "quickAccess",
+    "quickAccessInAppNotifications",
+    "quickAccessWallet"
+  ],
+  quickAccessInAppNotifications: ["quickAccessInAppNotifications"],
   quickAccessWallet: ["quickAccessWallet"],
   date: [
     "date",
@@ -2737,7 +2743,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   bookList: "div";
   quickAccess: "div";
-  quickAccessWorkhours: typeof QuickAccessWorkhours;
+  quickAccessInAppNotifications: typeof QuickAccessInAppNotifications;
   quickAccessWallet: typeof QuickAccessWallet;
   date: "div";
   date2: "div";
@@ -2819,7 +2825,9 @@ export const PlasmicBookList = Object.assign(
   {
     // Helper components rendering sub-elements
     quickAccess: makeNodeComponent("quickAccess"),
-    quickAccessWorkhours: makeNodeComponent("quickAccessWorkhours"),
+    quickAccessInAppNotifications: makeNodeComponent(
+      "quickAccessInAppNotifications"
+    ),
     quickAccessWallet: makeNodeComponent("quickAccessWallet"),
     date: makeNodeComponent("date"),
     date2: makeNodeComponent("date2"),

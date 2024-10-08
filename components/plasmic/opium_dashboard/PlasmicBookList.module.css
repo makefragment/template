@@ -91,7 +91,7 @@
   min-width: 0;
   padding: 1px;
 }
-.quickAccessWorkhours:global(.__wab_instance) {
+.quickAccessInAppNotifications:global(.__wab_instance) {
   max-width: 100%;
   width: 20px;
   height: 20px;

@@ -1524,14 +1524,14 @@
         },
         {
           "id": "thJf7wC4giTS",
-          "name": "QuickAccessWorkhours",
+          "name": "QuickAccessInAppNotifications",
           "type": "managed",
           "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicQuickAccessWorkhours.tsx",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicQuickAccessInAppNotifications.tsx",
           "importSpec": {
-            "modulePath": "QuickAccessWorkhours.tsx"
+            "modulePath": "QuickAccessInAppNotifications.tsx"
           },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicQuickAccessWorkhours.module.css",
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicQuickAccessInAppNotifications.module.css",
           "scheme": "blackbox",
           "componentType": "component"
         }

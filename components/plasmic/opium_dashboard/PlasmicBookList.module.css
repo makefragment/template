@@ -103,13 +103,14 @@
   position: relative;
   align-items: stretch;
   justify-content: flex-start;
-  width: auto;
+  width: 150px;
   height: auto;
   max-width: 100%;
+  flex-shrink: 0;
 }
 .quickAccessWallet:global(.__wab_instance) {
   max-width: 100%;
-  width: 100px;
+  width: 150px;
   height: auto;
   flex-shrink: 0;
 }

@@ -65,6 +65,7 @@ import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
 import { Quill } from "@plasmicpkgs/react-quill";
 import { quillHelpers as Quill_Helpers } from "@plasmicpkgs/react-quill";
+import MultilineTextInput from "../../MultilineTextInput"; // plasmic-import: CZBpNouNw7Ui/component
 import { AntdAccordion } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { accordionHelpers as AntdAccordion_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { AntdAccordionItem } from "@plasmicpkgs/antd5/skinny/registerCollapse";
@@ -118,6 +119,7 @@ export type PlasmicListOfNotofications__OverridesType = {
   refid?: Flex__<"div">;
   booktime?: Flex__<"div">;
   richTextEditor?: Flex__<typeof Quill>;
+  multilineTextInput?: Flex__<typeof MultilineTextInput>;
   sample?: Flex__<"div">;
   accordion?: Flex__<typeof AntdAccordion>;
   sample2?: Flex__<"div">;
@@ -362,6 +364,34 @@ function PlasmicListOfNotofications__RenderFunc(props: {
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "multilineTextInput.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.notificationsevents[0].name === "submit-book" &&
+                $state.selectedrecieverinnewworkflow === "doctor"
+                ? "یک نوبت جدید ثبت شد"
+                : $state.notificationsevents[0].name === "submit-book" &&
+                  $state.selectedrecieverinnewworkflow === "assistant"
+                ? "یک نوبت جدید ثبت شد"
+                : $state.notificationsevents[0].name === "submit-book" &&
+                  $state.selectedrecieverinnewworkflow === "patient"
+                ? "نوبت شما با موفقیت ثبت شد"
+                : "";
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -1741,6 +1771,24 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                         />
                       );
                     })()}
+                    <MultilineTextInput
+                      data-plasmic-name={"multilineTextInput"}
+                      data-plasmic-override={overrides.multilineTextInput}
+                      autoSize={true}
+                      className={classNames(
+                        "__wab_instance",
+                        sty.multilineTextInput
+                      )}
+                      onValueChange={generateStateOnChangeProp($state, [
+                        "multilineTextInput",
+                        "value"
+                      ])}
+                      value={generateStateValueProp($state, [
+                        "multilineTextInput",
+                        "value"
+                      ])}
+                    />
+
                     <Stack__
                       as={"div"}
                       data-plasmic-name={"sample"}
@@ -2920,6 +2968,7 @@ const PlasmicDescendants = {
     "refid",
     "booktime",
     "richTextEditor",
+    "multilineTextInput",
     "sample",
     "accordion",
     "sample2",
@@ -2956,6 +3005,7 @@ const PlasmicDescendants = {
     "refid",
     "booktime",
     "richTextEditor",
+    "multilineTextInput",
     "sample",
     "accordion",
     "sample2",
@@ -2976,6 +3026,7 @@ const PlasmicDescendants = {
     "refid",
     "booktime",
     "richTextEditor",
+    "multilineTextInput",
     "sample",
     "accordion",
     "sample2",
@@ -3004,6 +3055,7 @@ const PlasmicDescendants = {
     "refid",
     "booktime",
     "richTextEditor",
+    "multilineTextInput",
     "sample",
     "accordion",
     "sample2"
@@ -3020,6 +3072,7 @@ const PlasmicDescendants = {
   refid: ["refid"],
   booktime: ["booktime"],
   richTextEditor: ["richTextEditor"],
+  multilineTextInput: ["multilineTextInput"],
   sample: ["sample", "accordion", "sample2"],
   accordion: ["accordion", "sample2"],
   sample2: ["sample2"],
@@ -3098,6 +3151,7 @@ type NodeDefaultElementType = {
   refid: "div";
   booktime: "div";
   richTextEditor: typeof Quill;
+  multilineTextInput: typeof MultilineTextInput;
   sample: "div";
   accordion: typeof AntdAccordion;
   sample2: "div";
@@ -3194,6 +3248,7 @@ export const PlasmicListOfNotofications = Object.assign(
     refid: makeNodeComponent("refid"),
     booktime: makeNodeComponent("booktime"),
     richTextEditor: makeNodeComponent("richTextEditor"),
+    multilineTextInput: makeNodeComponent("multilineTextInput"),
     sample: makeNodeComponent("sample"),
     accordion: makeNodeComponent("accordion"),
     sample2: makeNodeComponent("sample2"),

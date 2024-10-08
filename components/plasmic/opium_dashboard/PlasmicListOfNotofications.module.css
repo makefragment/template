@@ -522,6 +522,9 @@
   object-fit: cover;
   min-width: 0;
 }
+.multilineTextInput:global(.__wab_instance) {
+  max-width: 100%;
+}
 .sample {
   display: flex;
   flex-direction: column;

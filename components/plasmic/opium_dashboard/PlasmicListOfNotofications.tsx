@@ -63,8 +63,6 @@ import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
-import { Quill } from "@plasmicpkgs/react-quill";
-import { quillHelpers as Quill_Helpers } from "@plasmicpkgs/react-quill";
 import MultilineTextInput from "../../MultilineTextInput"; // plasmic-import: CZBpNouNw7Ui/component
 import { AntdAccordion } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { accordionHelpers as AntdAccordion_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
@@ -118,7 +116,6 @@ export type PlasmicListOfNotofications__OverridesType = {
   patientname?: Flex__<"div">;
   refid?: Flex__<"div">;
   booktime?: Flex__<"div">;
-  richTextEditor?: Flex__<typeof Quill>;
   multilineTextInput?: Flex__<typeof MultilineTextInput>;
   sample?: Flex__<"div">;
   accordion?: Flex__<typeof AntdAccordion>;
@@ -258,36 +255,6 @@ function PlasmicListOfNotofications__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
-        path: "richTextEditor.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.notificationsevents[0].name === "submit-book" &&
-                $state.selectedrecieverinnewworkflow === "doctor"
-                ? "یک نوبت جدید ثبت شد"
-                : $state.notificationsevents[0].name === "submit-book" &&
-                  $state.selectedrecieverinnewworkflow === "assistant"
-                ? "یک نوبت جدید ثبت شد"
-                : $state.notificationsevents[0].name === "submit-book" &&
-                  $state.selectedrecieverinnewworkflow === "patient"
-                ? "نوبت شما با موفقیت ثبت شد"
-                : "";
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })(),
-
-        onMutate: generateOnMutateForSpec("value", Quill_Helpers)
       },
       {
         path: "notificationsevents",
@@ -1668,109 +1635,6 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                         "\u062a\u0648\u062c\u0647 : \u0645\u0648\u0627\u0631\u062f\u06cc \u06a9\u0647 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0631\u062f\u06cc\u062f \u0628\u0647 \u0645\u062a\u0646 \u0632\u06cc\u0631\u060c \u067e\u06cc\u0648\u0633\u062a \u062e\u0648\u0627\u0647\u062f \u0634\u062f.\n\u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u06cc\u062f \u0645\u062a\u0646 \u0632\u06cc\u0631 \u0631\u0627 \u0646\u06cc\u0632 \u0648\u06cc\u0631\u0627\u06cc\u0634 \u06a9\u0646\u06cc\u062f."
                       }
                     </div>
-                    {(() => {
-                      const child$Props = {
-                        containerClassName: classNames(
-                          "__wab_instance",
-                          sty.richTextEditor
-                        ),
-                        defaultValue: (() => {
-                          try {
-                            return $state.notificationsevents[0].name ===
-                              "submit-book" &&
-                              $state.selectedrecieverinnewworkflow === "doctor"
-                              ? "یک نوبت جدید ثبت شد"
-                              : $state.notificationsevents[0].name ===
-                                  "submit-book" &&
-                                $state.selectedrecieverinnewworkflow ===
-                                  "assistant"
-                              ? "یک نوبت جدید ثبت شد"
-                              : $state.notificationsevents[0].name ===
-                                  "submit-book" &&
-                                $state.selectedrecieverinnewworkflow ===
-                                  "patient"
-                              ? "نوبت شما با موفقیت ثبت شد"
-                              : "";
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })(),
-                        onChange: generateStateOnChangePropForCodeComponents(
-                          $state,
-                          "value",
-                          ["richTextEditor", "value"],
-                          Quill_Helpers
-                        ),
-                        preserveWhitespace: true,
-                        readOnly: false,
-                        toolbar: {
-                          textStyle: [
-                            "bold",
-                            "italic",
-                            "underline",
-                            "strikethrough"
-                          ],
-                          colors: ["text color", "text background"],
-                          script: true,
-                          fontFamily: true,
-                          heading: [
-                            "Heading 1",
-                            "Heading 2",
-                            "Heading 3",
-                            "Heading 4",
-                            "Heading 5",
-                            "Heading 6",
-                            "Body"
-                          ],
-                          fontSizes: ["small", "medium", "large", "huge"],
-                          formatting: [
-                            "alignment",
-                            "list",
-                            "indentation",
-                            "text direction",
-                            "clear formatting"
-                          ],
-                          inputTypes: [
-                            "link",
-                            "blockquote",
-                            "image",
-                            "video",
-                            "code-block",
-                            "formula"
-                          ]
-                        },
-                        value: generateStateValueProp($state, [
-                          "richTextEditor",
-                          "value"
-                        ])
-                      };
-                      initializeCodeComponentStates(
-                        $state,
-                        [
-                          {
-                            name: "value",
-                            plasmicStateName: "richTextEditor.value"
-                          }
-                        ],
-                        [],
-                        Quill_Helpers ?? {},
-                        child$Props
-                      );
-
-                      return (
-                        <Quill
-                          data-plasmic-name={"richTextEditor"}
-                          data-plasmic-override={overrides.richTextEditor}
-                          {...child$Props}
-                        />
-                      );
-                    })()}
                     <MultilineTextInput
                       data-plasmic-name={"multilineTextInput"}
                       data-plasmic-override={overrides.multilineTextInput}
@@ -1825,7 +1689,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                               try {
                                 return (() => {
                                   const finalText =
-                                    $state.richTextEditor.value
+                                    $state.multilineTextInput.value
                                       .replace(/<p>/g, "")
                                       .replace(/<\/p>/g, "") +
                                     "\n" +
@@ -1883,7 +1747,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                           {(() => {
                             try {
                               return (
-                                $state.richTextEditor.value
+                                $state.multilineTextInput.value
                                   .replace(/<p>/g, "")
                                   .replace(/<\/p>/g, "") +
                                 "\n" +
@@ -1988,7 +1852,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                           try {
                                             return (() => {
                                               const finalText =
-                                                $state.richTextEditor.value
+                                                $state.multilineTextInput.value
                                                   .replace(/<p>/g, "")
                                                   .replace(/<\/p>/g, "") +
                                                 "\n" +
@@ -2050,7 +1914,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                         try {
                                           return (() => {
                                             return (
-                                              $state.richTextEditor.value
+                                              $state.multilineTextInput.value
                                                 .replace(/<p>/g, "\n")
                                                 .replace(/<\/p>/g, "")
                                                 .trim() +
@@ -2228,7 +2092,8 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                         events:
                                           $state.notificationsevents[0].name,
                                         channels: "sms",
-                                        content: $state.richTextEditor.value,
+                                        content:
+                                          $state.multilineTextInput.value,
                                         objectofcontent: JSON.stringify(
                                           [
                                             $state.selecteddrnameinnewworkflowscontent
@@ -2967,7 +2832,6 @@ const PlasmicDescendants = {
     "patientname",
     "refid",
     "booktime",
-    "richTextEditor",
     "multilineTextInput",
     "sample",
     "accordion",
@@ -3004,7 +2868,6 @@ const PlasmicDescendants = {
     "patientname",
     "refid",
     "booktime",
-    "richTextEditor",
     "multilineTextInput",
     "sample",
     "accordion",
@@ -3025,7 +2888,6 @@ const PlasmicDescendants = {
     "patientname",
     "refid",
     "booktime",
-    "richTextEditor",
     "multilineTextInput",
     "sample",
     "accordion",
@@ -3054,7 +2916,6 @@ const PlasmicDescendants = {
     "patientname",
     "refid",
     "booktime",
-    "richTextEditor",
     "multilineTextInput",
     "sample",
     "accordion",
@@ -3071,7 +2932,6 @@ const PlasmicDescendants = {
   patientname: ["patientname"],
   refid: ["refid"],
   booktime: ["booktime"],
-  richTextEditor: ["richTextEditor"],
   multilineTextInput: ["multilineTextInput"],
   sample: ["sample", "accordion", "sample2"],
   accordion: ["accordion", "sample2"],
@@ -3150,7 +3010,6 @@ type NodeDefaultElementType = {
   patientname: "div";
   refid: "div";
   booktime: "div";
-  richTextEditor: typeof Quill;
   multilineTextInput: typeof MultilineTextInput;
   sample: "div";
   accordion: typeof AntdAccordion;
@@ -3247,7 +3106,6 @@ export const PlasmicListOfNotofications = Object.assign(
     patientname: makeNodeComponent("patientname"),
     refid: makeNodeComponent("refid"),
     booktime: makeNodeComponent("booktime"),
-    richTextEditor: makeNodeComponent("richTextEditor"),
     multilineTextInput: makeNodeComponent("multilineTextInput"),
     sample: makeNodeComponent("sample"),
     accordion: makeNodeComponent("accordion"),

@@ -441,11 +441,8 @@
   text-align: justify;
   min-width: 0;
 }
-.richTextEditor2:global(.__wab_instance) {
-  width: 100%;
+.multilineTextInput:global(.__wab_instance) {
   max-width: 100%;
-  object-fit: cover;
-  min-width: 0;
 }
 .sample3 {
   display: flex;

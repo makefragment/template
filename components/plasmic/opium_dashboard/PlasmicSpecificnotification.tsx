@@ -61,8 +61,7 @@ import {
 
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
-import { Quill } from "@plasmicpkgs/react-quill";
-import { quillHelpers as Quill_Helpers } from "@plasmicpkgs/react-quill";
+import MultilineTextInput from "../../MultilineTextInput"; // plasmic-import: CZBpNouNw7Ui/component
 import { AntdAccordion } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { accordionHelpers as AntdAccordion_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { AntdAccordionItem } from "@plasmicpkgs/antd5/skinny/registerCollapse";
@@ -117,7 +116,7 @@ export type PlasmicSpecificnotification__OverridesType = {
   patientname2?: Flex__<"div">;
   refid2?: Flex__<"div">;
   booktime2?: Flex__<"div">;
-  richTextEditor2?: Flex__<typeof Quill>;
+  multilineTextInput?: Flex__<typeof MultilineTextInput>;
   sample3?: Flex__<"div">;
   accordion2?: Flex__<typeof AntdAccordion>;
   sample4?: Flex__<"div">;
@@ -185,27 +184,6 @@ function PlasmicSpecificnotification__RenderFunc(props: {
         refName: "fragmentPopoverEditNotification2"
       },
       {
-        path: "richTextEditor2.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $props.content;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })(),
-
-        onMutate: generateOnMutateForSpec("value", Quill_Helpers)
-      },
-      {
         path: "accordion2.activePanelId",
         type: "private",
         variableType: "text",
@@ -263,6 +241,31 @@ function PlasmicSpecificnotification__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "multilineTextInput.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return (() => {
+                return $props.content
+                  .split(/<\/?p>/)
+                  .filter(Boolean)
+                  .join("\n")
+                  .trim();
+              })();
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -1019,87 +1022,20 @@ function PlasmicSpecificnotification__RenderFunc(props: {
             "\u062a\u0648\u062c\u0647 : \u0645\u0648\u0627\u0631\u062f\u06cc \u06a9\u0647 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0631\u062f\u06cc\u062f \u0628\u0647 \u0645\u062a\u0646 \u0632\u06cc\u0631\u060c \u067e\u06cc\u0648\u0633\u062a \u062e\u0648\u0627\u0647\u062f \u0634\u062f.\n\u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u06cc\u062f \u0645\u062a\u0646 \u0632\u06cc\u0631 \u0631\u0627 \u0646\u06cc\u0632 \u0648\u06cc\u0631\u0627\u06cc\u0634 \u06a9\u0646\u06cc\u062f."
           }
         </div>
-        {(() => {
-          const child$Props = {
-            containerClassName: classNames(
-              "__wab_instance",
-              sty.richTextEditor2
-            ),
-            defaultValue: (() => {
-              try {
-                return $props.content;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return undefined;
-                }
-                throw e;
-              }
-            })(),
-            onChange: generateStateOnChangePropForCodeComponents(
-              $state,
-              "value",
-              ["richTextEditor2", "value"],
-              Quill_Helpers
-            ),
-            preserveWhitespace: true,
-            readOnly: false,
-            toolbar: {
-              textStyle: ["bold", "italic", "underline", "strikethrough"],
-              colors: ["text color", "text background"],
-              script: true,
-              fontFamily: true,
-              heading: [
-                "Heading 1",
-                "Heading 2",
-                "Heading 3",
-                "Heading 4",
-                "Heading 5",
-                "Heading 6",
-                "Body"
-              ],
-              fontSizes: ["small", "medium", "large", "huge"],
-              formatting: [
-                "alignment",
-                "list",
-                "indentation",
-                "text direction",
-                "clear formatting"
-              ],
-              inputTypes: [
-                "link",
-                "blockquote",
-                "image",
-                "video",
-                "code-block",
-                "formula"
-              ]
-            },
-            value: generateStateValueProp($state, ["richTextEditor2", "value"])
-          };
-          initializeCodeComponentStates(
-            $state,
-            [
-              {
-                name: "value",
-                plasmicStateName: "richTextEditor2.value"
-              }
-            ],
-            [],
-            Quill_Helpers ?? {},
-            child$Props
-          );
+        <MultilineTextInput
+          data-plasmic-name={"multilineTextInput"}
+          data-plasmic-override={overrides.multilineTextInput}
+          className={classNames("__wab_instance", sty.multilineTextInput)}
+          onValueChange={generateStateOnChangeProp($state, [
+            "multilineTextInput",
+            "value"
+          ])}
+          value={generateStateValueProp($state, [
+            "multilineTextInput",
+            "value"
+          ])}
+        />
 
-          return (
-            <Quill
-              data-plasmic-name={"richTextEditor2"}
-              data-plasmic-override={overrides.richTextEditor2}
-              {...child$Props}
-            />
-          );
-        })()}
         <Stack__
           as={"div"}
           data-plasmic-name={"sample3"}
@@ -1276,7 +1212,7 @@ function PlasmicSpecificnotification__RenderFunc(props: {
                               try {
                                 return (() => {
                                   const finalText =
-                                    $state.richTextEditor2.value
+                                    $state.multilineTextInput.value
                                       .replace(/<p>/g, "")
                                       .replace(/<\/p>/g, "") +
                                     "\n" +
@@ -1369,7 +1305,7 @@ function PlasmicSpecificnotification__RenderFunc(props: {
                             try {
                               return (() => {
                                 return (
-                                  $state.richTextEditor2.value
+                                  $state.multilineTextInput.value
                                     .replace(/<p>/g, "\n")
                                     .replace(/<\/p>/g, "")
                                     .trim() +
@@ -1562,7 +1498,7 @@ function PlasmicSpecificnotification__RenderFunc(props: {
                           receivers: $props.receivers,
                           events: $props.events,
                           channels: "sms",
-                          content: $state.richTextEditor2.value,
+                          content: $state.multilineTextInput.value,
                           objectofcontent: JSON.stringify(
                             $state.changetobooktime ||
                               $state.changetorefid ||
@@ -1672,7 +1608,7 @@ const PlasmicDescendants = {
     "patientname2",
     "refid2",
     "booktime2",
-    "richTextEditor2",
+    "multilineTextInput",
     "sample3",
     "accordion2",
     "sample4",
@@ -1687,7 +1623,7 @@ const PlasmicDescendants = {
     "patientname2",
     "refid2",
     "booktime2",
-    "richTextEditor2",
+    "multilineTextInput",
     "sample3",
     "accordion2",
     "sample4"
@@ -1703,7 +1639,7 @@ const PlasmicDescendants = {
   patientname2: ["patientname2"],
   refid2: ["refid2"],
   booktime2: ["booktime2"],
-  richTextEditor2: ["richTextEditor2"],
+  multilineTextInput: ["multilineTextInput"],
   sample3: ["sample3", "accordion2", "sample4"],
   accordion2: ["accordion2", "sample4"],
   sample4: ["sample4"],
@@ -1722,7 +1658,7 @@ type NodeDefaultElementType = {
   patientname2: "div";
   refid2: "div";
   booktime2: "div";
-  richTextEditor2: typeof Quill;
+  multilineTextInput: typeof MultilineTextInput;
   sample3: "div";
   accordion2: typeof AntdAccordion;
   sample4: "div";
@@ -1799,7 +1735,7 @@ export const PlasmicSpecificnotification = Object.assign(
     patientname2: makeNodeComponent("patientname2"),
     refid2: makeNodeComponent("refid2"),
     booktime2: makeNodeComponent("booktime2"),
-    richTextEditor2: makeNodeComponent("richTextEditor2"),
+    multilineTextInput: makeNodeComponent("multilineTextInput"),
     sample3: makeNodeComponent("sample3"),
     accordion2: makeNodeComponent("accordion2"),
     sample4: makeNodeComponent("sample4"),

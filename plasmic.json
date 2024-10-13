@@ -1534,6 +1534,33 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicQuickAccessInAppNotifications.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "HbxtFj9vGYsX",
+          "name": "ListOfPatients",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicListOfPatients.tsx",
+          "importSpec": {
+            "modulePath": "ListOfPatients.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicListOfPatients.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "x8HL0N6mQMqd",
+          "name": "NewPage",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicNewPage.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/new-page-2.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicNewPage.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/new-page-2"
         }
       ],
       "icons": [

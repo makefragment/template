@@ -70,6 +70,8 @@ import { AntdAccordionItem } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import Specificnotification from "../../Specificnotification"; // plasmic-import: kyCg1wl1ZoV7/component
 import MetrikaYandex from "../../MetrikaYandex"; // plasmic-import: bwh2kDzd78mD/component
 
+import { useScreenVariants as useScreenVariantsfobTirRaixGf } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: fobTIRRaixGf/globalVariant
+
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
@@ -368,6 +370,10 @@ function PlasmicListOfNotofications__RenderFunc(props: {
     $ctx,
     $queries: {},
     $refs
+  });
+
+  const globalVariants = ensureGlobalVariants({
+    screen: useScreenVariantsfobTirRaixGf()
   });
 
   return (
@@ -1632,7 +1638,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                       )}
                     >
                       {
-                        "\u062a\u0648\u062c\u0647 : \u0645\u0648\u0627\u0631\u062f\u06cc \u06a9\u0647 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0631\u062f\u06cc\u062f \u0628\u0647 \u0645\u062a\u0646 \u0632\u06cc\u0631\u060c \u067e\u06cc\u0648\u0633\u062a \u062e\u0648\u0627\u0647\u062f \u0634\u062f.\n\u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u06cc\u062f \u0645\u062a\u0646 \u0632\u06cc\u0631 \u0631\u0627 \u0646\u06cc\u0632 \u0648\u06cc\u0631\u0627\u06cc\u0634 \u06a9\u0646\u06cc\u062f."
+                        "\u062a\u0648\u062c\u0647 : \u0645\u0648\u0627\u0631\u062f\u06cc \u06a9\u0647 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0631\u062f\u06cc\u062f \u0628\u0647 \u0645\u062a\u0646 \u0632\u06cc\u0631\u060c \u067e\u06cc\u0648\u0633\u062a \u062e\u0648\u0627\u0647\u062f \u0634\u062f.\n\u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u06cc\u062f \u0645\u062a\u0646 \u0632\u06cc\u0631 \u0631\u0627 \u0646\u06cc\u0632 \u0648\u06cc\u0631\u0627\u06cc\u0634 \u06a9\u0646\u06cc\u062f \u0648 \u0646\u0645\u0648\u0646\u0647 \u0645\u062a\u0646 \u067e\u06cc\u0627\u0645\u06a9 \u0631\u0627 \u062f\u0631 \u0632\u06cc\u0631 \u0645\u0634\u0627\u0647\u062f\u0647 \u06a9\u0646\u06cc\u062f."
                       }
                     </div>
                     <MultilineTextInput
@@ -1807,7 +1813,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                     )}
                                   >
                                     {
-                                      "\u0646\u0645\u0648\u0646\u0647 \u067e\u06cc\u0627\u0645\u06a9"
+                                      "\u0646\u0645\u0648\u0646\u0647 \u0645\u062a\u0646 \u067e\u06cc\u0627\u0645\u06a9\u06cc \u06a9\u0647 \u0627\u0631\u0633\u0627\u0644 \u0645\u06cc \u0634\u0648\u062f."
                                     }
                                   </div>
                                 }
@@ -2350,6 +2356,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                       }
                     </div>
                   }
+                  className={classNames("__wab_instance")}
                   endIcon={
                     <ChevronLeftIcon
                       className={classNames(projectcss.all, sty.svg__sD8S)}
@@ -2397,16 +2404,29 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                   sty.اطلاعرسانیهایموجود
                 )}
               >
-                <React.Fragment>
-                  <span
-                    className={"plasmic_default__all plasmic_default__span"}
-                    style={{ fontWeight: 700 }}
-                  >
-                    {
-                      "\u0627\u0637\u0644\u0627\u0639 \u0631\u0633\u0627\u0646\u06cc\u200c\u0647\u0627\u06cc \u0645\u0648\u062c\u0648\u062f"
-                    }
-                  </span>
-                </React.Fragment>
+                {hasVariant(globalVariants, "screen", "mobileOnly") ? (
+                  <React.Fragment>
+                    <span
+                      className={"plasmic_default__all plasmic_default__span"}
+                      style={{ fontWeight: 400 }}
+                    >
+                      {
+                        "\u0627\u0637\u0644\u0627\u0639 \u0631\u0633\u0627\u0646\u06cc\u200c\u0647\u0627\u06cc \u0645\u0648\u062c\u0648\u062f"
+                      }
+                    </span>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <span
+                      className={"plasmic_default__all plasmic_default__span"}
+                      style={{ fontWeight: 700 }}
+                    >
+                      {
+                        "\u0627\u0637\u0644\u0627\u0639 \u0631\u0633\u0627\u0646\u06cc\u200c\u0647\u0627\u06cc \u0645\u0648\u062c\u0648\u062f"
+                      }
+                    </span>
+                  </React.Fragment>
+                )}
               </div>
               {(() => {
                 try {
@@ -2753,6 +2773,8 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                         </React.Fragment>
                                       </div>
                                     }
+                                    className={classNames("__wab_instance")}
+                                    color={"softBlue"}
                                     endIcon={
                                       <ChevronLeftIcon
                                         className={classNames(
@@ -2762,6 +2784,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                         role={"img"}
                                       />
                                     }
+                                    outline={true}
                                     startIcon={
                                       <ChevronRightIcon
                                         className={classNames(

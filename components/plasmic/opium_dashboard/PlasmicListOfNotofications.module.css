@@ -21,6 +21,11 @@
 .root > * {
   grid-column: 4;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .root > * {
+    grid-column: 4;
+  }
+}
 .sideEffect:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
@@ -64,6 +69,11 @@
 .text___4AJnv {
   font-weight: 500;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .text___4AJnv {
+    font-size: 14px;
+  }
+}
 .addnewworkflow {
   display: flex;
   flex-direction: column;
@@ -78,6 +88,11 @@
 }
 .dialogaddnewworkflow:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .addnewworkflowbutton:global(.__wab_instance) {
+    width: 130px;
+  }
 }
 .text__idSQh {
   position: relative;
@@ -414,6 +429,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  cursor: pointer;
   min-width: 0;
   border-radius: 8px;
   padding: 8px;
@@ -440,6 +456,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  cursor: pointer;
   min-width: 0;
   border-radius: 8px;
   padding: 8px;
@@ -466,6 +483,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  cursor: pointer;
   min-width: 0;
   border-radius: 8px;
   padding: 8px;
@@ -492,6 +510,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  cursor: pointer;
   min-width: 0;
   border-radius: 8px;
   padding: 8px;
@@ -760,6 +779,11 @@
   text-align: center;
   min-width: 0;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .اطلاعرسانیهایموجود {
+    font-weight: 600;
+  }
+}
 .usersworkflows {
   display: flex;
   flex-direction: column;
@@ -811,12 +835,30 @@
 .who > :global(.__wab_flex-container) > :global(.__wab_slot) > picture > img {
   margin-top: var(--token-_c276Gs_1FIE);
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .who {
+    padding: 0px;
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .who > :global(.__wab_flex-container) {
+    align-items: center;
+    justify-content: center;
+  }
+}
 .svg___7Vh9C {
   object-fit: cover;
   max-width: 100%;
   width: 35px;
   height: 35px;
   flex-shrink: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .svg___7Vh9C {
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+  }
 }
 .text__r9EIk {
   position: relative;
@@ -825,6 +867,12 @@
   max-width: 100%;
   font-weight: 600;
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .text__r9EIk {
+    text-align: center;
+    font-size: 14px;
+  }
 }
 .whats {
   display: flex;
@@ -866,6 +914,18 @@
   > img {
   margin-left: var(--token-fhaz6q6bl-fW);
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox__rFyUy {
+    width: 100%;
+    min-width: 0;
+    padding: 0px;
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox__rFyUy > :global(.__wab_flex-container) {
+    min-width: 0;
+  }
+}
 .svg__oqvk0 {
   object-fit: cover;
   max-width: 100%;
@@ -874,12 +934,24 @@
   height: 22px;
   flex-shrink: 0;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .svg__oqvk0 {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+}
 .text___0JgSc {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .text___0JgSc {
+    font-size: 14px;
+  }
 }
 .channel {
   display: flex;
@@ -916,12 +988,24 @@
   height: 22px;
   flex-shrink: 0;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .svg__bqyZ0 {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+}
 .text__yHwLm {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .text__yHwLm {
+    font-size: 14px;
+  }
 }
 .editbuttonvertical {
   display: flex;
@@ -937,6 +1021,11 @@
 }
 .dialog:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .editbutton:global(.__wab_instance) {
+    width: 100px;
+  }
 }
 .text__bjgXp {
   position: relative;

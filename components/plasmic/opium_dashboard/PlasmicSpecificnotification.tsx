@@ -1591,6 +1591,40 @@ function PlasmicSpecificnotification__RenderFunc(props: {
           ) {
             $steps["finishLoading"] = await $steps["finishLoading"];
           }
+
+          $steps["updateFragmentPopoverEditNotification2Open"] =
+            $steps.apiSave.data.message === "successful"
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["fragmentPopoverEditNotification2", "open"]
+                    },
+                    operation: 0,
+                    value: false
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+
+                    $stateSet(objRoot, variablePath, value);
+                    return value;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+          if (
+            $steps["updateFragmentPopoverEditNotification2Open"] != null &&
+            typeof $steps["updateFragmentPopoverEditNotification2Open"] ===
+              "object" &&
+            typeof $steps["updateFragmentPopoverEditNotification2Open"].then ===
+              "function"
+          ) {
+            $steps["updateFragmentPopoverEditNotification2Open"] = await $steps[
+              "updateFragmentPopoverEditNotification2Open"
+            ];
+          }
         }}
       />
     </div>

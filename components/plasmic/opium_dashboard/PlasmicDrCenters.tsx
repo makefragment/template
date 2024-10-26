@@ -811,7 +811,7 @@ function PlasmicDrCenters__RenderFunc(props: {
                             return selectedCenter.name;
                           }
                         }
-                        return "نوبت‌های حضوری";
+                        return "نوبت‌های مطب";
                       })();
                     } catch (e) {
                       if (

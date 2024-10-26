@@ -1572,7 +1572,12 @@ function PlasmicBookList__RenderFunc(props: {
                     try {
                       return (
                         $state.centers.length > 0 &&
-                        $state.selectedCenter !== "5532"
+                        $state.centers.find(
+                          center =>
+                            center.id === $state.selectedCenter &&
+                            center.type_id === 1 &&
+                            $state.selectedCenter !== 5532
+                        ) !== undefined
                       );
                     } catch (e) {
                       if (

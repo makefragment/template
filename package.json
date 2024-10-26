@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@growthbook/growthbook-react": "^1.0.0",
-    "@plasmicapp/cli": "^0.1.331",
+    "@plasmicapp/cli": "^0.1.334",
     "@plasmicapp/host": "^1.0.196",
     "@plasmicapp/react-web": "^0.2.337",
     "@plasmicpkgs/antd5": "^0.0.241",

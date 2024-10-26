@@ -118,6 +118,7 @@ export type PlasmicAppointmentCard__ArgsType = {
   prescriptionId?: string;
   insurances?: string;
   userCenterId?: string;
+  treatmentCenter?: string;
 };
 type ArgPropType = keyof PlasmicAppointmentCard__ArgsType;
 export const PlasmicAppointmentCard__ArgProps = new Array<ArgPropType>(
@@ -141,7 +142,8 @@ export const PlasmicAppointmentCard__ArgProps = new Array<ArgPropType>(
   "finalized",
   "prescriptionId",
   "insurances",
-  "userCenterId"
+  "userCenterId",
+  "treatmentCenter"
 );
 
 export type PlasmicAppointmentCard__OverridesType = {
@@ -154,6 +156,7 @@ export type PlasmicAppointmentCard__OverridesType = {
   descriptionInput?: Flex__<typeof TextInput>;
   safeCall?: Flex__<typeof SafeCall>;
   bookStatusButton?: Flex__<typeof BookStatusButton>;
+  dialog3?: Flex__<typeof Dialog>;
 };
 
 export interface DefaultAppointmentCardProps {
@@ -178,6 +181,7 @@ export interface DefaultAppointmentCardProps {
   prescriptionId?: string;
   insurances?: string;
   userCenterId?: string;
+  treatmentCenter?: string;
   onlineBorder?: SingleBooleanChoiceArg<"onlineBorder">;
   className?: string;
 }
@@ -290,6 +294,12 @@ function PlasmicAppointmentCard__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "dialog3.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -2169,7 +2179,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             }
 
             $steps["updateDialogPatientInfo"] =
-              $props.insurances === true
+              $props.insurances === true && $props.treatmentCenter === false
                 ? (() => {
                     const actionArgs = {
                       variable: {
@@ -2360,6 +2370,36 @@ function PlasmicAppointmentCard__RenderFunc(props: {
             ) {
               $steps["endVisit"] = await $steps["endVisit"];
             }
+
+            $steps["updateDialog3Open"] =
+              $props.treatmentCenter === true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["dialog3", "open"]
+                      },
+                      operation: 0,
+                      value: true
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+            if (
+              $steps["updateDialog3Open"] != null &&
+              typeof $steps["updateDialog3Open"] === "object" &&
+              typeof $steps["updateDialog3Open"].then === "function"
+            ) {
+              $steps["updateDialog3Open"] = await $steps["updateDialog3Open"];
+            }
           }}
           visited={(() => {
             try {
@@ -2374,6 +2414,43 @@ function PlasmicAppointmentCard__RenderFunc(props: {
               throw e;
             }
           })()}
+        />
+
+        <Dialog
+          data-plasmic-name={"dialog3"}
+          data-plasmic-override={overrides.dialog3}
+          body={
+            <div className={classNames(projectcss.all, sty.freeBox___1Spt1)}>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__fxtBu
+                )}
+              >
+                {
+                  "\u0627\u06cc\u0646 \u0642\u0627\u0628\u0644\u06cc\u062a \u0628\u0631\u0627\u06cc \u0645\u0631\u0627\u06a9\u0632 \u062f\u0631\u0645\u0627\u0646\u06cc \u0648\u062c\u0648\u062f \u0646\u062f\u0627\u0631\u062f."
+                }
+              </div>
+            </div>
+          }
+          className={classNames("__wab_instance", sty.dialog3)}
+          onOpenChange={generateStateOnChangeProp($state, ["dialog3", "open"])}
+          open={generateStateValueProp($state, ["dialog3", "open"])}
+          title={
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___8BINw
+              )}
+            >
+              {
+                "\u0627\u0639\u0644\u0627\u0645 \u0634\u0631\u0648\u0639 \u0648\u06cc\u0632\u06cc\u062a"
+              }
+            </div>
+          }
+          trigger={null}
         />
       </Stack__>
     </div>
@@ -2390,7 +2467,8 @@ const PlasmicDescendants = {
     "dialog2",
     "descriptionInput",
     "safeCall",
-    "bookStatusButton"
+    "bookStatusButton",
+    "dialog3"
   ],
   dialog: [
     "dialog",
@@ -2404,12 +2482,14 @@ const PlasmicDescendants = {
     "dialog2",
     "descriptionInput",
     "safeCall",
-    "bookStatusButton"
+    "bookStatusButton",
+    "dialog3"
   ],
   dialog2: ["dialog2", "descriptionInput"],
   descriptionInput: ["descriptionInput"],
   safeCall: ["safeCall"],
-  bookStatusButton: ["bookStatusButton"]
+  bookStatusButton: ["bookStatusButton"],
+  dialog3: ["dialog3"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -2424,6 +2504,7 @@ type NodeDefaultElementType = {
   descriptionInput: typeof TextInput;
   safeCall: typeof SafeCall;
   bookStatusButton: typeof BookStatusButton;
+  dialog3: typeof Dialog;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -2496,6 +2577,7 @@ export const PlasmicAppointmentCard = Object.assign(
     descriptionInput: makeNodeComponent("descriptionInput"),
     safeCall: makeNodeComponent("safeCall"),
     bookStatusButton: makeNodeComponent("bookStatusButton"),
+    dialog3: makeNodeComponent("dialog3"),
 
     // Metadata about props expected for PlasmicAppointmentCard
     internalVariantProps: PlasmicAppointmentCard__VariantProps,

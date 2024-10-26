@@ -1561,6 +1561,19 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/new-page-2"
+        },
+        {
+          "id": "Ps0EHIUw0f7T",
+          "name": "Test",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicTest.tsx",
+          "importSpec": {
+            "modulePath": "Test.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicTest.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -1891,6 +1904,6 @@
   "nextjsConfig": {
     "pagesDir": "../src/pages"
   },
-  "cliVersion": "0.1.331",
-  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.331/dist/plasmic.schema.json"
+  "cliVersion": "0.1.334",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.334/dist/plasmic.schema.json"
 }

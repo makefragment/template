@@ -283,6 +283,12 @@ function PlasmicBookList__RenderFunc(props: {
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "auth",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
       }
     ],
     [$props, $ctx, $refs]
@@ -328,8 +334,101 @@ function PlasmicBookList__RenderFunc(props: {
         >
           <SideEffect
             className={classNames("__wab_instance", sty.sideEffect__d8T7G)}
+            deps={(() => {
+              try {
+                return [$ctx.GrowthBook.isReady];
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             onMount={async () => {
               const $steps = {};
+
+              $steps["auth"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: ["GET", "https://api.paziresh24.com/V1/auth/me"]
+                    };
+                    return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["auth"] != null &&
+                typeof $steps["auth"] === "object" &&
+                typeof $steps["auth"].then === "function"
+              ) {
+                $steps["auth"] = await $steps["auth"];
+              }
+
+              $steps["updateAuth"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["auth"]
+                      },
+                      operation: 0,
+                      value: $steps.auth.data
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateAuth"] != null &&
+                typeof $steps["updateAuth"] === "object" &&
+                typeof $steps["updateAuth"].then === "function"
+              ) {
+                $steps["updateAuth"] = await $steps["updateAuth"];
+              }
+
+              $steps["growthbook"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        (() => {
+                          try {
+                            return { user_id: $state.auth.data.id };
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["GrowthBook.setAttributes"]?.apply(
+                      null,
+                      [...actionArgs.args]
+                    );
+                  })()
+                : undefined;
+              if (
+                $steps["growthbook"] != null &&
+                typeof $steps["growthbook"] === "object" &&
+                typeof $steps["growthbook"].then === "function"
+              ) {
+                $steps["growthbook"] = await $steps["growthbook"];
+              }
 
               $steps["apiHoliday"] = true
                 ? (() => {
@@ -977,11 +1076,28 @@ function PlasmicBookList__RenderFunc(props: {
                   "active"
                 )
               })}
-              deps={undefined}
+              deps={(() => {
+                try {
+                  return [
+                    $ctx.GrowthBook.attributes?.user_id,
+                    $ctx.GrowthBook.features["show-list-of-centers-patients"]
+                  ];
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
               onMount={async () => {
                 const $steps = {};
 
-                $steps["apiCenters"] = true
+                $steps["apiCenters"] = !$ctx.GrowthBook.features[
+                  "show-list-of-centers-patients"
+                ]
                   ? (() => {
                       const actionArgs = {
                         args: [
@@ -1003,6 +1119,30 @@ function PlasmicBookList__RenderFunc(props: {
                   $steps["apiCenters"] = await $steps["apiCenters"];
                 }
 
+                $steps["apiAllCenters"] = $ctx.GrowthBook.features[
+                  "show-list-of-centers-patients"
+                ]
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "GET",
+                          "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/allcenters"
+                        ]
+                      };
+                      return $globalActions["Fragment.apiRequest"]?.apply(
+                        null,
+                        [...actionArgs.args]
+                      );
+                    })()
+                  : undefined;
+                if (
+                  $steps["apiAllCenters"] != null &&
+                  typeof $steps["apiAllCenters"] === "object" &&
+                  typeof $steps["apiAllCenters"].then === "function"
+                ) {
+                  $steps["apiAllCenters"] = await $steps["apiAllCenters"];
+                }
+
                 $steps["updateCenters"] = true
                   ? (() => {
                       const actionArgs = {
@@ -1011,7 +1151,11 @@ function PlasmicBookList__RenderFunc(props: {
                           variablePath: ["centers"]
                         },
                         operation: 0,
-                        value: $steps.apiCenters.data.data
+                        value: $ctx.GrowthBook.features[
+                          "show-list-of-centers-patients"
+                        ]
+                          ? $steps.apiAllCenters.data.data
+                          : $steps.apiCenters.data.data
                       };
                       return (({
                         variable,

@@ -803,13 +803,15 @@ function PlasmicDrCenters__RenderFunc(props: {
                         if ($state.selectedCenter == "all") return "کل نوبت‌ها";
                         if ($state.selectedCenter == "5532")
                           return "نوبت‌های آنلاین";
-                        if (
-                          $state.selectedCenter !== "5532" &&
-                          $props.centers.find(
+                        if ($state.selectedCenter !== "5532") {
+                          const selectedCenter = $props.centers.find(
                             center => center.id == $state.selectedCenter
-                          ).type_id == 1
-                        )
-                          return "نوبت‌های حضوری";
+                          );
+                          if (selectedCenter && selectedCenter.type_id !== 1) {
+                            return selectedCenter.name;
+                          }
+                        }
+                        return "نوبت‌های حضوری";
                       })();
                     } catch (e) {
                       if (

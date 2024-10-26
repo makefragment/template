@@ -95,9 +95,9 @@ export const PlasmicPatientList__ArgProps = new Array<ArgPropType>(
 export type PlasmicPatientList__OverridesType = {
   root?: Flex__<"div">;
   sideEffect?: Flex__<typeof SideEffect>;
-  freeBox?: Flex__<"div">;
   svg?: Flex__<"svg">;
   appointmentCard?: Flex__<typeof AppointmentCard>;
+  text?: Flex__<"div">;
 };
 
 export interface DefaultPatientListProps {
@@ -259,7 +259,8 @@ function PlasmicPatientList__RenderFunc(props: {
           }
 
           $steps["apiAllVisitorsData"] =
-            $props.centers.length > 0
+            $props.centers.length > 0 &&
+            !$ctx.GrowthBook.features["show-list-of-centers-patients"]
               ? (() => {
                   const actionArgs = {
                     args: [
@@ -299,8 +300,66 @@ function PlasmicPatientList__RenderFunc(props: {
             $steps["apiAllVisitorsData"] = await $steps["apiAllVisitorsData"];
           }
 
+          $steps["apiAllbooks"] =
+            $props.centers.length > 0 &&
+            $ctx.GrowthBook.features["show-list-of-centers-patients"]
+              ? (() => {
+                  const actionArgs = {
+                    args: [
+                      undefined,
+                      "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/allbooks",
+                      (() => {
+                        try {
+                          return {
+                            centers:
+                              $props.selectedCenter == "all"
+                                ? $props.centers
+                                    .filter(center => center.is_active_booking)
+                                    .map(center => ({
+                                      id: center.id,
+                                      user_center_id: center.user_center_id
+                                    }))
+                                : [
+                                    {
+                                      id: $props.selectedCenter,
+                                      user_center_id: $props.centers.find(
+                                        center =>
+                                          center.id === $props.selectedCenter
+                                      ).user_center_id
+                                    }
+                                  ],
+                            date: $props.date
+                          };
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return undefined;
+                          }
+                          throw e;
+                        }
+                      })()
+                    ]
+                  };
+                  return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                    ...actionArgs.args
+                  ]);
+                })()
+              : undefined;
+          if (
+            $steps["apiAllbooks"] != null &&
+            typeof $steps["apiAllbooks"] === "object" &&
+            typeof $steps["apiAllbooks"].then === "function"
+          ) {
+            $steps["apiAllbooks"] = await $steps["apiAllbooks"];
+          }
+
           $steps["updateAllvisitorsdata"] =
-            $props.centers.length > 0
+            $props.centers.length > 0 &&
+            ($ctx.GrowthBook.features["show-list-of-centers-patients"]
+              ? $steps.apiAllbooks.data
+              : $steps.apiAllVisitorsData.data)
               ? (() => {
                   const actionArgs = {
                     variable: {
@@ -308,7 +367,7 @@ function PlasmicPatientList__RenderFunc(props: {
                       variablePath: ["allvisitorsdata"]
                     },
                     operation: 0,
-                    value: $steps.apiAllVisitorsData.data
+                    value: $steps.apiAllbooks.data
                       .map(item => item.data)
                       .flat()
                       .sort((a, b) => new Date(a.from) - new Date(b.from))
@@ -481,11 +540,7 @@ function PlasmicPatientList__RenderFunc(props: {
           throw e;
         }
       })() ? (
-        <div
-          data-plasmic-name={"freeBox"}
-          data-plasmic-override={overrides.freeBox}
-          className={classNames(projectcss.all, sty.freeBox)}
-        >
+        <div className={classNames(projectcss.all, sty.freeBox___2MnkV)}>
           <Icon10Icon
             data-plasmic-name={"svg"}
             data-plasmic-override={overrides.svg}
@@ -496,13 +551,16 @@ function PlasmicPatientList__RenderFunc(props: {
       ) : null}
       {(() => {
         try {
-          return $state.loading == false;
+          return (
+            $state.loading === false &&
+            $state.allvisitorsdata.some(child => Object.keys(child).length > 0)
+          );
         } catch (e) {
           if (
             e instanceof TypeError ||
             e?.plasmicType === "PlasmicUndefinedDataError"
           ) {
-            return true;
+            return false;
           }
           throw e;
         }
@@ -775,7 +833,8 @@ function PlasmicPatientList__RenderFunc(props: {
                           const paymentStatusMapping = {
                             paid: "پرداخت شده",
                             not_paid: "پرداخت نشده",
-                            refund: "استرداد شده"
+                            refund: "استرداد شده",
+                            "not-need-to-pay": "پرداخت برای نوبت غیرفعال است."
                           };
                           return paymentStatusMapping[
                             currentItem.payment_status
@@ -874,6 +933,26 @@ function PlasmicPatientList__RenderFunc(props: {
                     throw e;
                   }
                 })()}
+                treatmentCenter={(() => {
+                  try {
+                    return $props.centers.find(
+                      center =>
+                        center.user_center_id === currentItem.user_center_id &&
+                        center.type_id !== 1 &&
+                        center.id !== "5532"
+                    )
+                      ? true
+                      : false;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
                 type={(() => {
                   try {
                     return currentItem.type;
@@ -904,16 +983,67 @@ function PlasmicPatientList__RenderFunc(props: {
             );
           })
         : null}
+      {(() => {
+        try {
+          return (
+            !$state.allvisitorsdata.some(
+              child => Object.keys(child).length > 0
+            ) && $state.loading === false
+          );
+        } catch (e) {
+          if (
+            e instanceof TypeError ||
+            e?.plasmicType === "PlasmicUndefinedDataError"
+          ) {
+            return false;
+          }
+          throw e;
+        }
+      })() ? (
+        <div className={classNames(projectcss.all, sty.freeBox__nG3PE)}>
+          {(() => {
+            try {
+              return (
+                !$state.allvisitorsdata.some(
+                  child => Object.keys(child).length > 0
+                ) && $state.loading === false
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return false;
+              }
+              throw e;
+            }
+          })() ? (
+            <div
+              data-plasmic-name={"text"}
+              data-plasmic-override={overrides.text}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text
+              )}
+            >
+              {
+                "\u0628\u0631\u0627\u06cc \u062a\u0627\u0631\u06cc\u062e\u06cc \u06a9\u0647 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0631\u062f\u06cc\u062f\u060c \u062f\u0631 \u0645\u0631\u06a9\u0632 \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u0647\u06cc\u0686 \u0646\u0648\u0628\u062a\u06cc \u0645\u0648\u062c\u0648\u062f  \u0646\u06cc\u0633\u062a."
+              }
+            </div>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "sideEffect", "freeBox", "svg", "appointmentCard"],
+  root: ["root", "sideEffect", "svg", "appointmentCard", "text"],
   sideEffect: ["sideEffect"],
-  freeBox: ["freeBox", "svg"],
   svg: ["svg"],
-  appointmentCard: ["appointmentCard"]
+  appointmentCard: ["appointmentCard"],
+  text: ["text"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -921,9 +1051,9 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   sideEffect: typeof SideEffect;
-  freeBox: "div";
   svg: "svg";
   appointmentCard: typeof AppointmentCard;
+  text: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -987,9 +1117,9 @@ export const PlasmicPatientList = Object.assign(
   {
     // Helper components rendering sub-elements
     sideEffect: makeNodeComponent("sideEffect"),
-    freeBox: makeNodeComponent("freeBox"),
     svg: makeNodeComponent("svg"),
     appointmentCard: makeNodeComponent("appointmentCard"),
+    text: makeNodeComponent("text"),
 
     // Metadata about props expected for PlasmicPatientList
     internalVariantProps: PlasmicPatientList__VariantProps,

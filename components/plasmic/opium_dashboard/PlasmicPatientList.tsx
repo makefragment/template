@@ -181,6 +181,18 @@ function PlasmicPatientList__RenderFunc(props: {
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "variable",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "auth",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
       }
     ],
     [$props, $ctx, $refs]
@@ -357,9 +369,8 @@ function PlasmicPatientList__RenderFunc(props: {
 
           $steps["updateAllvisitorsdata"] =
             $props.centers.length > 0 &&
-            ($ctx.GrowthBook.features["show-list-of-centers-patients"]
-              ? $steps.apiAllbooks.data
-              : $steps.apiAllVisitorsData.data)
+            $ctx.GrowthBook.features["show-list-of-centers-patients"] &&
+            $steps.apiAllbooks.data
               ? (() => {
                   const actionArgs = {
                     variable: {
@@ -390,6 +401,43 @@ function PlasmicPatientList__RenderFunc(props: {
           ) {
             $steps["updateAllvisitorsdata"] = await $steps[
               "updateAllvisitorsdata"
+            ];
+          }
+
+          $steps["updateAllvisitorsdata2"] =
+            $props.centers.length > 0 &&
+            !$ctx.GrowthBook.features["show-list-of-centers-patients"] &&
+            $steps.apiAllVisitorsData.data
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["allvisitorsdata"]
+                    },
+                    operation: 0,
+                    value: $steps.apiAllVisitorsData.data
+                      .map(item => item.data)
+                      .flat()
+                      .sort((a, b) => new Date(a.from) - new Date(b.from))
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+
+                    $stateSet(objRoot, variablePath, value);
+                    return value;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+          if (
+            $steps["updateAllvisitorsdata2"] != null &&
+            typeof $steps["updateAllvisitorsdata2"] === "object" &&
+            typeof $steps["updateAllvisitorsdata2"].then === "function"
+          ) {
+            $steps["updateAllvisitorsdata2"] = await $steps[
+              "updateAllvisitorsdata2"
             ];
           }
 

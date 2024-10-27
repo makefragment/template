@@ -1574,6 +1574,19 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicTest.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "EopFrTj8edtV",
+          "name": "Test2",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicTest2.tsx",
+          "importSpec": {
+            "modulePath": "Test2.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicTest2.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

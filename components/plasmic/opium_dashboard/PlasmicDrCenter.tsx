@@ -248,7 +248,7 @@ function PlasmicDrCenter__RenderFunc(props: {
           <React.Fragment>
             {(() => {
               try {
-                return " نوبت‌های حضوری ";
+                return " نوبت‌های مطب ";
               } catch (e) {
                 if (
                   e instanceof TypeError ||

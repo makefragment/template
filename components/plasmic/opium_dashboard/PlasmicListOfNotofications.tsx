@@ -86,6 +86,7 @@ import ChevronDownIcon from "../fragment_icons/icons/PlasmicIcon__ChevronDown"; 
 import CheckSvgIcon from "../fragment_design_system/icons/PlasmicIcon__CheckSvg"; // plasmic-import: _Qaeb-4Y8N07/icon
 import Icon16Icon from "./icons/PlasmicIcon__Icon16"; // plasmic-import: 8j1U_g9afFrU/icon
 import Icon18Icon from "./icons/PlasmicIcon__Icon18"; // plasmic-import: IETA_lWaQX-x/icon
+import Icon19Icon from "./icons/PlasmicIcon__Icon19"; // plasmic-import: BizSW9L3o2cq/icon
 import Icon17Icon from "./icons/PlasmicIcon__Icon17"; // plasmic-import: 0ELPoF5hq6sg/icon
 
 createPlasmicElementProxy;
@@ -108,6 +109,10 @@ export type PlasmicListOfNotofications__OverridesType = {
   addnewworkflow?: Flex__<"div">;
   dialogaddnewworkflow?: Flex__<typeof Dialog>;
   addnewworkflowbutton?: Flex__<typeof Button>;
+  sendnotifications?: Flex__<"div">;
+  fragmentPopoverSendEvents?: Flex__<typeof Popover>;
+  whichevents?: Flex__<"div">;
+  whichevent?: Flex__<"div">;
   sendwhom?: Flex__<"div">;
   fragmentPopoverSendWhom?: Flex__<typeof Popover>;
   whoshouldsend?: Flex__<"div">;
@@ -341,15 +346,24 @@ function PlasmicListOfNotofications__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) =>
           (() => {
             try {
-              return $state.notificationsevents[0].name === "submit-book" &&
+              return $state.selectedeventinworkflow === "submit-book" &&
                 $state.selectedrecieverinnewworkflow === "doctor"
                 ? "یک نوبت جدید ثبت شد"
-                : $state.notificationsevents[0].name === "submit-book" &&
+                : $state.selectedeventinworkflow === "submit-book" &&
                   $state.selectedrecieverinnewworkflow === "assistant"
                 ? "یک نوبت جدید ثبت شد"
-                : $state.notificationsevents[0].name === "submit-book" &&
+                : $state.selectedeventinworkflow === "submit-book" &&
                   $state.selectedrecieverinnewworkflow === "patient"
                 ? "نوبت شما با موفقیت ثبت شد"
+                : $state.selectedeventinworkflow === "delete-book" &&
+                  $state.selectedrecieverinnewworkflow === "doctor"
+                ? "یک نوبت لغو شد"
+                : $state.selectedeventinworkflow === "delete-book" &&
+                  $state.selectedrecieverinnewworkflow === "assistant"
+                ? "یک نوبت لغو شد"
+                : $state.selectedeventinworkflow === "delete-book" &&
+                  $state.selectedrecieverinnewworkflow === "patient"
+                ? "نوبت شما لغو شد"
                 : "";
             } catch (e) {
               if (
@@ -361,6 +375,20 @@ function PlasmicListOfNotofications__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "fragmentPopoverSendEvents.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false,
+
+        refName: "fragmentPopoverSendEvents"
+      },
+      {
+        path: "selectedeventinworkflow",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => "submit-book"
       }
     ],
     [$props, $ctx, $refs]
@@ -672,6 +700,351 @@ function PlasmicListOfNotofications__RenderFunc(props: {
               data-plasmic-override={overrides.dialogaddnewworkflow}
               body={
                 <div className={classNames(projectcss.all, sty.freeBox__qlUGr)}>
+                  <Stack__
+                    as={"div"}
+                    data-plasmic-name={"sendnotifications"}
+                    data-plasmic-override={overrides.sendnotifications}
+                    hasGap={true}
+                    className={classNames(
+                      projectcss.all,
+                      sty.sendnotifications
+                    )}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__abege
+                      )}
+                    >
+                      {
+                        "\u0686\u0647 \u0632\u0645\u0627\u0646\u06cc \u0627\u0637\u0644\u0627\u0639 \u0631\u0633\u0627\u0646\u06cc \u0627\u0646\u062c\u0627\u0645 \u0634\u0648\u062f\u061f"
+                      }
+                    </div>
+                    <Popover
+                      data-plasmic-name={"fragmentPopoverSendEvents"}
+                      data-plasmic-override={
+                        overrides.fragmentPopoverSendEvents
+                      }
+                      className={classNames(
+                        "__wab_instance",
+                        sty.fragmentPopoverSendEvents
+                      )}
+                      content={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            sty.freeBox__gIrXg
+                          )}
+                        >
+                          {(_par =>
+                            !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                            (() => {
+                              try {
+                                return $state.notificationsevents.map(
+                                  item => item.name
+                                );
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return [];
+                                }
+                                throw e;
+                              }
+                            })()
+                          ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                            const currentItem = __plasmic_item_0;
+                            const currentIndex = __plasmic_idx_0;
+                            return (
+                              <div
+                                data-plasmic-name={"whichevents"}
+                                data-plasmic-override={overrides.whichevents}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.whichevents
+                                )}
+                                key={currentIndex}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["updateSelectedeevntinnewworkflow"] =
+                                    true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "selectedeventinworkflow"
+                                              ]
+                                            },
+                                            operation: 0,
+                                            value: currentItem
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
+                                            return value;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps[
+                                      "updateSelectedeevntinnewworkflow"
+                                    ] != null &&
+                                    typeof $steps[
+                                      "updateSelectedeevntinnewworkflow"
+                                    ] === "object" &&
+                                    typeof $steps[
+                                      "updateSelectedeevntinnewworkflow"
+                                    ].then === "function"
+                                  ) {
+                                    $steps["updateSelectedeevntinnewworkflow"] =
+                                      await $steps[
+                                        "updateSelectedeevntinnewworkflow"
+                                      ];
+                                  }
+
+                                  $steps["updateFragmentPopoverSendWhomOpen"] =
+                                    true
+                                      ? (() => {
+                                          const actionArgs = {
+                                            variable: {
+                                              objRoot: $state,
+                                              variablePath: [
+                                                "fragmentPopoverSendEvents",
+                                                "open"
+                                              ]
+                                            },
+                                            operation: 0,
+                                            value: false
+                                          };
+                                          return (({
+                                            variable,
+                                            value,
+                                            startIndex,
+                                            deleteCount
+                                          }) => {
+                                            if (!variable) {
+                                              return;
+                                            }
+                                            const { objRoot, variablePath } =
+                                              variable;
+
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
+                                            return value;
+                                          })?.apply(null, [actionArgs]);
+                                        })()
+                                      : undefined;
+                                  if (
+                                    $steps[
+                                      "updateFragmentPopoverSendWhomOpen"
+                                    ] != null &&
+                                    typeof $steps[
+                                      "updateFragmentPopoverSendWhomOpen"
+                                    ] === "object" &&
+                                    typeof $steps[
+                                      "updateFragmentPopoverSendWhomOpen"
+                                    ].then === "function"
+                                  ) {
+                                    $steps[
+                                      "updateFragmentPopoverSendWhomOpen"
+                                    ] = await $steps[
+                                      "updateFragmentPopoverSendWhomOpen"
+                                    ];
+                                  }
+                                }}
+                              >
+                                <div
+                                  data-plasmic-name={"whichevent"}
+                                  data-plasmic-override={overrides.whichevent}
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.whichevent
+                                  )}
+                                >
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text__ezw4K
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return currentItem === "submit-book"
+                                            ? "ثبت نوبت"
+                                            : currentItem === "delete-book"
+                                            ? "لغو نوبت"
+                                            : currentItem;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                  {(() => {
+                                    try {
+                                      return (
+                                        $state.selectedeventinworkflow ===
+                                        currentItem
+                                      );
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return false;
+                                      }
+                                      throw e;
+                                    }
+                                  })() ? (
+                                    <CheckSvgIcon
+                                      className={classNames(
+                                        projectcss.all,
+                                        sty.svg__s0Lz
+                                      )}
+                                      role={"img"}
+                                    />
+                                  ) : null}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      }
+                      onOpenChange={generateStateOnChangeProp($state, [
+                        "fragmentPopoverSendEvents",
+                        "open"
+                      ])}
+                      open={generateStateValueProp($state, [
+                        "fragmentPopoverSendEvents",
+                        "open"
+                      ])}
+                      ref={ref => {
+                        $refs["fragmentPopoverSendEvents"] = ref;
+                      }}
+                      trigger={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            sty.freeBox__mqX2M
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              sty.freeBox__gcg67
+                            )}
+                          >
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text__vMMxT
+                              )}
+                            >
+                              <React.Fragment>
+                                {(() => {
+                                  try {
+                                    return $state.selectedeventinworkflow ===
+                                      "submit-book"
+                                      ? "ثبت نوبت"
+                                      : $state.selectedeventinworkflow ===
+                                        "delete-book"
+                                      ? "لغو نوبت"
+                                      : "به...";
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return "";
+                                    }
+                                    throw e;
+                                  }
+                                })()}
+                              </React.Fragment>
+                            </div>
+                            {(() => {
+                              try {
+                                return $state.fragmentPopoverSendEvents.open;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return false;
+                                }
+                                throw e;
+                              }
+                            })() ? (
+                              <ChevronUpIcon
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.svg__m609U
+                                )}
+                                role={"img"}
+                              />
+                            ) : null}
+                            {(() => {
+                              try {
+                                return (
+                                  $state.fragmentPopoverSendEvents.open ===
+                                  false
+                                );
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return true;
+                                }
+                                throw e;
+                              }
+                            })() ? (
+                              <ChevronDownIcon
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.svg__huCe
+                                )}
+                                role={"img"}
+                              />
+                            ) : null}
+                          </div>
+                        </div>
+                      }
+                    />
+                  </Stack__>
                   <Stack__
                     as={"div"}
                     data-plasmic-name={"sendwhom"}
@@ -2095,8 +2468,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                       return {
                                         receivers:
                                           $state.selectedrecieverinnewworkflow,
-                                        events:
-                                          $state.notificationsevents[0].name,
+                                        events: $state.selectedeventinworkflow,
                                         channels: "sms",
                                         content:
                                           $state.multilineTextInput.value,
@@ -2535,14 +2907,50 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                 sty.freeBox__rFyUy
                               )}
                             >
-                              <Icon18Icon
-                                className={classNames(
-                                  projectcss.all,
-                                  sty.svg__oqvk0
-                                )}
-                                role={"img"}
-                              />
-
+                              {(() => {
+                                try {
+                                  return currentItem.events === "submit-book";
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return false;
+                                  }
+                                  throw e;
+                                }
+                              })() ? (
+                                <Icon18Icon
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.svg__oqvk0
+                                  )}
+                                  role={"img"}
+                                />
+                              ) : null}
+                              {(() => {
+                                try {
+                                  return currentItem.events === "delete-book";
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return false;
+                                  }
+                                  throw e;
+                                }
+                              })() ? (
+                                <Icon19Icon
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.svg___8CTh
+                                  )}
+                                  role={"img"}
+                                />
+                              ) : null}
                               <div
                                 className={classNames(
                                   projectcss.all,
@@ -2553,12 +2961,16 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                 <React.Fragment>
                                   {(() => {
                                     try {
-                                      return $state
-                                        .notificationSettingForThisUser.list[0]
-                                        .events === "submit-book"
-                                        ? "ثبت نوبت"
-                                        : $state.notificationSettingForThisUser
-                                            .list[0].events;
+                                      return (() => {
+                                        let message =
+                                          currentItem.events === "delete-book"
+                                            ? "لغو نوبت"
+                                            : currentItem.events ===
+                                              "submit-book"
+                                            ? "ثبت نوبت"
+                                            : "";
+                                        return message;
+                                      })();
                                     } catch (e) {
                                       if (
                                         e instanceof TypeError ||
@@ -2845,6 +3257,10 @@ const PlasmicDescendants = {
     "addnewworkflow",
     "dialogaddnewworkflow",
     "addnewworkflowbutton",
+    "sendnotifications",
+    "fragmentPopoverSendEvents",
+    "whichevents",
+    "whichevent",
     "sendwhom",
     "fragmentPopoverSendWhom",
     "whoshouldsend",
@@ -2881,6 +3297,10 @@ const PlasmicDescendants = {
     "addnewworkflow",
     "dialogaddnewworkflow",
     "addnewworkflowbutton",
+    "sendnotifications",
+    "fragmentPopoverSendEvents",
+    "whichevents",
+    "whichevent",
     "sendwhom",
     "fragmentPopoverSendWhom",
     "whoshouldsend",
@@ -2901,6 +3321,10 @@ const PlasmicDescendants = {
   dialogaddnewworkflow: [
     "dialogaddnewworkflow",
     "addnewworkflowbutton",
+    "sendnotifications",
+    "fragmentPopoverSendEvents",
+    "whichevents",
+    "whichevent",
     "sendwhom",
     "fragmentPopoverSendWhom",
     "whoshouldsend",
@@ -2919,6 +3343,19 @@ const PlasmicDescendants = {
     "button"
   ],
   addnewworkflowbutton: ["addnewworkflowbutton"],
+  sendnotifications: [
+    "sendnotifications",
+    "fragmentPopoverSendEvents",
+    "whichevents",
+    "whichevent"
+  ],
+  fragmentPopoverSendEvents: [
+    "fragmentPopoverSendEvents",
+    "whichevents",
+    "whichevent"
+  ],
+  whichevents: ["whichevents", "whichevent"],
+  whichevent: ["whichevent"],
   sendwhom: [
     "sendwhom",
     "fragmentPopoverSendWhom",
@@ -3023,6 +3460,10 @@ type NodeDefaultElementType = {
   addnewworkflow: "div";
   dialogaddnewworkflow: typeof Dialog;
   addnewworkflowbutton: typeof Button;
+  sendnotifications: "div";
+  fragmentPopoverSendEvents: typeof Popover;
+  whichevents: "div";
+  whichevent: "div";
   sendwhom: "div";
   fragmentPopoverSendWhom: typeof Popover;
   whoshouldsend: "div";
@@ -3119,6 +3560,10 @@ export const PlasmicListOfNotofications = Object.assign(
     addnewworkflow: makeNodeComponent("addnewworkflow"),
     dialogaddnewworkflow: makeNodeComponent("dialogaddnewworkflow"),
     addnewworkflowbutton: makeNodeComponent("addnewworkflowbutton"),
+    sendnotifications: makeNodeComponent("sendnotifications"),
+    fragmentPopoverSendEvents: makeNodeComponent("fragmentPopoverSendEvents"),
+    whichevents: makeNodeComponent("whichevents"),
+    whichevent: makeNodeComponent("whichevent"),
     sendwhom: makeNodeComponent("sendwhom"),
     fragmentPopoverSendWhom: makeNodeComponent("fragmentPopoverSendWhom"),
     whoshouldsend: makeNodeComponent("whoshouldsend"),

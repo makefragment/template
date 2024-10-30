@@ -1549,20 +1549,6 @@
           "componentType": "component"
         },
         {
-          "id": "x8HL0N6mQMqd",
-          "name": "NewPage",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicNewPage.tsx",
-          "importSpec": {
-            "modulePath": "../src/pages/new-page-2.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicNewPage.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/new-page-2"
-        },
-        {
           "id": "Ps0EHIUw0f7T",
           "name": "Test",
           "type": "managed",
@@ -1587,6 +1573,34 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicTest2.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "x8HL0N6mQMqd",
+          "name": "PatientList2",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicPatientList2.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/new-page-2.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicPatientList2.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/new-page-2"
+        },
+        {
+          "id": "jvrHBi1Vmdv8",
+          "name": "Pricing",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicPricing.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/pricing.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicPricing.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/pricing"
         }
       ],
       "icons": [

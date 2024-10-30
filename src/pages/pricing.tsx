@@ -4,23 +4,23 @@ import * as React from "react";
 import { PageParamsProvider as PageParamsProvider__ } from "@plasmicapp/react-web/lib/host";
 import GlobalContextsProvider from "../../components/plasmic/opium_dashboard/PlasmicGlobalContextsProvider";
 
-import { PlasmicPatientList2 } from "../../components/plasmic/opium_dashboard/PlasmicPatientList2";
+import { PlasmicPricing } from "../../components/plasmic/opium_dashboard/PlasmicPricing";
 import { useRouter } from "next/router";
 
-function PatientList2() {
-  // Use PlasmicPatientList2 to render this component as it was
+function Pricing() {
+  // Use PlasmicPricing to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
   // can also install whatever React hooks you need here to manage state or
   // fetch data.
   //
-  // Props you can pass into PlasmicPatientList2 are:
+  // Props you can pass into PlasmicPricing are:
   // 1. Variants you want to activate,
   // 2. Contents for slots you want to fill,
   // 3. Overrides for any named node in the component to attach behavior and data,
   // 4. Props to set on the root node.
   //
-  // By default, PlasmicPatientList2 is wrapped by your project's global
+  // By default, PlasmicPricing is wrapped by your project's global
   // variant context providers. These wrappers may be moved to
   // Next.js Custom App component
   // (https://nextjs.org/docs/advanced-features/custom-app).
@@ -31,10 +31,10 @@ function PatientList2() {
         params={useRouter()?.query}
         query={useRouter()?.query}
       >
-        <PlasmicPatientList2 />
+        <PlasmicPricing />
       </PageParamsProvider__>
     </GlobalContextsProvider>
   );
 }
 
-export default PatientList2;
+export default Pricing;

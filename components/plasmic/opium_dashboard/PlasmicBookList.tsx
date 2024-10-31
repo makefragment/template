@@ -1086,7 +1086,7 @@ function PlasmicBookList__RenderFunc(props: {
                 try {
                   return [
                     $ctx.GrowthBook.attributes?.user_id,
-                    $ctx.GrowthBook.features["show-list-of-centers-patients"]
+                    $ctx.GrowthBook?.features?.["show-list-of-centers-patients"]
                   ];
                 } catch (e) {
                   if (
@@ -1101,9 +1101,7 @@ function PlasmicBookList__RenderFunc(props: {
               onMount={async () => {
                 const $steps = {};
 
-                $steps["apiCenters"] = !$ctx.GrowthBook.features[
-                  "show-list-of-centers-patients"
-                ]
+                $steps["apiCenters"] = true
                   ? (() => {
                       const actionArgs = {
                         args: [
@@ -1125,9 +1123,7 @@ function PlasmicBookList__RenderFunc(props: {
                   $steps["apiCenters"] = await $steps["apiCenters"];
                 }
 
-                $steps["apiAllCenters"] = $ctx.GrowthBook.features[
-                  "show-list-of-centers-patients"
-                ]
+                $steps["apiAllCenters"] = true
                   ? (() => {
                       const actionArgs = {
                         args: [
@@ -1147,6 +1143,48 @@ function PlasmicBookList__RenderFunc(props: {
                   typeof $steps["apiAllCenters"].then === "function"
                 ) {
                   $steps["apiAllCenters"] = await $steps["apiAllCenters"];
+                }
+
+                $steps["setAttributes"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          (() => {
+                            try {
+                              return {
+                                user_id: $state?.auth?.data?.id,
+                                center_types:
+                                  $steps.apiAllCenters.data.data?.map(
+                                    center => center.type_id
+                                  ),
+                                center_ids: $steps.apiAllCenters.data.data?.map(
+                                  center => center.id
+                                )
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
+                      };
+                      return $globalActions["GrowthBook.setAttributes"]?.apply(
+                        null,
+                        [...actionArgs.args]
+                      );
+                    })()
+                  : undefined;
+                if (
+                  $steps["setAttributes"] != null &&
+                  typeof $steps["setAttributes"] === "object" &&
+                  typeof $steps["setAttributes"].then === "function"
+                ) {
+                  $steps["setAttributes"] = await $steps["setAttributes"];
                 }
 
                 $steps["updateCenters"] = true

@@ -65,6 +65,7 @@ import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import { AntdAccordion } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { accordionHelpers as AntdAccordion_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { AntdAccordionItem } from "@plasmicpkgs/antd5/skinny/registerCollapse";
+import MetrikaYandex from "../../MetrikaYandex"; // plasmic-import: bwh2kDzd78mD/component
 
 import { useScreenVariants as useScreenVariantsfobTirRaixGf } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: fobTIRRaixGf/globalVariant
 
@@ -105,8 +106,12 @@ export type PlasmicPricing__OverridesType = {
   description?: Flex__<"div">;
   accordion?: Flex__<typeof AntdAccordion>;
   accordion2?: Flex__<typeof AntdAccordion>;
+  feedbacks?: Flex__<typeof AntdAccordion>;
   accordion3?: Flex__<typeof AntdAccordion>;
   accordion4?: Flex__<typeof AntdAccordion>;
+  apiRequestForNotificationSetting?: Flex__<typeof ApiRequest>;
+  customerfeatures?: Flex__<typeof ApiRequest>;
+  metrikaYandex?: Flex__<typeof MetrikaYandex>;
 };
 
 export interface DefaultPricingProps {}
@@ -228,6 +233,59 @@ function PlasmicPricing__RenderFunc(props: {
       },
       {
         path: "getNelsonFeatures.loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "apiRequestForNotificationSetting.data",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "apiRequestForNotificationSetting.error",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "apiRequestForNotificationSetting.loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "feedbacks.activePanelId",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec(
+          "activePanelId",
+          AntdAccordion_Helpers
+        )
+      },
+      {
+        path: "loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "customerfeatures.data",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "customerfeatures.error",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "customerfeatures.loading",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -559,7 +617,19 @@ function PlasmicPricing__RenderFunc(props: {
                                     initFunc: ({ $props, $state, $queries }) =>
                                       (() => {
                                         try {
-                                          return currentItem.price === 0;
+                                          return $state.customerfeatures.data &&
+                                            Object.keys(
+                                              $state.customerfeatures.data
+                                            ).length === 0
+                                            ? currentItem.price === 0
+                                            : $state.customerfeatures.data.find(
+                                                item =>
+                                                  item.features ===
+                                                    currentItem.features &&
+                                                  item.active
+                                              )
+                                            ? true
+                                            : false;
                                         } catch (e) {
                                           if (
                                             e instanceof TypeError ||
@@ -610,6 +680,60 @@ function PlasmicPricing__RenderFunc(props: {
                                 </Checkbox>
                               );
                             })()}
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text__f9B26
+                              )}
+                            >
+                              <React.Fragment>
+                                {(() => {
+                                  try {
+                                    return currentItem.unit
+                                      ? `(به ازای ${currentItem.unit})`
+                                      : "";
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return "";
+                                    }
+                                    throw e;
+                                  }
+                                })()}
+                              </React.Fragment>
+                            </div>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text__n5CVe
+                              )}
+                            >
+                              <React.Fragment>
+                                {(() => {
+                                  try {
+                                    return currentItem.price === 0
+                                      ? "رایگان"
+                                      : currentItem.price
+                                          .toString()
+                                          .slice(0, -1) + " تومان";
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return "";
+                                    }
+                                    throw e;
+                                  }
+                                })()}
+                              </React.Fragment>
+                            </div>
                           </div>
                         </div>
                       );
@@ -692,7 +816,7 @@ function PlasmicPricing__RenderFunc(props: {
                       )}
                     >
                       {
-                        "\u0628\u0631\u0627\u06cc \u062e\u0631\u06cc\u062f\u0627\u0631\u06cc \u0633\u0631\u0648\u06cc\u0633 \u200c\u0647\u0627\u06cc \u0627\u0646\u062a\u062e\u0627\u0628\u06cc \u0631\u0648\u06cc \u062f\u06a9\u0645\u0647 \u0645\u0642\u0627\u0628\u0644 \u06a9\u0644\u06cc\u06a9 \u06a9\u0646\u06cc\u062f."
+                        "\u0628\u0631\u0627\u06cc \u0641\u0639\u0627\u0644\u0633\u0627\u0632\u06cc \u0633\u0631\u0648\u06cc\u0633 \u200c\u0647\u0627\u06cc \u0627\u0646\u062a\u062e\u0627\u0628\u06cc \u0631\u0648\u06cc \u062f\u06a9\u0645\u0647 \u0645\u0642\u0627\u0628\u0644 \u06a9\u0644\u06cc\u06a9 \u06a9\u0646\u06cc\u062f."
                       }
                     </div>
                     <div
@@ -702,13 +826,34 @@ function PlasmicPricing__RenderFunc(props: {
                         data-plasmic-name={"button"}
                         data-plasmic-override={overrides.button}
                         children2={
-                          "\u062e\u0631\u06cc\u062f\u0627\u0631\u06cc \u0633\u0631\u0648\u06cc\u0633"
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__bP0Ka
+                            )}
+                          >
+                            {"\u0641\u0639\u0627\u0644\u0633\u0627\u0632\u06cc"}
+                          </div>
                         }
                         className={classNames("__wab_instance", sty.button)}
+                        loading={(() => {
+                          try {
+                            return $state.loading;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return [];
+                            }
+                            throw e;
+                          }
+                        })()}
                         onClick={async event => {
                           const $steps = {};
 
-                          $steps["buyProduct"] = true
+                          $steps["buyProduct"] = false
                             ? (() => {
                                 const actionArgs = {
                                   args: [
@@ -717,23 +862,14 @@ function PlasmicPricing__RenderFunc(props: {
                                     undefined,
                                     (() => {
                                       try {
-                                        return $state.getNelsonFeatures?.data
-                                          ?.map((feature, index) => ({
+                                        return $state.getNelsonFeatures?.data?.map(
+                                          (feature, index) => ({
                                             ...feature,
                                             active:
                                               $state.checkboxSilver[index]
                                                 .isChecked
-                                          }))
-                                          .filter(
-                                            feature =>
-                                              feature.price > 0 &&
-                                              feature.active
-                                          )
-                                          .map(feature => ({
-                                            name: feature.Title,
-                                            count: 1,
-                                            price: feature.price
-                                          }));
+                                          })
+                                        );
                                       } catch (e) {
                                         if (
                                           e instanceof TypeError ||
@@ -760,28 +896,141 @@ function PlasmicPricing__RenderFunc(props: {
                             $steps["buyProduct"] = await $steps["buyProduct"];
                           }
 
-                          $steps["invokeGlobalAction"] =
-                            $steps.buyProduct?.data?.[0]?.status === true
-                              ? (() => {
-                                  const actionArgs = {
-                                    args: [
-                                      undefined,
-                                      "\u0633\u0631\u0648\u06cc\u0633 \u0634\u0645\u0627 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f."
-                                    ]
-                                  };
-                                  return $globalActions[
-                                    "Fragment.showToast"
-                                  ]?.apply(null, [...actionArgs.args]);
-                                })()
-                              : undefined;
+                          $steps["loadingStart"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["loading"]
+                                  },
+                                  operation: 0,
+                                  value: true
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
                           if (
-                            $steps["invokeGlobalAction"] != null &&
-                            typeof $steps["invokeGlobalAction"] === "object" &&
-                            typeof $steps["invokeGlobalAction"].then ===
-                              "function"
+                            $steps["loadingStart"] != null &&
+                            typeof $steps["loadingStart"] === "object" &&
+                            typeof $steps["loadingStart"].then === "function"
                           ) {
-                            $steps["invokeGlobalAction"] = await $steps[
-                              "invokeGlobalAction"
+                            $steps["loadingStart"] = await $steps[
+                              "loadingStart"
+                            ];
+                          }
+
+                          $steps["submitReciept"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/change-customer-nelson-features",
+                                    undefined,
+                                    (() => {
+                                      try {
+                                        return $state.getNelsonFeatures?.data?.map(
+                                          (feature, index) => ({
+                                            ...feature,
+                                            active:
+                                              $state.checkboxSilver[index]
+                                                .isChecked
+                                          })
+                                        );
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
+                                  ]
+                                };
+                                return $globalActions[
+                                  "Fragment.apiRequest"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["submitReciept"] != null &&
+                            typeof $steps["submitReciept"] === "object" &&
+                            typeof $steps["submitReciept"].then === "function"
+                          ) {
+                            $steps["submitReciept"] = await $steps[
+                              "submitReciept"
+                            ];
+                          }
+
+                          $steps["toast"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    undefined,
+                                    "\u0633\u0631\u0648\u06cc\u0633 \u0634\u0645\u0627 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f."
+                                  ]
+                                };
+                                return $globalActions[
+                                  "Fragment.showToast"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["toast"] != null &&
+                            typeof $steps["toast"] === "object" &&
+                            typeof $steps["toast"].then === "function"
+                          ) {
+                            $steps["toast"] = await $steps["toast"];
+                          }
+
+                          $steps["loadingFalse"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: ["loading"]
+                                  },
+                                  operation: 0,
+                                  value: false
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
+                                  }
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["loadingFalse"] != null &&
+                            typeof $steps["loadingFalse"] === "object" &&
+                            typeof $steps["loadingFalse"].then === "function"
+                          ) {
+                            $steps["loadingFalse"] = await $steps[
+                              "loadingFalse"
                             ];
                           }
                         }}
@@ -1070,6 +1319,30 @@ function PlasmicPricing__RenderFunc(props: {
                                     >
                                       {
                                         "\u0627\u0645\u06a9\u0627\u0646 \u062a\u0639\u0631\u06cc\u0641 \u0645\u0631\u062e\u0635\u06cc \u0628\u0647 \u0635\u0648\u0631\u062a \u0633\u0627\u0639\u062a\u06cc \u0628\u0631\u0627\u06cc \u067e\u0632\u0634\u06a9"
+                                      }
+                                    </li>
+                                    <li
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.li,
+                                        projectcss.__wab_text,
+                                        sty.li__yKfda
+                                      )}
+                                    >
+                                      {
+                                        "\u067e\u0632\u0634\u06a9 \u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u062f \u0627\u0632 \u0627\u0645\u0631\u0648\u0632\u060c \u0641\u0631\u062f\u0627\u060c \u06f3\u060c \u06f4 \u0648 ..... \u0631\u0648\u0632 \u062a\u0627 \u0647\u0631 \u0632\u0645\u0627\u0646\u06cc \u06a9\u0647 \u062f\u0631 \u0646\u0638\u0631 \u062f\u0627\u0631\u062f \u0646\u0648\u0628\u062a\u200c\u062f\u0647\u06cc \u062f\u0627\u0634\u062a\u0647 \u0628\u0627\u0634\u062f."
+                                      }
+                                    </li>
+                                    <li
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.li,
+                                        projectcss.__wab_text,
+                                        sty.li__bn5Do
+                                      )}
+                                    >
+                                      {
+                                        "\u067e\u0632\u0634\u06a9 \u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u062f \u0645\u0634\u062e\u0635 \u06a9\u0646\u062f \u06a9\u0647 \u062a\u0627 \u0686\u0646\u062f\u0633\u0627\u0639\u062a \u067e\u06cc\u0634 \u0627\u0632 \u0632\u0645\u0627\u0646 \u0646\u0648\u0628\u062a\u200c\u060c \u0648\u062c\u0647 \u067e\u0631\u062f\u0627\u062e\u062a\u06cc \u0628\u06cc\u0645\u0627\u0631 \u062f\u0631 \u0635\u0648\u0631\u062a \u0644\u063a\u0648 \u0646\u0648\u0628\u062a \u0645\u0633\u062a\u0631\u062f \u06af\u0631\u062f\u062f.\n\n"
                                       }
                                     </li>
                                   </ul>
@@ -1475,9 +1748,18 @@ function PlasmicPricing__RenderFunc(props: {
                                   sty.text__p5Wz
                                 )}
                               >
-                                {
-                                  "\u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0627\u062e\u062a\u0635\u0627\u0635\u06cc"
-                                }
+                                <React.Fragment>
+                                  <span
+                                    className={
+                                      "plasmic_default__all plasmic_default__span"
+                                    }
+                                    style={{ fontWeight: 700 }}
+                                  >
+                                    {
+                                      "\u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0627\u062e\u062a\u0635\u0627\u0635\u06cc"
+                                    }
+                                  </span>
+                                </React.Fragment>
                               </div>
                             }
                             showArrow={true}
@@ -1646,9 +1928,18 @@ function PlasmicPricing__RenderFunc(props: {
                                   sty.text__h21Z4
                                 )}
                               >
-                                {
-                                  "\u0627\u0645\u06a9\u0627\u0646 \u067e\u0631\u062f\u0627\u062e\u062a \u062d\u0642 \u0648\u06cc\u0632\u06cc\u062a"
-                                }
+                                <React.Fragment>
+                                  <span
+                                    className={
+                                      "plasmic_default__all plasmic_default__span"
+                                    }
+                                    style={{ fontWeight: 700 }}
+                                  >
+                                    {
+                                      "\u0627\u0645\u06a9\u0627\u0646 \u067e\u0631\u062f\u0627\u062e\u062a \u062d\u0642 \u0648\u06cc\u0632\u06cc\u062a"
+                                    }
+                                  </span>
+                                </React.Fragment>
                               </div>
                             }
                             showArrow={true}
@@ -1801,17 +2092,17 @@ function PlasmicPricing__RenderFunc(props: {
                   {(() => {
                     const child$Props = {
                       activeKey: generateStateValueProp($state, [
-                        "accordion3",
+                        "feedbacks",
                         "activePanelId"
                       ]),
                       bordered: true,
-                      className: classNames("__wab_instance", sty.accordion3),
+                      className: classNames("__wab_instance", sty.feedbacks),
                       items: (
                         <React.Fragment>
                           <AntdAccordionItem
                             className={classNames(
                               "__wab_instance",
-                              sty.accordionItem___5TvEu
+                              sty.accordionItem__hhtng
                             )}
                             id={1}
                             label2={
@@ -1819,10 +2110,12 @@ function PlasmicPricing__RenderFunc(props: {
                                 className={classNames(
                                   projectcss.all,
                                   projectcss.__wab_text,
-                                  sty.text___1LKp8
+                                  sty.text__ziGAh
                                 )}
                               >
-                                {"\u062a\u0646\u0638\u06cc\u0645\u0627\u062a"}
+                                {
+                                  "\u0646\u0638\u0631\u0633\u0646\u062c\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062d\u0636\u0648\u0631\u06cc"
+                                }
                               </div>
                             }
                             showArrow={true}
@@ -1831,64 +2124,27 @@ function PlasmicPricing__RenderFunc(props: {
                               className={classNames(
                                 projectcss.all,
                                 projectcss.__wab_text,
-                                sty.text__hOnsq
+                                sty.text__kdi2D
                               )}
                             >
-                              <React.Fragment>
-                                <React.Fragment>{""}</React.Fragment>
-                                {
-                                  <ul
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.ul,
-                                      sty.ul__jRx5P
-                                    )}
-                                  >
-                                    <li
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.li,
-                                        projectcss.__wab_text,
-                                        sty.li__cBepz
-                                      )}
-                                    >
-                                      {
-                                        "\u067e\u0632\u0634\u06a9 \u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u062f \u0627\u0632 \u0627\u0645\u0631\u0648\u0632\u060c \u0641\u0631\u062f\u0627\u060c \u06f3\u060c \u06f4 \u0648 ..... \u0631\u0648\u0632 \u062a\u0627 \u0647\u0631 \u0632\u0645\u0627\u0646\u06cc \u06a9\u0647 \u062f\u0631 \u0646\u0638\u0631 \u062f\u0627\u0631\u062f \u0646\u0648\u0628\u062a\u200c\u062f\u0647\u06cc \u062f\u0627\u0634\u062a\u0647 \u0628\u0627\u0634\u062f."
-                                      }
-                                    </li>
-                                  </ul>
-                                }
-                                <React.Fragment>{""}</React.Fragment>
-                                {
-                                  <ul
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.ul,
-                                      sty.ul__u9Bty
-                                    )}
-                                  >
-                                    <li
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.li,
-                                        projectcss.__wab_text,
-                                        sty.li__ef5Cz
-                                      )}
-                                    >
-                                      {
-                                        "\u067e\u0632\u0634\u06a9 \u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u062f \u0645\u0634\u062e\u0635 \u06a9\u0646\u062f \u06a9\u0647 \u062a\u0627 \u0686\u0646\u062f\u0633\u0627\u0639\u062a \u067e\u06cc\u0634 \u0627\u0632 \u0632\u0645\u0627\u0646 \u0646\u0648\u0628\u062a\u200c\u060c \u0648\u062c\u0647 \u067e\u0631\u062f\u0627\u062e\u062a\u06cc \u0628\u06cc\u0645\u0627\u0631 \u062f\u0631 \u0635\u0648\u0631\u062a \u0644\u063a\u0648 \u0646\u0648\u0628\u062a \u0645\u0633\u062a\u0631\u062f \u06af\u0631\u062f\u062f."
-                                      }
-                                    </li>
-                                  </ul>
-                                }
-                                <React.Fragment>{""}</React.Fragment>
-                              </React.Fragment>
+                              {
+                                "\u0627\u06cc\u0646 \u0645\u062a\u0646 \u0631\u0627 \u0628\u062e\u0648\u0627\u0646 \u0648 \u062e\u06cc\u0644\u06cc \u0631\u0648\u0627\u0646 \u0648 \u06af\u0648\u06cc\u0627 \u0648 \u0633\u0627\u062f\u0647 \u0648 \u0627\u062f\u0627\u0628\u06cc \u0628\u0646\u0648\u06cc\u0633 \n\n \u067e\u0632\u0634\u06a9\u06cc \u06a9\u0647 \u062a\u0639\u062f\u0627\u062f \u0646\u0638\u0631\u0627\u062a\u0634 \u0627\u0632 300 \u0639\u062f\u062f \u0628\u06cc\u0634\u062a\u0631 \u0628\u0627\u0634\u062f\u060c \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646\u0634 \u067e\u06cc\u0627\u0645\u06a9 \u062c\u0647\u062a \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u062f\u0631\u062c \u0646\u0638\u0631 \u0627\u0631\u0633\u0627\u0644 \u0646\u0645\u06cc \u0634\u0648\u062f.\n\u0686\u0646\u0627\u0646\u0686\u0647 \u0645\u0627\u06cc\u0644 \u0647\u0633\u062a\u06cc\u062f \u062c\u0647\u062a \u062f\u0631\u062c \u0646\u0638\u0631 \u0628\u0631\u0627\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u067e\u06cc\u0627\u0645\u06a9 \u0627\u0631\u0633\u0627\u0644 \u0634\u0648\u062f \u0648 \u0628\u06cc\u0634 \u0627\u0632 5 \u0628\u0631\u0627\u0628\u0631 \u0628\u06cc\u0634\u062a\u0631 \u0646\u0638\u0631 \u062c\u0630\u0628 \u06a9\u0646\u06cc\u062f\u060c \u0633\u0631\u0648\u06cc\u0633 \u0627\u0631\u0633\u0627\u0644 \u067e\u06cc\u0627\u0645 \u0628\u0631\u0627\u06cc \u0634\u0645\u0627 \u0641\u0639\u0627\u0644 \u0645\u06cc \u0634\u0648\u062f \u0648 \u062f\u0631 \u067e\u0627\u06cc\u0627\u0646 \u0647\u0631 \u0645\u0627\u0647 \u0628\u0647 \u0627\u0632\u0627\u06cc \u0647\u0631 \u0646\u0638\u0631 \u062b\u0628\u062a \u0634\u062f\u0647 \u0645\u0628\u0644\u063a 10.000 \u062a\u0648\u0645\u0627\u0646 \u0628\u0647 \u062d\u0633\u0627\u0628 \u0634\u0645\u0627 \u0644\u062d\u0627\u0638 \u0645\u06cc \u0634\u0648\u062f."
+                              }
+                            </div>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text__ifJhr
+                              )}
+                            >
+                              {""}
                             </div>
                           </AntdAccordionItem>
                           <AntdAccordionItem
                             className={classNames(
                               "__wab_instance",
-                              sty.accordionItem__fmRbS
+                              sty.accordionItem__r3DsA
                             )}
                             id={2}
                             label2={
@@ -1896,11 +2152,11 @@ function PlasmicPricing__RenderFunc(props: {
                                 className={classNames(
                                   projectcss.all,
                                   projectcss.__wab_text,
-                                  sty.text__lImYn
+                                  sty.text__niCxl
                                 )}
                               >
                                 {
-                                  "\u067e\u0634\u062a\u06cc\u0628\u0627\u0646\u06cc"
+                                  "\u0646\u0638\u0631\u0633\u0646\u062c\u06cc \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0627\u06cc\u0646\u062a\u0631\u0646\u062a\u06cc"
                                 }
                               </div>
                             }
@@ -1910,15 +2166,86 @@ function PlasmicPricing__RenderFunc(props: {
                               className={classNames(
                                 projectcss.all,
                                 projectcss.__wab_text,
-                                sty.text__x10QY
+                                sty.text__wCu1H
                               )}
                             >
                               {
-                                " \u067e\u0634\u062a\u06cc\u0628\u0627\u0646\u06cc \u0628\u0647 \u0635\u0648\u0631\u062a \u062b\u0628\u062a \u062a\u06cc\u06a9\u062a \u0627\u0646\u062c\u0627\u0645 \u0645\u06cc\u200c\u0634\u0648\u062f \u0648 \u062d\u062f\u0627\u06a9\u062b\u0631 \u0632\u0645\u0627\u0646 \u067e\u0627\u0633\u062e \u06af\u0648\u06cc\u06cc \u0628\u0647 \u062a\u06cc\u06a9\u062a \u0647\u0627 \u06a9\u0645\u062a\u0631 \u0627\u0632 \u062f\u0648 \u0631\u0648\u0632 \u06a9\u0627\u0631\u06cc \u0645\u06cc \u0628\u0627\u0634\u062f."
+                                "\u067e\u0632\u0634\u06a9\u0627\u0646\u06cc \u06a9\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646\u06cc \u062f\u0627\u0631\u0646\u062f \u06a9\u0647 \u0627\u0632 \u067e\u0630\u06cc\u0631\u063424 \u0646\u0648\u0628\u062a \u0646\u06af\u0631\u0641\u062a\u0647 \u0627\u0646\u062f \u0648 \u0645\u0627\u06cc\u0644 \u0627\u0646\u062f \u0646\u0638\u0631\u0627\u062a \u0627\u06cc\u0646 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062f\u0631 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644\u0634\u0627\u0646 \u062f\u0631\u062c \u0634\u0648\u062f\u060c \u0628\u0627 \u06a9\u0645\u06a9 QR CODE \u062f\u0631 \u0645\u0637\u0628 \u0645\u06cc\u062a\u0648\u0627\u0646\u0646\u062f \u0627\u0632 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u06a9\u0646\u0646\u062f \u062a\u0627 \u0646\u0638\u0631 \u062e\u0648\u062f \u0631\u0627 \u062f\u0631\u062c \u06a9\u0646\u0646\u062f.\n\u0627\u06cc\u0646 \u0646\u0638\u0631\u0627\u062a \u067e\u0633 \u0627\u0632 \u0628\u0631\u0631\u0633\u06cc \u0648 \u062a\u0627\u06cc\u06cc\u062f\u060c \u062f\u0631 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u067e\u0632\u0634\u06a9 \u0646\u0645\u0627\u06cc\u0634 \u062f\u0627\u062f\u0647 \u062e\u0648\u0627\u0647\u062f \u0634\u062f\n\u0648\u062c\u0648\u062f \u0646\u0638\u0631\u0627\u062a \u0628\u0647 \u062a\u0635\u0645\u06cc\u0645 \u0628\u0647\u062a\u0631 \u0628\u06cc\u0645\u0627\u0631 \u062c\u0647\u062a \u0627\u0646\u062a\u062e\u0627\u0628 \u062f\u0631\u0645\u0627\u0646\u06af\u0631 \u06a9\u0645\u06a9 \u0645\u06cc\u06a9\u0646\u062f.\n"
                               }
                             </div>
                           </AntdAccordionItem>
                         </React.Fragment>
+                      ),
+                      onChange: generateStateOnChangePropForCodeComponents(
+                        $state,
+                        "activePanelId",
+                        ["feedbacks", "activePanelId"],
+                        AntdAccordion_Helpers
+                      )
+                    };
+                    initializeCodeComponentStates(
+                      $state,
+                      [
+                        {
+                          name: "activePanelId",
+                          plasmicStateName: "feedbacks.activePanelId"
+                        }
+                      ],
+                      [],
+                      AntdAccordion_Helpers ?? {},
+                      child$Props
+                    );
+
+                    return (
+                      <AntdAccordion
+                        data-plasmic-name={"feedbacks"}
+                        data-plasmic-override={overrides.feedbacks}
+                        {...child$Props}
+                      />
+                    );
+                  })()}
+                  {(() => {
+                    const child$Props = {
+                      activeKey: generateStateValueProp($state, [
+                        "accordion3",
+                        "activePanelId"
+                      ]),
+                      bordered: true,
+                      className: classNames("__wab_instance", sty.accordion3),
+                      items: (
+                        <AntdAccordionItem
+                          className={classNames(
+                            "__wab_instance",
+                            sty.accordionItem__fmRbS
+                          )}
+                          id={2}
+                          label2={
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text__lImYn
+                              )}
+                            >
+                              {
+                                "\u067e\u0634\u062a\u06cc\u0628\u0627\u0646\u06cc"
+                              }
+                            </div>
+                          }
+                          showArrow={true}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__x10QY
+                            )}
+                          >
+                            {
+                              " \u067e\u0634\u062a\u06cc\u0628\u0627\u0646\u06cc \u0628\u0647 \u0635\u0648\u0631\u062a \u062b\u0628\u062a \u062a\u06cc\u06a9\u062a \u0627\u0646\u062c\u0627\u0645 \u0645\u06cc\u200c\u0634\u0648\u062f \u0648 \u062d\u062f\u0627\u06a9\u062b\u0631 \u0632\u0645\u0627\u0646 \u067e\u0627\u0633\u062e \u06af\u0648\u06cc\u06cc \u0628\u0647 \u062a\u06cc\u06a9\u062a \u0647\u0627 \u06a9\u0645\u062a\u0631 \u0627\u0632 \u062f\u0648 \u0631\u0648\u0632 \u06a9\u0627\u0631\u06cc \u0645\u06cc \u0628\u0627\u0634\u062f."
+                            }
+                          </div>
+                        </AntdAccordionItem>
                       ),
                       onChange: generateStateOnChangePropForCodeComponents(
                         $state,
@@ -2168,9 +2495,19 @@ function PlasmicPricing__RenderFunc(props: {
                                 sty.text__s1Sg2
                               )}
                             >
-                              {
-                                "\u067e\u0632\u0634\u06a9\u0627\u0646 \u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u0646\u062f \u0628\u0631\u0627\u06cc \u0645\u062e\u0627\u0637\u0628\u06cc\u0646 \u0645\u0648\u0631\u062f\u0646\u0638\u0631 \u062e\u0648\u062f\u060c \u062f\u0631 \u0631\u0648\u06cc\u062f\u0627\u062f\u0647\u0627\u06cc \u0645\u062e\u062a\u0644\u0641\u060c \u067e\u06cc\u0627\u0645 \u0627\u0637\u0644\u0627\u0639 \u0631\u0633\u0627\u0646\u06cc \u0627\u0631\u0633\u0627\u0644 \u06a9\u0646\u0646\u062f."
-                              }
+                              <React.Fragment>
+                                <span
+                                  className={
+                                    "plasmic_default__all plasmic_default__span"
+                                  }
+                                  style={{ fontWeight: 400 }}
+                                >
+                                  {
+                                    "\u067e\u0630\u06cc\u0631\u0634\u06f2\u06f4 \u0628\u0627 \u0645\u0639\u0631\u0641\u06cc \u0642\u0627\u0628\u0644\u06cc\u062a \u0646\u0648\u0622\u0648\u0631\u0627\u0646\u0647 \u00ab\u0627\u0637\u0644\u0627\u0639\u200c\u0631\u0633\u0627\u0646\u06cc \u062e\u0648\u062f\u06a9\u0627\u0631\u00bb \u0628\u0647 \u067e\u0632\u0634\u06a9\u0627\u0646 \u0648 \u06a9\u0627\u062f\u0631 \u062f\u0631\u0645\u0627\u0646\u06cc \u0627\u06cc\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0631\u0627 \u0645\u06cc\u200c\u062f\u0647\u062f \u062a\u0627 \u0628\u0627 \u0628\u0647\u0631\u0647\u200c\u06af\u06cc\u0631\u06cc \u0627\u0632 \u0627\u0639\u0644\u0627\u0646\u200c\u0647\u0627 \u0648 \u06cc\u0627\u062f\u0622\u0648\u0631\u06cc\u200c\u0647\u0627\u06cc \u062e\u0648\u062f\u06a9\u0627\u0631\u060c \u0645\u062f\u06cc\u0631\u06cc\u062a \u0632\u0645\u0627\u0646 \u062f\u0642\u06cc\u0642\u200c\u062a\u0631\u06cc \u062f\u0627\u0634\u062a\u0647 \u0628\u0627\u0634\u0646\u062f \u0648 \u062a\u062c\u0631\u0628\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0631\u0627 \u0628\u0647\u0628\u0648\u062f \u0628\u062e\u0634\u0646\u062f. \u0627\u06cc\u0646 \u0648\u06cc\u0698\u06af\u06cc \u0628\u0627 \u0647\u062f\u0641 \u0633\u0627\u062f\u0647\u200c\u0633\u0627\u0632\u06cc \u0641\u0631\u0627\u06cc\u0646\u062f\u0647\u0627\u06cc \u0627\u0637\u0644\u0627\u0639\u200c\u0631\u0633\u0627\u0646\u06cc \u0648 \u0627\u0641\u0632\u0627\u06cc\u0634 \u0628\u0647\u0631\u0647\u200c\u0648\u0631\u06cc \u0637\u0631\u0627\u062d\u06cc \u0634\u062f\u0647 \u0627\u0633\u062a."
+                                  }
+                                </span>
+                                <React.Fragment>{"\n"}</React.Fragment>
+                              </React.Fragment>
                             </div>
                             <div
                               className={classNames(
@@ -2184,105 +2521,23 @@ function PlasmicPricing__RenderFunc(props: {
                                   className={
                                     "plasmic_default__all plasmic_default__span"
                                   }
-                                  style={{ fontWeight: 700 }}
+                                  style={{ fontWeight: 600 }}
                                 >
                                   {
-                                    "\u062b\u0628\u062a \u0646\u0648\u0628\u062a\u200c:"
+                                    "\u0627\u0637\u0644\u0627\u0639 \u0627\u0632 \u0631\u0632\u0631\u0648 \u0646\u0648\u0628\u062a \u062c\u062f\u06cc\u062f:"
                                   }
                                 </span>
                                 <React.Fragment>{"\n"}</React.Fragment>
-                                {
-                                  <ul
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.ul,
-                                      sty.ul__jbcpo
-                                    )}
-                                  >
-                                    <li
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.li,
-                                        projectcss.__wab_text,
-                                        sty.li__vgw8C
-                                      )}
-                                    >
-                                      {
-                                        "\u0627\u0631\u0633\u0627\u0644 \u067e\u06cc\u0627\u0645\u06a9 \u062b\u0628\u062a \u0646\u0648\u0628\u062a \u0628\u0647 \u067e\u0632\u0634\u06a9"
-                                      }
-                                    </li>
-                                  </ul>
-                                }
-                                <React.Fragment>{""}</React.Fragment>
-                                {
-                                  <ul
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.ul,
-                                      sty.ul__hQ1Y
-                                    )}
-                                  >
-                                    <li
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.li,
-                                        projectcss.__wab_text,
-                                        sty.li__hfJl5
-                                      )}
-                                    >
-                                      {
-                                        "\u0627\u0631\u0633\u0627\u0644 \u067e\u06cc\u0627\u0645\u06a9 \u062b\u0628\u062a \u0646\u0648\u0628\u062a \u0628\u0647 \u0628\u06cc\u0645\u0627\u0631"
-                                      }
-                                    </li>
-                                  </ul>
-                                }
-                                <React.Fragment>{""}</React.Fragment>
-                                {
-                                  <ul
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.ul,
-                                      sty.ul__i4K3I
-                                    )}
-                                  >
-                                    <li
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.li,
-                                        projectcss.__wab_text,
-                                        sty.li__vdV0N
-                                      )}
-                                    >
-                                      {
-                                        "\u0627\u0631\u0633\u0627\u0644 \u067e\u06cc\u0627\u0645\u06a9 \u062b\u0628\u062a \u0646\u0648\u0628\u062a \u0628\u0647 \u0645\u0646\u0634\u06cc"
-                                      }
-                                    </li>
-                                  </ul>
-                                }
-                                <React.Fragment>{""}</React.Fragment>
-                                {
-                                  <ul
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.ul,
-                                      sty.ul__ioyt
-                                    )}
-                                  >
-                                    <li
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.li,
-                                        projectcss.__wab_text,
-                                        sty.li__hIs8
-                                      )}
-                                    >
-                                      {
-                                        "\u062a\u0646\u0638\u06cc\u0645 \u0645\u062a\u0646 \u062f\u0644\u062e\u0648\u0627\u0647"
-                                      }
-                                    </li>
-                                  </ul>
-                                }
-                                <React.Fragment>{""}</React.Fragment>
+                                <span
+                                  className={
+                                    "plasmic_default__all plasmic_default__span"
+                                  }
+                                  style={{ fontWeight: 400 }}
+                                >
+                                  {
+                                    "\u067e\u0632\u0634\u06a9\u0627\u0646 \u0648 \u06a9\u0627\u062f\u0631 \u062f\u0631\u0645\u0627\u0646\u06cc \u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u0646\u062f \u0628\u0647 \u0645\u062d\u0636 \u0631\u0632\u0631\u0648 \u0646\u0648\u0628\u062a \u062c\u062f\u06cc\u062f \u0628\u0647\u200c\u0637\u0648\u0631 \u062e\u0648\u062f\u06a9\u0627\u0631 \u0627\u0632 \u0622\u0646 \u0645\u0637\u0644\u0639 \u0634\u0648\u0646\u062f. \u0627\u06cc\u0646 \u0642\u0627\u0628\u0644\u06cc\u062a \u0628\u0647 \u0622\u0646\u0647\u0627 \u0641\u0631\u0635\u062a \u06a9\u0627\u0641\u06cc \u0628\u0631\u0627\u06cc \u0628\u0631\u0646\u0627\u0645\u0647\u200c\u0631\u06cc\u0632\u06cc \u0628\u0647\u062a\u0631 \u0648 \u0647\u0645\u0627\u0647\u0646\u06af\u06cc \u0628\u0627 \u062f\u06cc\u06af\u0631 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0645\u06cc\u200c\u062f\u0647\u062f."
+                                  }
+                                </span>
                               </React.Fragment>
                             </div>
                             <div
@@ -2297,149 +2552,23 @@ function PlasmicPricing__RenderFunc(props: {
                                   className={
                                     "plasmic_default__all plasmic_default__span"
                                   }
-                                  style={{ fontWeight: 700 }}
+                                  style={{ fontWeight: 600 }}
                                 >
                                   {
-                                    "\u0644\u063a\u0648 \u0646\u0648\u0628\u062a\u200c(\u0628\u0647 \u0632\u0648\u062f\u06cc):"
+                                    "\u0644\u063a\u0648 \u0646\u0648\u0628\u062a\u200c:"
                                   }
                                 </span>
                                 <React.Fragment>{"\n"}</React.Fragment>
-                                {
-                                  <ul
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.ul,
-                                      sty.ul__agka2
-                                    )}
-                                  >
-                                    <li
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.li,
-                                        projectcss.__wab_text,
-                                        sty.li__edoyf
-                                      )}
-                                    >
-                                      {
-                                        "\u0627\u0631\u0633\u0627\u0644 \u067e\u06cc\u0627\u0645\u06a9 \u0644\u063a\u0648 \u0646\u0648\u0628\u062a \u0628\u0647 \u067e\u0632\u0634\u06a9"
-                                      }
-                                    </li>
-                                    <li
-                                      className={classNames(
-                                        projectcss.all,
-                                        projectcss.li,
-                                        projectcss.__wab_text,
-                                        sty.li__rz5Oi
-                                      )}
-                                    >
-                                      <React.Fragment>
-                                        <React.Fragment>{""}</React.Fragment>
-                                        {
-                                          <ul
-                                            className={classNames(
-                                              projectcss.all,
-                                              projectcss.ul,
-                                              sty.ul__qKj0E
-                                            )}
-                                          >
-                                            <li
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.li,
-                                                projectcss.__wab_text,
-                                                sty.li__fnYo9
-                                              )}
-                                            >
-                                              {
-                                                "\u0627\u0631\u0633\u0627\u0644 \u067e\u06cc\u0627\u0645\u06a9 \u0644\u063a\u0648 \u0646\u0648\u0628\u062a \u0628\u0647 \u0628\u06cc\u0645\u0627\u0631"
-                                              }
-                                            </li>
-                                            <li
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.li,
-                                                projectcss.__wab_text,
-                                                sty.li__mxyIy
-                                              )}
-                                            >
-                                              <React.Fragment>
-                                                <React.Fragment>
-                                                  {""}
-                                                </React.Fragment>
-                                                {
-                                                  <ul
-                                                    className={classNames(
-                                                      projectcss.all,
-                                                      projectcss.ul,
-                                                      sty.ul__utXvD
-                                                    )}
-                                                  >
-                                                    <li
-                                                      className={classNames(
-                                                        projectcss.all,
-                                                        projectcss.li,
-                                                        projectcss.__wab_text,
-                                                        sty.li___14PJn
-                                                      )}
-                                                    >
-                                                      {
-                                                        "\u0627\u0631\u0633\u0627\u0644 \u067e\u06cc\u0627\u0645\u06a9 \u0644\u063a\u0648 \u0646\u0648\u0628\u062a \u0628\u0647 \u0645\u0646\u0634\u06cc"
-                                                      }
-                                                    </li>
-                                                    <li
-                                                      className={classNames(
-                                                        projectcss.all,
-                                                        projectcss.li,
-                                                        projectcss.__wab_text,
-                                                        sty.li__be0My
-                                                      )}
-                                                    >
-                                                      <React.Fragment>
-                                                        <React.Fragment>
-                                                          {""}
-                                                        </React.Fragment>
-                                                        {
-                                                          <ul
-                                                            className={classNames(
-                                                              projectcss.all,
-                                                              projectcss.ul,
-                                                              sty.ul__b2IZf
-                                                            )}
-                                                          >
-                                                            <li
-                                                              className={classNames(
-                                                                projectcss.all,
-                                                                projectcss.li,
-                                                                projectcss.__wab_text,
-                                                                sty.li__lzhoQ
-                                                              )}
-                                                            >
-                                                              {
-                                                                "\u062a\u0646\u0638\u06cc\u0645 \u0645\u062a\u0646 \u062f\u0644\u062e\u0648\u0627\u0647\n"
-                                                              }
-                                                            </li>
-                                                          </ul>
-                                                        }
-                                                        <React.Fragment>
-                                                          {""}
-                                                        </React.Fragment>
-                                                      </React.Fragment>
-                                                    </li>
-                                                  </ul>
-                                                }
-                                                <React.Fragment>
-                                                  {""}
-                                                </React.Fragment>
-                                              </React.Fragment>
-                                            </li>
-                                          </ul>
-                                        }
-                                        <React.Fragment>{""}</React.Fragment>
-                                      </React.Fragment>
-                                    </li>
-                                  </ul>
-                                }
-                                <React.Fragment>{""}</React.Fragment>
+                                <span
+                                  className={
+                                    "plasmic_default__all plasmic_default__span"
+                                  }
+                                  style={{ fontWeight: 400 }}
+                                >
+                                  {
+                                    "\u062f\u0631 \u0635\u0648\u0631\u062a\u06cc \u06a9\u0647 \u0646\u0648\u0628\u062a\u06cc \u0644\u063a\u0648 \u0634\u0648\u062f\u060c \u0627\u0637\u0644\u0627\u0639\u200c\u0631\u0633\u0627\u0646\u06cc \u0628\u0647\u200c\u0633\u0631\u0639\u062a \u0628\u0647 \u0628\u06cc\u0645\u0627\u0631\u060c \u067e\u0632\u0634\u06a9 \u0648 \u0645\u0646\u0634\u06cc \u0627\u0631\u0633\u0627\u0644 \u0645\u06cc\u200c\u0634\u0648\u062f \u062a\u0627 \u0627\u0632 \u062a\u062f\u0627\u062e\u0644 \u062f\u0631 \u0628\u0631\u0646\u0627\u0645\u0647\u200c\u0647\u0627 \u062c\u0644\u0648\u06af\u06cc\u0631\u06cc \u0634\u0648\u062f \u0648 \u0638\u0631\u0641\u06cc\u062a \u062e\u0627\u0644\u06cc \u0628\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u062f\u06cc\u06af\u0631 \u0627\u062e\u062a\u0635\u0627\u0635 \u06cc\u0627\u0628\u062f."
+                                  }
+                                </span>
                               </React.Fragment>
                             </div>
                             <div
@@ -2457,7 +2586,69 @@ function PlasmicPricing__RenderFunc(props: {
                                   style={{ fontWeight: 700 }}
                                 >
                                   {
-                                    "\u062b\u0628\u062a \u0646\u0638\u0631(\u0628\u0647 \u0632\u0648\u062f\u06cc):"
+                                    "\u06cc\u0627\u062f\u0627\u0648\u0631\u06cc \u0646\u0648\u0628\u062a \u0628\u06cc\u0645\u0627\u0631 (\u0628\u0647 \u0632\u0648\u062f\u06cc): "
+                                  }
+                                </span>
+                                <React.Fragment>{"\n"}</React.Fragment>
+                                <span
+                                  className={
+                                    "plasmic_default__all plasmic_default__span"
+                                  }
+                                  style={{ fontWeight: 400 }}
+                                >
+                                  {
+                                    "\u0633\u06cc\u0633\u062a\u0645 \u0628\u0647\u200c\u0637\u0648\u0631 \u0647\u0648\u0634\u0645\u0646\u062f \u0628\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u067e\u06cc\u0634 \u0627\u0632 \u0632\u0645\u0627\u0646 \u0646\u0648\u0628\u062a\u0634\u0627\u0646 \u06cc\u0627\u062f\u0622\u0648\u0631\u06cc \u0645\u06cc\u200c\u06a9\u0646\u062f. \u0627\u06cc\u0646 \u06cc\u0627\u062f\u0622\u0648\u0631\u06cc \u06a9\u0645\u06a9 \u0645\u06cc\u200c\u06a9\u0646\u062f \u062a\u0627 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0628\u0627 \u0622\u0645\u0627\u062f\u06af\u06cc \u06a9\u0627\u0645\u0644 \u062f\u0631 \u0645\u0637\u0628 \u062d\u0627\u0636\u0631 \u0634\u0648\u0646\u062f\u060c \u06a9\u0647 \u0628\u0647 \u06a9\u0627\u0647\u0634 \u063a\u06cc\u0628\u062a\u200c\u0647\u0627 \u0648 \u0628\u0647\u0628\u0648\u062f \u0646\u0638\u0645 \u0628\u0631\u0646\u0627\u0645\u0647\u200c\u0647\u0627 \u06a9\u0645\u06a9 \u0645\u06cc\u200c\u06a9\u0646\u062f."
+                                  }
+                                </span>
+                              </React.Fragment>
+                            </div>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text__iTxQt
+                              )}
+                            >
+                              <React.Fragment>
+                                <span
+                                  className={
+                                    "plasmic_default__all plasmic_default__span"
+                                  }
+                                  style={{ fontWeight: 700 }}
+                                >
+                                  {
+                                    "\u062f\u0631\u06cc\u0627\u0641\u062a\u200c\u06a9\u0646\u0646\u062f\u06af\u0627\u0646 \u0627\u0637\u0644\u0627\u0639\u200c\u0631\u0633\u0627\u0646\u06cc:"
+                                  }
+                                </span>
+                                <React.Fragment>{"\n"}</React.Fragment>
+                                <span
+                                  className={
+                                    "plasmic_default__all plasmic_default__span"
+                                  }
+                                  style={{ fontWeight: 400 }}
+                                >
+                                  {
+                                    "\u0642\u0627\u0628\u0644\u06cc\u062a \u0627\u0637\u0644\u0627\u0639\u200c\u0631\u0633\u0627\u0646\u06cc \u062e\u0648\u062f\u06a9\u0627\u0631 \u067e\u0630\u06cc\u0631\u0634\u06f2\u06f4 \u0628\u0647 \u06a9\u0627\u0631\u0628\u0631\u0627\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0645\u06cc\u200c\u062f\u0647\u062f \u062a\u0627 \u0627\u0639\u0644\u0627\u0646\u200c\u0647\u0627 \u0631\u0627 \u0628\u0647 \u0627\u0641\u0631\u0627\u062f \u0645\u062e\u062a\u0644\u0641\u060c \u0627\u0632 \u062c\u0645\u0644\u0647 \u067e\u0632\u0634\u06a9\u0627\u0646\u060c \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0648 \u062d\u062a\u06cc \u0645\u0646\u0634\u06cc\u200c\u0647\u0627\u060c \u0627\u0631\u0633\u0627\u0644 \u06a9\u0646\u0646\u062f. \u0627\u06cc\u0646 \u0648\u06cc\u0698\u06af\u06cc \u0628\u0627\u0639\u062b \u0645\u06cc\u200c\u0634\u0648\u062f \u0647\u0645\u0647 \u0627\u0641\u0631\u0627\u062f \u062f\u0631\u06af\u06cc\u0631 \u062f\u0631 \u0641\u0631\u0622\u06cc\u0646\u062f \u062f\u0631\u0645\u0627\u0646 \u0627\u0632 \u0648\u0636\u0639\u06cc\u062a \u0628\u0631\u0646\u0627\u0645\u0647\u200c\u0631\u06cc\u0632\u06cc \u0622\u06af\u0627\u0647 \u0628\u0627\u0634\u0646\u062f."
+                                  }
+                                </span>
+                              </React.Fragment>
+                            </div>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text___8MxfF
+                              )}
+                            >
+                              <React.Fragment>
+                                <span
+                                  className={
+                                    "plasmic_default__all plasmic_default__span"
+                                  }
+                                  style={{ fontWeight: 700 }}
+                                >
+                                  {
+                                    "\u0646\u06a9\u0627\u062a \u0645\u0647\u0645:"
                                   }
                                 </span>
                                 <React.Fragment>{"\n"}</React.Fragment>
@@ -2466,7 +2657,7 @@ function PlasmicPricing__RenderFunc(props: {
                                     className={classNames(
                                       projectcss.all,
                                       projectcss.ul,
-                                      sty.ul___652Kp
+                                      sty.ul__puir
                                     )}
                                   >
                                     <li
@@ -2474,85 +2665,84 @@ function PlasmicPricing__RenderFunc(props: {
                                         projectcss.all,
                                         projectcss.li,
                                         projectcss.__wab_text,
-                                        sty.li__iLfiz
+                                        sty.li__fu7LE
                                       )}
                                     >
-                                      {
-                                        "\u0627\u0631\u0633\u0627\u0644 \u067e\u06cc\u0627\u0645\u06a9 \u062b\u0628\u062a \u0646\u0638\u0631 \u0628\u0647 \u067e\u0632\u0634\u06a9\n"
-                                      }
+                                      <React.Fragment>
+                                        <span
+                                          className={
+                                            "plasmic_default__all plasmic_default__span"
+                                          }
+                                          style={{ fontWeight: 400 }}
+                                        >
+                                          {
+                                            "\u067e\u0632\u0634\u06a9\u0627\u0646 \u0641\u0642\u0637 \u0647\u0632\u06cc\u0646\u0647 \u0627\u0639\u0644\u0627\u0646\u200c\u0647\u0627\u06cc \u0627\u0631\u0633\u0627\u0644\u06cc \u0631\u0627 \u067e\u0631\u062f\u0627\u062e\u062a \u0645\u06cc\u200c\u06a9\u0646\u0646\u062f \u0648 \u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u0646\u062f \u0628\u0631 \u0627\u0633\u0627\u0633 \u0646\u06cc\u0627\u0632 \u062e\u0648\u062f \u0647\u0632\u06cc\u0646\u0647\u200c\u0647\u0627 \u0631\u0627 \u0645\u062f\u06cc\u0631\u06cc\u062a \u06a9\u0646\u0646\u062f."
+                                          }
+                                        </span>
+                                      </React.Fragment>
                                     </li>
+                                  </ul>
+                                }
+                                <React.Fragment>{""}</React.Fragment>
+                                {
+                                  <ul
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.ul,
+                                      sty.ul__udDK
+                                    )}
+                                  >
                                     <li
                                       className={classNames(
                                         projectcss.all,
                                         projectcss.li,
                                         projectcss.__wab_text,
-                                        sty.li__tSlms
+                                        sty.li__y1Cn
                                       )}
                                     >
                                       <React.Fragment>
-                                        <React.Fragment>{""}</React.Fragment>
-                                        {
-                                          <ul
-                                            className={classNames(
-                                              projectcss.all,
-                                              projectcss.ul,
-                                              sty.ul__sd6Vo
-                                            )}
-                                          >
-                                            <li
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.li,
-                                                projectcss.__wab_text,
-                                                sty.li__lpf9I
-                                              )}
-                                            >
-                                              {
-                                                "\u0627\u0631\u0633\u0627\u0644 \u067e\u06cc\u0627\u0645\u06a9 \u062b\u0628\u062a \u0646\u0638\u0631 \u0628\u0647 \u0645\u0646\u0634\u06cc\n"
-                                              }
-                                            </li>
-                                            <li
-                                              className={classNames(
-                                                projectcss.all,
-                                                projectcss.li,
-                                                projectcss.__wab_text,
-                                                sty.li__xFehv
-                                              )}
-                                            >
-                                              <React.Fragment>
-                                                <React.Fragment>
-                                                  {""}
-                                                </React.Fragment>
-                                                {
-                                                  <ul
-                                                    className={classNames(
-                                                      projectcss.all,
-                                                      projectcss.ul,
-                                                      sty.ul__mOnVr
-                                                    )}
-                                                  >
-                                                    <li
-                                                      className={classNames(
-                                                        projectcss.all,
-                                                        projectcss.li,
-                                                        projectcss.__wab_text,
-                                                        sty.li___9HF5G
-                                                      )}
-                                                    >
-                                                      {
-                                                        "\u062a\u0646\u0638\u06cc\u0645 \u0645\u062a\u0646 \u062f\u0644\u062e\u0648\u0627\u0647\n"
-                                                      }
-                                                    </li>
-                                                  </ul>
-                                                }
-                                                <React.Fragment>
-                                                  {""}
-                                                </React.Fragment>
-                                              </React.Fragment>
-                                            </li>
-                                          </ul>
-                                        }
-                                        <React.Fragment>{""}</React.Fragment>
+                                        <span
+                                          className={
+                                            "plasmic_default__all plasmic_default__span"
+                                          }
+                                          style={{ fontWeight: 400 }}
+                                        >
+                                          {
+                                            "\u0627\u06cc\u0646 \u0633\u0631\u0648\u06cc\u0633 \u0628\u0647\u200c\u0635\u0648\u0631\u062a \u00ab\u067e\u0631\u062f\u0627\u062e\u062a \u0628\u0647 \u0627\u0632\u0627\u06cc \u0627\u0633\u062a\u0641\u0627\u062f\u0647\u00bb \u0627\u0631\u0627\u0626\u0647 \u0645\u06cc\u200c\u0634\u0648\u062f\u061b \u0628\u0647 \u0627\u06cc\u0646 \u0645\u0639\u0646\u06cc \u06a9\u0647 \u0647\u0631 \u0627\u0639\u0644\u0627\u0646 \u0628\u0627 \u0647\u0632\u06cc\u0646\u0647 \u0645\u0631\u0628\u0648\u0637\u0647 \u062b\u0628\u062a \u0648 \u0627\u0631\u0633\u0627\u0644 \u0645\u06cc\u200c\u0634\u0648\u062f."
+                                          }
+                                        </span>
+                                      </React.Fragment>
+                                    </li>
+                                  </ul>
+                                }
+                                <React.Fragment>{""}</React.Fragment>
+                                {
+                                  <ul
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.ul,
+                                      sty.ul__rpy1
+                                    )}
+                                  >
+                                    <li
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.li,
+                                        projectcss.__wab_text,
+                                        sty.li__yK0N3
+                                      )}
+                                    >
+                                      <React.Fragment>
+                                        <span
+                                          className={
+                                            "plasmic_default__all plasmic_default__span"
+                                          }
+                                          style={{ fontWeight: 400 }}
+                                        >
+                                          {
+                                            "\u0633\u06cc\u0633\u062a\u0645 \u0627\u0637\u0644\u0627\u0639\u200c\u0631\u0633\u0627\u0646\u06cc \u062e\u0648\u062f\u06a9\u0627\u0631 \u067e\u0630\u06cc\u0631\u0634\u06f2\u06f4 \u0628\u0647 \u06a9\u0627\u0631\u0628\u0631\u0627\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0645\u06cc\u200c\u062f\u0647\u062f \u0627\u0632 \u067e\u06cc\u0627\u0645\u200c\u0647\u0627\u06cc \u067e\u06cc\u0634\u200c\u0641\u0631\u0636 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u06a9\u0646\u0646\u062f \u06cc\u0627 \u067e\u06cc\u0627\u0645 \u0627\u062e\u062a\u0635\u0627\u0635\u06cc \u062e\u0648\u062f \u0631\u0627 \u0627\u06cc\u062c\u0627\u062f \u06a9\u0646\u0646\u062f."
+                                          }
+                                        </span>
                                       </React.Fragment>
                                     </li>
                                   </ul>
@@ -2564,12 +2754,31 @@ function PlasmicPricing__RenderFunc(props: {
                               className={classNames(
                                 projectcss.all,
                                 projectcss.__wab_text,
-                                sty.text__uy4SO
+                                sty.text__vXDfy
                               )}
                             >
-                              {
-                                "\u067e\u06cc\u0634\u0646\u0647\u0627\u062f\u0627\u062a \u0634\u0645\u0627 \u0631\u0627 \u062f\u0631 \u062a\u0648\u0633\u0639\u0647 \u0627\u06cc\u0646 \u0645\u062d\u0635\u0648\u0644 \u067e\u0630\u06cc\u0631\u0627 \u0647\u0633\u062a\u06cc\u0645."
-                              }
+                              <React.Fragment>
+                                <span
+                                  className={
+                                    "plasmic_default__all plasmic_default__span"
+                                  }
+                                  style={{ fontWeight: 400 }}
+                                >
+                                  {
+                                    "\u067e\u0630\u06cc\u0631\u0634\u06f2\u06f4 \u0628\u0627 \u0627\u06cc\u0646 \u0627\u0628\u0632\u0627\u0631 \u062c\u062f\u06cc\u062f\u060c \u0631\u0627\u0647\u06a9\u0627\u0631\u06cc \u0645\u0648\u062b\u0631 \u0628\u0631\u0627\u06cc \u0628\u0647\u06cc\u0646\u0647\u200c\u0633\u0627\u0632\u06cc \u0628\u0631\u0646\u0627\u0645\u0647\u200c\u0631\u06cc\u0632\u06cc\u060c \u0635\u0631\u0641\u0647\u200c\u062c\u0648\u06cc\u06cc \u062f\u0631 \u0648\u0642\u062a \u0648 \u062a\u0645\u0631\u06a9\u0632 \u0628\u06cc\u0634\u062a\u0631 \u0628\u0631 \u0627\u0631\u0627\u0626\u0647 \u062e\u062f\u0645\u0627\u062a \u0628\u0627 \u06a9\u06cc\u0641\u06cc\u062a \u0641\u0631\u0627\u0647\u0645 \u0622\u0648\u0631\u062f\u0647 \u0627\u0633\u062a. \u0627\u06cc\u0646 \u0648\u06cc\u0698\u06af\u06cc \u0647\u0645\u200c\u0627\u06a9\u0646\u0648\u0646 \u062f\u0631 \u062f\u0633\u062a\u0631\u0633 \u062a\u0645\u0627\u0645\u06cc \u06a9\u0627\u0631\u0628\u0631\u0627\u0646 \u067e\u0630\u06cc\u0631\u0634\u06f2\u06f4 \u0642\u0631\u0627\u0631 \u06af\u0631\u0641\u062a\u0647 \u0648 \u0622\u0645\u0627\u062f\u0647 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0633\u062a."
+                                  }
+                                </span>
+                                <React.Fragment>{"\n"}</React.Fragment>
+                              </React.Fragment>
+                            </div>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text__m5LC8
+                              )}
+                            >
+                              {"\n"}
                             </div>
                           </AntdAccordionItem>
                         </React.Fragment>
@@ -2605,7 +2814,100 @@ function PlasmicPricing__RenderFunc(props: {
                 </div>
               </Stack__>
             ) : null}
+            <ApiRequest
+              data-plasmic-name={"apiRequestForNotificationSetting"}
+              data-plasmic-override={overrides.apiRequestForNotificationSetting}
+              className={classNames(
+                "__wab_instance",
+                sty.apiRequestForNotificationSetting
+              )}
+              errorDisplay={
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__fHvk4
+                  )}
+                >
+                  {"Error fetching data"}
+                </div>
+              }
+              loadingDisplay={
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__cyCs
+                  )}
+                >
+                  {"Loading..."}
+                </div>
+              }
+              method={"GET"}
+              onError={generateStateOnChangeProp($state, [
+                "apiRequestForNotificationSetting",
+                "error"
+              ])}
+              onLoading={generateStateOnChangeProp($state, [
+                "apiRequestForNotificationSetting",
+                "loading"
+              ])}
+              onSuccess={generateStateOnChangeProp($state, [
+                "apiRequestForNotificationSetting",
+                "data"
+              ])}
+              url={"https://apigw.paziresh24.com/v1/martin/events"}
+            />
           </ApiRequest>
+          <ApiRequest
+            data-plasmic-name={"customerfeatures"}
+            data-plasmic-override={overrides.customerfeatures}
+            className={classNames("__wab_instance", sty.customerfeatures)}
+            errorDisplay={
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text___2JYX
+                )}
+              >
+                {"Error fetching data"}
+              </div>
+            }
+            loadingDisplay={
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__nnsl
+                )}
+              >
+                {"Loading..."}
+              </div>
+            }
+            method={"GET"}
+            onError={generateStateOnChangeProp($state, [
+              "customerfeatures",
+              "error"
+            ])}
+            onLoading={generateStateOnChangeProp($state, [
+              "customerfeatures",
+              "loading"
+            ])}
+            onSuccess={generateStateOnChangeProp($state, [
+              "customerfeatures",
+              "data"
+            ])}
+            url={
+              "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/get-customer-nelson-features"
+            }
+          />
+
+          <MetrikaYandex
+            data-plasmic-name={"metrikaYandex"}
+            data-plasmic-override={overrides.metrikaYandex}
+            className={classNames("__wab_instance", sty.metrikaYandex)}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -2629,8 +2931,12 @@ const PlasmicDescendants = {
     "description",
     "accordion",
     "accordion2",
+    "feedbacks",
     "accordion3",
-    "accordion4"
+    "accordion4",
+    "apiRequestForNotificationSetting",
+    "customerfeatures",
+    "metrikaYandex"
   ],
   getNelsonFeatures: [
     "getNelsonFeatures",
@@ -2647,8 +2953,10 @@ const PlasmicDescendants = {
     "description",
     "accordion",
     "accordion2",
+    "feedbacks",
     "accordion3",
-    "accordion4"
+    "accordion4",
+    "apiRequestForNotificationSetting"
   ],
   outlineVertical: [
     "outlineVertical",
@@ -2664,6 +2972,7 @@ const PlasmicDescendants = {
     "description",
     "accordion",
     "accordion2",
+    "feedbacks",
     "accordion3",
     "accordion4"
   ],
@@ -2693,13 +3002,18 @@ const PlasmicDescendants = {
     "description",
     "accordion",
     "accordion2",
+    "feedbacks",
     "accordion3",
     "accordion4"
   ],
   accordion: ["accordion"],
   accordion2: ["accordion2"],
+  feedbacks: ["feedbacks"],
   accordion3: ["accordion3"],
-  accordion4: ["accordion4"]
+  accordion4: ["accordion4"],
+  apiRequestForNotificationSetting: ["apiRequestForNotificationSetting"],
+  customerfeatures: ["customerfeatures"],
+  metrikaYandex: ["metrikaYandex"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -2720,8 +3034,12 @@ type NodeDefaultElementType = {
   description: "div";
   accordion: typeof AntdAccordion;
   accordion2: typeof AntdAccordion;
+  feedbacks: typeof AntdAccordion;
   accordion3: typeof AntdAccordion;
   accordion4: typeof AntdAccordion;
+  apiRequestForNotificationSetting: typeof ApiRequest;
+  customerfeatures: typeof ApiRequest;
+  metrikaYandex: typeof MetrikaYandex;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -2798,8 +3116,14 @@ export const PlasmicPricing = Object.assign(
     description: makeNodeComponent("description"),
     accordion: makeNodeComponent("accordion"),
     accordion2: makeNodeComponent("accordion2"),
+    feedbacks: makeNodeComponent("feedbacks"),
     accordion3: makeNodeComponent("accordion3"),
     accordion4: makeNodeComponent("accordion4"),
+    apiRequestForNotificationSetting: makeNodeComponent(
+      "apiRequestForNotificationSetting"
+    ),
+    customerfeatures: makeNodeComponent("customerfeatures"),
+    metrikaYandex: makeNodeComponent("metrikaYandex"),
 
     // Metadata about props expected for PlasmicPricing
     internalVariantProps: PlasmicPricing__VariantProps,

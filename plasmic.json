@@ -1601,6 +1601,33 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/pricing"
+        },
+        {
+          "id": "mlLx75iyGp5E",
+          "name": "NewPage",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicNewPage.tsx",
+          "importSpec": {
+            "modulePath": "../src/pages/new-page-3.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicNewPage.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/new-page-3"
+        },
+        {
+          "id": "xGsQPPSWr2u9",
+          "name": "Receipt",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicReceipt.tsx",
+          "importSpec": {
+            "modulePath": "Receipt.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicReceipt.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

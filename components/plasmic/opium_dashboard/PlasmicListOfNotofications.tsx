@@ -67,6 +67,7 @@ import MultilineTextInput from "../../MultilineTextInput"; // plasmic-import: CZ
 import { AntdAccordion } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { accordionHelpers as AntdAccordion_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { AntdAccordionItem } from "@plasmicpkgs/antd5/skinny/registerCollapse";
+import Receipt from "../../Receipt"; // plasmic-import: xGsQPPSWr2u9/component
 import Specificnotification from "../../Specificnotification"; // plasmic-import: kyCg1wl1ZoV7/component
 import MetrikaYandex from "../../MetrikaYandex"; // plasmic-import: bwh2kDzd78mD/component
 
@@ -129,6 +130,8 @@ export type PlasmicListOfNotofications__OverridesType = {
   sample2?: Flex__<"div">;
   save?: Flex__<"div">;
   button?: Flex__<typeof Button>;
+  receiptDialog?: Flex__<typeof Dialog>;
+  receipt?: Flex__<typeof Receipt>;
   listofnotifications?: Flex__<"div">;
   اطلاعرسانیهایموجود?: Flex__<"div">;
   usersworkflows?: Flex__<"div">;
@@ -389,6 +392,12 @@ function PlasmicListOfNotofications__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => "submit-book"
+      },
+      {
+        path: "receiptDialog.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -685,9 +694,22 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                 sty.text___4AJnv
               )}
             >
-              {
-                "\u067e\u0632\u0634\u06a9 \u0645\u062d\u062a\u0631\u0645\u060c\n\u0628\u0627 \u0641\u0639\u0627\u0644\u200c\u0633\u0627\u0632\u06cc \u0633\u06cc\u0633\u062a\u0645 \u0627\u0637\u0644\u0627\u0639\u200c\u0631\u0633\u0627\u0646\u06cc \u067e\u06cc\u0627\u0645\u06a9\u06cc \u0627\u062e\u062a\u0635\u0627\u0635\u06cc\u060c \u062f\u0631 \u0632\u0645\u0627\u0646 \u062b\u0628\u062a \u0646\u0648\u0628\u062a \u0628\u0647 \u0627\u0641\u0631\u0627\u062f \u0645\u0646\u062a\u062e\u0628 \u0634\u0645\u0627 \u0628\u0647\u200c\u0637\u0648\u0631 \u062e\u0648\u062f\u06a9\u0627\u0631 \u0627\u0637\u0644\u0627\u0639\u200c\u0631\u0633\u0627\u0646\u06cc \u062e\u0648\u0627\u0647\u062f \u0634\u062f.\n"
-              }
+              <React.Fragment>
+                <React.Fragment>
+                  {
+                    "\u067e\u0632\u0634\u06a9 \u0645\u062d\u062a\u0631\u0645\u060c\n"
+                  }
+                </React.Fragment>
+                <span
+                  className={"plasmic_default__all plasmic_default__span"}
+                  style={{ fontWeight: 400 }}
+                >
+                  {
+                    " \u0642\u0627\u0628\u0644\u06cc\u062a \u00ab\u0627\u0637\u0644\u0627\u0639\u200c\u0631\u0633\u0627\u0646\u06cc \u062e\u0648\u062f\u06a9\u0627\u0631\u00bb \u0627\u06cc\u0646 \u0627\u0645\u06a9\u0627\u0646 \u0631\u0627 \u0645\u06cc\u200c\u062f\u0647\u062f \u062a\u0627 \u0628\u0627 \u0628\u0647\u0631\u0647\u200c\u06af\u06cc\u0631\u06cc \u0627\u0632 \u0627\u0639\u0644\u0627\u0646\u200c\u0647\u0627 \u0648 \u06cc\u0627\u062f\u0622\u0648\u0631\u06cc\u200c\u0647\u0627\u06cc \u062e\u0648\u062f\u06a9\u0627\u0631\u060c \u0645\u062f\u06cc\u0631\u06cc\u062a \u0632\u0645\u0627\u0646 \u062f\u0642\u06cc\u0642\u200c\u062a\u0631\u06cc \u062f\u0627\u0634\u062a\u0647 \u0628\u0627\u0634\u06cc\u062f \u0648 \u062a\u062c\u0631\u0628\u0647 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0631\u0627 \u0628\u0647\u0628\u0648\u062f \u0628\u062e\u0634\u06cc\u062f. \u0627\u06cc\u0646 \u0648\u06cc\u0698\u06af\u06cc \u0628\u0627 \u0647\u062f\u0641 \u0633\u0627\u062f\u0647\u200c\u0633\u0627\u0632\u06cc \u0641\u0631\u0627\u06cc\u0646\u062f\u0647\u0627\u06cc \u0627\u0637\u0644\u0627\u0639\u200c\u0631\u0633\u0627\u0646\u06cc \u0648 \u0627\u0641\u0632\u0627\u06cc\u0634 \u0628\u0647\u0631\u0647\u200c\u0648\u0631\u06cc \u0637\u0631\u0627\u062d\u06cc \u0634\u062f\u0647 \u0627\u0633\u062a."
+                  }
+                </span>
+                <React.Fragment>{"\n\n"}</React.Fragment>
+              </React.Fragment>
             </div>
           </div>
           <div
@@ -2580,6 +2602,44 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                           $steps["showToast"] = await $steps["showToast"];
                         }
 
+                        $steps["updateReceiptDialogOpen"] = false
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["receiptDialog", "open"]
+                                },
+                                operation: 0,
+                                value: true
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateReceiptDialogOpen"] != null &&
+                          typeof $steps["updateReceiptDialogOpen"] ===
+                            "object" &&
+                          typeof $steps["updateReceiptDialogOpen"].then ===
+                            "function"
+                        ) {
+                          $steps["updateReceiptDialogOpen"] = await $steps[
+                            "updateReceiptDialogOpen"
+                          ];
+                        }
+
                         $steps["updateDialogaddnewworkflowOpen"] = true
                           ? (() => {
                               const actionArgs = {
@@ -2616,44 +2676,56 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                           $steps["updateDialogaddnewworkflowOpen"] =
                             await $steps["updateDialogaddnewworkflowOpen"];
                         }
-
-                        $steps["invokeGlobalAction"] = true
-                          ? (() => {
-                              const actionArgs = {
-                                args: [
-                                  (() => {
-                                    try {
-                                      return undefined;
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return undefined;
-                                      }
-                                      throw e;
-                                    }
-                                  })()
-                                ]
-                              };
-                              return $globalActions["Splunk.sendLog"]?.apply(
-                                null,
-                                [...actionArgs.args]
-                              );
-                            })()
-                          : undefined;
-                        if (
-                          $steps["invokeGlobalAction"] != null &&
-                          typeof $steps["invokeGlobalAction"] === "object" &&
-                          typeof $steps["invokeGlobalAction"].then ===
-                            "function"
-                        ) {
-                          $steps["invokeGlobalAction"] = await $steps[
-                            "invokeGlobalAction"
-                          ];
-                        }
                       }}
+                    />
+
+                    <Dialog
+                      data-plasmic-name={"receiptDialog"}
+                      data-plasmic-override={overrides.receiptDialog}
+                      body={
+                        <Receipt
+                          data-plasmic-name={"receipt"}
+                          data-plasmic-override={overrides.receipt}
+                          className={classNames("__wab_instance", sty.receipt)}
+                          event={(() => {
+                            try {
+                              return $state.selectedeventinworkflow;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()}
+                        />
+                      }
+                      className={classNames(
+                        "__wab_instance",
+                        sty.receiptDialog
+                      )}
+                      onOpenChange={generateStateOnChangeProp($state, [
+                        "receiptDialog",
+                        "open"
+                      ])}
+                      open={generateStateValueProp($state, [
+                        "receiptDialog",
+                        "open"
+                      ])}
+                      title={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__cHtCm
+                          )}
+                        >
+                          {"Dialog title"}
+                        </div>
+                      }
+                      trigger={null}
                     />
                   </div>
                 </div>
@@ -3277,6 +3349,8 @@ const PlasmicDescendants = {
     "sample2",
     "save",
     "button",
+    "receiptDialog",
+    "receipt",
     "listofnotifications",
     "\u0627\u0637\u0644\u0627\u0639\u0631\u0633\u0627\u0646\u06cc\u0647\u0627\u06cc\u0645\u0648\u062c\u0648\u062f",
     "usersworkflows",
@@ -3316,7 +3390,9 @@ const PlasmicDescendants = {
     "accordion",
     "sample2",
     "save",
-    "button"
+    "button",
+    "receiptDialog",
+    "receipt"
   ],
   dialogaddnewworkflow: [
     "dialogaddnewworkflow",
@@ -3340,7 +3416,9 @@ const PlasmicDescendants = {
     "accordion",
     "sample2",
     "save",
-    "button"
+    "button",
+    "receiptDialog",
+    "receipt"
   ],
   addnewworkflowbutton: ["addnewworkflowbutton"],
   sendnotifications: [
@@ -3396,8 +3474,10 @@ const PlasmicDescendants = {
   sample: ["sample", "accordion", "sample2"],
   accordion: ["accordion", "sample2"],
   sample2: ["sample2"],
-  save: ["save", "button"],
+  save: ["save", "button", "receiptDialog", "receipt"],
   button: ["button"],
+  receiptDialog: ["receiptDialog", "receipt"],
+  receipt: ["receipt"],
   listofnotifications: [
     "listofnotifications",
     "\u0627\u0637\u0644\u0627\u0639\u0631\u0633\u0627\u0646\u06cc\u0647\u0627\u06cc\u0645\u0648\u062c\u0648\u062f",
@@ -3480,6 +3560,8 @@ type NodeDefaultElementType = {
   sample2: "div";
   save: "div";
   button: typeof Button;
+  receiptDialog: typeof Dialog;
+  receipt: typeof Receipt;
   listofnotifications: "div";
   اطلاعرسانیهایموجود: "div";
   usersworkflows: "div";
@@ -3580,6 +3662,8 @@ export const PlasmicListOfNotofications = Object.assign(
     sample2: makeNodeComponent("sample2"),
     save: makeNodeComponent("save"),
     button: makeNodeComponent("button"),
+    receiptDialog: makeNodeComponent("receiptDialog"),
+    receipt: makeNodeComponent("receipt"),
     listofnotifications: makeNodeComponent("listofnotifications"),
     اطلاعرسانیهایموجود: makeNodeComponent(
       "\u0627\u0637\u0644\u0627\u0639\u0631\u0633\u0627\u0646\u06cc\u0647\u0627\u06cc\u0645\u0648\u062c\u0648\u062f"

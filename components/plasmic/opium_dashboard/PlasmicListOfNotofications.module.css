@@ -875,6 +875,16 @@
   width: auto;
   height: 1em;
 }
+.receiptDialog:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  display: none;
+}
+.text__cHtCm {
+  display: none;
+}
+.receipt:global(.__wab_instance) {
+  max-width: 100%;
+}
 .listofnotifications {
   display: flex;
   flex-direction: column;

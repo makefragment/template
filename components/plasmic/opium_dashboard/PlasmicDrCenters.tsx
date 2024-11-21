@@ -410,7 +410,7 @@ function PlasmicDrCenters__RenderFunc(props: {
                                   variablePath: ["selectedCenter"]
                                 },
                                 operation: 0,
-                                value: currentItem.id
+                                value: currentItem.user_center_id
                               };
                               return (({
                                 variable,
@@ -465,7 +465,9 @@ function PlasmicDrCenters__RenderFunc(props: {
                       }}
                       selected={(() => {
                         try {
-                          return $state.selectedCenter == currentItem.id;
+                          return (
+                            $state.selectedCenter == currentItem.user_center_id
+                          );
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -800,13 +802,14 @@ function PlasmicDrCenters__RenderFunc(props: {
                   {(() => {
                     try {
                       return (() => {
+                        const selectedCenter = $props.centers.find(
+                          center =>
+                            center.user_center_id == $state.selectedCenter
+                        );
                         if ($state.selectedCenter == "all") return "کل نوبت‌ها";
-                        if ($state.selectedCenter == "5532")
+                        if (selectedCenter?.id == "5532")
                           return "نوبت‌های آنلاین";
-                        if ($state.selectedCenter !== "5532") {
-                          const selectedCenter = $props.centers.find(
-                            center => center.id == $state.selectedCenter
-                          );
+                        if (selectedCenter?.id !== "5532") {
                           if (selectedCenter && selectedCenter.type_id !== 1) {
                             return selectedCenter.name;
                           }

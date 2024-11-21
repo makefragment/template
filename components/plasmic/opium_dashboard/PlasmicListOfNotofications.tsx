@@ -2602,7 +2602,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                           $steps["showToast"] = await $steps["showToast"];
                         }
 
-                        $steps["updateReceiptDialogOpen"] = false
+                        $steps["updateReceiptDialogOpen"] = true
                           ? (() => {
                               const actionArgs = {
                                 variable: {
@@ -2640,7 +2640,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                           ];
                         }
 
-                        $steps["updateDialogaddnewworkflowOpen"] = true
+                        $steps["updateDialogaddnewworkflowOpen"] = false
                           ? (() => {
                               const actionArgs = {
                                 variable: {

@@ -1415,6 +1415,23 @@ function PlasmicBookList__RenderFunc(props: {
               })()}
               selectedCenter={(() => {
                 try {
+                  return (
+                    $state.centers.find(
+                      center => center.user_center_id == $state.selectedCenter
+                    )?.id ?? "all"
+                  );
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+              userCenterId={(() => {
+                try {
                   return $state.selectedCenter;
                 } catch (e) {
                   if (

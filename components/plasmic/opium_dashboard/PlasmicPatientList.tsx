@@ -83,13 +83,15 @@ export type PlasmicPatientList__ArgsType = {
   date?: string;
   selectedCenter?: string;
   centers?: any;
+  userCenterId?: string;
 };
 type ArgPropType = keyof PlasmicPatientList__ArgsType;
 export const PlasmicPatientList__ArgProps = new Array<ArgPropType>(
   "searchquery",
   "date",
   "selectedCenter",
-  "centers"
+  "centers",
+  "userCenterId"
 );
 
 export type PlasmicPatientList__OverridesType = {
@@ -105,6 +107,7 @@ export interface DefaultPatientListProps {
   date?: string;
   selectedCenter?: string;
   centers?: any;
+  userCenterId?: string;
   className?: string;
 }
 
@@ -227,7 +230,12 @@ function PlasmicPatientList__RenderFunc(props: {
         className={classNames("__wab_instance", sty.sideEffect)}
         deps={(() => {
           try {
-            return [$props.selectedCenter, $props.centers, $props.date];
+            return [
+              $props.selectedCenter,
+              $props.centers,
+              $props.date,
+              $props.userCenterId
+            ];
           } catch (e) {
             if (
               e instanceof TypeError ||
@@ -334,10 +342,7 @@ function PlasmicPatientList__RenderFunc(props: {
                                 : [
                                     {
                                       id: $props.selectedCenter,
-                                      user_center_id: $props.centers.find(
-                                        center =>
-                                          center.id === $props.selectedCenter
-                                      ).user_center_id
+                                      user_center_id: $props.userCenterId
                                     }
                                   ],
                             date: $props.date

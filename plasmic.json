@@ -782,7 +782,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-query"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "h9Dbk9ygddw7UVEq1NNhKi",
@@ -1290,19 +1291,6 @@
             "modulePath": "Card.tsx"
           },
           "cssFilePath": "plasmic/opium_dashboard/PlasmicCard.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "ro6__ROOMy7S",
-          "name": "Anahita",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicAnahita.tsx",
-          "importSpec": {
-            "modulePath": "Anahita.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicAnahita.module.css",
           "scheme": "blackbox",
           "componentType": "component"
         },

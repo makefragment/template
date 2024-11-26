@@ -112,6 +112,7 @@ export type PlasmicPricing__OverridesType = {
   apiRequestForNotificationSetting?: Flex__<typeof ApiRequest>;
   customerfeatures?: Flex__<typeof ApiRequest>;
   metrikaYandex?: Flex__<typeof MetrikaYandex>;
+  auth?: Flex__<typeof ApiRequest>;
 };
 
 export interface DefaultPricingProps {}
@@ -286,6 +287,24 @@ function PlasmicPricing__RenderFunc(props: {
       },
       {
         path: "customerfeatures.loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "auth.data",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "auth.error",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "auth.loading",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -929,6 +948,46 @@ function PlasmicPricing__RenderFunc(props: {
                             typeof $steps["apiRollout"].then === "function"
                           ) {
                             $steps["apiRollout"] = await $steps["apiRollout"];
+                          }
+
+                          $steps["sendLog"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    (() => {
+                                      try {
+                                        return {
+                                          group: "pricing",
+                                          data: {
+                                            who: $state.auth.data
+                                          },
+                                          type: "click-active-button"
+                                        };
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
+                                  ]
+                                };
+                                return $globalActions["Splunk.sendLog"]?.apply(
+                                  null,
+                                  [...actionArgs.args]
+                                );
+                              })()
+                            : undefined;
+                          if (
+                            $steps["sendLog"] != null &&
+                            typeof $steps["sendLog"] === "object" &&
+                            typeof $steps["sendLog"].then === "function"
+                          ) {
+                            $steps["sendLog"] = await $steps["sendLog"];
                           }
 
                           $steps[
@@ -2881,6 +2940,39 @@ function PlasmicPricing__RenderFunc(props: {
             data-plasmic-override={overrides.metrikaYandex}
             className={classNames("__wab_instance", sty.metrikaYandex)}
           />
+
+          <ApiRequest
+            data-plasmic-name={"auth"}
+            data-plasmic-override={overrides.auth}
+            className={classNames("__wab_instance", sty.auth)}
+            errorDisplay={
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__umWda
+                )}
+              >
+                {"Error fetching data"}
+              </div>
+            }
+            loadingDisplay={
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__kEbV9
+                )}
+              >
+                {"Loading..."}
+              </div>
+            }
+            method={"GET"}
+            onError={generateStateOnChangeProp($state, ["auth", "error"])}
+            onLoading={generateStateOnChangeProp($state, ["auth", "loading"])}
+            onSuccess={generateStateOnChangeProp($state, ["auth", "data"])}
+            url={"https://apigw.paziresh24.com/v1/auth/me"}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -2909,7 +3001,8 @@ const PlasmicDescendants = {
     "accordion4",
     "apiRequestForNotificationSetting",
     "customerfeatures",
-    "metrikaYandex"
+    "metrikaYandex",
+    "auth"
   ],
   getNelsonFeatures: [
     "getNelsonFeatures",
@@ -2986,7 +3079,8 @@ const PlasmicDescendants = {
   accordion4: ["accordion4"],
   apiRequestForNotificationSetting: ["apiRequestForNotificationSetting"],
   customerfeatures: ["customerfeatures"],
-  metrikaYandex: ["metrikaYandex"]
+  metrikaYandex: ["metrikaYandex"],
+  auth: ["auth"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -3013,6 +3107,7 @@ type NodeDefaultElementType = {
   apiRequestForNotificationSetting: typeof ApiRequest;
   customerfeatures: typeof ApiRequest;
   metrikaYandex: typeof MetrikaYandex;
+  auth: typeof ApiRequest;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -3097,6 +3192,7 @@ export const PlasmicPricing = Object.assign(
     ),
     customerfeatures: makeNodeComponent("customerfeatures"),
     metrikaYandex: makeNodeComponent("metrikaYandex"),
+    auth: makeNodeComponent("auth"),
 
     // Metadata about props expected for PlasmicPricing
     internalVariantProps: PlasmicPricing__VariantProps,

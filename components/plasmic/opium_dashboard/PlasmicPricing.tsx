@@ -929,67 +929,6 @@ function PlasmicPricing__RenderFunc(props: {
                             $steps["addMember"] = await $steps["addMember"];
                           }
 
-                          $steps["apiRollout"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/rollout-notification-menu"
-                                  ]
-                                };
-                                return $globalActions[
-                                  "Fragment.apiRequest"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["apiRollout"] != null &&
-                            typeof $steps["apiRollout"] === "object" &&
-                            typeof $steps["apiRollout"].then === "function"
-                          ) {
-                            $steps["apiRollout"] = await $steps["apiRollout"];
-                          }
-
-                          $steps["sendLog"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    (() => {
-                                      try {
-                                        return {
-                                          group: "pricing",
-                                          data: {
-                                            who: $state.auth.data
-                                          },
-                                          type: "click-active-button"
-                                        };
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                  ]
-                                };
-                                return $globalActions["Splunk.sendLog"]?.apply(
-                                  null,
-                                  [...actionArgs.args]
-                                );
-                              })()
-                            : undefined;
-                          if (
-                            $steps["sendLog"] != null &&
-                            typeof $steps["sendLog"] === "object" &&
-                            typeof $steps["sendLog"].then === "function"
-                          ) {
-                            $steps["sendLog"] = await $steps["sendLog"];
-                          }
-
                           $steps[
                             "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
                           ] = true
@@ -1064,6 +1003,67 @@ function PlasmicPricing__RenderFunc(props: {
                             $steps["loadingFalse"] = await $steps[
                               "loadingFalse"
                             ];
+                          }
+
+                          $steps["apiRollout"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    "POST",
+                                    "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/rollout-notification-menu"
+                                  ]
+                                };
+                                return $globalActions[
+                                  "Fragment.apiRequest"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["apiRollout"] != null &&
+                            typeof $steps["apiRollout"] === "object" &&
+                            typeof $steps["apiRollout"].then === "function"
+                          ) {
+                            $steps["apiRollout"] = await $steps["apiRollout"];
+                          }
+
+                          $steps["sendLog"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    (() => {
+                                      try {
+                                        return {
+                                          group: "pricing",
+                                          data: {
+                                            who: $state.auth.data
+                                          },
+                                          type: "click-active-button"
+                                        };
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
+                                  ]
+                                };
+                                return $globalActions["Splunk.sendLog"]?.apply(
+                                  null,
+                                  [...actionArgs.args]
+                                );
+                              })()
+                            : undefined;
+                          if (
+                            $steps["sendLog"] != null &&
+                            typeof $steps["sendLog"] === "object" &&
+                            typeof $steps["sendLog"].then === "function"
+                          ) {
+                            $steps["sendLog"] = await $steps["sendLog"];
                           }
                         }}
                       />

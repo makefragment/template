@@ -60,6 +60,7 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import Avatar from "../../Avatar"; // plasmic-import: 3i84rYjQRrs4/component
+import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -67,6 +68,8 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfileHead.module.css"; // plasmic-import: PIAFRsJicCGh/css
+
+import Icon26Icon from "./icons/PlasmicIcon__Icon26"; // plasmic-import: frSwMvWOgAN1/icon
 
 createPlasmicElementProxy;
 
@@ -94,6 +97,8 @@ export const PlasmicProfileHead__ArgProps = new Array<ArgPropType>(
 export type PlasmicProfileHead__OverridesType = {
   root?: Flex__<"div">;
   avatar?: Flex__<typeof Avatar>;
+  upload?: Flex__<typeof UploadWrapper>;
+  svg?: Flex__<"svg">;
   link?: Flex__<"a"> & Partial<LinkProps>;
 };
 
@@ -144,6 +149,30 @@ function PlasmicProfileHead__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "upload.files",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "imgPreview",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
+
   return (
     <div
       data-plasmic-name={"root"}
@@ -178,7 +207,9 @@ function PlasmicProfileHead__RenderFunc(props: {
               className={classNames("__wab_instance", sty.avatar)}
               src={(() => {
                 try {
-                  return `https://uploader.paziresh24.com/api/file/${$props.image}`;
+                  return !!$state.imgPreview
+                    ? $state.imgPreview
+                    : `https://uploader.paziresh24.com/api/file/${$props.image}`;
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -190,6 +221,54 @@ function PlasmicProfileHead__RenderFunc(props: {
                 }
               })()}
             />
+
+            <UploadWrapper
+              data-plasmic-name={"upload"}
+              data-plasmic-override={overrides.upload}
+              accept={"image/*"}
+              className={classNames("__wab_instance", sty.upload)}
+              files={generateStateValueProp($state, ["upload", "files"])}
+              listType={"picture"}
+              onFilesChange={async (...eventArgs: any) => {
+                generateStateOnChangeProp($state, ["upload", "files"]).apply(
+                  null,
+                  eventArgs
+                );
+                (async files => {
+                  const $steps = {};
+
+                  $steps["runCode"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return undefined;
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["runCode"] != null &&
+                    typeof $steps["runCode"] === "object" &&
+                    typeof $steps["runCode"].then === "function"
+                  ) {
+                    $steps["runCode"] = await $steps["runCode"];
+                  }
+                }).apply(null, eventArgs);
+              }}
+              showUploadList={false}
+            >
+              <div className={classNames(projectcss.all, sty.freeBox___6GKuj)}>
+                <Icon26Icon
+                  data-plasmic-name={"svg"}
+                  data-plasmic-override={overrides.svg}
+                  className={classNames(projectcss.all, sty.svg)}
+                  role={"img"}
+                />
+              </div>
+            </UploadWrapper>
           </div>
           <Stack__
             as={"div"}
@@ -317,8 +396,10 @@ function PlasmicProfileHead__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "avatar", "link"],
+  root: ["root", "avatar", "upload", "svg", "link"],
   avatar: ["avatar"],
+  upload: ["upload", "svg"],
+  svg: ["svg"],
   link: ["link"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -327,6 +408,8 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   avatar: typeof Avatar;
+  upload: typeof UploadWrapper;
+  svg: "svg";
   link: "a";
 };
 
@@ -391,6 +474,8 @@ export const PlasmicProfileHead = Object.assign(
   {
     // Helper components rendering sub-elements
     avatar: makeNodeComponent("avatar"),
+    upload: makeNodeComponent("upload"),
+    svg: makeNodeComponent("svg"),
     link: makeNodeComponent("link"),
 
     // Metadata about props expected for PlasmicProfileHead

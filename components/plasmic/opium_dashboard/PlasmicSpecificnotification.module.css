@@ -587,6 +587,7 @@
   max-width: 100%;
   text-align: left;
   min-width: 0;
+  display: none;
 }
 .text__qU2Qx {
   position: relative;

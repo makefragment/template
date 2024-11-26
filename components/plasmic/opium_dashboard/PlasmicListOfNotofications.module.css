@@ -819,6 +819,7 @@
   font-size: 12px;
   text-align: left;
   flex-shrink: 0;
+  display: none;
 }
 .text___08Mzx {
   position: relative;

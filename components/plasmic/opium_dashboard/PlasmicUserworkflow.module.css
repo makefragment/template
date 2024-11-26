@@ -327,7 +327,7 @@
   }
 }
 .deleteWorkflow:global(.__wab_instance) {
-  width: 25px;
+  width: auto;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .deleteWorkflow:global(.__wab_instance) {
@@ -338,7 +338,7 @@
   object-fit: cover;
   max-width: 100%;
   color: var(--token-Bo2_tT25lwh4);
-  width: 25px;
+  width: 30px;
   height: 1em;
 }
 .svg__h3O9T {

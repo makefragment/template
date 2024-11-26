@@ -853,49 +853,6 @@ function PlasmicPricing__RenderFunc(props: {
                         onClick={async event => {
                           const $steps = {};
 
-                          $steps["buyProduct"] = false
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/buy-product",
-                                    undefined,
-                                    (() => {
-                                      try {
-                                        return $state.getNelsonFeatures?.data?.map(
-                                          (feature, index) => ({
-                                            ...feature,
-                                            active:
-                                              $state.checkboxSilver[index]
-                                                .isChecked
-                                          })
-                                        );
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
-                                  ]
-                                };
-                                return $globalActions[
-                                  "Fragment.apiRequest"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["buyProduct"] != null &&
-                            typeof $steps["buyProduct"] === "object" &&
-                            typeof $steps["buyProduct"].then === "function"
-                          ) {
-                            $steps["buyProduct"] = await $steps["buyProduct"];
-                          }
-
                           $steps["loadingStart"] = true
                             ? (() => {
                                 const actionArgs = {
@@ -932,34 +889,12 @@ function PlasmicPricing__RenderFunc(props: {
                             ];
                           }
 
-                          $steps["submitReciept"] = true
+                          $steps["addMember"] = true
                             ? (() => {
                                 const actionArgs = {
                                   args: [
                                     "POST",
-                                    "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/change-customer-nelson-features",
-                                    undefined,
-                                    (() => {
-                                      try {
-                                        return $state.getNelsonFeatures?.data?.map(
-                                          (feature, index) => ({
-                                            ...feature,
-                                            active:
-                                              $state.checkboxSilver[index]
-                                                .isChecked
-                                          })
-                                        );
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()
+                                    "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/update-notification-member"
                                   ]
                                 };
                                 return $globalActions[
@@ -968,34 +903,72 @@ function PlasmicPricing__RenderFunc(props: {
                               })()
                             : undefined;
                           if (
-                            $steps["submitReciept"] != null &&
-                            typeof $steps["submitReciept"] === "object" &&
-                            typeof $steps["submitReciept"].then === "function"
+                            $steps["addMember"] != null &&
+                            typeof $steps["addMember"] === "object" &&
+                            typeof $steps["addMember"].then === "function"
                           ) {
-                            $steps["submitReciept"] = await $steps[
-                              "submitReciept"
-                            ];
+                            $steps["addMember"] = await $steps["addMember"];
                           }
 
-                          $steps["toast"] = true
+                          $steps["apiRollout"] = true
                             ? (() => {
                                 const actionArgs = {
                                   args: [
-                                    undefined,
-                                    "\u0633\u0631\u0648\u06cc\u0633 \u0634\u0645\u0627 \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u062b\u0628\u062a \u0634\u062f."
+                                    "POST",
+                                    "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/rollout-notification-menu"
                                   ]
                                 };
                                 return $globalActions[
-                                  "Fragment.showToast"
+                                  "Fragment.apiRequest"
                                 ]?.apply(null, [...actionArgs.args]);
                               })()
                             : undefined;
                           if (
-                            $steps["toast"] != null &&
-                            typeof $steps["toast"] === "object" &&
-                            typeof $steps["toast"].then === "function"
+                            $steps["apiRollout"] != null &&
+                            typeof $steps["apiRollout"] === "object" &&
+                            typeof $steps["apiRollout"].then === "function"
                           ) {
-                            $steps["toast"] = await $steps["toast"];
+                            $steps["apiRollout"] = await $steps["apiRollout"];
+                          }
+
+                          $steps[
+                            "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                          ] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  destination:
+                                    "https://opium-dashboard.paziresh24.com/list-of-notofications"
+                                };
+                                return (({ destination }) => {
+                                  if (
+                                    typeof destination === "string" &&
+                                    destination.startsWith("#")
+                                  ) {
+                                    document
+                                      .getElementById(destination.substr(1))
+                                      .scrollIntoView({ behavior: "smooth" });
+                                  } else {
+                                    __nextRouter?.push(destination);
+                                  }
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps[
+                              "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                            ] != null &&
+                            typeof $steps[
+                              "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                            ] === "object" &&
+                            typeof $steps[
+                              "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                            ].then === "function"
+                          ) {
+                            $steps[
+                              "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                            ] = await $steps[
+                              "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                            ];
                           }
 
                           $steps["loadingFalse"] = true

@@ -68,7 +68,7 @@ import { AntdAccordion } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { accordionHelpers as AntdAccordion_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import { AntdAccordionItem } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import Receipt from "../../Receipt"; // plasmic-import: xGsQPPSWr2u9/component
-import Specificnotification from "../../Specificnotification"; // plasmic-import: kyCg1wl1ZoV7/component
+import Userworkflow from "../../Userworkflow"; // plasmic-import: xcx15_gUi62a/component
 import MetrikaYandex from "../../MetrikaYandex"; // plasmic-import: bwh2kDzd78mD/component
 
 import { useScreenVariants as useScreenVariantsfobTirRaixGf } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: fobTIRRaixGf/globalVariant
@@ -85,10 +85,6 @@ import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; 
 import ChevronUpIcon from "../fragment_icons/icons/PlasmicIcon__ChevronUp"; // plasmic-import: YXreB8gS3SjV/icon
 import ChevronDownIcon from "../fragment_icons/icons/PlasmicIcon__ChevronDown"; // plasmic-import: aC_QFogxt1Ko/icon
 import CheckSvgIcon from "../fragment_design_system/icons/PlasmicIcon__CheckSvg"; // plasmic-import: _Qaeb-4Y8N07/icon
-import Icon16Icon from "./icons/PlasmicIcon__Icon16"; // plasmic-import: 8j1U_g9afFrU/icon
-import Icon18Icon from "./icons/PlasmicIcon__Icon18"; // plasmic-import: IETA_lWaQX-x/icon
-import Icon19Icon from "./icons/PlasmicIcon__Icon19"; // plasmic-import: BizSW9L3o2cq/icon
-import Icon17Icon from "./icons/PlasmicIcon__Icon17"; // plasmic-import: 0ELPoF5hq6sg/icon
 
 createPlasmicElementProxy;
 
@@ -134,15 +130,7 @@ export type PlasmicListOfNotofications__OverridesType = {
   receipt?: Flex__<typeof Receipt>;
   listofnotifications?: Flex__<"div">;
   اطلاعرسانیهایموجود?: Flex__<"div">;
-  usersworkflows?: Flex__<"div">;
-  workflowsdata?: Flex__<"div">;
-  who?: Flex__<"div">;
-  whats?: Flex__<"div">;
-  channel?: Flex__<"div">;
-  editbuttonvertical?: Flex__<"div">;
-  dialog?: Flex__<typeof Dialog>;
-  editbutton?: Flex__<typeof Button>;
-  specificnotification?: Flex__<typeof Specificnotification>;
+  userworkflow?: Flex__<typeof Userworkflow>;
   metrikaYandex?: Flex__<typeof MetrikaYandex>;
 };
 
@@ -279,11 +267,6 @@ function PlasmicListOfNotofications__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
-        path: "dialog[].open",
-        type: "private",
-        variableType: "boolean"
-      },
-      {
         path: "changetodrname",
         type: "private",
         variableType: "text",
@@ -398,6 +381,24 @@ function PlasmicListOfNotofications__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "closeEditDialog",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "variable2",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -2276,18 +2277,18 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                                 finalText.length;
                                               let finalPrice = 0;
                                               if (charCount < 70) {
-                                                finalPrice = 965;
+                                                finalPrice = 9650;
                                               } else if (
                                                 charCount >= 70 &&
                                                 charCount < 140
                                               ) {
-                                                finalPrice = 965 * 2;
+                                                finalPrice = 9650 * 2;
                                               } else {
                                                 finalPrice =
-                                                  965 *
+                                                  9650 *
                                                   Math.ceil(charCount / 70);
                                               }
-                                              return finalPrice + " ریال";
+                                              return finalPrice / 10 + " تومان";
                                             })();
                                           } catch (e) {
                                             if (
@@ -2602,7 +2603,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                           $steps["showToast"] = await $steps["showToast"];
                         }
 
-                        $steps["updateReceiptDialogOpen"] = true
+                        $steps["updateReceiptDialogOpen"] = false
                           ? (() => {
                               const actionArgs = {
                                 variable: {
@@ -2640,7 +2641,7 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                           ];
                         }
 
-                        $steps["updateDialogaddnewworkflowOpen"] = false
+                        $steps["updateDialogaddnewworkflowOpen"] = true
                           ? (() => {
                               const actionArgs = {
                                 variable: {
@@ -2675,6 +2676,95 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                         ) {
                           $steps["updateDialogaddnewworkflowOpen"] =
                             await $steps["updateDialogaddnewworkflowOpen"];
+                        }
+
+                        $steps["invokeGlobalAction"] = true
+                          ? (() => {
+                              const actionArgs = { args: [undefined, ``] };
+                              return $globalActions[
+                                "Fragment.apiRequest"
+                              ]?.apply(null, [...actionArgs.args]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["invokeGlobalAction"] != null &&
+                          typeof $steps["invokeGlobalAction"] === "object" &&
+                          typeof $steps["invokeGlobalAction"].then ===
+                            "function"
+                        ) {
+                          $steps["invokeGlobalAction"] = await $steps[
+                            "invokeGlobalAction"
+                          ];
+                        }
+
+                        $steps["apiGetNoticationSettingForThisUser"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  undefined,
+                                  "https://apigw.paziresh24.com/v1/get-notification-setting"
+                                ]
+                              };
+                              return $globalActions[
+                                "Fragment.apiRequest"
+                              ]?.apply(null, [...actionArgs.args]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["apiGetNoticationSettingForThisUser"] !=
+                            null &&
+                          typeof $steps[
+                            "apiGetNoticationSettingForThisUser"
+                          ] === "object" &&
+                          typeof $steps["apiGetNoticationSettingForThisUser"]
+                            .then === "function"
+                        ) {
+                          $steps["apiGetNoticationSettingForThisUser"] =
+                            await $steps["apiGetNoticationSettingForThisUser"];
+                        }
+
+                        $steps["updateNotificationSettingForThisUser"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: [
+                                    "notificationSettingForThisUser"
+                                  ]
+                                },
+                                operation: 0,
+                                value:
+                                  $steps.apiGetNoticationSettingForThisUser.data
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateNotificationSettingForThisUser"] !=
+                            null &&
+                          typeof $steps[
+                            "updateNotificationSettingForThisUser"
+                          ] === "object" &&
+                          typeof $steps["updateNotificationSettingForThisUser"]
+                            .then === "function"
+                        ) {
+                          $steps["updateNotificationSettingForThisUser"] =
+                            await $steps[
+                              "updateNotificationSettingForThisUser"
+                            ];
                         }
                       }}
                     />
@@ -2874,13 +2964,13 @@ function PlasmicListOfNotofications__RenderFunc(props: {
               </div>
               {(() => {
                 try {
-                  return $state.notificationSettingForThisUser.list.length > 0;
+                  return true;
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
                     e?.plasmicType === "PlasmicUndefinedDataError"
                   ) {
-                    return false;
+                    return true;
                   }
                   throw e;
                 }
@@ -2903,407 +2993,96 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                     const currentItem = __plasmic_item_0;
                     const currentIndex = __plasmic_idx_0;
                     return (
-                      <div
-                        data-plasmic-name={"usersworkflows"}
-                        data-plasmic-override={overrides.usersworkflows}
+                      <Userworkflow
+                        data-plasmic-name={"userworkflow"}
+                        data-plasmic-override={overrides.userworkflow}
                         className={classNames(
-                          projectcss.all,
-                          sty.usersworkflows
+                          "__wab_instance",
+                          sty.userworkflow
                         )}
+                        currentItem={currentItem}
                         key={currentIndex}
-                      >
-                        <div
-                          data-plasmic-name={"workflowsdata"}
-                          data-plasmic-override={overrides.workflowsdata}
-                          className={classNames(
-                            projectcss.all,
-                            sty.workflowsdata
-                          )}
-                        >
-                          <Stack__
-                            as={"div"}
-                            data-plasmic-name={"who"}
-                            data-plasmic-override={overrides.who}
-                            hasGap={true}
-                            className={classNames(projectcss.all, sty.who)}
-                          >
-                            <Icon16Icon
-                              className={classNames(
-                                projectcss.all,
-                                sty.svg___7Vh9C
-                              )}
-                              role={"img"}
-                            />
+                        notificationSettingForThisUser={
+                          $state.notificationSettingForThisUser
+                        }
+                        refresh={async () => {
+                          const $steps = {};
 
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text__r9EIk
-                              )}
-                            >
-                              <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.receivers === "doctor"
-                                      ? "پزشک"
-                                      : currentItem.receivers === "assistant"
-                                      ? "منشی"
-                                      : currentItem.receivers === "patient"
-                                      ? "بیمار"
-                                      : currentItem.receivers;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
-                                    }
-                                    throw e;
-                                  }
-                                })()}
-                              </React.Fragment>
-                            </div>
-                          </Stack__>
-                          <div
-                            data-plasmic-name={"whats"}
-                            data-plasmic-override={overrides.whats}
-                            className={classNames(projectcss.all, sty.whats)}
-                          >
-                            <Stack__
-                              as={"div"}
-                              hasGap={true}
-                              className={classNames(
-                                projectcss.all,
-                                sty.freeBox__rFyUy
-                              )}
-                            >
-                              {(() => {
-                                try {
-                                  return currentItem.events === "submit-book";
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return false;
-                                  }
-                                  throw e;
-                                }
-                              })() ? (
-                                <Icon18Icon
-                                  className={classNames(
-                                    projectcss.all,
-                                    sty.svg__oqvk0
-                                  )}
-                                  role={"img"}
-                                />
-                              ) : null}
-                              {(() => {
-                                try {
-                                  return currentItem.events === "delete-book";
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return false;
-                                  }
-                                  throw e;
-                                }
-                              })() ? (
-                                <Icon19Icon
-                                  className={classNames(
-                                    projectcss.all,
-                                    sty.svg___8CTh
-                                  )}
-                                  role={"img"}
-                                />
-                              ) : null}
-                              <div
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text___0JgSc
-                                )}
-                              >
-                                <React.Fragment>
-                                  {(() => {
-                                    try {
-                                      return (() => {
-                                        let message =
-                                          currentItem.events === "delete-book"
-                                            ? "لغو نوبت"
-                                            : currentItem.events ===
-                                              "submit-book"
-                                            ? "ثبت نوبت"
-                                            : "";
-                                        return message;
-                                      })();
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return "";
-                                      }
-                                      throw e;
-                                    }
-                                  })()}
-                                </React.Fragment>
-                              </div>
-                            </Stack__>
-                            <Stack__
-                              as={"div"}
-                              data-plasmic-name={"channel"}
-                              data-plasmic-override={overrides.channel}
-                              hasGap={true}
-                              className={classNames(
-                                projectcss.all,
-                                sty.channel
-                              )}
-                            >
-                              <Icon17Icon
-                                className={classNames(
-                                  projectcss.all,
-                                  sty.svg__bqyZ0
-                                )}
-                                role={"img"}
-                              />
+                          $steps["apiGetNoticationSettingForThisUser"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    undefined,
+                                    "https://apigw.paziresh24.com/v1/get-notification-setting"
+                                  ]
+                                };
+                                return $globalActions[
+                                  "Fragment.apiRequest"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["apiGetNoticationSettingForThisUser"] !=
+                              null &&
+                            typeof $steps[
+                              "apiGetNoticationSettingForThisUser"
+                            ] === "object" &&
+                            typeof $steps["apiGetNoticationSettingForThisUser"]
+                              .then === "function"
+                          ) {
+                            $steps["apiGetNoticationSettingForThisUser"] =
+                              await $steps[
+                                "apiGetNoticationSettingForThisUser"
+                              ];
+                          }
 
-                              <div
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text__yHwLm
-                                )}
-                              >
-                                <React.Fragment>
-                                  {(() => {
-                                    try {
-                                      return $state
-                                        .notificationSettingForThisUser.list[0]
-                                        .channels === "sms"
-                                        ? "پیامک"
-                                        : "";
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return "";
-                                      }
-                                      throw e;
-                                    }
-                                  })()}
-                                </React.Fragment>
-                              </div>
-                            </Stack__>
-                          </div>
-                          <div
-                            data-plasmic-name={"editbuttonvertical"}
-                            data-plasmic-override={overrides.editbuttonvertical}
-                            className={classNames(
-                              projectcss.all,
-                              sty.editbuttonvertical
-                            )}
-                          >
-                            {(() => {
-                              const child$Props = {
-                                body: (
-                                  <Specificnotification
-                                    data-plasmic-name={"specificnotification"}
-                                    data-plasmic-override={
-                                      overrides.specificnotification
-                                    }
-                                    channels={(() => {
-                                      try {
-                                        return currentItem.channels;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                    className={classNames(
-                                      "__wab_instance",
-                                      sty.specificnotification
-                                    )}
-                                    content={(() => {
-                                      try {
-                                        return currentItem.content;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                    events={(() => {
-                                      try {
-                                        return currentItem.events;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                    objectofcontent={(() => {
-                                      try {
-                                        return currentItem.objectofcontent;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                    receivers={(() => {
-                                      try {
-                                        return currentItem.receivers;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                    userId={(() => {
-                                      try {
-                                        return currentItem.user_id;
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
-                                      }
-                                    })()}
-                                  />
-                                ),
-
-                                className: classNames(
-                                  "__wab_instance",
-                                  sty.dialog
-                                ),
-                                onOpenChange: generateStateOnChangeProp(
-                                  $state,
-                                  ["dialog", __plasmic_idx_0, "open"]
-                                ),
-                                open: generateStateValueProp($state, [
-                                  "dialog",
-                                  __plasmic_idx_0,
-                                  "open"
-                                ]),
-                                title:
-                                  "\u0627\u0638\u0644\u0627\u0639 \u0631\u0633\u0627\u0646\u06cc",
-                                trigger: (
-                                  <Button
-                                    data-plasmic-name={"editbutton"}
-                                    data-plasmic-override={overrides.editbutton}
-                                    children2={
-                                      <div
-                                        className={classNames(
-                                          projectcss.all,
-                                          projectcss.__wab_text,
-                                          sty.text__bjgXp
-                                        )}
-                                      >
-                                        <React.Fragment>
-                                          {(() => {
-                                            try {
-                                              return "ویرایش";
-                                            } catch (e) {
-                                              if (
-                                                e instanceof TypeError ||
-                                                e?.plasmicType ===
-                                                  "PlasmicUndefinedDataError"
-                                              ) {
-                                                return "Show dialog";
-                                              }
-                                              throw e;
-                                            }
-                                          })()}
-                                        </React.Fragment>
-                                      </div>
-                                    }
-                                    className={classNames("__wab_instance")}
-                                    color={"softBlue"}
-                                    endIcon={
-                                      <ChevronLeftIcon
-                                        className={classNames(
-                                          projectcss.all,
-                                          sty.svg__bVb7Y
-                                        )}
-                                        role={"img"}
-                                      />
-                                    }
-                                    outline={true}
-                                    startIcon={
-                                      <ChevronRightIcon
-                                        className={classNames(
-                                          projectcss.all,
-                                          sty.svg___4FJys
-                                        )}
-                                        role={"img"}
-                                      />
-                                    }
-                                  />
-                                )
-                              };
-
-                              initializePlasmicStates(
-                                $state,
-                                [
-                                  {
-                                    name: "dialog[].open",
-                                    initFunc: ({ $props, $state, $queries }) =>
-                                      undefined
+                          $steps["updateNotificationSettingForThisUser"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  variable: {
+                                    objRoot: $state,
+                                    variablePath: [
+                                      "notificationSettingForThisUser"
+                                    ]
+                                  },
+                                  operation: 0,
+                                  value:
+                                    $steps.apiGetNoticationSettingForThisUser
+                                      .data
+                                };
+                                return (({
+                                  variable,
+                                  value,
+                                  startIndex,
+                                  deleteCount
+                                }) => {
+                                  if (!variable) {
+                                    return;
                                   }
-                                ],
-                                [__plasmic_idx_0]
-                              );
-                              return (
-                                <Dialog
-                                  data-plasmic-name={"dialog"}
-                                  data-plasmic-override={overrides.dialog}
-                                  {...child$Props}
-                                />
-                              );
-                            })()}
-                          </div>
-                        </div>
-                      </div>
+                                  const { objRoot, variablePath } = variable;
+
+                                  $stateSet(objRoot, variablePath, value);
+                                  return value;
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["updateNotificationSettingForThisUser"] !=
+                              null &&
+                            typeof $steps[
+                              "updateNotificationSettingForThisUser"
+                            ] === "object" &&
+                            typeof $steps[
+                              "updateNotificationSettingForThisUser"
+                            ].then === "function"
+                          ) {
+                            $steps["updateNotificationSettingForThisUser"] =
+                              await $steps[
+                                "updateNotificationSettingForThisUser"
+                              ];
+                          }
+                        }}
+                      />
                     );
                   })
                 : null}
@@ -3353,15 +3132,7 @@ const PlasmicDescendants = {
     "receipt",
     "listofnotifications",
     "\u0627\u0637\u0644\u0627\u0639\u0631\u0633\u0627\u0646\u06cc\u0647\u0627\u06cc\u0645\u0648\u062c\u0648\u062f",
-    "usersworkflows",
-    "workflowsdata",
-    "who",
-    "whats",
-    "channel",
-    "editbuttonvertical",
-    "dialog",
-    "editbutton",
-    "specificnotification",
+    "userworkflow",
     "metrikaYandex"
   ],
   sideEffect: ["sideEffect"],
@@ -3481,52 +3252,12 @@ const PlasmicDescendants = {
   listofnotifications: [
     "listofnotifications",
     "\u0627\u0637\u0644\u0627\u0639\u0631\u0633\u0627\u0646\u06cc\u0647\u0627\u06cc\u0645\u0648\u062c\u0648\u062f",
-    "usersworkflows",
-    "workflowsdata",
-    "who",
-    "whats",
-    "channel",
-    "editbuttonvertical",
-    "dialog",
-    "editbutton",
-    "specificnotification"
+    "userworkflow"
   ],
   اطلاعرسانیهایموجود: [
     "\u0627\u0637\u0644\u0627\u0639\u0631\u0633\u0627\u0646\u06cc\u0647\u0627\u06cc\u0645\u0648\u062c\u0648\u062f"
   ],
-  usersworkflows: [
-    "usersworkflows",
-    "workflowsdata",
-    "who",
-    "whats",
-    "channel",
-    "editbuttonvertical",
-    "dialog",
-    "editbutton",
-    "specificnotification"
-  ],
-  workflowsdata: [
-    "workflowsdata",
-    "who",
-    "whats",
-    "channel",
-    "editbuttonvertical",
-    "dialog",
-    "editbutton",
-    "specificnotification"
-  ],
-  who: ["who"],
-  whats: ["whats", "channel"],
-  channel: ["channel"],
-  editbuttonvertical: [
-    "editbuttonvertical",
-    "dialog",
-    "editbutton",
-    "specificnotification"
-  ],
-  dialog: ["dialog", "editbutton", "specificnotification"],
-  editbutton: ["editbutton"],
-  specificnotification: ["specificnotification"],
+  userworkflow: ["userworkflow"],
   metrikaYandex: ["metrikaYandex"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -3564,15 +3295,7 @@ type NodeDefaultElementType = {
   receipt: typeof Receipt;
   listofnotifications: "div";
   اطلاعرسانیهایموجود: "div";
-  usersworkflows: "div";
-  workflowsdata: "div";
-  who: "div";
-  whats: "div";
-  channel: "div";
-  editbuttonvertical: "div";
-  dialog: typeof Dialog;
-  editbutton: typeof Button;
-  specificnotification: typeof Specificnotification;
+  userworkflow: typeof Userworkflow;
   metrikaYandex: typeof MetrikaYandex;
 };
 
@@ -3668,15 +3391,7 @@ export const PlasmicListOfNotofications = Object.assign(
     اطلاعرسانیهایموجود: makeNodeComponent(
       "\u0627\u0637\u0644\u0627\u0639\u0631\u0633\u0627\u0646\u06cc\u0647\u0627\u06cc\u0645\u0648\u062c\u0648\u062f"
     ),
-    usersworkflows: makeNodeComponent("usersworkflows"),
-    workflowsdata: makeNodeComponent("workflowsdata"),
-    who: makeNodeComponent("who"),
-    whats: makeNodeComponent("whats"),
-    channel: makeNodeComponent("channel"),
-    editbuttonvertical: makeNodeComponent("editbuttonvertical"),
-    dialog: makeNodeComponent("dialog"),
-    editbutton: makeNodeComponent("editbutton"),
-    specificnotification: makeNodeComponent("specificnotification"),
+    userworkflow: makeNodeComponent("userworkflow"),
     metrikaYandex: makeNodeComponent("metrikaYandex"),
 
     // Metadata about props expected for PlasmicListOfNotofications

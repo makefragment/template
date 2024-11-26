@@ -484,8 +484,13 @@ function PlasmicDrCenters__RenderFunc(props: {
               : null}
             {(() => {
               try {
-                return !$props.centers.some(
-                  center => center.id === "5532" && center.is_active_booking
+                return (
+                  !$props.centers.some(
+                    center =>
+                      center.type_id === 3 &&
+                      center.id === "5532" &&
+                      center.is_active_booking === true
+                  ) && $props.centers.some(center => center.type_id === 1)
                 );
               } catch (e) {
                 if (
@@ -585,7 +590,12 @@ function PlasmicDrCenters__RenderFunc(props: {
             ) : null}
             {(() => {
               try {
-                return !$props.centers.some(center => center.type_id == 1);
+                return (
+                  !$props.centers.some(center => center.type_id == 1) &&
+                  !$props.centers.every(
+                    center => center.id !== "5532" || center.type_id !== 1
+                  )
+                );
               } catch (e) {
                 if (
                   e instanceof TypeError ||

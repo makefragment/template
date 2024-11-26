@@ -1131,10 +1131,6 @@ function PlasmicAddPatient__RenderFunc(props: {
                   </DataCtxReader__>
                 }
                 errorName={"fetchedDatafirstfreeturnFetchError"}
-                headers={{
-                  "Content-Type": "application/json",
-                  Accept: "application/json"
-                }}
                 loadingDisplay={
                   <DataCtxReader__>
                     {$ctx => (
@@ -2006,10 +2002,6 @@ function PlasmicAddPatient__RenderFunc(props: {
                                   </DataCtxReader__>
                                 }
                                 errorName={"fetchError"}
-                                headers={{
-                                  "Content-Type": "application/json",
-                                  Accept: "application/json"
-                                }}
                                 loadingDisplay={
                                   <DataCtxReader__>
                                     {$ctx =>

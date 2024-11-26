@@ -605,6 +605,7 @@
   object-fit: cover;
   font-weight: 600;
   min-width: 0;
+  display: none;
 }
 .accordionItem__hhtng:global(.__wab_instance) {
   max-width: 100%;

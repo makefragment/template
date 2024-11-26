@@ -95,6 +95,7 @@ export type PlasmicSpecificnotification__ArgsType = {
   receivers?: string;
   content?: string;
   objectofcontent?: any;
+  submit?: () => void;
 };
 type ArgPropType = keyof PlasmicSpecificnotification__ArgsType;
 export const PlasmicSpecificnotification__ArgProps = new Array<ArgPropType>(
@@ -103,7 +104,8 @@ export const PlasmicSpecificnotification__ArgProps = new Array<ArgPropType>(
   "events",
   "receivers",
   "content",
-  "objectofcontent"
+  "objectofcontent",
+  "submit"
 );
 
 export type PlasmicSpecificnotification__OverridesType = {
@@ -130,6 +132,7 @@ export interface DefaultSpecificnotificationProps {
   receivers?: string;
   content?: string;
   objectofcontent?: any;
+  submit?: () => void;
   className?: string;
 }
 
@@ -237,7 +240,7 @@ function PlasmicSpecificnotification__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
-        path: "loading",
+        path: "loadingDelete",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -266,6 +269,12 @@ function PlasmicSpecificnotification__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "loadingOutsideDeleteButton",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -1268,17 +1277,17 @@ function PlasmicSpecificnotification__RenderFunc(props: {
                                   const charCount = finalText.length;
                                   let finalPrice = 0;
                                   if (charCount < 70) {
-                                    finalPrice = 965;
+                                    finalPrice = 9650;
                                   } else if (
                                     charCount >= 70 &&
                                     charCount < 140
                                   ) {
-                                    finalPrice = 965 * 2;
+                                    finalPrice = 9650 * 2;
                                   } else {
                                     finalPrice =
-                                      965 * Math.ceil(charCount / 70);
+                                      9650 * Math.ceil(charCount / 70);
                                   }
-                                  return finalPrice + " ریال";
+                                  return finalPrice / 10 + " تومان";
                                 })();
                               } catch (e) {
                                 if (
@@ -1443,7 +1452,7 @@ function PlasmicSpecificnotification__RenderFunc(props: {
         className={classNames("__wab_instance", sty.button)}
         loading={(() => {
           try {
-            return $state.loading;
+            return $state.loadingDelete;
           } catch (e) {
             if (
               e instanceof TypeError ||
@@ -1462,7 +1471,7 @@ function PlasmicSpecificnotification__RenderFunc(props: {
                 const actionArgs = {
                   variable: {
                     objRoot: $state,
-                    variablePath: ["loading"]
+                    variablePath: ["loadingDelete"]
                   },
                   operation: 0,
                   value: true
@@ -1568,7 +1577,7 @@ function PlasmicSpecificnotification__RenderFunc(props: {
                   const actionArgs = {
                     variable: {
                       objRoot: $state,
-                      variablePath: ["loading"]
+                      variablePath: ["loadingDelete"]
                     },
                     operation: 0,
                     value: false
@@ -1624,6 +1633,25 @@ function PlasmicSpecificnotification__RenderFunc(props: {
             $steps["updateFragmentPopoverEditNotification2Open"] = await $steps[
               "updateFragmentPopoverEditNotification2Open"
             ];
+          }
+
+          $steps["updateFragmentPopoverEditNotification2Open2"] = true
+            ? (() => {
+                const actionArgs = { eventRef: $props["submit"] };
+                return (({ eventRef, args }) => {
+                  return eventRef?.(...(args ?? []));
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateFragmentPopoverEditNotification2Open2"] != null &&
+            typeof $steps["updateFragmentPopoverEditNotification2Open2"] ===
+              "object" &&
+            typeof $steps["updateFragmentPopoverEditNotification2Open2"]
+              .then === "function"
+          ) {
+            $steps["updateFragmentPopoverEditNotification2Open2"] =
+              await $steps["updateFragmentPopoverEditNotification2Open2"];
           }
         }}
       />

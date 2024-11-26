@@ -782,8 +782,7 @@
           "componentImportPath": "@plasmicpkgs/plasmic-query"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "h9Dbk9ygddw7UVEq1NNhKi",
@@ -1628,6 +1627,188 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicReceipt.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "_Rp6tLXxWeJV",
+          "name": "ProfilePersonal",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfilePersonal.tsx",
+          "importSpec": {
+            "modulePath": "ProfilePersonal.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfilePersonal.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "abv63v9O9ARy",
+          "name": "ProfilePersonalName",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfilePersonalName.tsx",
+          "importSpec": {
+            "modulePath": "ProfilePersonalName.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfilePersonalName.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "eYafZiJOKVtf",
+          "name": "ProfilePersonalPhoneNumber",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfilePersonalPhoneNumber.tsx",
+          "importSpec": {
+            "modulePath": "ProfilePersonalPhoneNumber.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfilePersonalPhoneNumber.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "EB-Xw4Ecb7gM",
+          "name": "ProfilePersonalBiography",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfilePersonalBiography.tsx",
+          "importSpec": {
+            "modulePath": "ProfilePersonalBiography.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfilePersonalBiography.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "kkDbj8e0HCl3",
+          "name": "Profile",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfile.tsx",
+          "importSpec": {
+            "modulePath": "Profile.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfile.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "PIAFRsJicCGh",
+          "name": "ProfileHead",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfileHead.tsx",
+          "importSpec": {
+            "modulePath": "ProfileHead.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfileHead.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "UGR3L7iEGIlw",
+          "name": "Statistic",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicStatistic.tsx",
+          "importSpec": {
+            "modulePath": "Statistic.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicStatistic.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "E1ah_bVnKUPF",
+          "name": "ProfileExperties",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfileExperties.tsx",
+          "importSpec": {
+            "modulePath": "ProfileExperties.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfileExperties.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "E4hp1BPnaz1R",
+          "name": "ProfileExpertiseItem",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfileExpertiseItem.tsx",
+          "importSpec": {
+            "modulePath": "ProfileExpertiseItem.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfileExpertiseItem.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "o4nq-6V2-plH",
+          "name": "ProfileChannels",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfileChannels.tsx",
+          "importSpec": {
+            "modulePath": "ProfileChannels.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfileChannels.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "JABa_xxikfr0",
+          "name": "ProfileChannelsItem",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfileChannelsItem.tsx",
+          "importSpec": {
+            "modulePath": "ProfileChannelsItem.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfileChannelsItem.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "i6SPs9Tk2LaM",
+          "name": "ProfilePassword",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfilePassword.tsx",
+          "importSpec": {
+            "modulePath": "ProfilePassword.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfilePassword.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "2QrXQ3Lsq6zG",
+          "name": "ProfilePrescriptionSettings",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfilePrescriptionSettings.tsx",
+          "importSpec": {
+            "modulePath": "ProfilePrescriptionSettings.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfilePrescriptionSettings.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "xcx15_gUi62a",
+          "name": "Userworkflow",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicUserworkflow.tsx",
+          "importSpec": {
+            "modulePath": "Userworkflow.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicUserworkflow.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -1785,6 +1966,26 @@
           "id": "WiLor5jWTYZW",
           "name": "Icon24Icon",
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon24.tsx"
+        },
+        {
+          "id": "FRDdMgt8RmzU",
+          "name": "Icon25Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon25.tsx"
+        },
+        {
+          "id": "frSwMvWOgAN1",
+          "name": "Icon26Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon26.tsx"
+        },
+        {
+          "id": "_jqfq3yh1NEC",
+          "name": "Icon27Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon27.tsx"
+        },
+        {
+          "id": "jhZk-kRqJ6_T",
+          "name": "Icon28Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon28.tsx"
         }
       ],
       "images": [

@@ -111,7 +111,6 @@ export type PlasmicPricing__OverridesType = {
   accordion4?: Flex__<typeof AntdAccordion>;
   apiRequestForNotificationSetting?: Flex__<typeof ApiRequest>;
   customerfeatures?: Flex__<typeof ApiRequest>;
-  metrikaYandex?: Flex__<typeof MetrikaYandex>;
   auth?: Flex__<typeof ApiRequest>;
 };
 
@@ -803,273 +802,290 @@ function PlasmicPricing__RenderFunc(props: {
                     </div>
                   </div>
                 </Stack__>
-                {(() => {
-                  try {
-                    return (
-                      $state.getNelsonFeatures?.data
-                        ?.map((feature, index) => ({
-                          ...feature,
-                          active: $state.checkboxSilver[index].isChecked
-                        }))
-                        .filter(feature => feature.active && feature.price > 0)
-                        .length > 0
-                    );
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return false;
-                    }
-                    throw e;
-                  }
-                })() ? (
+                <div className={classNames(projectcss.all, sty.freeBox__vpFLj)}>
                   <div
-                    className={classNames(projectcss.all, sty.freeBox__vpFLj)}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__ysEh
+                    )}
                   >
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__ysEh
-                      )}
-                    >
-                      {
-                        "\u0628\u0631\u0627\u06cc \u0641\u0639\u0627\u0644\u0633\u0627\u0632\u06cc \u0633\u0631\u0648\u06cc\u0633 \u200c\u0647\u0627\u06cc \u0627\u0646\u062a\u062e\u0627\u0628\u06cc \u0631\u0648\u06cc \u062f\u06a9\u0645\u0647 \u0645\u0642\u0627\u0628\u0644 \u06a9\u0644\u06cc\u06a9 \u06a9\u0646\u06cc\u062f."
+                    {
+                      "\u0628\u0631\u0627\u06cc \u0641\u0639\u0627\u0644\u0633\u0627\u0632\u06cc \u06cc\u0627 \u0648\u06cc\u0631\u0627\u06cc\u0634 \u0633\u0631\u0648\u06cc\u0633 \u200c\u0647\u0627\u06cc \u0627\u0646\u062a\u062e\u0627\u0628\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u062e\u0648\u062f \u0631\u0627 \u062b\u0628\u062a \u06a9\u0646\u06cc\u062f."
+                    }
+                  </div>
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox__ftMdP)}
+                  >
+                    <Button
+                      data-plasmic-name={"button"}
+                      data-plasmic-override={overrides.button}
+                      children2={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__bP0Ka
+                          )}
+                        >
+                          {
+                            "\u062b\u0628\u062a \u062f\u0631\u062e\u0648\u0627\u0633\u062a"
+                          }
+                        </div>
                       }
-                    </div>
-                    <div
-                      className={classNames(projectcss.all, sty.freeBox__ftMdP)}
-                    >
-                      <Button
-                        data-plasmic-name={"button"}
-                        data-plasmic-override={overrides.button}
-                        children2={
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__bP0Ka
-                            )}
-                          >
-                            {"\u0641\u0639\u0627\u0644\u0633\u0627\u0632\u06cc"}
-                          </div>
+                      className={classNames("__wab_instance", sty.button)}
+                      loading={(() => {
+                        try {
+                          return $state.loading;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
                         }
-                        className={classNames("__wab_instance", sty.button)}
-                        loading={(() => {
-                          try {
-                            return $state.loading;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return [];
-                            }
-                            throw e;
-                          }
-                        })()}
-                        onClick={async event => {
-                          const $steps = {};
+                      })()}
+                      onClick={async event => {
+                        const $steps = {};
 
-                          $steps["loadingStart"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["loading"]
-                                  },
-                                  operation: 0,
-                                  value: true
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
+                        $steps["loadingStart"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["loading"]
+                                },
+                                operation: 0,
+                                value: true
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
 
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["loadingStart"] != null &&
-                            typeof $steps["loadingStart"] === "object" &&
-                            typeof $steps["loadingStart"].then === "function"
-                          ) {
-                            $steps["loadingStart"] = await $steps[
-                              "loadingStart"
-                            ];
-                          }
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["loadingStart"] != null &&
+                          typeof $steps["loadingStart"] === "object" &&
+                          typeof $steps["loadingStart"].then === "function"
+                        ) {
+                          $steps["loadingStart"] = await $steps["loadingStart"];
+                        }
 
-                          $steps["addMember"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/update-notification-member"
-                                  ]
-                                };
-                                return $globalActions[
-                                  "Fragment.apiRequest"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["addMember"] != null &&
-                            typeof $steps["addMember"] === "object" &&
-                            typeof $steps["addMember"].then === "function"
-                          ) {
-                            $steps["addMember"] = await $steps["addMember"];
-                          }
+                        $steps["addMember"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  "POST",
+                                  "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/update-notification-member"
+                                ]
+                              };
+                              return $globalActions[
+                                "Fragment.apiRequest"
+                              ]?.apply(null, [...actionArgs.args]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["addMember"] != null &&
+                          typeof $steps["addMember"] === "object" &&
+                          typeof $steps["addMember"].then === "function"
+                        ) {
+                          $steps["addMember"] = await $steps["addMember"];
+                        }
 
+                        $steps[
+                          "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                        ] = true
+                          ? (() => {
+                              const actionArgs = {
+                                destination:
+                                  "https://opium-dashboard.paziresh24.com/list-of-notofications"
+                              };
+                              return (({ destination }) => {
+                                if (
+                                  typeof destination === "string" &&
+                                  destination.startsWith("#")
+                                ) {
+                                  document
+                                    .getElementById(destination.substr(1))
+                                    .scrollIntoView({ behavior: "smooth" });
+                                } else {
+                                  __nextRouter?.push(destination);
+                                }
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
                           $steps[
                             "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
-                          ] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  destination:
-                                    "https://opium-dashboard.paziresh24.com/list-of-notofications"
-                                };
-                                return (({ destination }) => {
-                                  if (
-                                    typeof destination === "string" &&
-                                    destination.startsWith("#")
-                                  ) {
-                                    document
-                                      .getElementById(destination.substr(1))
-                                      .scrollIntoView({ behavior: "smooth" });
-                                  } else {
-                                    __nextRouter?.push(destination);
-                                  }
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps[
-                              "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
-                            ] != null &&
-                            typeof $steps[
-                              "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
-                            ] === "object" &&
-                            typeof $steps[
-                              "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
-                            ].then === "function"
-                          ) {
-                            $steps[
-                              "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
-                            ] = await $steps[
-                              "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
-                            ];
-                          }
+                          ] != null &&
+                          typeof $steps[
+                            "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                          ] === "object" &&
+                          typeof $steps[
+                            "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                          ].then === "function"
+                        ) {
+                          $steps[
+                            "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                          ] = await $steps[
+                            "goToHttpsOpiumDashboardPaziresh24ComListOfNotofications"
+                          ];
+                        }
 
-                          $steps["loadingFalse"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["loading"]
-                                  },
-                                  operation: 0,
-                                  value: false
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
+                        $steps["loadingFalse"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["loading"]
+                                },
+                                operation: 0,
+                                value: false
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
 
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["loadingFalse"] != null &&
-                            typeof $steps["loadingFalse"] === "object" &&
-                            typeof $steps["loadingFalse"].then === "function"
-                          ) {
-                            $steps["loadingFalse"] = await $steps[
-                              "loadingFalse"
-                            ];
-                          }
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["loadingFalse"] != null &&
+                          typeof $steps["loadingFalse"] === "object" &&
+                          typeof $steps["loadingFalse"].then === "function"
+                        ) {
+                          $steps["loadingFalse"] = await $steps["loadingFalse"];
+                        }
 
-                          $steps["apiRollout"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    "POST",
-                                    "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/rollout-notification-menu"
-                                  ]
-                                };
-                                return $globalActions[
-                                  "Fragment.apiRequest"
-                                ]?.apply(null, [...actionArgs.args]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["apiRollout"] != null &&
-                            typeof $steps["apiRollout"] === "object" &&
-                            typeof $steps["apiRollout"].then === "function"
-                          ) {
-                            $steps["apiRollout"] = await $steps["apiRollout"];
-                          }
+                        $steps["apiRollout"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  "POST",
+                                  "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/rollout-notification-menu"
+                                ]
+                              };
+                              return $globalActions[
+                                "Fragment.apiRequest"
+                              ]?.apply(null, [...actionArgs.args]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["apiRollout"] != null &&
+                          typeof $steps["apiRollout"] === "object" &&
+                          typeof $steps["apiRollout"].then === "function"
+                        ) {
+                          $steps["apiRollout"] = await $steps["apiRollout"];
+                        }
 
-                          $steps["sendLog"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  args: [
-                                    (() => {
-                                      try {
-                                        return {
-                                          group: "pricing",
-                                          data: {
-                                            who: $state.auth.data
-                                          },
-                                          type: "click-active-button"
-                                        };
-                                      } catch (e) {
-                                        if (
-                                          e instanceof TypeError ||
-                                          e?.plasmicType ===
-                                            "PlasmicUndefinedDataError"
-                                        ) {
-                                          return undefined;
-                                        }
-                                        throw e;
+                        $steps["changefeature"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  "POST",
+                                  "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/change-customer-nelson-features",
+                                  undefined,
+                                  (() => {
+                                    try {
+                                      return $state.getNelsonFeatures?.data?.map(
+                                        (feature, index) => ({
+                                          ...feature,
+                                          active:
+                                            $state.checkboxSilver[index]
+                                              .isChecked
+                                        })
+                                      );
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
                                       }
-                                    })()
-                                  ]
-                                };
-                                return $globalActions["Splunk.sendLog"]?.apply(
-                                  null,
-                                  [...actionArgs.args]
-                                );
-                              })()
-                            : undefined;
-                          if (
-                            $steps["sendLog"] != null &&
-                            typeof $steps["sendLog"] === "object" &&
-                            typeof $steps["sendLog"].then === "function"
-                          ) {
-                            $steps["sendLog"] = await $steps["sendLog"];
-                          }
-                        }}
-                      />
-                    </div>
+                                      throw e;
+                                    }
+                                  })()
+                                ]
+                              };
+                              return $globalActions[
+                                "Fragment.apiRequest"
+                              ]?.apply(null, [...actionArgs.args]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["changefeature"] != null &&
+                          typeof $steps["changefeature"] === "object" &&
+                          typeof $steps["changefeature"].then === "function"
+                        ) {
+                          $steps["changefeature"] = await $steps[
+                            "changefeature"
+                          ];
+                        }
+
+                        $steps["sendLog"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                args: [
+                                  (() => {
+                                    try {
+                                      return {
+                                        group: "pricing",
+                                        data: { who: $state.auth.data },
+                                        type: "click-active-button"
+                                      };
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return undefined;
+                                      }
+                                      throw e;
+                                    }
+                                  })()
+                                ]
+                              };
+                              return $globalActions["Splunk.sendLog"]?.apply(
+                                null,
+                                [...actionArgs.args]
+                              );
+                            })()
+                          : undefined;
+                        if (
+                          $steps["sendLog"] != null &&
+                          typeof $steps["sendLog"] === "object" &&
+                          typeof $steps["sendLog"].then === "function"
+                        ) {
+                          $steps["sendLog"] = await $steps["sendLog"];
+                        }
+                      }}
+                    />
                   </div>
-                ) : null}
+                </div>
                 <div
                   data-plasmic-name={"description"}
                   data-plasmic-override={overrides.description}
@@ -2936,9 +2952,7 @@ function PlasmicPricing__RenderFunc(props: {
           />
 
           <MetrikaYandex
-            data-plasmic-name={"metrikaYandex"}
-            data-plasmic-override={overrides.metrikaYandex}
-            className={classNames("__wab_instance", sty.metrikaYandex)}
+            className={classNames("__wab_instance", sty.metrikaYandex___3Cov7)}
           />
 
           <ApiRequest
@@ -2973,6 +2987,10 @@ function PlasmicPricing__RenderFunc(props: {
             onSuccess={generateStateOnChangeProp($state, ["auth", "data"])}
             url={"https://apigw.paziresh24.com/v1/auth/me"}
           />
+
+          <MetrikaYandex
+            className={classNames("__wab_instance", sty.metrikaYandex___8M9Ls)}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -3001,7 +3019,6 @@ const PlasmicDescendants = {
     "accordion4",
     "apiRequestForNotificationSetting",
     "customerfeatures",
-    "metrikaYandex",
     "auth"
   ],
   getNelsonFeatures: [
@@ -3079,7 +3096,6 @@ const PlasmicDescendants = {
   accordion4: ["accordion4"],
   apiRequestForNotificationSetting: ["apiRequestForNotificationSetting"],
   customerfeatures: ["customerfeatures"],
-  metrikaYandex: ["metrikaYandex"],
   auth: ["auth"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -3106,7 +3122,6 @@ type NodeDefaultElementType = {
   accordion4: typeof AntdAccordion;
   apiRequestForNotificationSetting: typeof ApiRequest;
   customerfeatures: typeof ApiRequest;
-  metrikaYandex: typeof MetrikaYandex;
   auth: typeof ApiRequest;
 };
 
@@ -3191,7 +3206,6 @@ export const PlasmicPricing = Object.assign(
       "apiRequestForNotificationSetting"
     ),
     customerfeatures: makeNodeComponent("customerfeatures"),
-    metrikaYandex: makeNodeComponent("metrikaYandex"),
     auth: makeNodeComponent("auth"),
 
     // Metadata about props expected for PlasmicPricing

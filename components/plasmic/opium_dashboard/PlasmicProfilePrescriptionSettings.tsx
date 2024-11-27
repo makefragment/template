@@ -59,6 +59,7 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-import: Gl72hv5IMo-p/codeComponent
 import { Switch } from "@/fragment/components/switch"; // plasmic-import: dH6_VlwkAh4P/codeComponent
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -67,6 +68,8 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfilePrescriptionSettings.module.css"; // plasmic-import: 2QrXQ3Lsq6zG/css
+
+import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
 
 createPlasmicElementProxy;
 
@@ -83,8 +86,10 @@ export const PlasmicProfilePrescriptionSettings__ArgProps =
 
 export type PlasmicProfilePrescriptionSettings__OverridesType = {
   root?: Flex__<"div">;
-  _switch?: Flex__<typeof Switch>;
-  switch2?: Flex__<typeof Switch>;
+  apiRequest?: Flex__<typeof ApiRequest>;
+  svg?: Flex__<"svg">;
+  smsActivation?: Flex__<typeof Switch>;
+  information?: Flex__<typeof Switch>;
 };
 
 export interface DefaultProfilePrescriptionSettingsProps {
@@ -129,18 +134,51 @@ function PlasmicProfilePrescriptionSettings__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = useGlobalActions?.();
+
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "_switch.checked",
+        path: "smsActivation.checked",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.apiRequest.data[0].active;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "information.checked",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "switch2.checked",
+        path: "apiRequest.data",
         type: "private",
-        variableType: "text",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "apiRequest.error",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "apiRequest.loading",
+        type: "private",
+        variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
@@ -172,78 +210,205 @@ function PlasmicProfilePrescriptionSettings__RenderFunc(props: {
         sty.root
       )}
     >
-      <Stack__
-        as={"div"}
-        hasGap={true}
-        className={classNames(projectcss.all, sty.freeBox___7Un2B)}
+      <ApiRequest
+        data-plasmic-name={"apiRequest"}
+        data-plasmic-override={overrides.apiRequest}
+        className={classNames("__wab_instance", sty.apiRequest)}
+        errorDisplay={
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text__fqS2
+            )}
+          >
+            {""}
+          </div>
+        }
+        loadingDisplay={
+          <div className={classNames(projectcss.all, sty.freeBox__qmCks)}>
+            <Icon10Icon
+              data-plasmic-name={"svg"}
+              data-plasmic-override={overrides.svg}
+              className={classNames(projectcss.all, sty.svg)}
+              role={"img"}
+            />
+          </div>
+        }
+        method={"GET"}
+        onError={generateStateOnChangeProp($state, ["apiRequest", "error"])}
+        onLoading={generateStateOnChangeProp($state, ["apiRequest", "loading"])}
+        onSuccess={generateStateOnChangeProp($state, ["apiRequest", "data"])}
+        url={"https://apigw.paziresh24.com/prescription/settings"}
       >
-        <Switch
-          data-plasmic-name={"_switch"}
-          data-plasmic-override={overrides._switch}
-          checked={generateStateValueProp($state, ["_switch", "checked"])}
-          className={classNames("__wab_instance", sty._switch)}
-          onCheckedChange={generateStateOnChangeProp($state, [
-            "_switch",
-            "checked"
-          ])}
-        />
-
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text__xxC7M
-          )}
+        <Stack__
+          as={"div"}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.freeBox__bDhZr)}
         >
-          {
-            "\u063a\u06cc\u0631\u0641\u0639\u0627\u0644 \u06a9\u0631\u062f\u0646 SMS \u0646\u0647\u0627\u06cc\u06cc \u0633\u0627\u0632\u06cc \u0646\u0633\u062e\u0647"
-          }
-        </div>
-      </Stack__>
-      <Stack__
-        as={"div"}
-        hasGap={true}
-        className={classNames(projectcss.all, sty.freeBox___62Cd1)}
-      >
-        <Switch
-          data-plasmic-name={"switch2"}
-          data-plasmic-override={overrides.switch2}
-          checked={generateStateValueProp($state, ["switch2", "checked"])}
-          className={classNames("__wab_instance", sty.switch2)}
-          onCheckedChange={generateStateOnChangeProp($state, [
-            "switch2",
-            "checked"
-          ])}
-        />
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox___7Un2B)}
+          >
+            <Switch
+              data-plasmic-name={"smsActivation"}
+              data-plasmic-override={overrides.smsActivation}
+              checked={generateStateValueProp($state, [
+                "smsActivation",
+                "checked"
+              ])}
+              className={classNames("__wab_instance", sty.smsActivation)}
+              onCheckedChange={async (...eventArgs: any) => {
+                generateStateOnChangeProp($state, [
+                  "smsActivation",
+                  "checked"
+                ]).apply(null, eventArgs);
+                (async checked => {
+                  const $steps = {};
 
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text__zhBdF
-          )}
-        >
-          {
-            "\u0648\u06cc\u0631\u0627\u06cc\u0634 \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0627\u062d\u0631\u0627\u0632 \u0647\u0648\u06cc\u062a"
-          }
-        </div>
-      </Stack__>
+                  $steps["invokeGlobalAction"] = checked
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "POST",
+                            "https://apigw.paziresh24.com/prescription/settings",
+                            undefined,
+                            (() => {
+                              try {
+                                return { id: 1 };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Fragment.apiRequest"]?.apply(
+                          null,
+                          [...actionArgs.args]
+                        );
+                      })()
+                    : undefined;
+                  if (
+                    $steps["invokeGlobalAction"] != null &&
+                    typeof $steps["invokeGlobalAction"] === "object" &&
+                    typeof $steps["invokeGlobalAction"].then === "function"
+                  ) {
+                    $steps["invokeGlobalAction"] = await $steps[
+                      "invokeGlobalAction"
+                    ];
+                  }
+
+                  $steps["invokeGlobalAction2"] = !checked
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "DELETE",
+                            (() => {
+                              try {
+                                return `https://apigw.paziresh24.com/prescription/settings/1?id=1`;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Fragment.apiRequest"]?.apply(
+                          null,
+                          [...actionArgs.args]
+                        );
+                      })()
+                    : undefined;
+                  if (
+                    $steps["invokeGlobalAction2"] != null &&
+                    typeof $steps["invokeGlobalAction2"] === "object" &&
+                    typeof $steps["invokeGlobalAction2"].then === "function"
+                  ) {
+                    $steps["invokeGlobalAction2"] = await $steps[
+                      "invokeGlobalAction2"
+                    ];
+                  }
+                }).apply(null, eventArgs);
+              }}
+            />
+
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__xxC7M
+              )}
+            >
+              {
+                "\u063a\u06cc\u0631\u0641\u0639\u0627\u0644 \u06a9\u0631\u062f\u0646 SMS \u0646\u0647\u0627\u06cc\u06cc \u0633\u0627\u0632\u06cc \u0646\u0633\u062e\u0647"
+              }
+            </div>
+          </Stack__>
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox___62Cd1)}
+          >
+            <Switch
+              data-plasmic-name={"information"}
+              data-plasmic-override={overrides.information}
+              checked={generateStateValueProp($state, [
+                "information",
+                "checked"
+              ])}
+              className={classNames("__wab_instance", sty.information)}
+              onCheckedChange={generateStateOnChangeProp($state, [
+                "information",
+                "checked"
+              ])}
+            />
+
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__zhBdF
+              )}
+            >
+              {
+                "\u0648\u06cc\u0631\u0627\u06cc\u0634 \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0627\u062d\u0631\u0627\u0632 \u0647\u0648\u06cc\u062a"
+              }
+            </div>
+          </Stack__>
+        </Stack__>
+      </ApiRequest>
     </Stack__>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "_switch", "switch2"],
-  _switch: ["_switch"],
-  switch2: ["switch2"]
+  root: ["root", "apiRequest", "svg", "smsActivation", "information"],
+  apiRequest: ["apiRequest", "svg", "smsActivation", "information"],
+  svg: ["svg"],
+  smsActivation: ["smsActivation"],
+  information: ["information"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  _switch: typeof Switch;
-  switch2: typeof Switch;
+  apiRequest: typeof ApiRequest;
+  svg: "svg";
+  smsActivation: typeof Switch;
+  information: typeof Switch;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -310,8 +475,10 @@ export const PlasmicProfilePrescriptionSettings = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    _switch: makeNodeComponent("_switch"),
-    switch2: makeNodeComponent("switch2"),
+    apiRequest: makeNodeComponent("apiRequest"),
+    svg: makeNodeComponent("svg"),
+    smsActivation: makeNodeComponent("smsActivation"),
+    information: makeNodeComponent("information"),
 
     // Metadata about props expected for PlasmicProfilePrescriptionSettings
     internalVariantProps: PlasmicProfilePrescriptionSettings__VariantProps,

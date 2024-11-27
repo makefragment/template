@@ -59,7 +59,15 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import ProfileHead from "../../ProfileHead"; // plasmic-import: PIAFRsJicCGh/component
+import { AntdAccordion } from "@plasmicpkgs/antd5/skinny/registerCollapse";
+import { accordionHelpers as AntdAccordion_Helpers } from "@plasmicpkgs/antd5/skinny/registerCollapse";
+import { AntdAccordionItem } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import ProfilePersonal from "../../ProfilePersonal"; // plasmic-import: _Rp6tLXxWeJV/component
+import ProfileExperties from "../../ProfileExperties"; // plasmic-import: E1ah_bVnKUPF/component
+import ProfileChannels from "../../ProfileChannels"; // plasmic-import: o4nq-6V2-plH/component
+import ProfilePassword from "../../ProfilePassword"; // plasmic-import: i6SPs9Tk2LaM/component
+import ProfilePrescriptionSettings from "../../ProfilePrescriptionSettings"; // plasmic-import: 2QrXQ3Lsq6zG/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -67,6 +75,12 @@ import plasmic_fragment_design_system_css from "../fragment_design_system/plasmi
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfile.module.css"; // plasmic-import: kkDbj8e0HCl3/css
+
+import Icon29Icon from "./icons/PlasmicIcon__Icon29"; // plasmic-import: 4BN4Jr3XKtOg/icon
+import Icon30Icon from "./icons/PlasmicIcon__Icon30"; // plasmic-import: kLd3FZ1H9HBS/icon
+import Icon31Icon from "./icons/PlasmicIcon__Icon31"; // plasmic-import: WipT2Hen4ot8/icon
+import Icon32Icon from "./icons/PlasmicIcon__Icon32"; // plasmic-import: z4LkEdXxME3x/icon
+import Icon33Icon from "./icons/PlasmicIcon__Icon33"; // plasmic-import: 01c_66jVlqBW/icon
 
 createPlasmicElementProxy;
 
@@ -81,7 +95,13 @@ export const PlasmicProfile__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicProfile__OverridesType = {
   root?: Flex__<"div">;
+  profileHead?: Flex__<typeof ProfileHead>;
+  accordion?: Flex__<typeof AntdAccordion>;
   profilePersonal?: Flex__<typeof ProfilePersonal>;
+  experties?: Flex__<typeof ProfileExperties>;
+  profileChannels?: Flex__<typeof ProfileChannels>;
+  profilePassword?: Flex__<typeof ProfilePassword>;
+  profilePrescriptionSettings?: Flex__<typeof ProfilePrescriptionSettings>;
 };
 
 export interface DefaultProfileProps {
@@ -126,12 +146,37 @@ function PlasmicProfile__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "accordion.activePanelId",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec(
+          "activePanelId",
+          AntdAccordion_Helpers
+        )
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
+
   return (
-    <div
+    <Stack__
+      as={"div"}
       data-plasmic-name={"root"}
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
+      hasGap={true}
       className={classNames(
         projectcss.all,
         projectcss.root_reset,
@@ -143,26 +188,287 @@ function PlasmicProfile__RenderFunc(props: {
         sty.root
       )}
     >
-      <ProfilePersonal
-        data-plasmic-name={"profilePersonal"}
-        data-plasmic-override={overrides.profilePersonal}
-        className={classNames("__wab_instance", sty.profilePersonal)}
-        noNationalCode={true}
+      <ProfileHead
+        data-plasmic-name={"profileHead"}
+        data-plasmic-override={overrides.profileHead}
+        className={classNames("__wab_instance", sty.profileHead)}
       />
-    </div>
+
+      {(() => {
+        const child$Props = {
+          activeKey: generateStateValueProp($state, [
+            "accordion",
+            "activePanelId"
+          ]),
+          bordered: false,
+          className: classNames("__wab_instance", sty.accordion),
+          ghost: true,
+          items: (
+            <React.Fragment>
+              <AntdAccordionItem
+                className={classNames(
+                  "__wab_instance",
+                  sty.accordionItem__eqmwQ
+                )}
+                id={1}
+                label2={
+                  <Stack__
+                    as={"div"}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.freeBox___1L4T)}
+                  >
+                    <Icon29Icon
+                      className={classNames(projectcss.all, sty.svg__pGmLj)}
+                      role={"img"}
+                    />
+
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___1MUns
+                      )}
+                    >
+                      {
+                        "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0641\u0631\u062f\u06cc"
+                      }
+                    </div>
+                  </Stack__>
+                }
+                showArrow={false}
+              >
+                <ProfilePersonal
+                  data-plasmic-name={"profilePersonal"}
+                  data-plasmic-override={overrides.profilePersonal}
+                  className={classNames("__wab_instance", sty.profilePersonal)}
+                  noNationalCode={undefined}
+                />
+              </AntdAccordionItem>
+              <AntdAccordionItem
+                className={classNames(
+                  "__wab_instance",
+                  sty.accordionItem__ntNcL
+                )}
+                id={"2"}
+                label2={
+                  <Stack__
+                    as={"div"}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.freeBox__zdRj3)}
+                  >
+                    <Icon30Icon
+                      className={classNames(projectcss.all, sty.svg__iswAz)}
+                      role={"img"}
+                    />
+
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___72UQi
+                      )}
+                    >
+                      {"\u062a\u062e\u0635\u0635"}
+                    </div>
+                  </Stack__>
+                }
+                showArrow={false}
+              >
+                <ProfileExperties
+                  data-plasmic-name={"experties"}
+                  data-plasmic-override={overrides.experties}
+                  className={classNames("__wab_instance", sty.experties)}
+                />
+              </AntdAccordionItem>
+              <AntdAccordionItem
+                className={classNames(
+                  "__wab_instance",
+                  sty.accordionItem__pxDfy
+                )}
+                id={"3"}
+                label2={
+                  <Stack__
+                    as={"div"}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.freeBox___5N3Yt)}
+                  >
+                    <Icon31Icon
+                      className={classNames(projectcss.all, sty.svg__kS1B)}
+                      role={"img"}
+                    />
+
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___7B72
+                      )}
+                    >
+                      {
+                        "\u067e\u06cc\u0627\u0645 \u0631\u0633\u0627\u0646 \u0647\u0627"
+                      }
+                    </div>
+                  </Stack__>
+                }
+                showArrow={false}
+              >
+                <ProfileChannels
+                  data-plasmic-name={"profileChannels"}
+                  data-plasmic-override={overrides.profileChannels}
+                  className={classNames("__wab_instance", sty.profileChannels)}
+                />
+              </AntdAccordionItem>
+              <AntdAccordionItem
+                className={classNames(
+                  "__wab_instance",
+                  sty.accordionItem__sZrC0
+                )}
+                id={"4"}
+                label2={
+                  <Stack__
+                    as={"div"}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.freeBox__tQxif)}
+                  >
+                    <Icon32Icon
+                      className={classNames(projectcss.all, sty.svg__qJ1Nt)}
+                      role={"img"}
+                    />
+
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__ogTAq
+                      )}
+                    >
+                      {
+                        "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062b\u0627\u0628\u062a"
+                      }
+                    </div>
+                  </Stack__>
+                }
+                showArrow={false}
+              >
+                <ProfilePassword
+                  data-plasmic-name={"profilePassword"}
+                  data-plasmic-override={overrides.profilePassword}
+                  className={classNames("__wab_instance", sty.profilePassword)}
+                />
+              </AntdAccordionItem>
+              <AntdAccordionItem
+                className={classNames(
+                  "__wab_instance",
+                  sty.accordionItem___2DoIc
+                )}
+                id={"5"}
+                label2={
+                  <Stack__
+                    as={"div"}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.freeBox__rs5Nj)}
+                  >
+                    <Icon33Icon
+                      className={classNames(projectcss.all, sty.svg__xBpBk)}
+                      role={"img"}
+                    />
+
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__wK3JF
+                      )}
+                    >
+                      {
+                        "\u062a\u0646\u0638\u06cc\u0645\u0627\u062a \u0646\u0633\u062e\u0647 \u0646\u0648\u06cc\u0633\u06cc"
+                      }
+                    </div>
+                  </Stack__>
+                }
+                showArrow={false}
+              >
+                <ProfilePrescriptionSettings
+                  data-plasmic-name={"profilePrescriptionSettings"}
+                  data-plasmic-override={overrides.profilePrescriptionSettings}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.profilePrescriptionSettings
+                  )}
+                />
+              </AntdAccordionItem>
+            </React.Fragment>
+          ),
+          onChange: generateStateOnChangePropForCodeComponents(
+            $state,
+            "activePanelId",
+            ["accordion", "activePanelId"],
+            AntdAccordion_Helpers
+          )
+        };
+        initializeCodeComponentStates(
+          $state,
+          [
+            {
+              name: "activePanelId",
+              plasmicStateName: "accordion.activePanelId"
+            }
+          ],
+          [],
+          AntdAccordion_Helpers ?? {},
+          child$Props
+        );
+
+        return (
+          <AntdAccordion
+            data-plasmic-name={"accordion"}
+            data-plasmic-override={overrides.accordion}
+            {...child$Props}
+          />
+        );
+      })()}
+    </Stack__>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "profilePersonal"],
-  profilePersonal: ["profilePersonal"]
+  root: [
+    "root",
+    "profileHead",
+    "accordion",
+    "profilePersonal",
+    "experties",
+    "profileChannels",
+    "profilePassword",
+    "profilePrescriptionSettings"
+  ],
+  profileHead: ["profileHead"],
+  accordion: [
+    "accordion",
+    "profilePersonal",
+    "experties",
+    "profileChannels",
+    "profilePassword",
+    "profilePrescriptionSettings"
+  ],
+  profilePersonal: ["profilePersonal"],
+  experties: ["experties"],
+  profileChannels: ["profileChannels"],
+  profilePassword: ["profilePassword"],
+  profilePrescriptionSettings: ["profilePrescriptionSettings"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  profileHead: typeof ProfileHead;
+  accordion: typeof AntdAccordion;
   profilePersonal: typeof ProfilePersonal;
+  experties: typeof ProfileExperties;
+  profileChannels: typeof ProfileChannels;
+  profilePassword: typeof ProfilePassword;
+  profilePrescriptionSettings: typeof ProfilePrescriptionSettings;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -225,7 +531,15 @@ export const PlasmicProfile = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    profileHead: makeNodeComponent("profileHead"),
+    accordion: makeNodeComponent("accordion"),
     profilePersonal: makeNodeComponent("profilePersonal"),
+    experties: makeNodeComponent("experties"),
+    profileChannels: makeNodeComponent("profileChannels"),
+    profilePassword: makeNodeComponent("profilePassword"),
+    profilePrescriptionSettings: makeNodeComponent(
+      "profilePrescriptionSettings"
+    ),
 
     // Metadata about props expected for PlasmicProfile
     internalVariantProps: PlasmicProfile__VariantProps,

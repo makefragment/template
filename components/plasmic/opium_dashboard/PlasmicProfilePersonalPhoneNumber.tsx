@@ -94,7 +94,7 @@ export type PlasmicProfilePersonalPhoneNumber__OverridesType = {
   input?: Flex__<typeof Input>;
   dialog?: Flex__<typeof Dialog>;
   newPhoneNumber?: Flex__<typeof Input>;
-  text?: Flex__<"div">;
+  otpCode?: Flex__<typeof Input>;
 };
 
 export interface DefaultProfilePersonalPhoneNumberProps {
@@ -171,6 +171,18 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
       },
       {
         path: "newPhoneNumber.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "step",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => "PHONE_NUMBER"
+      },
+      {
+        path: "otpCode.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
@@ -331,20 +343,118 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
               ])}
             />
 
-            <Button
-              children2={
+            {(() => {
+              try {
+                return $state.step === "OTP";
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return true;
+                }
+                throw e;
+              }
+            })() ? (
+              <Stack__
+                as={"div"}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.freeBox___5FKBx)}
+              >
                 <div
-                  data-plasmic-name={"text"}
-                  data-plasmic-override={overrides.text}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text
+                    sty.text__muFtv
                   )}
                 >
                   {
-                    "\u0627\u0631\u0633\u0627\u0644 \u06a9\u062f \u062a\u0627\u06cc\u06cc\u062f"
+                    "\u06a9\u062f \u0627\u0631\u0633\u0627\u0644 \u0634\u062f\u0647 \u0628\u0647 \u0634\u0645\u0627\u0631\u0647 \u0645\u0648\u0628\u0627\u06cc\u0644 \u062c\u062f\u06cc\u062f \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f."
                   }
+                </div>
+                <Input
+                  data-plasmic-name={"otpCode"}
+                  data-plasmic-override={overrides.otpCode}
+                  className={classNames("__wab_instance", sty.otpCode)}
+                  onChange={async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "otpCode",
+                      "value"
+                    ]).apply(null, eventArgs);
+                    (async value => {
+                      const $steps = {};
+
+                      $steps["updateNewPhoneNumberValue"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["otpCode", "value"]
+                              },
+                              operation: 0,
+                              value: value.replace(/[^0-9]/g, "")
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateNewPhoneNumberValue"] != null &&
+                        typeof $steps["updateNewPhoneNumberValue"] ===
+                          "object" &&
+                        typeof $steps["updateNewPhoneNumberValue"].then ===
+                          "function"
+                      ) {
+                        $steps["updateNewPhoneNumberValue"] = await $steps[
+                          "updateNewPhoneNumberValue"
+                        ];
+                      }
+                    }).apply(null, eventArgs);
+                  }}
+                  placeholder={"\u06a9\u062f \u062a\u0627\u06cc\u06cc\u062f"}
+                  type={"text"}
+                  value={generateStateValueProp($state, ["otpCode", "value"])}
+                />
+              </Stack__>
+            ) : null}
+            <Button
+              children2={
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___4Fo8M
+                  )}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return $state.step === "PHONE_NUMBER"
+                          ? "ارسال کد تایید"
+                          : "ویرایش شماره موبایل";
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "\u0627\u0631\u0633\u0627\u0644 \u06a9\u062f \u062a\u0627\u06cc\u06cc\u062f";
+                        }
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
                 </div>
               }
               className={classNames("__wab_instance", sty.button__ytoLr)}
@@ -379,7 +489,10 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
 
                 $steps["invokeGlobalAction2"] = (() => {
                   const regex = /^09\d{9}/;
-                  return regex.test($state.newPhoneNumber.value);
+                  return (
+                    regex.test($state.newPhoneNumber.value) &&
+                    $state.step === "PHONE_NUMBER"
+                  );
                 })()
                   ? (() => {
                       const actionArgs = {
@@ -389,7 +502,11 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
                           undefined,
                           (() => {
                             try {
-                              return { username: $state.newPhoneNumber.value };
+                              return (() => {
+                                {
+                                  username: $state.newPhoneNumber.value;
+                                }
+                              })();
                             } catch (e) {
                               if (
                                 e instanceof TypeError ||
@@ -417,6 +534,47 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
                     "invokeGlobalAction2"
                   ];
                 }
+
+                $steps["invokeGlobalAction3"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "PUT",
+                          "https://api.paziresh24.com/V1/doctor/profile/change-mobile",
+                          undefined,
+                          (() => {
+                            try {
+                              return {
+                                username: $state.newPhoneNumber.value,
+                                password: $state.otpCode.value
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
+                      };
+                      return $globalActions["Fragment.apiRequest"]?.apply(
+                        null,
+                        [...actionArgs.args]
+                      );
+                    })()
+                  : undefined;
+                if (
+                  $steps["invokeGlobalAction3"] != null &&
+                  typeof $steps["invokeGlobalAction3"] === "object" &&
+                  typeof $steps["invokeGlobalAction3"].then === "function"
+                ) {
+                  $steps["invokeGlobalAction3"] = await $steps[
+                    "invokeGlobalAction3"
+                  ];
+                }
               }}
             />
           </Stack__>
@@ -435,11 +593,11 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "input", "dialog", "newPhoneNumber", "text"],
+  root: ["root", "input", "dialog", "newPhoneNumber", "otpCode"],
   input: ["input"],
-  dialog: ["dialog", "newPhoneNumber", "text"],
+  dialog: ["dialog", "newPhoneNumber", "otpCode"],
   newPhoneNumber: ["newPhoneNumber"],
-  text: ["text"]
+  otpCode: ["otpCode"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -449,7 +607,7 @@ type NodeDefaultElementType = {
   input: typeof Input;
   dialog: typeof Dialog;
   newPhoneNumber: typeof Input;
-  text: "div";
+  otpCode: typeof Input;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -516,7 +674,7 @@ export const PlasmicProfilePersonalPhoneNumber = Object.assign(
     input: makeNodeComponent("input"),
     dialog: makeNodeComponent("dialog"),
     newPhoneNumber: makeNodeComponent("newPhoneNumber"),
-    text: makeNodeComponent("text"),
+    otpCode: makeNodeComponent("otpCode"),
 
     // Metadata about props expected for PlasmicProfilePersonalPhoneNumber
     internalVariantProps: PlasmicProfilePersonalPhoneNumber__VariantProps,

@@ -116,6 +116,7 @@ export type PlasmicProfilePersonal__OverridesType = {
   nationalCode?: Flex__<typeof Input>;
   medicalCode?: Flex__<typeof Input>;
   profilePersonalPhoneNumber?: Flex__<typeof ProfilePersonalPhoneNumber>;
+  notifyCellApi?: Flex__<typeof ApiRequest>;
   notifyCell?: Flex__<typeof Input>;
   profilePersonalBiography?: Flex__<typeof ProfilePersonalBiography>;
   button?: Flex__<typeof Button>;
@@ -209,12 +210,6 @@ function PlasmicProfilePersonal__RenderFunc(props: {
               throw e;
             }
           })()
-      },
-      {
-        path: "notifyCell.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       },
       {
         path: "noName",
@@ -328,6 +323,43 @@ function PlasmicProfilePersonal__RenderFunc(props: {
           (() => {
             try {
               return $state.profile.data.data.biography;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "notifyCellApi.data",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "notifyCellApi.error",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "notifyCellApi.loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "notifyCell.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.notifyCellApi.data.providers[0].notify_cell;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -543,22 +575,73 @@ function PlasmicProfilePersonal__RenderFunc(props: {
                 })()}
               />
             ) : null}
-            <Input
-              data-plasmic-name={"notifyCell"}
-              data-plasmic-override={overrides.notifyCell}
-              className={classNames("__wab_instance", sty.notifyCell)}
-              name={"nationalCode"}
-              onChange={generateStateOnChangeProp($state, [
-                "notifyCell",
-                "value"
-              ])}
-              placeholder={
-                "\u0634\u0645\u0627\u0631\u0647 \u0645\u0648\u0628\u0627\u06cc\u0644 \u0645\u0646\u0634\u06cc"
+            <ApiRequest
+              data-plasmic-name={"notifyCellApi"}
+              data-plasmic-override={overrides.notifyCellApi}
+              className={classNames("__wab_instance", sty.notifyCellApi)}
+              errorDisplay={
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___9PJ2O
+                  )}
+                >
+                  {""}
+                </div>
               }
-              type={"text"}
-              value={generateStateValueProp($state, ["notifyCell", "value"])}
-            />
-
+              loadingDisplay={
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__dnc
+                  )}
+                >
+                  {""}
+                </div>
+              }
+              method={"GET"}
+              onError={generateStateOnChangeProp($state, [
+                "notifyCellApi",
+                "error"
+              ])}
+              onLoading={generateStateOnChangeProp($state, [
+                "notifyCellApi",
+                "loading"
+              ])}
+              onSuccess={generateStateOnChangeProp($state, [
+                "notifyCellApi",
+                "data"
+              ])}
+              url={(() => {
+                try {
+                  return `https://apigw.paziresh24.com/v1/providers/${$state.profile.data.data.id}/notify-cell`;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+            >
+              <Input
+                data-plasmic-name={"notifyCell"}
+                data-plasmic-override={overrides.notifyCell}
+                className={classNames("__wab_instance", sty.notifyCell)}
+                onChange={generateStateOnChangeProp($state, [
+                  "notifyCell",
+                  "value"
+                ])}
+                placeholder={
+                  "\u0634\u0645\u0627\u0631\u0647 \u0645\u0646\u0634\u06cc"
+                }
+                value={generateStateValueProp($state, ["notifyCell", "value"])}
+              />
+            </ApiRequest>
             {(
               hasVariant($state, "noBiography", "noBiography") ? false : true
             ) ? (
@@ -626,8 +709,8 @@ function PlasmicProfilePersonal__RenderFunc(props: {
                                 biography:
                                   $state.profilePersonalBiography
                                     .biographyValue,
-                                employee_id: $state.medicalCode.value,
-                                notify_cell: $state.notifyCell.value
+                                employee_id: $state.medicalCode.value
+                                // "notify_cell": $state.notifyCell.value
                               };
                             } catch (e) {
                               if (
@@ -656,6 +739,61 @@ function PlasmicProfilePersonal__RenderFunc(props: {
                     "invokeGlobalAction"
                   ];
                 }
+
+                $steps["invokeGlobalAction2"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "PATCH",
+                          (() => {
+                            try {
+                              return `https://apigw.paziresh24.com/v1/users/${$state.auth.data.data.id}`;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })(),
+                          undefined,
+                          (() => {
+                            try {
+                              return {
+                                name: $state.profilePersonalName.firstNameValue,
+                                family:
+                                  $state.profilePersonalName.lastNameValue,
+                                national_code: $state.nationalCode.value
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
+                      };
+                      return $globalActions["Fragment.apiRequest"]?.apply(
+                        null,
+                        [...actionArgs.args]
+                      );
+                    })()
+                  : undefined;
+                if (
+                  $steps["invokeGlobalAction2"] != null &&
+                  typeof $steps["invokeGlobalAction2"] === "object" &&
+                  typeof $steps["invokeGlobalAction2"].then === "function"
+                ) {
+                  $steps["invokeGlobalAction2"] = await $steps[
+                    "invokeGlobalAction2"
+                  ];
+                }
               }}
             />
           </Stack__>
@@ -676,6 +814,7 @@ const PlasmicDescendants = {
     "nationalCode",
     "medicalCode",
     "profilePersonalPhoneNumber",
+    "notifyCellApi",
     "notifyCell",
     "profilePersonalBiography",
     "button"
@@ -689,6 +828,7 @@ const PlasmicDescendants = {
     "nationalCode",
     "medicalCode",
     "profilePersonalPhoneNumber",
+    "notifyCellApi",
     "notifyCell",
     "profilePersonalBiography",
     "button"
@@ -701,6 +841,7 @@ const PlasmicDescendants = {
     "nationalCode",
     "medicalCode",
     "profilePersonalPhoneNumber",
+    "notifyCellApi",
     "notifyCell",
     "profilePersonalBiography",
     "button"
@@ -711,6 +852,7 @@ const PlasmicDescendants = {
     "nationalCode",
     "medicalCode",
     "profilePersonalPhoneNumber",
+    "notifyCellApi",
     "notifyCell",
     "profilePersonalBiography",
     "button"
@@ -719,6 +861,7 @@ const PlasmicDescendants = {
   nationalCode: ["nationalCode"],
   medicalCode: ["medicalCode"],
   profilePersonalPhoneNumber: ["profilePersonalPhoneNumber"],
+  notifyCellApi: ["notifyCellApi", "notifyCell"],
   notifyCell: ["notifyCell"],
   profilePersonalBiography: ["profilePersonalBiography"],
   button: ["button"]
@@ -736,6 +879,7 @@ type NodeDefaultElementType = {
   nationalCode: typeof Input;
   medicalCode: typeof Input;
   profilePersonalPhoneNumber: typeof ProfilePersonalPhoneNumber;
+  notifyCellApi: typeof ApiRequest;
   notifyCell: typeof Input;
   profilePersonalBiography: typeof ProfilePersonalBiography;
   button: typeof Button;
@@ -809,6 +953,7 @@ export const PlasmicProfilePersonal = Object.assign(
     nationalCode: makeNodeComponent("nationalCode"),
     medicalCode: makeNodeComponent("medicalCode"),
     profilePersonalPhoneNumber: makeNodeComponent("profilePersonalPhoneNumber"),
+    notifyCellApi: makeNodeComponent("notifyCellApi"),
     notifyCell: makeNodeComponent("notifyCell"),
     profilePersonalBiography: makeNodeComponent("profilePersonalBiography"),
     button: makeNodeComponent("button"),

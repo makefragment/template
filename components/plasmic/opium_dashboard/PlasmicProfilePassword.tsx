@@ -59,8 +59,10 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-import: Gl72hv5IMo-p/codeComponent
 import { Switch } from "@/fragment/components/switch"; // plasmic-import: dH6_VlwkAh4P/codeComponent
-import { Input } from "@/fragment/components/input"; // plasmic-import: ByhbQ0nAxig8/codeComponent
+import { AntdPassword } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { inputHelpers as AntdPassword_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -70,6 +72,7 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfilePassword.module.css"; // plasmic-import: i6SPs9Tk2LaM/css
 
+import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 
@@ -87,9 +90,12 @@ export const PlasmicProfilePassword__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicProfilePassword__OverridesType = {
   root?: Flex__<"div">;
+  authApi?: Flex__<typeof ApiRequest>;
+  svg?: Flex__<"svg">;
   _switch?: Flex__<typeof Switch>;
-  input?: Flex__<typeof Input>;
-  input2?: Flex__<typeof Input>;
+  oldPassword?: Flex__<typeof AntdPassword>;
+  passwordInput?: Flex__<typeof AntdPassword>;
+  repeatPassword?: Flex__<typeof AntdPassword>;
   button?: Flex__<typeof Button>;
 };
 
@@ -135,25 +141,70 @@ function PlasmicProfilePassword__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = useGlobalActions?.();
+
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "_switch.checked",
         type: "private",
         variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.authApi.data.data.is_static_password_enabled;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "passwordInput.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdPassword_Helpers)
+      },
+      {
+        path: "repeatPassword.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdPassword_Helpers)
+      },
+      {
+        path: "authApi.data",
+        type: "private",
+        variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "input.value",
+        path: "authApi.error",
         type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "input2.value",
+        path: "authApi.loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "oldPassword.value",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdPassword_Helpers)
       }
     ],
     [$props, $ctx, $refs]
@@ -182,88 +233,318 @@ function PlasmicProfilePassword__RenderFunc(props: {
         sty.root
       )}
     >
-      <Stack__
-        as={"div"}
-        hasGap={true}
-        className={classNames(projectcss.all, sty.freeBox__j39Cj)}
-      >
-        <Switch
-          data-plasmic-name={"_switch"}
-          data-plasmic-override={overrides._switch}
-          checked={generateStateValueProp($state, ["_switch", "checked"])}
-          className={classNames("__wab_instance", sty._switch)}
-          onCheckedChange={generateStateOnChangeProp($state, [
-            "_switch",
-            "checked"
-          ])}
-        />
-
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text__z8T8G
-          )}
-        >
-          {
-            "\u0631\u0645\u0632\u0639\u0628\u0648\u0631 \u062b\u0627\u0628\u062a \u0641\u0639\u0627\u0644 \u0627\u0633\u062a"
-          }
-        </div>
-      </Stack__>
-      <Stack__
-        as={"div"}
-        hasGap={true}
-        className={classNames(projectcss.all, sty.freeBox__foiIa)}
-      >
-        <Input
-          data-plasmic-name={"input"}
-          data-plasmic-override={overrides.input}
-          className={classNames("__wab_instance", sty.input)}
-          onChange={generateStateOnChangeProp($state, ["input", "value"])}
-          placeholder={"\u0631\u0645\u0632 \u0639\u0628\u0648\u0631"}
-          type={"password"}
-          value={generateStateValueProp($state, ["input", "value"])}
-        />
-
-        <Input
-          data-plasmic-name={"input2"}
-          data-plasmic-override={overrides.input2}
-          className={classNames("__wab_instance", sty.input2)}
-          onChange={generateStateOnChangeProp($state, ["input2", "value"])}
-          placeholder={
-            "\u062a\u06a9\u0631\u0627\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
-          }
-          type={"password"}
-          value={generateStateValueProp($state, ["input2", "value"])}
-        />
-      </Stack__>
-      <Button
-        data-plasmic-name={"button"}
-        data-plasmic-override={overrides.button}
-        children2={
-          <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text___1Gj7T
-            )}
-          >
-            {
-              "\u0630\u062e\u06cc\u0631\u0647 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
-            }
+      <ApiRequest
+        data-plasmic-name={"authApi"}
+        data-plasmic-override={overrides.authApi}
+        className={classNames("__wab_instance", sty.authApi)}
+        errorDisplay={null}
+        loadingDisplay={
+          <div className={classNames(projectcss.all, sty.freeBox__okRnv)}>
+            <Icon10Icon
+              data-plasmic-name={"svg"}
+              data-plasmic-override={overrides.svg}
+              className={classNames(projectcss.all, sty.svg)}
+              role={"img"}
+            />
           </div>
         }
-        className={classNames("__wab_instance", sty.button)}
-      />
+        method={"GET"}
+        onError={generateStateOnChangeProp($state, ["authApi", "error"])}
+        onLoading={generateStateOnChangeProp($state, ["authApi", "loading"])}
+        onSuccess={generateStateOnChangeProp($state, ["authApi", "data"])}
+        url={"https://api.paziresh24.com/V1/auth/me"}
+      >
+        <Stack__
+          as={"div"}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.freeBox__vi37B)}
+        >
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__j39Cj)}
+          >
+            <Switch
+              data-plasmic-name={"_switch"}
+              data-plasmic-override={overrides._switch}
+              checked={generateStateValueProp($state, ["_switch", "checked"])}
+              className={classNames("__wab_instance", sty._switch)}
+              onCheckedChange={generateStateOnChangeProp($state, [
+                "_switch",
+                "checked"
+              ])}
+            />
+
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__z8T8G
+              )}
+            >
+              {
+                "\u0631\u0645\u0632\u0639\u0628\u0648\u0631 \u062b\u0627\u0628\u062a \u0641\u0639\u0627\u0644 \u0627\u0633\u062a"
+              }
+            </div>
+          </Stack__>
+          {(() => {
+            try {
+              return $state.authApi.data.data.is_static_password_enabled;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
+              }
+              throw e;
+            }
+          })() ? (
+            <div className={classNames(projectcss.all, sty.freeBox__phLNe)}>
+              {(() => {
+                const child$Props = {
+                  className: classNames("__wab_instance", sty.oldPassword),
+                  onChange: generateStateOnChangePropForCodeComponents(
+                    $state,
+                    "value",
+                    ["oldPassword", "value"],
+                    AntdPassword_Helpers
+                  ),
+                  placeholder:
+                    "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0642\u0628\u0644\u06cc",
+                  value: generateStateValueProp($state, [
+                    "oldPassword",
+                    "value"
+                  ])
+                };
+                initializeCodeComponentStates(
+                  $state,
+                  [
+                    {
+                      name: "value",
+                      plasmicStateName: "oldPassword.value"
+                    }
+                  ],
+                  [],
+                  AntdPassword_Helpers ?? {},
+                  child$Props
+                );
+
+                return (
+                  <AntdPassword
+                    data-plasmic-name={"oldPassword"}
+                    data-plasmic-override={overrides.oldPassword}
+                    {...child$Props}
+                  />
+                );
+              })()}
+            </div>
+          ) : null}
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__foiIa)}
+          >
+            {(() => {
+              const child$Props = {
+                className: classNames("__wab_instance", sty.passwordInput),
+                onChange: generateStateOnChangePropForCodeComponents(
+                  $state,
+                  "value",
+                  ["passwordInput", "value"],
+                  AntdPassword_Helpers
+                ),
+                placeholder:
+                  "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f",
+                value: generateStateValueProp($state, [
+                  "passwordInput",
+                  "value"
+                ])
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "value",
+                    plasmicStateName: "passwordInput.value"
+                  }
+                ],
+                [],
+                AntdPassword_Helpers ?? {},
+                child$Props
+              );
+
+              return (
+                <AntdPassword
+                  data-plasmic-name={"passwordInput"}
+                  data-plasmic-override={overrides.passwordInput}
+                  {...child$Props}
+                />
+              );
+            })()}
+            {(() => {
+              const child$Props = {
+                className: classNames("__wab_instance", sty.repeatPassword),
+                onChange: generateStateOnChangePropForCodeComponents(
+                  $state,
+                  "value",
+                  ["repeatPassword", "value"],
+                  AntdPassword_Helpers
+                ),
+                placeholder:
+                  "\u062a\u06a9\u0631\u0627\u0631 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062c\u062f\u06cc\u062f",
+                value: generateStateValueProp($state, [
+                  "repeatPassword",
+                  "value"
+                ])
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "value",
+                    plasmicStateName: "repeatPassword.value"
+                  }
+                ],
+                [],
+                AntdPassword_Helpers ?? {},
+                child$Props
+              );
+
+              return (
+                <AntdPassword
+                  data-plasmic-name={"repeatPassword"}
+                  data-plasmic-override={overrides.repeatPassword}
+                  {...child$Props}
+                />
+              );
+            })()}
+          </Stack__>
+          <Button
+            data-plasmic-name={"button"}
+            data-plasmic-override={overrides.button}
+            children2={
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text___1Gj7T
+                )}
+              >
+                {
+                  "\u0630\u062e\u06cc\u0631\u0647 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
+                }
+              </div>
+            }
+            className={classNames("__wab_instance", sty.button)}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["invokeGlobalAction"] = !$state.authApi.data.data
+                .is_static_password_enabled
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        "PATCH",
+                        "https://api.paziresh24.com/V1/user/enable-static-password"
+                      ]
+                    };
+                    return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["invokeGlobalAction"] != null &&
+                typeof $steps["invokeGlobalAction"] === "object" &&
+                typeof $steps["invokeGlobalAction"].then === "function"
+              ) {
+                $steps["invokeGlobalAction"] = await $steps[
+                  "invokeGlobalAction"
+                ];
+              }
+
+              $steps["invokeGlobalAction2"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        "PATCH",
+                        "https://api.paziresh24.com/V1/user/change-static-password",
+                        undefined,
+                        (() => {
+                          try {
+                            return (() => {
+                              const data = $state.authApi.data.data;
+                              const oldPassword =
+                                data.is_static_password_enabled
+                                  ? $state.oldPassword.value
+                                  : data.cell.slice(-4);
+                              return {
+                                old_password: oldPassword,
+                                password: $state.passwordInput.value,
+                                password_confirmation:
+                                  $state.repeatPassword.value
+                              };
+                            })();
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["invokeGlobalAction2"] != null &&
+                typeof $steps["invokeGlobalAction2"] === "object" &&
+                typeof $steps["invokeGlobalAction2"].then === "function"
+              ) {
+                $steps["invokeGlobalAction2"] = await $steps[
+                  "invokeGlobalAction2"
+                ];
+              }
+            }}
+          />
+        </Stack__>
+      </ApiRequest>
     </div>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "_switch", "input", "input2", "button"],
+  root: [
+    "root",
+    "authApi",
+    "svg",
+    "_switch",
+    "oldPassword",
+    "passwordInput",
+    "repeatPassword",
+    "button"
+  ],
+  authApi: [
+    "authApi",
+    "svg",
+    "_switch",
+    "oldPassword",
+    "passwordInput",
+    "repeatPassword",
+    "button"
+  ],
+  svg: ["svg"],
   _switch: ["_switch"],
-  input: ["input"],
-  input2: ["input2"],
+  oldPassword: ["oldPassword"],
+  passwordInput: ["passwordInput"],
+  repeatPassword: ["repeatPassword"],
   button: ["button"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -271,9 +552,12 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  authApi: typeof ApiRequest;
+  svg: "svg";
   _switch: typeof Switch;
-  input: typeof Input;
-  input2: typeof Input;
+  oldPassword: typeof AntdPassword;
+  passwordInput: typeof AntdPassword;
+  repeatPassword: typeof AntdPassword;
   button: typeof Button;
 };
 
@@ -337,9 +621,12 @@ export const PlasmicProfilePassword = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    authApi: makeNodeComponent("authApi"),
+    svg: makeNodeComponent("svg"),
     _switch: makeNodeComponent("_switch"),
-    input: makeNodeComponent("input"),
-    input2: makeNodeComponent("input2"),
+    oldPassword: makeNodeComponent("oldPassword"),
+    passwordInput: makeNodeComponent("passwordInput"),
+    repeatPassword: makeNodeComponent("repeatPassword"),
     button: makeNodeComponent("button"),
 
     // Metadata about props expected for PlasmicProfilePassword

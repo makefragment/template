@@ -28,6 +28,9 @@
     grid-column: 4;
   }
 }
+.bookListactive > * {
+  grid-column: 4;
+}
 .sideEffect__d8T7G:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;
@@ -513,7 +516,7 @@
   width: 100%;
   min-width: 0;
 }
-.svg__lh664 {
+.svg__g3CTe {
   position: relative;
   object-fit: cover;
   width: auto;
@@ -523,7 +526,7 @@
   color: var(--token-WR9d568ToYeY);
   font-size: var(--token-6NbVMeD6zQwn);
 }
-.svg__r3Ug7 {
+.svg__vc9ZU {
   position: relative;
   object-fit: cover;
   width: auto;
@@ -534,13 +537,13 @@
   width: 100%;
   min-width: 0;
 }
-.svg__lkNh7 {
+.svg__svxxH {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
 }
-.svg__ciYv6 {
+.svg__c6EoP {
   position: relative;
   object-fit: cover;
   width: auto;
@@ -549,7 +552,7 @@
 .button___8I0Vg:global(.__wab_instance) {
   max-width: 100%;
 }
-.svg__nhZyb {
+.svg__wo1Tt {
   position: relative;
   object-fit: cover;
   width: auto;
@@ -561,7 +564,7 @@
   width: var(--token-QcxRWQfhgyJI);
   height: var(--token-QcxRWQfhgyJI);
 }
-.svg__jzE71 {
+.svg__tsR1M {
   position: relative;
   object-fit: cover;
   width: auto;

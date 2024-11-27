@@ -59,10 +59,11 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
+import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-import: Gl72hv5IMo-p/codeComponent
 import ProfileChannelsItem from "../../ProfileChannelsItem"; // plasmic-import: JABa_xxikfr0/component
 import { Switch } from "@/fragment/components/switch"; // plasmic-import: dH6_VlwkAh4P/codeComponent
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
-import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -71,10 +72,11 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfileChannels.module.css"; // plasmic-import: o4nq-6V2-plH/css
 
+import Icon28Icon from "./icons/PlasmicIcon__Icon28"; // plasmic-import: jhZk-kRqJ6_T/icon
+import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
 import Icon27Icon from "./icons/PlasmicIcon__Icon27"; // plasmic-import: _jqfq3yh1NEC/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
-import Icon28Icon from "./icons/PlasmicIcon__Icon28"; // plasmic-import: jhZk-kRqJ6_T/icon
 
 createPlasmicElementProxy;
 
@@ -94,11 +96,12 @@ export const PlasmicProfileChannels__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicProfileChannels__OverridesType = {
   root?: Flex__<"div">;
-  item?: Flex__<typeof ProfileChannelsItem>;
-  item2?: Flex__<typeof ProfileChannelsItem>;
+  dialog?: Flex__<typeof Dialog>;
+  apiRequest?: Flex__<typeof ApiRequest>;
+  eitaa?: Flex__<typeof ProfileChannelsItem>;
+  whatsapp?: Flex__<typeof ProfileChannelsItem>;
   _switch?: Flex__<typeof Switch>;
   button?: Flex__<typeof Button>;
-  dialog?: Flex__<typeof Dialog>;
 };
 
 export interface DefaultProfileChannelsProps {
@@ -144,42 +147,120 @@ function PlasmicProfileChannels__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = useGlobalActions?.();
+
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "item.numberValue2",
+        path: "eitaa.numberValue2",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
-          "\u06f3\u06f2\u06f4\u06f2\u06f3\u06f4"
+          (() => {
+            try {
+              return $state.apiRequest.data.data.find(
+                item => item.type == "eitaa_number"
+              ).channel;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
-        path: "item.usernameValue",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => "\u06cc\u0633\u0628"
-      },
-      {
-        path: "item2.numberValue2",
+        path: "eitaa.usernameValue",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
-          "\u06f3\u06f2\u06f4\u06f2\u06f3\u06f4"
+          (() => {
+            try {
+              return $state.apiRequest.data.data.find(
+                item => item.type == "eitaa"
+              ).channel;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
-        path: "item2.usernameValue",
+        path: "whatsapp.numberValue2",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => "\u06cc\u0633\u0628"
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.apiRequest.data.data.find(
+                item => item.type == "whatsapp"
+              ).channel;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "whatsapp.usernameValue",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ``
       },
       {
         path: "_switch.checked",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return !!$state.apiRequest.data.data.find(
+                item => item.type == "secure_call"
+              );
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "dialog.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "apiRequest.data",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "apiRequest.error",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "apiRequest.loading",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -213,207 +294,6 @@ function PlasmicProfileChannels__RenderFunc(props: {
         sty.root
       )}
     >
-      <Stack__
-        as={"div"}
-        hasGap={true}
-        className={classNames(projectcss.all, sty.freeBox__huZso)}
-      >
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text___1Kj1M
-          )}
-        >
-          {
-            "\u0644\u0637\u0641\u0627 \u0634\u0645\u0627\u0631\u0647 \u0648 \u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc \u067e\u06cc\u0627\u0645 \u0631\u0633\u0627\u0646 \u0627\u06cc\u062a\u0627 \u06cc\u0627 \u0634\u0645\u0627\u0631\u0647 \u0648\u0627\u062a\u0633\u0627\u067e \u062e\u0648\u062f \u0631\u0627 \u0648\u0627\u0631\u062f."
-          }
-        </div>
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text__j1PZ2
-          )}
-        >
-          {
-            "\u0634\u0645\u0627\u0631\u0647 \u0645\u0648\u0628\u0627\u06cc\u0644 \u0627\u06cc\u0646 \u067e\u06cc\u0627\u0645 \u0631\u0633\u0627\u0646 \u0647\u0627 \u062f\u0631 \u062f\u0633\u062a\u0631\u0633 \u0628\u06cc\u0645\u0627\u0631 \u0642\u0631\u0627\u0631 \u0645\u06cc\u06af\u06cc\u0631\u062f."
-          }
-        </div>
-      </Stack__>
-      <Stack__
-        as={"div"}
-        hasGap={true}
-        className={classNames(projectcss.all, sty.freeBox__jftlG)}
-      >
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text___4Hz4A
-          )}
-        >
-          {
-            "\u067e\u06cc\u0627\u0645 \u0631\u0633\u0627\u0646 \u062f\u0627\u062e\u0644\u06cc"
-          }
-        </div>
-        <ProfileChannelsItem
-          data-plasmic-name={"item"}
-          data-plasmic-override={overrides.item}
-          channelName={"\u0627\u06cc\u062a\u0627"}
-          className={classNames("__wab_instance", sty.item)}
-          guidUrl={"https://opium-dashboard.paziresh24.com/help-eitaa/"}
-          numberValue2={generateStateValueProp($state, [
-            "item",
-            "numberValue2"
-          ])}
-          onNumberValueChange2={generateStateOnChangeProp($state, [
-            "item",
-            "numberValue2"
-          ])}
-          onUsernameValueChange={generateStateOnChangeProp($state, [
-            "item",
-            "usernameValue"
-          ])}
-          type={"eitaa"}
-          usernameValue={generateStateValueProp($state, [
-            "item",
-            "usernameValue"
-          ])}
-        />
-      </Stack__>
-      <Stack__
-        as={"div"}
-        hasGap={true}
-        className={classNames(projectcss.all, sty.freeBox__ylzte)}
-      >
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text__wYuAl
-          )}
-        >
-          {
-            "\u067e\u06cc\u0627\u0645 \u0631\u0633\u0627\u0646 \u062e\u0627\u0631\u062c\u06cc"
-          }
-        </div>
-        <ProfileChannelsItem
-          data-plasmic-name={"item2"}
-          data-plasmic-override={overrides.item2}
-          channelName={"\u0648\u0627\u062a\u0633\u0627\u067e"}
-          className={classNames("__wab_instance", sty.item2)}
-          guidUrl={"https://opium-dashboard.paziresh24.com/help-eitaa/"}
-          noUserName={true}
-          numberValue2={generateStateValueProp($state, [
-            "item2",
-            "numberValue2"
-          ])}
-          onNumberValueChange2={generateStateOnChangeProp($state, [
-            "item2",
-            "numberValue2"
-          ])}
-          onUsernameValueChange={generateStateOnChangeProp($state, [
-            "item2",
-            "usernameValue"
-          ])}
-          type={"whatsapp"}
-          usernameValue={generateStateValueProp($state, [
-            "item2",
-            "usernameValue"
-          ])}
-        />
-      </Stack__>
-      <div className={classNames(projectcss.all, sty.freeBox__b6VXx)}>
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text__ug2U
-          )}
-        >
-          {"\u062a\u0645\u0627\u0633 \u0627\u064e\u0645\u0646"}
-        </div>
-        <div className={classNames(projectcss.all, sty.freeBox__dOtV)}>
-          <Stack__
-            as={"div"}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.freeBox__awmco)}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__d7MSz
-              )}
-            >
-              {
-                "\u062a\u0645\u0627\u0633 \u0627\u0645\u0646 \u0628\u0647 \u0639\u0646\u0648\u0627\u0646 \u0631\u0627\u0647 \u0627\u0631\u062a\u0628\u0627\u0637 \u062c\u0627\u0646\u0628\u06cc \u062f\u0631 \u06a9\u0646\u0627\u0631 \u0647\u0631 \u06cc\u06a9 \u0627\u0632 \u067e\u06cc\u0627\u0645\u200c\u0631\u0633\u0627\u0646\u200c\u0647\u0627 \u0642\u0631\u0627\u0631 \u0645\u06cc\u200c\u06af\u06cc\u0631\u062f."
-              }
-            </div>
-            <Icon27Icon
-              className={classNames(projectcss.all, sty.svg__acy02)}
-              onClick={async event => {
-                const $steps = {};
-
-                $steps["updateDialogOpen"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["dialog", "open"]
-                        },
-                        operation: 4
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        const oldValue = $stateGet(objRoot, variablePath);
-                        $stateSet(objRoot, variablePath, !oldValue);
-                        return !oldValue;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateDialogOpen"] != null &&
-                  typeof $steps["updateDialogOpen"] === "object" &&
-                  typeof $steps["updateDialogOpen"].then === "function"
-                ) {
-                  $steps["updateDialogOpen"] = await $steps["updateDialogOpen"];
-                }
-              }}
-              role={"img"}
-            />
-          </Stack__>
-          <Switch
-            data-plasmic-name={"_switch"}
-            data-plasmic-override={overrides._switch}
-            checked={generateStateValueProp($state, ["_switch", "checked"])}
-            className={classNames("__wab_instance", sty._switch)}
-            onCheckedChange={generateStateOnChangeProp($state, [
-              "_switch",
-              "checked"
-            ])}
-          />
-        </div>
-      </div>
-      <Button
-        data-plasmic-name={"button"}
-        data-plasmic-override={overrides.button}
-        children2={
-          "\u062b\u0628\u062a \u062a\u063a\u06cc\u06cc\u0631\u0627\u062a"
-        }
-        className={classNames("__wab_instance", sty.button)}
-      />
-
       <Dialog
         data-plasmic-name={"dialog"}
         data-plasmic-override={overrides.dialog}
@@ -485,28 +365,338 @@ function PlasmicProfileChannels__RenderFunc(props: {
         title={"\u062a\u0645\u0627\u0633 \u0627\u0645\u0646"}
         trigger={null}
       />
+
+      <ApiRequest
+        data-plasmic-name={"apiRequest"}
+        data-plasmic-override={overrides.apiRequest}
+        className={classNames("__wab_instance", sty.apiRequest)}
+        errorDisplay={
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text__wi8Yq
+            )}
+          >
+            {""}
+          </div>
+        }
+        loadingDisplay={
+          <div className={classNames(projectcss.all, sty.freeBox__epmPd)}>
+            <Icon10Icon
+              className={classNames(projectcss.all, sty.svg__zT5IJ)}
+              role={"img"}
+            />
+          </div>
+        }
+        method={"GET"}
+        onError={generateStateOnChangeProp($state, ["apiRequest", "error"])}
+        onLoading={generateStateOnChangeProp($state, ["apiRequest", "loading"])}
+        onSuccess={generateStateOnChangeProp($state, ["apiRequest", "data"])}
+        url={"https://api.paziresh24.com/V1/doctor/visit-channels"}
+      >
+        <Stack__
+          as={"div"}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.freeBox__zYO)}
+        >
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__huZso)}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___1Kj1M
+              )}
+            >
+              {
+                "\u0644\u0637\u0641\u0627 \u0634\u0645\u0627\u0631\u0647 \u0648 \u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc \u067e\u06cc\u0627\u0645 \u0631\u0633\u0627\u0646 \u0627\u06cc\u062a\u0627 \u06cc\u0627 \u0634\u0645\u0627\u0631\u0647 \u0648\u0627\u062a\u0633\u0627\u067e \u062e\u0648\u062f \u0631\u0627 \u0648\u0627\u0631\u062f."
+              }
+            </div>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__j1PZ2
+              )}
+            >
+              {
+                "\u0634\u0645\u0627\u0631\u0647 \u0645\u0648\u0628\u0627\u06cc\u0644 \u0627\u06cc\u0646 \u067e\u06cc\u0627\u0645 \u0631\u0633\u0627\u0646 \u0647\u0627 \u062f\u0631 \u062f\u0633\u062a\u0631\u0633 \u0628\u06cc\u0645\u0627\u0631 \u0642\u0631\u0627\u0631 \u0645\u06cc\u06af\u06cc\u0631\u062f."
+              }
+            </div>
+          </Stack__>
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__jftlG)}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___4Hz4A
+              )}
+            >
+              {
+                "\u067e\u06cc\u0627\u0645 \u0631\u0633\u0627\u0646 \u062f\u0627\u062e\u0644\u06cc"
+              }
+            </div>
+            <ProfileChannelsItem
+              data-plasmic-name={"eitaa"}
+              data-plasmic-override={overrides.eitaa}
+              channelName={"\u0627\u06cc\u062a\u0627"}
+              className={classNames("__wab_instance", sty.eitaa)}
+              guidUrl={"https://opium-dashboard.paziresh24.com/help-eitaa/"}
+              numberValue2={generateStateValueProp($state, [
+                "eitaa",
+                "numberValue2"
+              ])}
+              onNumberValueChange2={generateStateOnChangeProp($state, [
+                "eitaa",
+                "numberValue2"
+              ])}
+              onUsernameValueChange={generateStateOnChangeProp($state, [
+                "eitaa",
+                "usernameValue"
+              ])}
+              type={"eitaa"}
+              usernameValue={generateStateValueProp($state, [
+                "eitaa",
+                "usernameValue"
+              ])}
+            />
+          </Stack__>
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__ylzte)}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__wYuAl
+              )}
+            >
+              {
+                "\u067e\u06cc\u0627\u0645 \u0631\u0633\u0627\u0646 \u062e\u0627\u0631\u062c\u06cc"
+              }
+            </div>
+            <ProfileChannelsItem
+              data-plasmic-name={"whatsapp"}
+              data-plasmic-override={overrides.whatsapp}
+              channelName={"\u0648\u0627\u062a\u0633\u0627\u067e"}
+              className={classNames("__wab_instance", sty.whatsapp)}
+              guidUrl={"https://opium-dashboard.paziresh24.com/help-eitaa/"}
+              noUserName={true}
+              numberValue2={generateStateValueProp($state, [
+                "whatsapp",
+                "numberValue2"
+              ])}
+              onNumberValueChange2={generateStateOnChangeProp($state, [
+                "whatsapp",
+                "numberValue2"
+              ])}
+              onUsernameValueChange={generateStateOnChangeProp($state, [
+                "whatsapp",
+                "usernameValue"
+              ])}
+              type={"whatsapp"}
+              usernameValue={generateStateValueProp($state, [
+                "whatsapp",
+                "usernameValue"
+              ])}
+            />
+          </Stack__>
+          <div className={classNames(projectcss.all, sty.freeBox__b6VXx)}>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__ug2U
+              )}
+            >
+              {"\u062a\u0645\u0627\u0633 \u0627\u064e\u0645\u0646"}
+            </div>
+            <div className={classNames(projectcss.all, sty.freeBox__dOtV)}>
+              <Stack__
+                as={"div"}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.freeBox__awmco)}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__d7MSz
+                  )}
+                >
+                  {
+                    "\u062a\u0645\u0627\u0633 \u0627\u0645\u0646 \u0628\u0647 \u0639\u0646\u0648\u0627\u0646 \u0631\u0627\u0647 \u0627\u0631\u062a\u0628\u0627\u0637 \u062c\u0627\u0646\u0628\u06cc \u062f\u0631 \u06a9\u0646\u0627\u0631 \u0647\u0631 \u06cc\u06a9 \u0627\u0632 \u067e\u06cc\u0627\u0645\u200c\u0631\u0633\u0627\u0646\u200c\u0647\u0627 \u0642\u0631\u0627\u0631 \u0645\u06cc\u200c\u06af\u06cc\u0631\u062f."
+                  }
+                </div>
+                <Icon27Icon
+                  className={classNames(projectcss.all, sty.svg__acy02)}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateDialogOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["dialog", "open"]
+                            },
+                            operation: 4
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            const oldValue = $stateGet(objRoot, variablePath);
+                            $stateSet(objRoot, variablePath, !oldValue);
+                            return !oldValue;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateDialogOpen"] != null &&
+                      typeof $steps["updateDialogOpen"] === "object" &&
+                      typeof $steps["updateDialogOpen"].then === "function"
+                    ) {
+                      $steps["updateDialogOpen"] = await $steps[
+                        "updateDialogOpen"
+                      ];
+                    }
+                  }}
+                  role={"img"}
+                />
+              </Stack__>
+              <Switch
+                data-plasmic-name={"_switch"}
+                data-plasmic-override={overrides._switch}
+                checked={generateStateValueProp($state, ["_switch", "checked"])}
+                className={classNames("__wab_instance", sty._switch)}
+                onCheckedChange={generateStateOnChangeProp($state, [
+                  "_switch",
+                  "checked"
+                ])}
+              />
+            </div>
+          </div>
+          <Button
+            data-plasmic-name={"button"}
+            data-plasmic-override={overrides.button}
+            children2={
+              "\u062b\u0628\u062a \u062a\u063a\u06cc\u06cc\u0631\u0627\u062a"
+            }
+            className={classNames("__wab_instance", sty.button)}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["invokeGlobalAction"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        "PATCH",
+                        "https://api.paziresh24.com/V1/doctor/visit-channels",
+                        undefined,
+                        (() => {
+                          try {
+                            return (() => {
+                              const eitaaNumber = $state.eitaa.numberValue2;
+                              const whatsappNumber =
+                                $state.whatsapp.numberValue2;
+                              const eitaUsername = $state.eitaa.usernameValue;
+                              const result = [];
+                              const addEntry = (type, channel) => {
+                                if (channel) {
+                                  result.push({
+                                    type,
+                                    channel
+                                  });
+                                }
+                              };
+                              addEntry("eitaa_number", eitaaNumber);
+                              addEntry("eitaa", eitaUsername);
+                              addEntry("whatsapp", whatsappNumber);
+                              if ($state._switch.checked) {
+                                addEntry("secure_call", "02125015000");
+                              }
+                              return { online_channels: result };
+                            })();
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["invokeGlobalAction"] != null &&
+                typeof $steps["invokeGlobalAction"] === "object" &&
+                typeof $steps["invokeGlobalAction"].then === "function"
+              ) {
+                $steps["invokeGlobalAction"] = await $steps[
+                  "invokeGlobalAction"
+                ];
+              }
+            }}
+          />
+        </Stack__>
+      </ApiRequest>
     </Stack__>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "item", "item2", "_switch", "button", "dialog"],
-  item: ["item"],
-  item2: ["item2"],
+  root: [
+    "root",
+    "dialog",
+    "apiRequest",
+    "eitaa",
+    "whatsapp",
+    "_switch",
+    "button"
+  ],
+  dialog: ["dialog"],
+  apiRequest: ["apiRequest", "eitaa", "whatsapp", "_switch", "button"],
+  eitaa: ["eitaa"],
+  whatsapp: ["whatsapp"],
   _switch: ["_switch"],
-  button: ["button"],
-  dialog: ["dialog"]
+  button: ["button"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  item: typeof ProfileChannelsItem;
-  item2: typeof ProfileChannelsItem;
+  dialog: typeof Dialog;
+  apiRequest: typeof ApiRequest;
+  eitaa: typeof ProfileChannelsItem;
+  whatsapp: typeof ProfileChannelsItem;
   _switch: typeof Switch;
   button: typeof Button;
-  dialog: typeof Dialog;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -569,11 +759,12 @@ export const PlasmicProfileChannels = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    item: makeNodeComponent("item"),
-    item2: makeNodeComponent("item2"),
+    dialog: makeNodeComponent("dialog"),
+    apiRequest: makeNodeComponent("apiRequest"),
+    eitaa: makeNodeComponent("eitaa"),
+    whatsapp: makeNodeComponent("whatsapp"),
     _switch: makeNodeComponent("_switch"),
     button: makeNodeComponent("button"),
-    dialog: makeNodeComponent("dialog"),
 
     // Metadata about props expected for PlasmicProfileChannels
     internalVariantProps: PlasmicProfileChannels__VariantProps,

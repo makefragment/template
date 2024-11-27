@@ -59,6 +59,7 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-import: Gl72hv5IMo-p/codeComponent
 import Avatar from "../../Avatar"; // plasmic-import: 3i84rYjQRrs4/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 
@@ -69,6 +70,7 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfileHead.module.css"; // plasmic-import: PIAFRsJicCGh/css
 
+import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
 import Icon26Icon from "./icons/PlasmicIcon__Icon26"; // plasmic-import: frSwMvWOgAN1/icon
 
 createPlasmicElementProxy;
@@ -78,36 +80,19 @@ export type PlasmicProfileHead__VariantsArgs = {};
 type VariantPropType = keyof PlasmicProfileHead__VariantsArgs;
 export const PlasmicProfileHead__VariantProps = new Array<VariantPropType>();
 
-export type PlasmicProfileHead__ArgsType = {
-  firstName?: string;
-  lastName?: string;
-  experties?: any;
-  image?: string;
-  slug?: string;
-};
+export type PlasmicProfileHead__ArgsType = {};
 type ArgPropType = keyof PlasmicProfileHead__ArgsType;
-export const PlasmicProfileHead__ArgProps = new Array<ArgPropType>(
-  "firstName",
-  "lastName",
-  "experties",
-  "image",
-  "slug"
-);
+export const PlasmicProfileHead__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicProfileHead__OverridesType = {
   root?: Flex__<"div">;
+  profile?: Flex__<typeof ApiRequest>;
   avatar?: Flex__<typeof Avatar>;
   upload?: Flex__<typeof UploadWrapper>;
-  svg?: Flex__<"svg">;
   link?: Flex__<"a"> & Partial<LinkProps>;
 };
 
 export interface DefaultProfileHeadProps {
-  firstName?: string;
-  lastName?: string;
-  experties?: any;
-  image?: string;
-  slug?: string;
   className?: string;
 }
 
@@ -149,6 +134,8 @@ function PlasmicProfileHead__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = useGlobalActions?.();
+
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -162,6 +149,24 @@ function PlasmicProfileHead__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => ""
+      },
+      {
+        path: "profile.data",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "profile.error",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "profile.loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -190,26 +195,275 @@ function PlasmicProfileHead__RenderFunc(props: {
         sty.root
       )}
     >
-      <Stack__
-        as={"div"}
-        hasGap={true}
-        className={classNames(projectcss.all, sty.freeBox__p2O2Y)}
+      <ApiRequest
+        data-plasmic-name={"profile"}
+        data-plasmic-override={overrides.profile}
+        className={classNames("__wab_instance", sty.profile)}
+        errorDisplay={
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text__f4832
+            )}
+          >
+            {""}
+          </div>
+        }
+        loadingDisplay={
+          <div className={classNames(projectcss.all, sty.freeBox__ehRb)}>
+            <Icon10Icon
+              className={classNames(projectcss.all, sty.svg__y7K04)}
+              role={"img"}
+            />
+          </div>
+        }
+        method={"GET"}
+        onError={generateStateOnChangeProp($state, ["profile", "error"])}
+        onLoading={generateStateOnChangeProp($state, ["profile", "loading"])}
+        onSuccess={generateStateOnChangeProp($state, ["profile", "data"])}
+        url={"https://api.paziresh24.com/V1/doctor/profile"}
       >
         <Stack__
           as={"div"}
           hasGap={true}
-          className={classNames(projectcss.all, sty.freeBox__sK3Um)}
+          className={classNames(projectcss.all, sty.freeBox__p2O2Y)}
         >
-          <div className={classNames(projectcss.all, sty.freeBox__f836)}>
-            <Avatar
-              data-plasmic-name={"avatar"}
-              data-plasmic-override={overrides.avatar}
-              className={classNames("__wab_instance", sty.avatar)}
-              src={(() => {
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__sK3Um)}
+          >
+            <div className={classNames(projectcss.all, sty.freeBox__f836)}>
+              <Avatar
+                data-plasmic-name={"avatar"}
+                data-plasmic-override={overrides.avatar}
+                className={classNames("__wab_instance", sty.avatar)}
+                src={(() => {
+                  try {
+                    return `https://uploader.paziresh24.com/api/file/${$state.profile.data.data.image}`;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
+              />
+
+              <UploadWrapper
+                data-plasmic-name={"upload"}
+                data-plasmic-override={overrides.upload}
+                accept={"image/*"}
+                className={classNames("__wab_instance", sty.upload)}
+                files={generateStateValueProp($state, ["upload", "files"])}
+                listType={"picture"}
+                onFilesChange={async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, ["upload", "files"]).apply(
+                    null,
+                    eventArgs
+                  );
+                  (async files => {
+                    const $steps = {};
+
+                    $steps["invokeGlobalAction"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            args: [
+                              "POST",
+                              "https://api.paziresh24.com/V1/doctor/profile/image",
+                              undefined,
+                              (() => {
+                                try {
+                                  return (() => {
+                                    let formData = new globalThis.FormData();
+                                    formData.append(
+                                      "file",
+                                      $state.upload.files?.[0]?.contents
+                                    );
+                                    return formData;
+                                  })();
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })(),
+                              {
+                                headers: {
+                                  "Content-Type": "multipart/form-data"
+                                }
+                              }
+                            ]
+                          };
+                          return $globalActions["Fragment.apiRequest"]?.apply(
+                            null,
+                            [...actionArgs.args]
+                          );
+                        })()
+                      : undefined;
+                    if (
+                      $steps["invokeGlobalAction"] != null &&
+                      typeof $steps["invokeGlobalAction"] === "object" &&
+                      typeof $steps["invokeGlobalAction"].then === "function"
+                    ) {
+                      $steps["invokeGlobalAction"] = await $steps[
+                        "invokeGlobalAction"
+                      ];
+                    }
+
+                    $steps["runCode"] = false
+                      ? (() => {
+                          const actionArgs = {
+                            customFunction: async () => {
+                              return (() => {
+                                let formData = new globalThis.FormData();
+                                formData.append(
+                                  "file",
+                                  $state.upload.files?.[0]?.contents
+                                );
+                                return console.log(formData);
+                              })();
+                            }
+                          };
+                          return (({ customFunction }) => {
+                            return customFunction();
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["runCode"] != null &&
+                      typeof $steps["runCode"] === "object" &&
+                      typeof $steps["runCode"].then === "function"
+                    ) {
+                      $steps["runCode"] = await $steps["runCode"];
+                    }
+                  }).apply(null, eventArgs);
+                }}
+                showUploadList={false}
+              >
+                <div
+                  className={classNames(projectcss.all, sty.freeBox___6GKuj)}
+                >
+                  <Icon26Icon
+                    className={classNames(projectcss.all, sty.svg__r5O0X)}
+                    role={"img"}
+                  />
+                </div>
+              </UploadWrapper>
+            </div>
+            <Stack__
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox__lx8K6)}
+            >
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__gxBDc
+                )}
+              >
+                <React.Fragment>
+                  {(() => {
+                    try {
+                      return `${$state.profile.data.data.name || ""} ${
+                        $state.profile.data.data.family || ""
+                      }`;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "\u0646\u0627\u0645 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc";
+                      }
+                      throw e;
+                    }
+                  })()}
+                </React.Fragment>
+              </div>
+              <Stack__
+                as={"div"}
+                hasGap={true}
+                className={classNames(
+                  projectcss.all,
+                  sty.freeBox__bjZmx,
+                  "no-scroll"
+                )}
+              >
+                {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                  (() => {
+                    try {
+                      return $state.profile.data.data.expertises;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return [];
+                      }
+                      throw e;
+                    }
+                  })()
+                ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                  const currentItem = __plasmic_item_0;
+                  const currentIndex = __plasmic_idx_0;
+                  return (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__afQM
+                      )}
+                      key={currentIndex}
+                    >
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return !!currentItem.alias_title
+                              ? currentItem.alias_title
+                              : `${currentItem.degree.name || ""} ${
+                                  currentItem.expertise.name || ""
+                                }`;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "\u0627\u062a\u0627\u0642 \u0639\u0645\u0644";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
+                    </div>
+                  );
+                })}
+              </Stack__>
+            </Stack__>
+          </Stack__>
+          <div className={classNames(projectcss.all, sty.freeBox__prR0)}>
+            <PlasmicLink__
+              data-plasmic-name={"link"}
+              data-plasmic-override={overrides.link}
+              className={classNames(
+                projectcss.all,
+                projectcss.a,
+                projectcss.__wab_text,
+                sty.link
+              )}
+              component={Link}
+              href={(() => {
                 try {
-                  return !!$state.imgPreview
-                    ? $state.imgPreview
-                    : `https://uploader.paziresh24.com/api/file/${$props.image}`;
+                  return `https://www.paziresh24.com/dr/${$state.profile.data.data.slug}`;
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -220,186 +474,25 @@ function PlasmicProfileHead__RenderFunc(props: {
                   throw e;
                 }
               })()}
-            />
-
-            <UploadWrapper
-              data-plasmic-name={"upload"}
-              data-plasmic-override={overrides.upload}
-              accept={"image/*"}
-              className={classNames("__wab_instance", sty.upload)}
-              files={generateStateValueProp($state, ["upload", "files"])}
-              listType={"picture"}
-              onFilesChange={async (...eventArgs: any) => {
-                generateStateOnChangeProp($state, ["upload", "files"]).apply(
-                  null,
-                  eventArgs
-                );
-                (async files => {
-                  const $steps = {};
-
-                  $steps["runCode"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          customFunction: async () => {
-                            return undefined;
-                          }
-                        };
-                        return (({ customFunction }) => {
-                          return customFunction();
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["runCode"] != null &&
-                    typeof $steps["runCode"] === "object" &&
-                    typeof $steps["runCode"].then === "function"
-                  ) {
-                    $steps["runCode"] = await $steps["runCode"];
-                  }
-                }).apply(null, eventArgs);
-              }}
-              showUploadList={false}
+              platform={"nextjs"}
+              target={"_blank"}
             >
-              <div className={classNames(projectcss.all, sty.freeBox___6GKuj)}>
-                <Icon26Icon
-                  data-plasmic-name={"svg"}
-                  data-plasmic-override={overrides.svg}
-                  className={classNames(projectcss.all, sty.svg)}
-                  role={"img"}
-                />
-              </div>
-            </UploadWrapper>
-          </div>
-          <Stack__
-            as={"div"}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.freeBox__lx8K6)}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__gxBDc
-              )}
-            >
-              <React.Fragment>
-                {(() => {
-                  try {
-                    return `${$props.firstName || ""} ${$props.lastName || ""}`;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return "\u0646\u0627\u0645 \u0646\u0627\u0645 \u062e\u0627\u0646\u0648\u0627\u062f\u06af\u06cc";
-                    }
-                    throw e;
-                  }
-                })()}
-              </React.Fragment>
-            </div>
-            <Stack__
-              as={"div"}
-              hasGap={true}
-              className={classNames(
-                projectcss.all,
-                sty.freeBox__bjZmx,
-                "no-scroll"
-              )}
-            >
-              {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-                (() => {
-                  try {
-                    return $props.experties;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return [];
-                    }
-                    throw e;
-                  }
-                })()
-              ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                const currentItem = __plasmic_item_0;
-                const currentIndex = __plasmic_idx_0;
-                return (
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__afQM
-                    )}
-                    key={currentIndex}
-                  >
-                    <React.Fragment>
-                      {(() => {
-                        try {
-                          return !!currentItem.alias_title
-                            ? currentItem.alias_title
-                            : `${currentItem.degree.name || ""} ${
-                                currentItem.expertise.name || ""
-                              }`;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return "\u0627\u062a\u0627\u0642 \u0639\u0645\u0644";
-                          }
-                          throw e;
-                        }
-                      })()}
-                    </React.Fragment>
-                  </div>
-                );
-              })}
-            </Stack__>
-          </Stack__>
-        </Stack__>
-        <div className={classNames(projectcss.all, sty.freeBox__prR0)}>
-          <PlasmicLink__
-            data-plasmic-name={"link"}
-            data-plasmic-override={overrides.link}
-            className={classNames(
-              projectcss.all,
-              projectcss.a,
-              projectcss.__wab_text,
-              sty.link
-            )}
-            component={Link}
-            href={(() => {
-              try {
-                return `https://www.paziresh24.com/dr/${$props.slug}`;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return undefined;
-                }
-                throw e;
+              {
+                "\u0645\u0634\u0627\u0647\u062f\u0647 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644"
               }
-            })()}
-            platform={"nextjs"}
-            target={"_blank"}
-          >
-            {
-              "\u0645\u0634\u0627\u0647\u062f\u0647 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644"
-            }
-          </PlasmicLink__>
-        </div>
-      </Stack__>
+            </PlasmicLink__>
+          </div>
+        </Stack__>
+      </ApiRequest>
     </div>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "avatar", "upload", "svg", "link"],
+  root: ["root", "profile", "avatar", "upload", "link"],
+  profile: ["profile", "avatar", "upload", "link"],
   avatar: ["avatar"],
-  upload: ["upload", "svg"],
-  svg: ["svg"],
+  upload: ["upload"],
   link: ["link"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -407,9 +500,9 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  profile: typeof ApiRequest;
   avatar: typeof Avatar;
   upload: typeof UploadWrapper;
-  svg: "svg";
   link: "a";
 };
 
@@ -473,9 +566,9 @@ export const PlasmicProfileHead = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    profile: makeNodeComponent("profile"),
     avatar: makeNodeComponent("avatar"),
     upload: makeNodeComponent("upload"),
-    svg: makeNodeComponent("svg"),
     link: makeNodeComponent("link"),
 
     // Metadata about props expected for PlasmicProfileHead

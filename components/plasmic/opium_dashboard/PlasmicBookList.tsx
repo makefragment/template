@@ -334,7 +334,8 @@ function PlasmicBookList__RenderFunc(props: {
             projectcss.plasmic_tokens,
             plasmic_fragment_design_system_css.plasmic_tokens,
             plasmic_antd_5_hostless_css.plasmic_tokens,
-            sty.bookList
+            sty.bookList,
+            { [sty.bookListactive]: hasVariant($state, "active", "active") }
           )}
           dir={"rtl"}
         >
@@ -1586,7 +1587,12 @@ function PlasmicBookList__RenderFunc(props: {
                       }}
                       centerId={(() => {
                         try {
-                          return $state.selectedCenterInAddPatient;
+                          return (
+                            $state.centers.find(
+                              center =>
+                                center.user_center_id == $state.selectedCenter
+                            )?.id ?? "all"
+                          );
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -1604,10 +1610,7 @@ function PlasmicBookList__RenderFunc(props: {
                       type={"web"}
                       userCenterId={(() => {
                         try {
-                          return $state.centers.find(
-                            center =>
-                              center.id === $state.selectedCenterInAddPatient
-                          ).user_center_id;
+                          return $state.selectedCenter;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
@@ -1621,7 +1624,9 @@ function PlasmicBookList__RenderFunc(props: {
                     />
                   </div>
                 }
-                className={classNames("__wab_instance", sty.dialog)}
+                className={classNames("__wab_instance", sty.dialog, {
+                  [sty.dialogactive]: hasVariant($state, "active", "active")
+                })}
                 onOpenChange={generateStateOnChangeProp($state, [
                   "dialog",
                   "open"
@@ -1632,13 +1637,9 @@ function PlasmicBookList__RenderFunc(props: {
                   (() => {
                     try {
                       return (
-                        $state.centers.length > 0 &&
                         $state.centers.find(
-                          center =>
-                            center.id === $state.selectedCenter &&
-                            center.type_id === 1 &&
-                            $state.selectedCenter !== 5532
-                        ) !== undefined
+                          item => item.user_center_id == $state.selectedCenter
+                        ).type_id == 1
                       );
                     } catch (e) {
                       if (
@@ -1666,7 +1667,14 @@ function PlasmicBookList__RenderFunc(props: {
                       }
                       className={classNames(
                         "__wab_instance",
-                        sty.button__i3Jch
+                        sty.button__i3Jch,
+                        {
+                          [sty.buttonactive__i3Jchw7TP]: hasVariant(
+                            $state,
+                            "active",
+                            "active"
+                          )
+                        }
                       )}
                       endIcon={
                         <ChevronLeftIcon

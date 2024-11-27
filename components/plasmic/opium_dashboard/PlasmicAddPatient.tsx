@@ -944,7 +944,7 @@ function PlasmicAddPatient__RenderFunc(props: {
             $steps["resetPassword"] = await $steps["resetPassword"];
           }
 
-          $steps["updateNationalCodeValue"] = true
+          $steps["updateNationalCodeValue"] = false
             ? (() => {
                 const actionArgs = {
                   variable: {
@@ -974,7 +974,7 @@ function PlasmicAddPatient__RenderFunc(props: {
             ];
           }
 
-          $steps["updateNationalCodeValue2"] = true
+          $steps["updateNationalCodeValue2"] = false
             ? (() => {
                 const actionArgs = { args: [] };
                 return $globalActions["GrowthBook.setAttributes"]?.apply(null, [
@@ -1399,10 +1399,10 @@ function PlasmicAddPatient__RenderFunc(props: {
                                           user_center_id: $props.userCenterId,
                                           type: 3,
                                           fullname:
-                                            $state.fullname?.trim() ??
+                                            $state.fullname.trim() ||
                                             $state.inputfullname.value,
                                           cell:
-                                            $state.cell?.trim() ??
+                                            $state.cell.trim() ||
                                             $state.inputcell.value,
                                           request_code:
                                             $steps.suspend.data.request_code,

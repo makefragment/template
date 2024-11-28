@@ -116,6 +116,7 @@ export type PlasmicProfilePersonal__OverridesType = {
   nationalCode?: Flex__<typeof Input>;
   medicalCode?: Flex__<typeof Input>;
   profilePersonalPhoneNumber?: Flex__<typeof ProfilePersonalPhoneNumber>;
+  providerApi?: Flex__<typeof ApiRequest>;
   notifyCellApi?: Flex__<typeof ApiRequest>;
   notifyCell?: Flex__<typeof Input>;
   profilePersonalBiography?: Flex__<typeof ProfilePersonalBiography>;
@@ -370,6 +371,24 @@ function PlasmicProfilePersonal__RenderFunc(props: {
               throw e;
             }
           })()
+      },
+      {
+        path: "providerApi.data",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "providerApi.error",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "providerApi.loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -576,47 +595,37 @@ function PlasmicProfilePersonal__RenderFunc(props: {
               />
             ) : null}
             <ApiRequest
-              data-plasmic-name={"notifyCellApi"}
-              data-plasmic-override={overrides.notifyCellApi}
-              className={classNames("__wab_instance", sty.notifyCellApi)}
-              errorDisplay={
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text___9PJ2O
-                  )}
-                >
-                  {""}
-                </div>
-              }
+              data-plasmic-name={"providerApi"}
+              data-plasmic-override={overrides.providerApi}
+              className={classNames("__wab_instance", sty.providerApi)}
+              errorDisplay={null}
               loadingDisplay={
                 <div
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text__dnc
+                    sty.text__vBmQs
                   )}
                 >
-                  {""}
+                  {"Loading..."}
                 </div>
               }
               method={"GET"}
               onError={generateStateOnChangeProp($state, [
-                "notifyCellApi",
+                "providerApi",
                 "error"
               ])}
               onLoading={generateStateOnChangeProp($state, [
-                "notifyCellApi",
+                "providerApi",
                 "loading"
               ])}
               onSuccess={generateStateOnChangeProp($state, [
-                "notifyCellApi",
+                "providerApi",
                 "data"
               ])}
               url={(() => {
                 try {
-                  return `https://apigw.paziresh24.com/v1/providers/${$state.profile.data.data.id}/notify-cell`;
+                  return `https://apigw.paziresh24.com/v1/providers?user_id=${$state.auth.data.data.id}`;
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -628,19 +637,82 @@ function PlasmicProfilePersonal__RenderFunc(props: {
                 }
               })()}
             >
-              <Input
-                data-plasmic-name={"notifyCell"}
-                data-plasmic-override={overrides.notifyCell}
-                className={classNames("__wab_instance", sty.notifyCell)}
-                onChange={generateStateOnChangeProp($state, [
-                  "notifyCell",
-                  "value"
-                ])}
-                placeholder={
-                  "\u0634\u0645\u0627\u0631\u0647 \u0645\u0646\u0634\u06cc"
+              <ApiRequest
+                data-plasmic-name={"notifyCellApi"}
+                data-plasmic-override={overrides.notifyCellApi}
+                className={classNames("__wab_instance", sty.notifyCellApi)}
+                errorDisplay={
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___9PJ2O
+                    )}
+                  >
+                    {""}
+                  </div>
                 }
-                value={generateStateValueProp($state, ["notifyCell", "value"])}
-              />
+                loadingDisplay={
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__dnc
+                    )}
+                  >
+                    {""}
+                  </div>
+                }
+                method={"GET"}
+                onError={generateStateOnChangeProp($state, [
+                  "notifyCellApi",
+                  "error"
+                ])}
+                onLoading={generateStateOnChangeProp($state, [
+                  "notifyCellApi",
+                  "loading"
+                ])}
+                onSuccess={generateStateOnChangeProp($state, [
+                  "notifyCellApi",
+                  "data"
+                ])}
+                url={(() => {
+                  try {
+                    return (() => {
+                      const providerId = $state.providerApi.data.providers.find(
+                        item => item.user_id == $state.auth.data.data.id
+                      ).id;
+                      return `https://apigw.paziresh24.com/v1/providers/${providerId}/notify-cell`;
+                    })();
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
+              >
+                <Input
+                  data-plasmic-name={"notifyCell"}
+                  data-plasmic-override={overrides.notifyCell}
+                  className={classNames("__wab_instance", sty.notifyCell)}
+                  onChange={generateStateOnChangeProp($state, [
+                    "notifyCell",
+                    "value"
+                  ])}
+                  placeholder={
+                    "\u0634\u0645\u0627\u0631\u0647 \u0645\u0646\u0634\u06cc"
+                  }
+                  type={"text"}
+                  value={generateStateValueProp($state, [
+                    "notifyCell",
+                    "value"
+                  ])}
+                />
+              </ApiRequest>
             </ApiRequest>
             {(
               hasVariant($state, "noBiography", "noBiography") ? false : true
@@ -709,8 +781,8 @@ function PlasmicProfilePersonal__RenderFunc(props: {
                                 biography:
                                   $state.profilePersonalBiography
                                     .biographyValue,
-                                employee_id: $state.medicalCode.value
-                                // "notify_cell": $state.notifyCell.value
+                                employee_id: $state.medicalCode.value,
+                                notify_cell: $state.notifyCell.value
                               };
                             } catch (e) {
                               if (
@@ -814,6 +886,7 @@ const PlasmicDescendants = {
     "nationalCode",
     "medicalCode",
     "profilePersonalPhoneNumber",
+    "providerApi",
     "notifyCellApi",
     "notifyCell",
     "profilePersonalBiography",
@@ -828,6 +901,7 @@ const PlasmicDescendants = {
     "nationalCode",
     "medicalCode",
     "profilePersonalPhoneNumber",
+    "providerApi",
     "notifyCellApi",
     "notifyCell",
     "profilePersonalBiography",
@@ -841,6 +915,7 @@ const PlasmicDescendants = {
     "nationalCode",
     "medicalCode",
     "profilePersonalPhoneNumber",
+    "providerApi",
     "notifyCellApi",
     "notifyCell",
     "profilePersonalBiography",
@@ -852,6 +927,7 @@ const PlasmicDescendants = {
     "nationalCode",
     "medicalCode",
     "profilePersonalPhoneNumber",
+    "providerApi",
     "notifyCellApi",
     "notifyCell",
     "profilePersonalBiography",
@@ -861,6 +937,7 @@ const PlasmicDescendants = {
   nationalCode: ["nationalCode"],
   medicalCode: ["medicalCode"],
   profilePersonalPhoneNumber: ["profilePersonalPhoneNumber"],
+  providerApi: ["providerApi", "notifyCellApi", "notifyCell"],
   notifyCellApi: ["notifyCellApi", "notifyCell"],
   notifyCell: ["notifyCell"],
   profilePersonalBiography: ["profilePersonalBiography"],
@@ -879,6 +956,7 @@ type NodeDefaultElementType = {
   nationalCode: typeof Input;
   medicalCode: typeof Input;
   profilePersonalPhoneNumber: typeof ProfilePersonalPhoneNumber;
+  providerApi: typeof ApiRequest;
   notifyCellApi: typeof ApiRequest;
   notifyCell: typeof Input;
   profilePersonalBiography: typeof ProfilePersonalBiography;
@@ -953,6 +1031,7 @@ export const PlasmicProfilePersonal = Object.assign(
     nationalCode: makeNodeComponent("nationalCode"),
     medicalCode: makeNodeComponent("medicalCode"),
     profilePersonalPhoneNumber: makeNodeComponent("profilePersonalPhoneNumber"),
+    providerApi: makeNodeComponent("providerApi"),
     notifyCellApi: makeNodeComponent("notifyCellApi"),
     notifyCell: makeNodeComponent("notifyCell"),
     profilePersonalBiography: makeNodeComponent("profilePersonalBiography"),

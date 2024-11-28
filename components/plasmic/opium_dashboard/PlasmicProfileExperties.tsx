@@ -5374,7 +5374,7 @@ function PlasmicProfileExperties__RenderFunc(props: {
                                         id: currentItem.id,
                                         academic_degree_id: val,
                                         alias: currentItem.alias,
-                                        speciality_id: currentItem.speciality
+                                        speciality_id: currentItem.speciality.id
                                       }
                                     ];
                                   }
@@ -5704,7 +5704,11 @@ function PlasmicProfileExperties__RenderFunc(props: {
                   );
                 })();
               })}
-              <div className={classNames(projectcss.all, sty.freeBox__hKrof)}>
+              <Stack__
+                as={"div"}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.freeBox__hKrof)}
+              >
                 {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                   (() => {
                     try {
@@ -5826,6 +5830,48 @@ function PlasmicProfileExperties__RenderFunc(props: {
                             ];
                           }
                         }).apply(null, eventArgs);
+                      },
+                      onDeleteClick: async id => {
+                        const $steps = {};
+
+                        $steps["updateExpertiseArray"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["expertiseArray"]
+                                },
+                                operation: 0,
+                                value: $state.expertiseArray.filter(
+                                  item => item.id !== currentItem.id
+                                )
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, value);
+                                return value;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateExpertiseArray"] != null &&
+                          typeof $steps["updateExpertiseArray"] === "object" &&
+                          typeof $steps["updateExpertiseArray"].then ===
+                            "function"
+                        ) {
+                          $steps["updateExpertiseArray"] = await $steps[
+                            "updateExpertiseArray"
+                          ];
+                        }
                       },
                       onExpertiseTitleChange: async (...eventArgs: any) => {
                         generateStateOnChangeProp($state, [
@@ -5999,7 +6045,7 @@ function PlasmicProfileExperties__RenderFunc(props: {
                     );
                   })();
                 })}
-              </div>
+              </Stack__>
               <Stack__
                 as={"div"}
                 hasGap={true}
@@ -6007,7 +6053,7 @@ function PlasmicProfileExperties__RenderFunc(props: {
               >
                 <Button
                   children2={
-                    "\u0630\u062e\u06cc\u0631\u0647 \u06a9\u0631\u062f\u0646 \u062a\u063a\u06cc\u0631\u0627\u062a"
+                    "\u0630\u062e\u06cc\u0631\u0647 \u06a9\u0631\u062f\u0646 \u062a\u063a\u06cc\u06cc\u0631\u0627\u062a"
                   }
                   className={classNames("__wab_instance", sty.button__wTEc8)}
                   onClick={async event => {
@@ -6028,14 +6074,22 @@ function PlasmicProfileExperties__RenderFunc(props: {
                                       ({ id, ...data }) =>
                                         $$.axios.post(
                                           "https://apigw.paziresh24.com/v1/providers-specialities",
-                                          data
+                                          data,
+                                          {
+                                            ...$ctx.Fragment.apiConfig,
+                                            ...$ctx.Fragment.previewApiConfig
+                                          }
                                         )
                                     );
                                     const oldRequests = oldExperties.map(
                                       ({ id, ...data }) =>
                                         $$.axios.patch(
                                           `https://apigw.paziresh24.com/v1/providers-specialities/${id}`,
-                                          data
+                                          data,
+                                          {
+                                            ...$ctx.Fragment.apiConfig,
+                                            ...$ctx.Fragment.previewApiConfig
+                                          }
                                         )
                                     );
                                     const responses = await Promise.all([

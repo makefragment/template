@@ -63,6 +63,10 @@ import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-impor
 import { Select } from "@/fragment/components/select"; // plasmic-import: n8ioKZzFQxrO/codeComponent
 import { Input } from "@/fragment/components/input"; // plasmic-import: ByhbQ0nAxig8/codeComponent
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
+import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
+import Checkbox from "../../Checkbox"; // plasmic-import: IDR0sAqN5tth/component
+import Dialog from "../../Dialog"; // plasmic-import: vgdY0K-oHhe6/component
+import Dialog2 from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -76,6 +80,8 @@ import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHez
 import Icon14Icon from "./icons/PlasmicIcon__Icon14"; // plasmic-import: tgZrqAaEEOY7/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: q8mRvXMvOrv9/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
+import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
+import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: z62U0rB8gsLE/icon
 
 import { v4 as __lib_uuid__v4 } from "uuid";
 
@@ -97,8 +103,15 @@ export type PlasmicProfileAddress__OverridesType = {
   citySelect?: Flex__<typeof Select>;
   input?: Flex__<typeof Input>;
   input2?: Flex__<typeof Input>;
-  button?: Flex__<typeof Button>;
   input3?: Flex__<typeof Input>;
+  galleryApi?: Flex__<typeof ApiRequest>;
+  upload?: Flex__<typeof UploadWrapper>;
+  checkbox?: Flex__<typeof Checkbox>;
+  checkbox2?: Flex__<typeof Checkbox>;
+  checkbox3?: Flex__<typeof Checkbox>;
+  checkbox4?: Flex__<typeof Checkbox>;
+  imageDialog?: Flex__<typeof Dialog>;
+  deleteImageDialog?: Flex__<typeof Dialog2>;
 };
 
 export interface DefaultProfileAddressProps {
@@ -146,6 +159,8 @@ function PlasmicProfileAddress__RenderFunc(props: {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+
+  const $globalActions = useGlobalActions?.();
 
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
@@ -4114,19 +4129,73 @@ function PlasmicProfileAddress__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return undefined;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()
+          "\u0648\u06cc\u0632\u06cc\u062a"
+      },
+      {
+        path: "galleryApi.data",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "galleryApi.error",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "galleryApi.loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "imageDialog.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "selectdImage",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "deleteImageDialog.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "upload.files",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "checkbox.isChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "checkbox2.isChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "checkbox3.isChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "checkbox4.isChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -4454,8 +4523,6 @@ function PlasmicProfileAddress__RenderFunc(props: {
               );
             })}
             <Button
-              data-plasmic-name={"button"}
-              data-plasmic-override={overrides.button}
               children2={
                 <div
                   className={classNames(
@@ -4469,7 +4536,7 @@ function PlasmicProfileAddress__RenderFunc(props: {
                   }
                 </div>
               }
-              className={classNames("__wab_instance", sty.button)}
+              className={classNames("__wab_instance", sty.button__omVta)}
               color={"text"}
               onClick={async event => {
                 const $steps = {};
@@ -4534,8 +4601,547 @@ function PlasmicProfileAddress__RenderFunc(props: {
             type={"text"}
             value={generateStateValueProp($state, ["input3", "value"])}
           />
+
+          <ApiRequest
+            data-plasmic-name={"galleryApi"}
+            data-plasmic-override={overrides.galleryApi}
+            className={classNames("__wab_instance", sty.galleryApi)}
+            errorDisplay={null}
+            loadingDisplay={
+              <div className={classNames(projectcss.all, sty.freeBox___4HCMu)}>
+                <Icon10Icon
+                  className={classNames(projectcss.all, sty.svg__zaVdh)}
+                  role={"img"}
+                />
+              </div>
+            }
+            method={"GET"}
+            onError={generateStateOnChangeProp($state, ["galleryApi", "error"])}
+            onLoading={generateStateOnChangeProp($state, [
+              "galleryApi",
+              "loading"
+            ])}
+            onSuccess={generateStateOnChangeProp($state, [
+              "galleryApi",
+              "data"
+            ])}
+            url={(() => {
+              try {
+                return (() => {
+                  const centerId = $state.centersApi.data.data.find(
+                    item => item.type_id == 1
+                  ).id;
+                  return `https://api.paziresh24.com/V1/doctor/center/gallery?center_id=${centerId}`;
+                })();
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
+          >
+            <Stack__
+              as={"div"}
+              hasGap={true}
+              className={classNames(
+                projectcss.all,
+                sty.freeBox__axO8D,
+                "no-scroll"
+              )}
+            >
+              {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                (() => {
+                  try {
+                    return $state.galleryApi.data.data;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return [];
+                    }
+                    throw e;
+                  }
+                })()
+              ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                const currentItem = __plasmic_item_0;
+                const currentIndex = __plasmic_idx_0;
+                return (
+                  <PlasmicImg__
+                    alt={""}
+                    className={classNames(sty.img__feGoA)}
+                    displayHeight={"112px"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"auto"}
+                    height={``}
+                    key={currentIndex}
+                    loading={"lazy"}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateDialogOpen"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["imageDialog", "open"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateDialogOpen"] != null &&
+                        typeof $steps["updateDialogOpen"] === "object" &&
+                        typeof $steps["updateDialogOpen"].then === "function"
+                      ) {
+                        $steps["updateDialogOpen"] = await $steps[
+                          "updateDialogOpen"
+                        ];
+                      }
+
+                      $steps["updateSelectdImage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["selectdImage"]
+                              },
+                              operation: 0,
+                              value: currentItem
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateSelectdImage"] != null &&
+                        typeof $steps["updateSelectdImage"] === "object" &&
+                        typeof $steps["updateSelectdImage"].then === "function"
+                      ) {
+                        $steps["updateSelectdImage"] = await $steps[
+                          "updateSelectdImage"
+                        ];
+                      }
+                    }}
+                    src={(() => {
+                      try {
+                        return currentItem.url;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
+                        }
+                        throw e;
+                      }
+                    })()}
+                  />
+                );
+              })}
+            </Stack__>
+          </ApiRequest>
+          <UploadWrapper
+            data-plasmic-name={"upload"}
+            data-plasmic-override={overrides.upload}
+            accept={""}
+            className={classNames("__wab_instance", sty.upload)}
+            files={generateStateValueProp($state, ["upload", "files"])}
+            onFilesChange={generateStateOnChangeProp($state, [
+              "upload",
+              "files"
+            ])}
+            showUploadList={true}
+          >
+            <Stack__
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox___0EeuL)}
+            >
+              <Icon2Icon
+                className={classNames(projectcss.all, sty.svg__mDSc2)}
+                role={"img"}
+              />
+
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__irtxf
+                )}
+              >
+                {"\u0639\u06a9\u0633 \u0645\u0637\u0628"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__bJllt
+                )}
+              >
+                {
+                  "( \u062d\u062f\u0627\u06a9\u062b\u0631 \u06cc\u06a9 \u0645\u06af\u0627\u0628\u0627\u06cc\u062a )"
+                }
+              </div>
+            </Stack__>
+          </UploadWrapper>
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__qaWiL)}
+          >
+            <Checkbox
+              data-plasmic-name={"checkbox"}
+              data-plasmic-override={overrides.checkbox}
+              className={classNames("__wab_instance", sty.checkbox)}
+              isChecked={
+                generateStateValueProp($state, ["checkbox", "isChecked"]) ??
+                false
+              }
+              name={"metro"}
+              onChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["checkbox", "isChecked"])(
+                  eventArgs[0]
+                );
+              }}
+            >
+              {
+                "\u062f\u0633\u062a\u0631\u0633\u06cc \u0628\u0647 \u0645\u062a\u0631\u0648 \u062f\u0627\u0631\u062f"
+              }
+            </Checkbox>
+            <Checkbox
+              data-plasmic-name={"checkbox2"}
+              data-plasmic-override={overrides.checkbox2}
+              className={classNames("__wab_instance", sty.checkbox2)}
+              isChecked={
+                generateStateValueProp($state, ["checkbox2", "isChecked"]) ??
+                false
+              }
+              name={"metro"}
+              onChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["checkbox2", "isChecked"])(
+                  eventArgs[0]
+                );
+              }}
+            >
+              {
+                "\u0622\u0633\u0627\u0646\u0633\u0648\u0631 \u062f\u0627\u0631\u062f"
+              }
+            </Checkbox>
+            <Checkbox
+              data-plasmic-name={"checkbox3"}
+              data-plasmic-override={overrides.checkbox3}
+              className={classNames("__wab_instance", sty.checkbox3)}
+              isChecked={
+                generateStateValueProp($state, ["checkbox3", "isChecked"]) ??
+                false
+              }
+              name={"metro"}
+              onChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["checkbox3", "isChecked"])(
+                  eventArgs[0]
+                );
+              }}
+            >
+              {
+                "\u0627\u0645\u06a9\u0627\u0646 \u067e\u0630\u06cc\u0631\u0634 \u0628\u06cc\u0645\u0627\u0631\u0627\u0646 \u0648\u06cc\u0644\u0686\u0631\u06cc \u0648\u062c\u0648\u062f \u062f\u0627\u0631\u062f"
+              }
+            </Checkbox>
+            <Checkbox
+              data-plasmic-name={"checkbox4"}
+              data-plasmic-override={overrides.checkbox4}
+              className={classNames("__wab_instance", sty.checkbox4)}
+              isChecked={
+                generateStateValueProp($state, ["checkbox4", "isChecked"]) ??
+                false
+              }
+              name={"metro"}
+              onChange={(...eventArgs) => {
+                generateStateOnChangeProp($state, ["checkbox4", "isChecked"])(
+                  eventArgs[0]
+                );
+              }}
+            >
+              {
+                "\u062c\u0627\u06cc \u067e\u0627\u0631\u06a9 \u062f\u0627\u0631\u062f"
+              }
+            </Checkbox>
+          </Stack__>
+          <Button
+            children2={
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__hz6N0
+                )}
+              >
+                {
+                  "\u0630\u062e\u06cc\u0631\u0647 \u062a\u063a\u06cc\u06cc\u0631\u0627\u062a"
+                }
+              </div>
+            }
+            className={classNames("__wab_instance", sty.button___9E4Bm)}
+          />
         </Stack__>
       </ApiRequest>
+      <Dialog
+        data-plasmic-name={"imageDialog"}
+        data-plasmic-override={overrides.imageDialog}
+        body={
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__n2Bkj)}
+          >
+            <PlasmicImg__
+              alt={""}
+              className={classNames(sty.img__s90Ha)}
+              displayHeight={"100%"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"400px"}
+              loading={"lazy"}
+              src={(() => {
+                try {
+                  return $state.selectdImage.url;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
+            />
+
+            <Button
+              children2={"\u062d\u0630\u0641 \u062a\u0635\u0648\u06cc\u0631"}
+              className={classNames("__wab_instance", sty.button__n9Xv)}
+              color={"softRed"}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["updateDeleteImageDialogOpen"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["deleteImageDialog", "open"]
+                        },
+                        operation: 4
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        const oldValue = $stateGet(objRoot, variablePath);
+                        $stateSet(objRoot, variablePath, !oldValue);
+                        return !oldValue;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateDeleteImageDialogOpen"] != null &&
+                  typeof $steps["updateDeleteImageDialogOpen"] === "object" &&
+                  typeof $steps["updateDeleteImageDialogOpen"].then ===
+                    "function"
+                ) {
+                  $steps["updateDeleteImageDialogOpen"] = await $steps[
+                    "updateDeleteImageDialogOpen"
+                  ];
+                }
+              }}
+              showStartIcon={true}
+              startIcon={
+                <Icon4Icon
+                  className={classNames(projectcss.all, sty.svg__cRSg5)}
+                  role={"img"}
+                />
+              }
+            />
+          </Stack__>
+        }
+        className={classNames("__wab_instance", sty.imageDialog)}
+        noTrigger={true}
+        onOpenChange={generateStateOnChangeProp($state, [
+          "imageDialog",
+          "open"
+        ])}
+        open={generateStateValueProp($state, ["imageDialog", "open"])}
+        title={""}
+        trigger={null}
+      />
+
+      <Dialog2
+        data-plasmic-name={"deleteImageDialog"}
+        data-plasmic-override={overrides.deleteImageDialog}
+        body={
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__bViAg)}
+          >
+            <Button
+              children2={"\u0628\u0644\u0647 \u0648 \u062d\u0630\u0641"}
+              className={classNames("__wab_instance", sty.button___3YtD)}
+              color={"red"}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["invokeGlobalAction"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "DELETE",
+                          (() => {
+                            try {
+                              return `https://api.paziresh24.com/V1/doctor/center/gallery/${$state.selectdImage.id}`;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
+                      };
+                      return $globalActions["Fragment.apiRequest"]?.apply(
+                        null,
+                        [...actionArgs.args]
+                      );
+                    })()
+                  : undefined;
+                if (
+                  $steps["invokeGlobalAction"] != null &&
+                  typeof $steps["invokeGlobalAction"] === "object" &&
+                  typeof $steps["invokeGlobalAction"].then === "function"
+                ) {
+                  $steps["invokeGlobalAction"] = await $steps[
+                    "invokeGlobalAction"
+                  ];
+                }
+              }}
+            />
+
+            <Button
+              children2={
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___4APaC
+                  )}
+                >
+                  {"\u0627\u0646\u0635\u0631\u0627\u0641"}
+                </div>
+              }
+              className={classNames("__wab_instance", sty.button__zVkOf)}
+              color={"softSand"}
+              onClick={async event => {
+                const $steps = {};
+
+                $steps["updateDeleteImageDialogOpen"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["deleteImageDialog", "open"]
+                        },
+                        operation: 4
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        const oldValue = $stateGet(objRoot, variablePath);
+                        $stateSet(objRoot, variablePath, !oldValue);
+                        return !oldValue;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateDeleteImageDialogOpen"] != null &&
+                  typeof $steps["updateDeleteImageDialogOpen"] === "object" &&
+                  typeof $steps["updateDeleteImageDialogOpen"].then ===
+                    "function"
+                ) {
+                  $steps["updateDeleteImageDialogOpen"] = await $steps[
+                    "updateDeleteImageDialogOpen"
+                  ];
+                }
+              }}
+            />
+          </Stack__>
+        }
+        className={classNames("__wab_instance", sty.deleteImageDialog)}
+        noTrigger={true}
+        onOpenChange={generateStateOnChangeProp($state, [
+          "deleteImageDialog",
+          "open"
+        ])}
+        open={generateStateValueProp($state, ["deleteImageDialog", "open"])}
+        title={
+          "\u0622\u06cc\u0627 \u0627\u0632 \u062d\u0630\u0641 \u062a\u0635\u0648\u06cc\u0631 \u0645\u0637\u0645\u0626\u0646 \u0647\u0633\u062a\u06cc\u062f\u061f"
+        }
+        trigger={null}
+      />
     </div>
   ) as React.ReactElement | null;
 }
@@ -4548,8 +5154,15 @@ const PlasmicDescendants = {
     "citySelect",
     "input",
     "input2",
-    "button",
-    "input3"
+    "input3",
+    "galleryApi",
+    "upload",
+    "checkbox",
+    "checkbox2",
+    "checkbox3",
+    "checkbox4",
+    "imageDialog",
+    "deleteImageDialog"
   ],
   centersApi: [
     "centersApi",
@@ -4557,15 +5170,27 @@ const PlasmicDescendants = {
     "citySelect",
     "input",
     "input2",
-    "button",
-    "input3"
+    "input3",
+    "galleryApi",
+    "upload",
+    "checkbox",
+    "checkbox2",
+    "checkbox3",
+    "checkbox4"
   ],
   provinceSelect: ["provinceSelect"],
   citySelect: ["citySelect"],
   input: ["input"],
   input2: ["input2"],
-  button: ["button"],
-  input3: ["input3"]
+  input3: ["input3"],
+  galleryApi: ["galleryApi"],
+  upload: ["upload"],
+  checkbox: ["checkbox"],
+  checkbox2: ["checkbox2"],
+  checkbox3: ["checkbox3"],
+  checkbox4: ["checkbox4"],
+  imageDialog: ["imageDialog"],
+  deleteImageDialog: ["deleteImageDialog"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -4577,8 +5202,15 @@ type NodeDefaultElementType = {
   citySelect: typeof Select;
   input: typeof Input;
   input2: typeof Input;
-  button: typeof Button;
   input3: typeof Input;
+  galleryApi: typeof ApiRequest;
+  upload: typeof UploadWrapper;
+  checkbox: typeof Checkbox;
+  checkbox2: typeof Checkbox;
+  checkbox3: typeof Checkbox;
+  checkbox4: typeof Checkbox;
+  imageDialog: typeof Dialog;
+  deleteImageDialog: typeof Dialog2;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -4646,8 +5278,15 @@ export const PlasmicProfileAddress = Object.assign(
     citySelect: makeNodeComponent("citySelect"),
     input: makeNodeComponent("input"),
     input2: makeNodeComponent("input2"),
-    button: makeNodeComponent("button"),
     input3: makeNodeComponent("input3"),
+    galleryApi: makeNodeComponent("galleryApi"),
+    upload: makeNodeComponent("upload"),
+    checkbox: makeNodeComponent("checkbox"),
+    checkbox2: makeNodeComponent("checkbox2"),
+    checkbox3: makeNodeComponent("checkbox3"),
+    checkbox4: makeNodeComponent("checkbox4"),
+    imageDialog: makeNodeComponent("imageDialog"),
+    deleteImageDialog: makeNodeComponent("deleteImageDialog"),
 
     // Metadata about props expected for PlasmicProfileAddress
     internalVariantProps: PlasmicProfileAddress__VariantProps,

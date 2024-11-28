@@ -136,7 +136,7 @@ export type PlasmicUncertainBookStatusBookCard__OverridesType = {
   root?: Flex__<"div">;
   dialog?: Flex__<typeof Dialog>;
   ساعتوتاریخ?: Flex__<"div">;
-  دیالوگحذفنوبت?: Flex__<typeof Dialog>;
+  dialogdeletebook?: Flex__<typeof Dialog>;
   bookState?: Flex__<"div">;
   dialog2?: Flex__<typeof Dialog>;
   descriptionInput?: Flex__<typeof TextInput>;
@@ -216,7 +216,7 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "دیالوگحذفنوبت.open",
+        path: "dialogdeletebook.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -586,12 +586,12 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
                     onClick={async event => {
                       const $steps = {};
 
-                      $steps["updateStateدالوحذفنوبتOpen"] = true
+                      $steps["updateDialogdeletebookOpen"] = true
                         ? (() => {
                             const actionArgs = {
                               variable: {
                                 objRoot: $state,
-                                variablePath: ["دالوحذفنوبت", "open"]
+                                variablePath: ["dialogdeletebook", "open"]
                               },
                               operation: 0,
                               value: true
@@ -613,14 +613,14 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
                           })()
                         : undefined;
                       if (
-                        $steps["updateStateدالوحذفنوبتOpen"] != null &&
-                        typeof $steps["updateStateدالوحذفنوبتOpen"] ===
+                        $steps["updateDialogdeletebookOpen"] != null &&
+                        typeof $steps["updateDialogdeletebookOpen"] ===
                           "object" &&
-                        typeof $steps["updateStateدالوحذفنوبتOpen"].then ===
+                        typeof $steps["updateDialogdeletebookOpen"].then ===
                           "function"
                       ) {
-                        $steps["updateStateدالوحذفنوبتOpen"] = await $steps[
-                          "updateStateدالوحذفنوبتOpen"
+                        $steps["updateDialogdeletebookOpen"] = await $steps[
+                          "updateDialogdeletebookOpen"
                         ];
                       }
 
@@ -679,10 +679,8 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
                 ) : null}
               </Stack__>
               <Dialog
-                data-plasmic-name={
-                  "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
-                }
-                data-plasmic-override={overrides.دیالوگحذفنوبت}
+                data-plasmic-name={"dialogdeletebook"}
+                data-plasmic-override={overrides.dialogdeletebook}
                 body={
                   <Stack__
                     as={"div"}
@@ -848,7 +846,7 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
                               const actionArgs = {
                                 variable: {
                                   objRoot: $state,
-                                  variablePath: ["دالوحذفنوبت", "open"]
+                                  variablePath: ["dialogdeletebook", "open"]
                                 },
                                 operation: 0,
                                 value: false
@@ -1114,12 +1112,15 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
                     />
                   </Stack__>
                 }
-                className={classNames("__wab_instance", sty.دیالوگحذفنوبت)}
+                className={classNames("__wab_instance", sty.dialogdeletebook)}
                 onOpenChange={generateStateOnChangeProp($state, [
-                  "دیالوگحذفنوبت",
+                  "dialogdeletebook",
                   "open"
                 ])}
-                open={generateStateValueProp($state, ["دیالوگحذفنوبت", "open"])}
+                open={generateStateValueProp($state, [
+                  "dialogdeletebook",
+                  "open"
+                ])}
                 title={
                   <div
                     className={classNames(
@@ -2015,7 +2016,7 @@ const PlasmicDescendants = {
     "root",
     "dialog",
     "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e",
-    "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a",
+    "dialogdeletebook",
     "bookState",
     "dialog2",
     "descriptionInput",
@@ -2025,12 +2026,10 @@ const PlasmicDescendants = {
   dialog: [
     "dialog",
     "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e",
-    "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
+    "dialogdeletebook"
   ],
   ساعتوتاریخ: ["\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e"],
-  دیالوگحذفنوبت: [
-    "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
-  ],
+  dialogdeletebook: ["dialogdeletebook"],
   bookState: [
     "bookState",
     "dialog2",
@@ -2050,7 +2049,7 @@ type NodeDefaultElementType = {
   root: "div";
   dialog: typeof Dialog;
   ساعتوتاریخ: "div";
-  دیالوگحذفنوبت: typeof Dialog;
+  dialogdeletebook: typeof Dialog;
   bookState: "div";
   dialog2: typeof Dialog;
   descriptionInput: typeof TextInput;
@@ -2126,9 +2125,7 @@ export const PlasmicUncertainBookStatusBookCard = Object.assign(
     ساعتوتاریخ: makeNodeComponent(
       "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e"
     ),
-    دیالوگحذفنوبت: makeNodeComponent(
-      "\u062f\u06cc\u0627\u0644\u0648\u06af\u062d\u0630\u0641\u0646\u0648\u0628\u062a"
-    ),
+    dialogdeletebook: makeNodeComponent("dialogdeletebook"),
     bookState: makeNodeComponent("bookState"),
     dialog2: makeNodeComponent("dialog2"),
     descriptionInput: makeNodeComponent("descriptionInput"),

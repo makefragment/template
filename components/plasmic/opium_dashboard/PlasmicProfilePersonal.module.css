@@ -80,6 +80,17 @@
 .profilePersonalPhoneNumber:global(.__wab_instance) {
   max-width: 100%;
 }
+.providerApi:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__vBmQs {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
 .notifyCellApi:global(.__wab_instance) {
   max-width: 100%;
   object-fit: cover;

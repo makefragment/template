@@ -330,7 +330,7 @@ function PlasmicDrCenters__RenderFunc(props: {
             ) : null}
             {(() => {
               try {
-                return $props.centers.length > 3;
+                return $props.centers.length > 5;
               } catch (e) {
                 if (
                   e instanceof TypeError ||

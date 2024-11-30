@@ -1753,7 +1753,11 @@ function PlasmicBookList__RenderFunc(props: {
           >
             {(() => {
               try {
-                return $state.selectedCenter === "5532";
+                return (
+                  $state.centers.find(
+                    center => center.id === $state.selectedCenter
+                  ).id === "5532"
+                );
               } catch (e) {
                 if (
                   e instanceof TypeError ||

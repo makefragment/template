@@ -1836,33 +1836,6 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicProfileAddress.module.css",
           "scheme": "blackbox",
           "componentType": "component"
-        },
-        {
-          "id": "ji6-7c0UJqLt",
-          "name": "Button",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicButton.tsx",
-          "importSpec": {
-            "modulePath": "Button.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicButton.module.css",
-          "scheme": "blackbox",
-          "componentType": "component",
-          "plumeType": "button"
-        },
-        {
-          "id": "vgdY0K-oHhe6",
-          "name": "Dialog",
-          "type": "managed",
-          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
-          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicDialog.tsx",
-          "importSpec": {
-            "modulePath": "Dialog.tsx"
-          },
-          "cssFilePath": "plasmic/opium_dashboard/PlasmicDialog.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
         }
       ],
       "icons": [

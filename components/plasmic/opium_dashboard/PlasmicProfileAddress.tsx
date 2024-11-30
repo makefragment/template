@@ -65,8 +65,7 @@ import { Input } from "@/fragment/components/input"; // plasmic-import: ByhbQ0nA
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import Checkbox from "../../Checkbox"; // plasmic-import: IDR0sAqN5tth/component
-import Dialog from "../../Dialog"; // plasmic-import: vgdY0K-oHhe6/component
-import Dialog2 from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
+import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -111,7 +110,7 @@ export type PlasmicProfileAddress__OverridesType = {
   checkbox3?: Flex__<typeof Checkbox>;
   checkbox4?: Flex__<typeof Checkbox>;
   imageDialog?: Flex__<typeof Dialog>;
-  deleteImageDialog?: Flex__<typeof Dialog2>;
+  deleteImageDialog?: Flex__<typeof Dialog>;
 };
 
 export interface DefaultProfileAddressProps {
@@ -4150,22 +4149,10 @@ function PlasmicProfileAddress__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "imageDialog.open",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
-      },
-      {
         path: "selectdImage",
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
-      },
-      {
-        path: "deleteImageDialog.open",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "upload.files",
@@ -4193,6 +4180,18 @@ function PlasmicProfileAddress__RenderFunc(props: {
       },
       {
         path: "checkbox4.isChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "imageDialog.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "deleteImageDialog.open",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -4927,11 +4926,11 @@ function PlasmicProfileAddress__RenderFunc(props: {
           <Stack__
             as={"div"}
             hasGap={true}
-            className={classNames(projectcss.all, sty.freeBox__n2Bkj)}
+            className={classNames(projectcss.all, sty.freeBox__rykZm)}
           >
             <PlasmicImg__
               alt={""}
-              className={classNames(sty.img__s90Ha)}
+              className={classNames(sty.img__sXkNt)}
               displayHeight={"100%"}
               displayMaxHeight={"none"}
               displayMaxWidth={"100%"}
@@ -4956,12 +4955,12 @@ function PlasmicProfileAddress__RenderFunc(props: {
 
             <Button
               children2={"\u062d\u0630\u0641 \u062a\u0635\u0648\u06cc\u0631"}
-              className={classNames("__wab_instance", sty.button__n9Xv)}
+              className={classNames("__wab_instance", sty.button___03UTe)}
               color={"softRed"}
               onClick={async event => {
                 const $steps = {};
 
-                $steps["updateDeleteImageDialogOpen"] = true
+                $steps["updateDeleteImageDialog2Open"] = true
                   ? (() => {
                       const actionArgs = {
                         variable: {
@@ -4988,20 +4987,20 @@ function PlasmicProfileAddress__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["updateDeleteImageDialogOpen"] != null &&
-                  typeof $steps["updateDeleteImageDialogOpen"] === "object" &&
-                  typeof $steps["updateDeleteImageDialogOpen"].then ===
+                  $steps["updateDeleteImageDialog2Open"] != null &&
+                  typeof $steps["updateDeleteImageDialog2Open"] === "object" &&
+                  typeof $steps["updateDeleteImageDialog2Open"].then ===
                     "function"
                 ) {
-                  $steps["updateDeleteImageDialogOpen"] = await $steps[
-                    "updateDeleteImageDialogOpen"
+                  $steps["updateDeleteImageDialog2Open"] = await $steps[
+                    "updateDeleteImageDialog2Open"
                   ];
                 }
               }}
               showStartIcon={true}
               startIcon={
                 <Icon4Icon
-                  className={classNames(projectcss.all, sty.svg__cRSg5)}
+                  className={classNames(projectcss.all, sty.svg__bXrfn)}
                   role={"img"}
                 />
               }
@@ -5019,18 +5018,18 @@ function PlasmicProfileAddress__RenderFunc(props: {
         trigger={null}
       />
 
-      <Dialog2
+      <Dialog
         data-plasmic-name={"deleteImageDialog"}
         data-plasmic-override={overrides.deleteImageDialog}
         body={
           <Stack__
             as={"div"}
             hasGap={true}
-            className={classNames(projectcss.all, sty.freeBox__bViAg)}
+            className={classNames(projectcss.all, sty.freeBox__qdRDn)}
           >
             <Button
               children2={"\u0628\u0644\u0647 \u0648 \u062d\u0630\u0641"}
-              className={classNames("__wab_instance", sty.button___3YtD)}
+              className={classNames("__wab_instance", sty.button__voqZ5)}
               color={"red"}
               onClick={async event => {
                 const $steps = {};
@@ -5079,18 +5078,18 @@ function PlasmicProfileAddress__RenderFunc(props: {
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text___4APaC
+                    sty.text___23Khc
                   )}
                 >
                   {"\u0627\u0646\u0635\u0631\u0627\u0641"}
                 </div>
               }
-              className={classNames("__wab_instance", sty.button__zVkOf)}
+              className={classNames("__wab_instance", sty.button___5FBum)}
               color={"softSand"}
               onClick={async event => {
                 const $steps = {};
 
-                $steps["updateDeleteImageDialogOpen"] = true
+                $steps["updateDeleteImageDialog2Open"] = true
                   ? (() => {
                       const actionArgs = {
                         variable: {
@@ -5117,13 +5116,13 @@ function PlasmicProfileAddress__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["updateDeleteImageDialogOpen"] != null &&
-                  typeof $steps["updateDeleteImageDialogOpen"] === "object" &&
-                  typeof $steps["updateDeleteImageDialogOpen"].then ===
+                  $steps["updateDeleteImageDialog2Open"] != null &&
+                  typeof $steps["updateDeleteImageDialog2Open"] === "object" &&
+                  typeof $steps["updateDeleteImageDialog2Open"].then ===
                     "function"
                 ) {
-                  $steps["updateDeleteImageDialogOpen"] = await $steps[
-                    "updateDeleteImageDialogOpen"
+                  $steps["updateDeleteImageDialog2Open"] = await $steps[
+                    "updateDeleteImageDialog2Open"
                   ];
                 }
               }}
@@ -5210,7 +5209,7 @@ type NodeDefaultElementType = {
   checkbox3: typeof Checkbox;
   checkbox4: typeof Checkbox;
   imageDialog: typeof Dialog;
-  deleteImageDialog: typeof Dialog2;
+  deleteImageDialog: typeof Dialog;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";

@@ -813,14 +813,16 @@ function PlasmicDrCenters__RenderFunc(props: {
                     try {
                       return (() => {
                         const selectedCenter = $props.centers.find(
-                          center =>
-                            center.user_center_id == $state.selectedCenter
+                          center => center.id == $state.selectedCenter
                         );
                         if ($state.selectedCenter == "all") return "کل نوبت‌ها";
-                        if (selectedCenter?.id == "5532")
+                        if ($state.selectedCenter == "5532")
                           return "نوبت‌های آنلاین";
-                        if (selectedCenter?.id !== "5532") {
-                          if (selectedCenter && selectedCenter.type_id !== 1) {
+                        if ($state.selectedCenter !== "5532") {
+                          if (
+                            $state.selectedCenter &&
+                            selectedCenter.type_id !== 1
+                          ) {
                             return selectedCenter.name;
                           }
                         }

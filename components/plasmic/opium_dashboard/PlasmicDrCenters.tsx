@@ -336,7 +336,7 @@ function PlasmicDrCenters__RenderFunc(props: {
                   e instanceof TypeError ||
                   e?.plasmicType === "PlasmicUndefinedDataError"
                 ) {
-                  return true;
+                  return false;
                 }
                 throw e;
               }
@@ -350,9 +350,7 @@ function PlasmicDrCenters__RenderFunc(props: {
                     (e => e.target?.value).apply(null, eventArgs)
                   );
                 }}
-                placeholder={
-                  "\u062c\u0633\u062a\u062c\u0648\u06cc \u067e\u0632\u0634\u06a9 ..."
-                }
+                placeholder={"\u062c\u0633\u062a\u062c\u0648 ..."}
                 value={
                   generateStateValueProp($state, ["textInput", "value"]) ?? ""
                 }

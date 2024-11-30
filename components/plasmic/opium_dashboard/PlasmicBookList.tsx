@@ -117,7 +117,6 @@ export type PlasmicBookList__OverridesType = {
   patientList?: Flex__<typeof PatientList>;
   addPatient?: Flex__<"div">;
   dialog?: Flex__<typeof Dialog>;
-  drCenters2?: Flex__<typeof DrCenters>;
   onOffButton?: Flex__<"div">;
   activeDeactiveOnlineVisit?: Flex__<"div">;
   determiningTheSituationDialog?: Flex__<typeof Dialog>;
@@ -193,12 +192,6 @@ function PlasmicBookList__RenderFunc(props: {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => "all"
-      },
-      {
-        path: "drCenters2.selectedCenter",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "selectedCenterInAddPatient",
@@ -1338,39 +1331,6 @@ function PlasmicBookList__RenderFunc(props: {
                 ) {
                   $steps["updateActive"] = await $steps["updateActive"];
                 }
-
-                $steps["updateDialogOpen"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["dialog", "open"]
-                        },
-                        operation: 0
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["updateDialogOpen"] != null &&
-                  typeof $steps["updateDialogOpen"] === "object" &&
-                  typeof $steps["updateDialogOpen"].then === "function"
-                ) {
-                  $steps["updateDialogOpen"] = await $steps["updateDialogOpen"];
-                }
               }}
             />
 
@@ -1475,76 +1435,6 @@ function PlasmicBookList__RenderFunc(props: {
                   <div
                     className={classNames(projectcss.all, sty.freeBox___8Ydnx)}
                   >
-                    <DrCenters
-                      data-plasmic-name={"drCenters2"}
-                      data-plasmic-override={overrides.drCenters2}
-                      centers={(() => {
-                        try {
-                          return $state.centers.filter(
-                            center => center.id !== "5532"
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return undefined;
-                          }
-                          throw e;
-                        }
-                      })()}
-                      className={classNames("__wab_instance", sty.drCenters2)}
-                      hasAllOption={false}
-                      onSelectedCenterChange={async (...eventArgs: any) => {
-                        generateStateOnChangeProp($state, [
-                          "drCenters2",
-                          "selectedCenter"
-                        ]).apply(null, eventArgs);
-                        (async val => {
-                          const $steps = {};
-
-                          $steps["updateSelectedCenterInAddPatient"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["selectedCenterInAddPatient"]
-                                  },
-                                  operation: 0,
-                                  value: val
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateSelectedCenterInAddPatient"] !=
-                              null &&
-                            typeof $steps[
-                              "updateSelectedCenterInAddPatient"
-                            ] === "object" &&
-                            typeof $steps["updateSelectedCenterInAddPatient"]
-                              .then === "function"
-                          ) {
-                            $steps["updateSelectedCenterInAddPatient"] =
-                              await $steps["updateSelectedCenterInAddPatient"];
-                          }
-                        }).apply(null, eventArgs);
-                      }}
-                    />
-
                     <AddPatient
                       booked={async () => {
                         const $steps = {};
@@ -1755,7 +1645,7 @@ function PlasmicBookList__RenderFunc(props: {
               try {
                 return (
                   $state.centers.find(
-                    center => center.id === $state.selectedCenter
+                    center => center.user_center_id === $state.selectedCenter
                   ).id === "5532"
                 );
               } catch (e) {
@@ -2897,7 +2787,6 @@ const PlasmicDescendants = {
     "patientList",
     "addPatient",
     "dialog",
-    "drCenters2",
     "onOffButton",
     "activeDeactiveOnlineVisit",
     "determiningTheSituationDialog",
@@ -2937,9 +2826,8 @@ const PlasmicDescendants = {
   center: ["center", "drCenters", "patientList"],
   drCenters: ["drCenters"],
   patientList: ["patientList"],
-  addPatient: ["addPatient", "dialog", "drCenters2"],
-  dialog: ["dialog", "drCenters2"],
-  drCenters2: ["drCenters2"],
+  addPatient: ["addPatient", "dialog"],
+  dialog: ["dialog"],
   onOffButton: [
     "onOffButton",
     "activeDeactiveOnlineVisit",
@@ -2977,7 +2865,6 @@ type NodeDefaultElementType = {
   patientList: typeof PatientList;
   addPatient: "div";
   dialog: typeof Dialog;
-  drCenters2: typeof DrCenters;
   onOffButton: "div";
   activeDeactiveOnlineVisit: "div";
   determiningTheSituationDialog: typeof Dialog;
@@ -3063,7 +2950,6 @@ export const PlasmicBookList = Object.assign(
     patientList: makeNodeComponent("patientList"),
     addPatient: makeNodeComponent("addPatient"),
     dialog: makeNodeComponent("dialog"),
-    drCenters2: makeNodeComponent("drCenters2"),
     onOffButton: makeNodeComponent("onOffButton"),
     activeDeactiveOnlineVisit: makeNodeComponent("activeDeactiveOnlineVisit"),
     determiningTheSituationDialog: makeNodeComponent(

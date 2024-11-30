@@ -57,9 +57,11 @@
   left: auto;
   top: auto;
   background: #ffffff00;
+  outline-style: none;
   min-width: 0;
   padding: 0px;
-  border-width: 0px;
+  border-style: none;
+  border-color: transparent;
 }
 .inputisDisabled {
   cursor: not-allowed;
@@ -67,8 +69,18 @@
 .inputcolor_dark {
   color: #ffffff;
 }
+.root .input___focusVisibleWithin {
+  border-style: none;
+}
+.root:focus-within .input {
+  border-style: none;
+}
+.root .input:focus {
+  border-style: none;
+}
 .root .input::placeholder {
   color: #706f6c;
+  border-style: none;
 }
 .rootcolor_dark .inputcolor_dark::placeholder {
   color: #c8c7c1;

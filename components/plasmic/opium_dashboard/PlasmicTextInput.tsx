@@ -253,8 +253,10 @@ function PlasmicTextInput__RenderFunc(props: {
     useTrigger("useFocusVisibleWithin", {
       isTextInput: false
     });
+  const [isInputFocus, triggerInputFocusProps] = useTrigger("useFocused", {});
   const triggers = {
-    focusVisibleWithin_root: isRootFocusVisibleWithin
+    focusVisibleWithin_root: isRootFocusVisibleWithin,
+    focus_input: isInputFocus
   };
 
   return (
@@ -361,6 +363,7 @@ function PlasmicTextInput__RenderFunc(props: {
         required={args.required}
         type={args.type}
         value={generateStateValueProp($state, ["input", "value"]) ?? ""}
+        data-plasmic-trigger-props={[triggerInputFocusProps]}
       />
 
       <div

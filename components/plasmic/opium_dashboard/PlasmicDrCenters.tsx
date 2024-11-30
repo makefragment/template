@@ -61,6 +61,7 @@ import {
 
 import { Popover } from "@/fragment/components/popover"; // plasmic-import: umJXC-fyxDQn/codeComponent
 import DrCenter from "../../DrCenter"; // plasmic-import: Y5f_I7uzx8ZQ/component
+import TextInput from "../../TextInput"; // plasmic-import: 4D7TNkkkVIcw/component
 import ActiveVisitOnline from "../../ActiveVisitOnline"; // plasmic-import: JRdpm2ALL90Q/component
 import ActiveOfficeBooking from "../../ActiveOfficeBooking"; // plasmic-import: s9QYwyQBTqhJ/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
@@ -74,6 +75,8 @@ import sty from "./PlasmicDrCenters.module.css"; // plasmic-import: IkLsGKQP_uPj
 
 import ChevronDownIcon from "../fragment_icons/icons/PlasmicIcon__ChevronDown"; // plasmic-import: aC_QFogxt1Ko/icon
 import ChevronUpIcon from "../fragment_icons/icons/PlasmicIcon__ChevronUp"; // plasmic-import: YXreB8gS3SjV/icon
+import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: euu18ryAtnAt/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: BMYyZW6g83gg/icon
 
 createPlasmicElementProxy;
 
@@ -98,6 +101,7 @@ export type PlasmicDrCenters__OverridesType = {
   root?: Flex__<"div">;
   fragmentPopover?: Flex__<typeof Popover>;
   text?: Flex__<"div">;
+  textInput?: Flex__<typeof TextInput>;
   activeVisitOnline?: Flex__<typeof ActiveVisitOnline>;
 };
 
@@ -161,7 +165,8 @@ function PlasmicDrCenters__RenderFunc(props: {
             try {
               return $props.hasAllOption
                 ? "all"
-                : $props.centers.find(center => center.is_active_booking).id;
+                : $props.centers.find(center => center.is_active_booking)
+                    .user_center_id;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -182,6 +187,12 @@ function PlasmicDrCenters__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => false,
 
         refName: "fragmentPopover"
+      },
+      {
+        path: "textInput.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -222,6 +233,7 @@ function PlasmicDrCenters__RenderFunc(props: {
             as={"div"}
             hasGap={true}
             className={classNames(projectcss.all, sty.freeBox__jC2P)}
+            dir={``}
           >
             {(() => {
               try {
@@ -318,6 +330,36 @@ function PlasmicDrCenters__RenderFunc(props: {
             ) : null}
             {(() => {
               try {
+                return $props.centers.length > 3;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return true;
+                }
+                throw e;
+              }
+            })() ? (
+              <TextInput
+                data-plasmic-name={"textInput"}
+                data-plasmic-override={overrides.textInput}
+                className={classNames("__wab_instance", sty.textInput)}
+                onChange={(...eventArgs) => {
+                  generateStateOnChangeProp($state, ["textInput", "value"])(
+                    (e => e.target?.value).apply(null, eventArgs)
+                  );
+                }}
+                placeholder={
+                  "\u062c\u0633\u062a\u062c\u0648\u06cc \u067e\u0632\u0634\u06a9 ..."
+                }
+                value={
+                  generateStateValueProp($state, ["textInput", "value"]) ?? ""
+                }
+              />
+            ) : null}
+            {(() => {
+              try {
                 return true;
               } catch (e) {
                 if (
@@ -332,9 +374,11 @@ function PlasmicDrCenters__RenderFunc(props: {
               ? (_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                   (() => {
                     try {
-                      return $props.centers.filter(
-                        center => center.is_active_booking
-                      );
+                      return $props.centers
+                        .filter(center => center.is_active_booking)
+                        ?.filter(item =>
+                          item.name?.includes($state.textInput.value ?? "")
+                        );
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -460,6 +504,42 @@ function PlasmicDrCenters__RenderFunc(props: {
                         ) {
                           $steps["updateSelectedCenter2"] = await $steps[
                             "updateSelectedCenter2"
+                          ];
+                        }
+
+                        $steps["updateSelectedCenter3"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                variable: {
+                                  objRoot: $state,
+                                  variablePath: ["textInput", "value"]
+                                },
+                                operation: 1
+                              };
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+
+                                $stateSet(objRoot, variablePath, undefined);
+                                return undefined;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateSelectedCenter3"] != null &&
+                          typeof $steps["updateSelectedCenter3"] === "object" &&
+                          typeof $steps["updateSelectedCenter3"].then ===
+                            "function"
+                        ) {
+                          $steps["updateSelectedCenter3"] = await $steps[
+                            "updateSelectedCenter3"
                           ];
                         }
                       }}
@@ -813,12 +893,13 @@ function PlasmicDrCenters__RenderFunc(props: {
                     try {
                       return (() => {
                         const selectedCenter = $props.centers.find(
-                          center => center.id == $state.selectedCenter
+                          center =>
+                            center.user_center_id == $state.selectedCenter
                         );
                         if ($state.selectedCenter == "all") return "کل نوبت‌ها";
-                        if ($state.selectedCenter == "5532")
+                        if (selectedCenter.id == "5532")
                           return "نوبت‌های آنلاین";
-                        if ($state.selectedCenter !== "5532") {
+                        if (selectedCenter.id !== "5532") {
                           if (
                             $state.selectedCenter &&
                             selectedCenter.type_id !== 1
@@ -885,9 +966,15 @@ function PlasmicDrCenters__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "fragmentPopover", "text", "activeVisitOnline"],
-  fragmentPopover: ["fragmentPopover", "text", "activeVisitOnline"],
+  root: ["root", "fragmentPopover", "text", "textInput", "activeVisitOnline"],
+  fragmentPopover: [
+    "fragmentPopover",
+    "text",
+    "textInput",
+    "activeVisitOnline"
+  ],
   text: ["text"],
+  textInput: ["textInput"],
   activeVisitOnline: ["activeVisitOnline"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -897,6 +984,7 @@ type NodeDefaultElementType = {
   root: "div";
   fragmentPopover: typeof Popover;
   text: "div";
+  textInput: typeof TextInput;
   activeVisitOnline: typeof ActiveVisitOnline;
 };
 
@@ -962,6 +1050,7 @@ export const PlasmicDrCenters = Object.assign(
     // Helper components rendering sub-elements
     fragmentPopover: makeNodeComponent("fragmentPopover"),
     text: makeNodeComponent("text"),
+    textInput: makeNodeComponent("textInput"),
     activeVisitOnline: makeNodeComponent("activeVisitOnline"),
 
     // Metadata about props expected for PlasmicDrCenters

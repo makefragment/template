@@ -397,6 +397,16 @@ function PlasmicProfile__RenderFunc(props: {
                   )}
                 />
               </AntdAccordionItem>
+              <AntdAccordionItem
+                children={null}
+                className={classNames(
+                  "__wab_instance",
+                  sty.accordionItem__tXtiq
+                )}
+                id={"52"}
+                label2={null}
+                showArrow={false}
+              />
             </React.Fragment>
           ),
           onChange: generateStateOnChangePropForCodeComponents(

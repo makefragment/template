@@ -72,7 +72,7 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfilePassword.module.css"; // plasmic-import: i6SPs9Tk2LaM/css
 
-import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
+import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 
@@ -240,7 +240,7 @@ function PlasmicProfilePassword__RenderFunc(props: {
         errorDisplay={null}
         loadingDisplay={
           <div className={classNames(projectcss.all, sty.freeBox__okRnv)}>
-            <Icon10Icon
+            <Icon34Icon
               data-plasmic-name={"svg"}
               data-plasmic-override={overrides.svg}
               className={classNames(projectcss.all, sty.svg)}
@@ -282,9 +282,23 @@ function PlasmicProfilePassword__RenderFunc(props: {
                 sty.text__z8T8G
               )}
             >
-              {
-                "\u0631\u0645\u0632\u0639\u0628\u0648\u0631 \u062b\u0627\u0628\u062a \u0641\u0639\u0627\u0644 \u0627\u0633\u062a"
-              }
+              <React.Fragment>
+                {(() => {
+                  try {
+                    return $state._switch.checked
+                      ? "رمزعبور ثابت فعال است"
+                      : "رمزعبور ثابت فعال نیست";
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return "\u0631\u0645\u0632\u0639\u0628\u0648\u0631 \u062b\u0627\u0628\u062a \u0641\u0639\u0627\u0644 \u0627\u0633\u062a";
+                    }
+                    throw e;
+                  }
+                })()}
+              </React.Fragment>
             </div>
           </Stack__>
           {(() => {

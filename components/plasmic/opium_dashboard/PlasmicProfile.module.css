@@ -4,7 +4,7 @@
   position: relative;
   width: 100%;
   height: auto;
-  background: #f8fafc;
+  background: none;
   min-width: 0;
 }
 .root > :global(.__wab_flex-container) {
@@ -294,4 +294,13 @@
 }
 .profilePrescriptionSettings:global(.__wab_instance) {
   max-width: 100%;
+}
+.accordionItem__tXtiq:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  margin-bottom: var(--token-Fv8-L_kN-2Ma);
+  box-shadow: 0px 4px 40px 0px #3f3f7921;
+  background: #ffffff;
+  display: none;
+  border-radius: var(--token-_c276Gs_1FIE);
 }

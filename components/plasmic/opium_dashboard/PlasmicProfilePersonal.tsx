@@ -73,7 +73,7 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfilePersonal.module.css"; // plasmic-import: _Rp6tLXxWeJV/css
 
-import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
+import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 
@@ -109,7 +109,6 @@ export const PlasmicProfilePersonal__ArgProps = new Array<ArgPropType>();
 export type PlasmicProfilePersonal__OverridesType = {
   root?: Flex__<"div">;
   auth?: Flex__<typeof ApiRequest>;
-  svg?: Flex__<"svg">;
   profile?: Flex__<typeof ApiRequest>;
   freeBox?: Flex__<"div">;
   profilePersonalName?: Flex__<typeof ProfilePersonalName>;
@@ -425,10 +424,8 @@ function PlasmicProfilePersonal__RenderFunc(props: {
         className={classNames("__wab_instance", sty.auth)}
         errorDisplay={null}
         loadingDisplay={
-          <Icon10Icon
-            data-plasmic-name={"svg"}
-            data-plasmic-override={overrides.svg}
-            className={classNames(projectcss.all, sty.svg)}
+          <Icon34Icon
+            className={classNames(projectcss.all, sty.svg___2LcMf)}
             role={"img"}
           />
         }
@@ -443,7 +440,12 @@ function PlasmicProfilePersonal__RenderFunc(props: {
           data-plasmic-override={overrides.profile}
           className={classNames("__wab_instance", sty.profile)}
           errorDisplay={null}
-          loadingDisplay={null}
+          loadingDisplay={
+            <Icon34Icon
+              className={classNames(projectcss.all, sty.svg__wpYan)}
+              role={"img"}
+            />
+          }
           method={"GET"}
           onError={generateStateOnChangeProp($state, ["profile", "error"])}
           onLoading={generateStateOnChangeProp($state, ["profile", "loading"])}
@@ -879,7 +881,6 @@ const PlasmicDescendants = {
   root: [
     "root",
     "auth",
-    "svg",
     "profile",
     "freeBox",
     "profilePersonalName",
@@ -894,7 +895,6 @@ const PlasmicDescendants = {
   ],
   auth: [
     "auth",
-    "svg",
     "profile",
     "freeBox",
     "profilePersonalName",
@@ -907,7 +907,6 @@ const PlasmicDescendants = {
     "profilePersonalBiography",
     "button"
   ],
-  svg: ["svg"],
   profile: [
     "profile",
     "freeBox",
@@ -949,7 +948,6 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   auth: typeof ApiRequest;
-  svg: "svg";
   profile: typeof ApiRequest;
   freeBox: "div";
   profilePersonalName: typeof ProfilePersonalName;
@@ -1024,7 +1022,6 @@ export const PlasmicProfilePersonal = Object.assign(
   {
     // Helper components rendering sub-elements
     auth: makeNodeComponent("auth"),
-    svg: makeNodeComponent("svg"),
     profile: makeNodeComponent("profile"),
     freeBox: makeNodeComponent("freeBox"),
     profilePersonalName: makeNodeComponent("profilePersonalName"),

@@ -508,7 +508,11 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                 data-plasmic-override={overrides.hoursDaysOfWeek}
                 centerId={(() => {
                   try {
-                    return $state.drCenters.selectedCenter;
+                    return $state.centers.find(
+                      center =>
+                        center.user_center_id ===
+                        $state.drCenters.selectedCenter
+                    ).id;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -530,9 +534,7 @@ function PlasmicWorkhoursPage__RenderFunc(props: {
                 ])}
                 userCenterId={(() => {
                   try {
-                    return $state.centers.find(
-                      center => center.id === $state.selectedCenter
-                    ).user_center_id;
+                    return $state.selectedCenter;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||

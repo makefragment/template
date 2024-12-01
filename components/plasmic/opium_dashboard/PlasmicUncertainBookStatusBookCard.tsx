@@ -775,11 +775,9 @@ function PlasmicUncertainBookStatusBookCard__RenderFunc(props: {
                                   undefined,
                                   (() => {
                                     try {
-                                      return (() => {
-                                        {
-                                          book_id: $props.bookId;
-                                        }
-                                      })();
+                                      return {
+                                        book_id: $props.bookId
+                                      };
                                     } catch (e) {
                                       if (
                                         e instanceof TypeError ||

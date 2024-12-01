@@ -72,7 +72,7 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfileExperties.module.css"; // plasmic-import: E1ah_bVnKUPF/css
 
-import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
+import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: q8mRvXMvOrv9/icon
@@ -5156,8 +5156,8 @@ function PlasmicProfileExperties__RenderFunc(props: {
         errorDisplay={null}
         loadingDisplay={
           <div className={classNames(projectcss.all, sty.freeBox__bhGCx)}>
-            <Icon10Icon
-              className={classNames(projectcss.all, sty.svg__e6ZY)}
+            <Icon34Icon
+              className={classNames(projectcss.all, sty.svg__lYhYn)}
               role={"img"}
             />
           </div>
@@ -5173,7 +5173,12 @@ function PlasmicProfileExperties__RenderFunc(props: {
           data-plasmic-override={overrides.providerApi}
           className={classNames("__wab_instance", sty.providerApi)}
           errorDisplay={null}
-          loadingDisplay={null}
+          loadingDisplay={
+            <Icon34Icon
+              className={classNames(projectcss.all, sty.svg__wNjv6)}
+              role={"img"}
+            />
+          }
           method={"GET"}
           onError={generateStateOnChangeProp($state, ["providerApi", "error"])}
           onLoading={generateStateOnChangeProp($state, [
@@ -5212,8 +5217,8 @@ function PlasmicProfileExperties__RenderFunc(props: {
             }
             loadingDisplay={
               <div className={classNames(projectcss.all, sty.freeBox___1LOpQ)}>
-                <Icon10Icon
-                  className={classNames(projectcss.all, sty.svg__nfJ24)}
+                <Icon34Icon
+                  className={classNames(projectcss.all, sty.svg__eOkO9)}
                   role={"img"}
                 />
               </div>
@@ -6229,6 +6234,24 @@ function PlasmicProfileExperties__RenderFunc(props: {
                               }
                               throw e;
                             }
+                          })(),
+                          undefined,
+                          undefined,
+                          (() => {
+                            try {
+                              return {
+                                ...$ctx.Fragment.apiConfig,
+                                ...$ctx.Fragment.previewApiConfig
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
                           })()
                         ]
                       };
@@ -6246,6 +6269,42 @@ function PlasmicProfileExperties__RenderFunc(props: {
                   $steps["invokeGlobalAction"] = await $steps[
                     "invokeGlobalAction"
                   ];
+                }
+
+                $steps["runCode"] = false
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (async () => {
+                            const handleDelete = async () => {
+                              try {
+                                const result = await $$.axios.delete(
+                                  `https://apigw.paziresh24.com/v1/providers-specialities/${$state.selectedId}`,
+                                  {
+                                    ...$ctx.Fragment.apiConfig,
+                                    ...$ctx.Fragment.previewApiConfig
+                                  }
+                                );
+                                $state.dialog.open = false;
+                              } catch (e) {
+                                console.log(`Somethings went wrong ${e}`);
+                              }
+                            };
+                            return handleDelete();
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["runCode"] != null &&
+                  typeof $steps["runCode"] === "object" &&
+                  typeof $steps["runCode"].then === "function"
+                ) {
+                  $steps["runCode"] = await $steps["runCode"];
                 }
               }}
             />

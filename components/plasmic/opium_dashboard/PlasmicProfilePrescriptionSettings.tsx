@@ -69,7 +69,7 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfilePrescriptionSettings.module.css"; // plasmic-import: 2QrXQ3Lsq6zG/css
 
-import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
+import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
 
 createPlasmicElementProxy;
 
@@ -227,7 +227,7 @@ function PlasmicProfilePrescriptionSettings__RenderFunc(props: {
         }
         loadingDisplay={
           <div className={classNames(projectcss.all, sty.freeBox__qmCks)}>
-            <Icon10Icon
+            <Icon34Icon
               data-plasmic-name={"svg"}
               data-plasmic-override={overrides.svg}
               className={classNames(projectcss.all, sty.svg)}

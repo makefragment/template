@@ -73,7 +73,7 @@ import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJ
 import sty from "./PlasmicProfileChannels.module.css"; // plasmic-import: o4nq-6V2-plH/css
 
 import Icon28Icon from "./icons/PlasmicIcon__Icon28"; // plasmic-import: jhZk-kRqJ6_T/icon
-import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
+import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
 import Icon27Icon from "./icons/PlasmicIcon__Icon27"; // plasmic-import: _jqfq3yh1NEC/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
@@ -383,8 +383,8 @@ function PlasmicProfileChannels__RenderFunc(props: {
         }
         loadingDisplay={
           <div className={classNames(projectcss.all, sty.freeBox__epmPd)}>
-            <Icon10Icon
-              className={classNames(projectcss.all, sty.svg__zT5IJ)}
+            <Icon34Icon
+              className={classNames(projectcss.all, sty.svg__vcr5X)}
               role={"img"}
             />
           </div>

@@ -96,9 +96,11 @@
   min-width: 0;
   padding: 8px;
 }
-.svg__zT5IJ {
+.svg__vcr5X {
   object-fit: cover;
   max-width: 100%;
+  width: 24px;
+  flex-shrink: 0;
   height: 1em;
 }
 .text__wi8Yq {

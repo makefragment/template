@@ -5455,7 +5455,7 @@ function PlasmicProfileAddress__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
-                $steps["invokeGlobalAction"] = true
+                $steps["deleteImageApi"] = true
                   ? (() => {
                       const actionArgs = {
                         args: [
@@ -5515,12 +5515,85 @@ function PlasmicProfileAddress__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["invokeGlobalAction"] != null &&
-                  typeof $steps["invokeGlobalAction"] === "object" &&
-                  typeof $steps["invokeGlobalAction"].then === "function"
+                  $steps["deleteImageApi"] != null &&
+                  typeof $steps["deleteImageApi"] === "object" &&
+                  typeof $steps["deleteImageApi"].then === "function"
                 ) {
-                  $steps["invokeGlobalAction"] = await $steps[
-                    "invokeGlobalAction"
+                  $steps["deleteImageApi"] = await $steps["deleteImageApi"];
+                }
+
+                $steps["updateDeleteImageDialogOpen"] =
+                  $steps.deleteImageApi.status == 204
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["deleteImageDialog", "open"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                if (
+                  $steps["updateDeleteImageDialogOpen"] != null &&
+                  typeof $steps["updateDeleteImageDialogOpen"] === "object" &&
+                  typeof $steps["updateDeleteImageDialogOpen"].then ===
+                    "function"
+                ) {
+                  $steps["updateDeleteImageDialogOpen"] = await $steps[
+                    "updateDeleteImageDialogOpen"
+                  ];
+                }
+
+                $steps["updateImageDialogOpen"] =
+                  $steps.deleteImageApi.status == 204
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["imageDialog", "open"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                if (
+                  $steps["updateImageDialogOpen"] != null &&
+                  typeof $steps["updateImageDialogOpen"] === "object" &&
+                  typeof $steps["updateImageDialogOpen"].then === "function"
+                ) {
+                  $steps["updateImageDialogOpen"] = await $steps[
+                    "updateImageDialogOpen"
                   ];
                 }
               }}

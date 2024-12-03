@@ -66,6 +66,7 @@ import { AntdAccordionItem } from "@plasmicpkgs/antd5/skinny/registerCollapse";
 import ProfilePersonal from "../../ProfilePersonal"; // plasmic-import: _Rp6tLXxWeJV/component
 import ProfileExperties from "../../ProfileExperties"; // plasmic-import: E1ah_bVnKUPF/component
 import ProfileChannels from "../../ProfileChannels"; // plasmic-import: o4nq-6V2-plH/component
+import ProfileAddress from "../../ProfileAddress"; // plasmic-import: x5b7hK4cfrsH/component
 import ProfilePassword from "../../ProfilePassword"; // plasmic-import: i6SPs9Tk2LaM/component
 import ProfilePrescriptionSettings from "../../ProfilePrescriptionSettings"; // plasmic-import: 2QrXQ3Lsq6zG/component
 
@@ -79,6 +80,7 @@ import sty from "./PlasmicProfile.module.css"; // plasmic-import: kkDbj8e0HCl3/c
 import Icon29Icon from "./icons/PlasmicIcon__Icon29"; // plasmic-import: 4BN4Jr3XKtOg/icon
 import Icon30Icon from "./icons/PlasmicIcon__Icon30"; // plasmic-import: kLd3FZ1H9HBS/icon
 import Icon31Icon from "./icons/PlasmicIcon__Icon31"; // plasmic-import: WipT2Hen4ot8/icon
+import Icon35Icon from "./icons/PlasmicIcon__Icon35"; // plasmic-import: JFE5vLu_22XX/icon
 import Icon32Icon from "./icons/PlasmicIcon__Icon32"; // plasmic-import: z4LkEdXxME3x/icon
 import Icon33Icon from "./icons/PlasmicIcon__Icon33"; // plasmic-import: 01c_66jVlqBW/icon
 
@@ -100,6 +102,7 @@ export type PlasmicProfile__OverridesType = {
   profilePersonal?: Flex__<typeof ProfilePersonal>;
   experties?: Flex__<typeof ProfileExperties>;
   profileChannels?: Flex__<typeof ProfileChannels>;
+  profileAddress?: Flex__<typeof ProfileAddress>;
   profilePassword?: Flex__<typeof ProfilePassword>;
   profilePrescriptionSettings?: Flex__<typeof ProfilePrescriptionSettings>;
 };
@@ -321,6 +324,44 @@ function PlasmicProfile__RenderFunc(props: {
               <AntdAccordionItem
                 className={classNames(
                   "__wab_instance",
+                  sty.accordionItem__binkx
+                )}
+                id={"88"}
+                label2={
+                  <Stack__
+                    as={"div"}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.freeBox__enKFw)}
+                  >
+                    <Icon35Icon
+                      className={classNames(projectcss.all, sty.svg__wcChw)}
+                      role={"img"}
+                    />
+
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__nGdAp
+                      )}
+                    >
+                      {
+                        "\u0622\u062f\u0631\u0633 \u0648 \u0634\u0645\u0627\u0631\u0647 \u062a\u0644\u0641\u0646 \u0645\u0637\u0628"
+                      }
+                    </div>
+                  </Stack__>
+                }
+                showArrow={false}
+              >
+                <ProfileAddress
+                  data-plasmic-name={"profileAddress"}
+                  data-plasmic-override={overrides.profileAddress}
+                  className={classNames("__wab_instance", sty.profileAddress)}
+                />
+              </AntdAccordionItem>
+              <AntdAccordionItem
+                className={classNames(
+                  "__wab_instance",
                   sty.accordionItem__sZrC0
                 )}
                 id={"4"}
@@ -449,6 +490,7 @@ const PlasmicDescendants = {
     "profilePersonal",
     "experties",
     "profileChannels",
+    "profileAddress",
     "profilePassword",
     "profilePrescriptionSettings"
   ],
@@ -458,12 +500,14 @@ const PlasmicDescendants = {
     "profilePersonal",
     "experties",
     "profileChannels",
+    "profileAddress",
     "profilePassword",
     "profilePrescriptionSettings"
   ],
   profilePersonal: ["profilePersonal"],
   experties: ["experties"],
   profileChannels: ["profileChannels"],
+  profileAddress: ["profileAddress"],
   profilePassword: ["profilePassword"],
   profilePrescriptionSettings: ["profilePrescriptionSettings"]
 } as const;
@@ -477,6 +521,7 @@ type NodeDefaultElementType = {
   profilePersonal: typeof ProfilePersonal;
   experties: typeof ProfileExperties;
   profileChannels: typeof ProfileChannels;
+  profileAddress: typeof ProfileAddress;
   profilePassword: typeof ProfilePassword;
   profilePrescriptionSettings: typeof ProfilePrescriptionSettings;
 };
@@ -546,6 +591,7 @@ export const PlasmicProfile = Object.assign(
     profilePersonal: makeNodeComponent("profilePersonal"),
     experties: makeNodeComponent("experties"),
     profileChannels: makeNodeComponent("profileChannels"),
+    profileAddress: makeNodeComponent("profileAddress"),
     profilePassword: makeNodeComponent("profilePassword"),
     profilePrescriptionSettings: makeNodeComponent(
       "profilePrescriptionSettings"

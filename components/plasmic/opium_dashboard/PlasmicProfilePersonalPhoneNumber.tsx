@@ -285,6 +285,19 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
               data-plasmic-name={"newPhoneNumber"}
               data-plasmic-override={overrides.newPhoneNumber}
               className={classNames("__wab_instance", sty.newPhoneNumber)}
+              disabled={(() => {
+                try {
+                  return $state.step === "OTP_CODE";
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
               onChange={async (...eventArgs: any) => {
                 generateStateOnChangeProp($state, [
                   "newPhoneNumber",
@@ -345,7 +358,7 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
 
             {(() => {
               try {
-                return $state.step === "OTP";
+                return $state.step === "OTP_CODE";
               } catch (e) {
                 if (
                   e instanceof TypeError ||
@@ -461,9 +474,169 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
+                $steps["otpCodeApi"] =
+                  $state.step == "OTP_CODE"
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            "PUT",
+                            "https://api.paziresh24.com/V1/doctor/profile/change-mobile",
+                            undefined,
+                            (() => {
+                              try {
+                                return (() => {
+                                  return {
+                                    username: $state.newPhoneNumber.value,
+                                    password: $state.otpCode.value
+                                  };
+                                })();
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Fragment.apiRequest"]?.apply(
+                          null,
+                          [...actionArgs.args]
+                        );
+                      })()
+                    : undefined;
+                if (
+                  $steps["otpCodeApi"] != null &&
+                  typeof $steps["otpCodeApi"] === "object" &&
+                  typeof $steps["otpCodeApi"].then === "function"
+                ) {
+                  $steps["otpCodeApi"] = await $steps["otpCodeApi"];
+                }
+
+                $steps["sendCodeApi"] = (() => {
+                  const regex = /^09\d{9}/;
+                  return (
+                    regex.test($state.newPhoneNumber.value) &&
+                    $state.step === "PHONE_NUMBER"
+                  );
+                })()
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "POST",
+                          "https://api.paziresh24.com/V1/doctor/profile/change-mobile-otp",
+                          undefined,
+                          (() => {
+                            try {
+                              return (() => {
+                                return {
+                                  username: $state.newPhoneNumber.value
+                                };
+                              })();
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
+                      };
+                      return $globalActions["Fragment.apiRequest"]?.apply(
+                        null,
+                        [...actionArgs.args]
+                      );
+                    })()
+                  : undefined;
+                if (
+                  $steps["sendCodeApi"] != null &&
+                  typeof $steps["sendCodeApi"] === "object" &&
+                  typeof $steps["sendCodeApi"].then === "function"
+                ) {
+                  $steps["sendCodeApi"] = await $steps["sendCodeApi"];
+                }
+
+                $steps["updateDialogOpen"] = false
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["dialog", "open"]
+                        },
+                        operation: 4
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        const oldValue = $stateGet(objRoot, variablePath);
+                        $stateSet(objRoot, variablePath, !oldValue);
+                        return !oldValue;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateDialogOpen"] != null &&
+                  typeof $steps["updateDialogOpen"] === "object" &&
+                  typeof $steps["updateDialogOpen"].then === "function"
+                ) {
+                  $steps["updateDialogOpen"] = await $steps["updateDialogOpen"];
+                }
+
+                $steps["updateStep2"] =
+                  $steps.otpCodeApi.status == 200 && $state.step == "OTP_CODE"
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["step"]
+                          },
+                          operation: 0,
+                          value: "PHONE_NUMBER"
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                if (
+                  $steps["updateStep2"] != null &&
+                  typeof $steps["updateStep2"] === "object" &&
+                  typeof $steps["updateStep2"].then === "function"
+                ) {
+                  $steps["updateStep2"] = await $steps["updateStep2"];
+                }
+
                 $steps["invokeGlobalAction"] = (() => {
                   const regex = /^09\d{9}/;
-                  return !regex.test($state.newPhoneNumber.value);
+                  return (
+                    !regex.test($state.newPhoneNumber.value) &&
+                    $state.step == "PHONE_NUMBER"
+                  );
                 })()
                   ? (() => {
                       const actionArgs = {
@@ -487,93 +660,39 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
                   ];
                 }
 
-                $steps["invokeGlobalAction2"] = (() => {
-                  const regex = /^09\d{9}/;
-                  return (
-                    regex.test($state.newPhoneNumber.value) &&
-                    $state.step === "PHONE_NUMBER"
-                  );
-                })()
-                  ? (() => {
-                      const actionArgs = {
-                        args: [
-                          "POST",
-                          "https://api.paziresh24.com/V1/doctor/profile/change-mobile-otp",
-                          undefined,
-                          (() => {
-                            try {
-                              return (() => {
-                                {
-                                  username: $state.newPhoneNumber.value;
-                                }
-                              })();
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })()
-                        ]
-                      };
-                      return $globalActions["Fragment.apiRequest"]?.apply(
-                        null,
-                        [...actionArgs.args]
-                      );
-                    })()
-                  : undefined;
-                if (
-                  $steps["invokeGlobalAction2"] != null &&
-                  typeof $steps["invokeGlobalAction2"] === "object" &&
-                  typeof $steps["invokeGlobalAction2"].then === "function"
-                ) {
-                  $steps["invokeGlobalAction2"] = await $steps[
-                    "invokeGlobalAction2"
-                  ];
-                }
+                $steps["updateStep"] =
+                  $steps.sendCodeApi.status == 200
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["step"]
+                          },
+                          operation: 0,
+                          value: "OTP_CODE"
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
 
-                $steps["invokeGlobalAction3"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        args: [
-                          "PUT",
-                          "https://api.paziresh24.com/V1/doctor/profile/change-mobile",
-                          undefined,
-                          (() => {
-                            try {
-                              return {
-                                username: $state.newPhoneNumber.value,
-                                password: $state.otpCode.value
-                              };
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return undefined;
-                              }
-                              throw e;
-                            }
-                          })()
-                        ]
-                      };
-                      return $globalActions["Fragment.apiRequest"]?.apply(
-                        null,
-                        [...actionArgs.args]
-                      );
-                    })()
-                  : undefined;
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
                 if (
-                  $steps["invokeGlobalAction3"] != null &&
-                  typeof $steps["invokeGlobalAction3"] === "object" &&
-                  typeof $steps["invokeGlobalAction3"].then === "function"
+                  $steps["updateStep"] != null &&
+                  typeof $steps["updateStep"] === "object" &&
+                  typeof $steps["updateStep"].then === "function"
                 ) {
-                  $steps["invokeGlobalAction3"] = await $steps[
-                    "invokeGlobalAction3"
-                  ];
+                  $steps["updateStep"] = await $steps["updateStep"];
                 }
               }}
             />

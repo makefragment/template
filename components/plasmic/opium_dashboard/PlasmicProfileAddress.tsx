@@ -65,6 +65,7 @@ import { Input } from "@/fragment/components/input"; // plasmic-import: ByhbQ0nA
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import Checkbox from "../../Checkbox"; // plasmic-import: IDR0sAqN5tth/component
+import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
@@ -75,12 +76,13 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfileAddress.module.css"; // plasmic-import: x5b7hK4cfrsH/css
 
-import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
+import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
 import Icon14Icon from "./icons/PlasmicIcon__Icon14"; // plasmic-import: tgZrqAaEEOY7/icon
-import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: q8mRvXMvOrv9/icon
-import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import Icon4Icon from "./icons/PlasmicIcon__Icon4"; // plasmic-import: z62U0rB8gsLE/icon
+import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
+import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: q8mRvXMvOrv9/icon
+import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
 
 import { v4 as __lib_uuid__v4 } from "uuid";
 
@@ -100,8 +102,10 @@ export type PlasmicProfileAddress__OverridesType = {
   centersApi?: Flex__<typeof ApiRequest>;
   provinceSelect?: Flex__<typeof Select>;
   citySelect?: Flex__<typeof Select>;
-  input?: Flex__<typeof Input>;
+  address?: Flex__<typeof Input>;
+  tells?: Flex__<"div">;
   input2?: Flex__<typeof Input>;
+  input4?: Flex__<typeof Input>;
   input3?: Flex__<typeof Input>;
   galleryApi?: Flex__<typeof ApiRequest>;
   upload?: Flex__<typeof UploadWrapper>;
@@ -109,6 +113,7 @@ export type PlasmicProfileAddress__OverridesType = {
   checkbox2?: Flex__<typeof Checkbox>;
   checkbox3?: Flex__<typeof Checkbox>;
   checkbox4?: Flex__<typeof Checkbox>;
+  sideEffect?: Flex__<typeof SideEffect>;
   imageDialog?: Flex__<typeof Dialog>;
   deleteImageDialog?: Flex__<typeof Dialog>;
 };
@@ -4054,7 +4059,21 @@ function PlasmicProfileAddress__RenderFunc(props: {
         path: "provinceSelect.value",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.centersApi.data.data.find(item => item.type_id == 1)
+                .province;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "provinceSelect.open",
@@ -4066,7 +4085,21 @@ function PlasmicProfileAddress__RenderFunc(props: {
         path: "citySelect.value",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.centersApi.data.data.find(item => item.type_id == 1)
+                .city;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       },
       {
         path: "citySelect.open",
@@ -4093,7 +4126,7 @@ function PlasmicProfileAddress__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "input.value",
+        path: "address.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) =>
@@ -4195,6 +4228,17 @@ function PlasmicProfileAddress__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "input4[].value",
+        type: "private",
+        variableType: "text"
+      },
+      {
+        path: "oldPhoneNumbers",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
     [$props, $ctx, $refs]
@@ -4240,8 +4284,8 @@ function PlasmicProfileAddress__RenderFunc(props: {
         }
         loadingDisplay={
           <div className={classNames(projectcss.all, sty.freeBox__cdW1Q)}>
-            <Icon10Icon
-              className={classNames(projectcss.all, sty.svg__wbeI)}
+            <Icon34Icon
+              className={classNames(projectcss.all, sty.svg__c4N7Z)}
               role={"img"}
             />
           </div>
@@ -4381,24 +4425,26 @@ function PlasmicProfileAddress__RenderFunc(props: {
               </React.Fragment>
             </div>
             <Input
-              data-plasmic-name={"input"}
-              data-plasmic-override={overrides.input}
-              className={classNames("__wab_instance", sty.input)}
-              onChange={generateStateOnChangeProp($state, ["input", "value"])}
+              data-plasmic-name={"address"}
+              data-plasmic-override={overrides.address}
+              className={classNames("__wab_instance", sty.address)}
+              onChange={generateStateOnChangeProp($state, ["address", "value"])}
               placeholder={"\u0622\u062f\u0631\u0633 \u0645\u0637\u0628"}
               type={"text"}
-              value={generateStateValueProp($state, ["input", "value"])}
+              value={generateStateValueProp($state, ["address", "value"])}
             />
           </Stack__>
           <Stack__
             as={"div"}
+            data-plasmic-name={"tells"}
+            data-plasmic-override={overrides.tells}
             hasGap={true}
-            className={classNames(projectcss.all, sty.freeBox__kqzwe)}
+            className={classNames(projectcss.all, sty.tells)}
           >
             {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
               (() => {
                 try {
-                  return $state.newPhoneNumbers;
+                  return $state.oldPhoneNumbers;
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -4429,21 +4475,16 @@ function PlasmicProfileAddress__RenderFunc(props: {
                         (async value => {
                           const $steps = {};
 
-                          $steps["updateNewPhoneNumbers"] = true
+                          $steps["updateOldPhoneNumbers"] = true
                             ? (() => {
                                 const actionArgs = {
                                   variable: {
                                     objRoot: $state,
-                                    variablePath: ["newPhoneNumbers"]
+                                    variablePath: ["oldPhoneNumbers"]
                                   },
                                   operation: 0,
-                                  value: $state.newPhoneNumbers.map(item =>
-                                    item.id === currentItem.id
-                                      ? {
-                                          id: item.id,
-                                          tell: value
-                                        }
-                                      : item
+                                  value: $state.oldPhoneNumbers.map(item =>
+                                    item === currentItem ? value : item
                                   )
                                 };
                                 return (({
@@ -4463,14 +4504,14 @@ function PlasmicProfileAddress__RenderFunc(props: {
                               })()
                             : undefined;
                           if (
-                            $steps["updateNewPhoneNumbers"] != null &&
-                            typeof $steps["updateNewPhoneNumbers"] ===
+                            $steps["updateOldPhoneNumbers"] != null &&
+                            typeof $steps["updateOldPhoneNumbers"] ===
                               "object" &&
-                            typeof $steps["updateNewPhoneNumbers"].then ===
+                            typeof $steps["updateOldPhoneNumbers"].then ===
                               "function"
                           ) {
-                            $steps["updateNewPhoneNumbers"] = await $steps[
-                              "updateNewPhoneNumbers"
+                            $steps["updateOldPhoneNumbers"] = await $steps[
+                              "updateOldPhoneNumbers"
                             ];
                           }
                         }).apply(null, eventArgs);
@@ -4501,7 +4542,20 @@ function PlasmicProfileAddress__RenderFunc(props: {
                       [
                         {
                           name: "input2[].value",
-                          initFunc: ({ $props, $state, $queries }) => ""
+                          initFunc: ({ $props, $state, $queries }) =>
+                            (() => {
+                              try {
+                                return currentItem;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
                         }
                       ],
                       [__plasmic_idx_0]
@@ -4519,6 +4573,212 @@ function PlasmicProfileAddress__RenderFunc(props: {
                     role={"img"}
                   />
                 </div>
+              );
+            })}
+            {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+              (() => {
+                try {
+                  return $state.newPhoneNumbers;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
+            ).map((__plasmic_item_0, __plasmic_idx_0) => {
+              const currentItem = __plasmic_item_0;
+              const currentIndex = __plasmic_idx_0;
+              return (
+                <Stack__
+                  as={"div"}
+                  hasGap={true}
+                  className={classNames(projectcss.all, sty.freeBox__eGghO)}
+                  key={currentIndex}
+                >
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox__rkST)}
+                  >
+                    {(() => {
+                      const child$Props = {
+                        className: classNames("__wab_instance", sty.input4),
+                        onChange: async (...eventArgs: any) => {
+                          generateStateOnChangeProp($state, [
+                            "input4",
+                            __plasmic_idx_0,
+                            "value"
+                          ]).apply(null, eventArgs);
+                          (async value => {
+                            const $steps = {};
+
+                            $steps["updateNewPhoneNumbers"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["newPhoneNumbers"]
+                                    },
+                                    operation: 0,
+                                    value: $state.newPhoneNumbers.map(item =>
+                                      item.id === currentItem.id
+                                        ? {
+                                            id: item.id,
+                                            tell: value
+                                          }
+                                        : item
+                                    )
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateNewPhoneNumbers"] != null &&
+                              typeof $steps["updateNewPhoneNumbers"] ===
+                                "object" &&
+                              typeof $steps["updateNewPhoneNumbers"].then ===
+                                "function"
+                            ) {
+                              $steps["updateNewPhoneNumbers"] = await $steps[
+                                "updateNewPhoneNumbers"
+                              ];
+                            }
+                          }).apply(null, eventArgs);
+                        },
+                        placeholder:
+                          "\u0634\u0645\u0627\u0631\u0647 \u062a\u0644\u0641\u0646 \u0645\u0637\u0628",
+                        type: "text",
+                        value: generateStateValueProp($state, [
+                          "input4",
+                          __plasmic_idx_0,
+                          "value"
+                        ])
+                      };
+                      initializeCodeComponentStates(
+                        $state,
+                        [
+                          {
+                            name: "value",
+                            plasmicStateName: "input4[].value"
+                          }
+                        ],
+                        [__plasmic_idx_0],
+                        undefined ?? {},
+                        child$Props
+                      );
+                      initializePlasmicStates(
+                        $state,
+                        [
+                          {
+                            name: "input4[].value",
+                            initFunc: ({ $props, $state, $queries }) =>
+                              (() => {
+                                try {
+                                  return currentItem.tell;
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return undefined;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                          }
+                        ],
+                        [__plasmic_idx_0]
+                      );
+                      return (
+                        <Input
+                          data-plasmic-name={"input4"}
+                          data-plasmic-override={overrides.input4}
+                          {...child$Props}
+                        />
+                      );
+                    })()}
+                    <Icon14Icon
+                      className={classNames(projectcss.all, sty.svg___9KeGp)}
+                      role={"img"}
+                    />
+                  </div>
+                  <Button
+                    children2={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          sty.freeBox__lm79
+                        )}
+                      >
+                        <Icon4Icon
+                          className={classNames(projectcss.all, sty.svg__w8Rt)}
+                          role={"img"}
+                        />
+                      </div>
+                    }
+                    className={classNames("__wab_instance", sty.button__zTH2)}
+                    color={"softRed"}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["updateNewPhoneNumbers"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["newPhoneNumbers"]
+                              },
+                              operation: 0,
+                              value: $state.newPhoneNumbers.filter(
+                                item => item.id !== currentItem.id
+                              )
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateNewPhoneNumbers"] != null &&
+                        typeof $steps["updateNewPhoneNumbers"] === "object" &&
+                        typeof $steps["updateNewPhoneNumbers"].then ===
+                          "function"
+                      ) {
+                        $steps["updateNewPhoneNumbers"] = await $steps[
+                          "updateNewPhoneNumbers"
+                        ];
+                      }
+                    }}
+                    size={"minimal"}
+                  />
+                </Stack__>
               );
             })}
             <Button
@@ -4547,11 +4807,14 @@ function PlasmicProfileAddress__RenderFunc(props: {
                           objRoot: $state,
                           variablePath: ["newPhoneNumbers"]
                         },
-                        operation: 5,
-                        value: {
-                          id: $$.uuid.v4(),
-                          tell: ""
-                        }
+                        operation: 0,
+                        value: [
+                          ...$state.newPhoneNumbers,
+                          {
+                            id: $$.uuid.v4(),
+                            tell: ""
+                          }
+                        ]
                       };
                       return (({
                         variable,
@@ -4564,9 +4827,8 @@ function PlasmicProfileAddress__RenderFunc(props: {
                         }
                         const { objRoot, variablePath } = variable;
 
-                        const arr = $stateGet(objRoot, variablePath);
-                        arr.push(value);
-                        return arr;
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
                       })?.apply(null, [actionArgs]);
                     })()
                   : undefined;
@@ -4781,10 +5043,48 @@ function PlasmicProfileAddress__RenderFunc(props: {
             accept={""}
             className={classNames("__wab_instance", sty.upload)}
             files={generateStateValueProp($state, ["upload", "files"])}
-            onFilesChange={generateStateOnChangeProp($state, [
-              "upload",
-              "files"
-            ])}
+            onFilesChange={async (...eventArgs: any) => {
+              generateStateOnChangeProp($state, ["upload", "files"]).apply(
+                null,
+                eventArgs
+              );
+              (async files => {
+                const $steps = {};
+
+                $steps["updateProvince"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["province"]
+                        },
+                        operation: 0
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateProvince"] != null &&
+                  typeof $steps["updateProvince"] === "object" &&
+                  typeof $steps["updateProvince"].then === "function"
+                ) {
+                  $steps["updateProvince"] = await $steps["updateProvince"];
+                }
+              }).apply(null, eventArgs);
+            }}
             showUploadList={true}
           >
             <Stack__
@@ -4916,8 +5216,129 @@ function PlasmicProfileAddress__RenderFunc(props: {
               </div>
             }
             className={classNames("__wab_instance", sty.button___9E4Bm)}
+            onClick={async event => {
+              const $steps = {};
+
+              $steps["invokeGlobalAction"] = true
+                ? (() => {
+                    const actionArgs = {
+                      args: [
+                        "PUT",
+                        (() => {
+                          try {
+                            return (() => {
+                              const centerId = $state.centersApi.data.data.find(
+                                item => item.type_id == 1
+                              ).id;
+                              return `https://api.paziresh24.com/V1/doctor/centers/${centerId}`;
+                            })();
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })(),
+                        undefined,
+                        (() => {
+                          try {
+                            return (() => {
+                              const newTells = $state.newPhoneNumbers.map(
+                                item => item.tell
+                              );
+                              return {
+                                address: $state.address.value,
+                                city: $state.citySelect.value,
+                                province: $state.provinceSelect.value,
+                                tells: [...$state.oldPhoneNumbers, ...newTells]
+                              };
+                            })();
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      ]
+                    };
+                    return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                      ...actionArgs.args
+                    ]);
+                  })()
+                : undefined;
+              if (
+                $steps["invokeGlobalAction"] != null &&
+                typeof $steps["invokeGlobalAction"] === "object" &&
+                typeof $steps["invokeGlobalAction"].then === "function"
+              ) {
+                $steps["invokeGlobalAction"] = await $steps[
+                  "invokeGlobalAction"
+                ];
+              }
+            }}
           />
         </Stack__>
+        <SideEffect
+          data-plasmic-name={"sideEffect"}
+          data-plasmic-override={overrides.sideEffect}
+          className={classNames("__wab_instance", sty.sideEffect)}
+          deps={(() => {
+            try {
+              return $state.centersApi.data;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()}
+          onMount={async () => {
+            const $steps = {};
+
+            $steps["updateOldPhoneNumbers"] = true
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["oldPhoneNumbers"]
+                    },
+                    operation: 0,
+                    value: $state.centersApi?.data?.data?.find(
+                      item => item.type_id == 1
+                    )?.tells
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+
+                    $stateSet(objRoot, variablePath, value);
+                    return value;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["updateOldPhoneNumbers"] != null &&
+              typeof $steps["updateOldPhoneNumbers"] === "object" &&
+              typeof $steps["updateOldPhoneNumbers"].then === "function"
+            ) {
+              $steps["updateOldPhoneNumbers"] = await $steps[
+                "updateOldPhoneNumbers"
+              ];
+            }
+          }}
+        />
       </ApiRequest>
       <Dialog
         data-plasmic-name={"imageDialog"}
@@ -5051,6 +5472,39 @@ function PlasmicProfileAddress__RenderFunc(props: {
                               }
                               throw e;
                             }
+                          })(),
+                          undefined,
+                          (() => {
+                            try {
+                              return {
+                                ...$ctx.Fragment.apiConfig,
+                                ...$ctx.Fragment.previewApiConfig
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })(),
+                          (() => {
+                            try {
+                              return {
+                                ...$ctx.Fragment.apiConfig,
+                                ...$ctx.Fragment.previewApiConfig
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
                           })()
                         ]
                       };
@@ -5151,8 +5605,10 @@ const PlasmicDescendants = {
     "centersApi",
     "provinceSelect",
     "citySelect",
-    "input",
+    "address",
+    "tells",
     "input2",
+    "input4",
     "input3",
     "galleryApi",
     "upload",
@@ -5160,6 +5616,7 @@ const PlasmicDescendants = {
     "checkbox2",
     "checkbox3",
     "checkbox4",
+    "sideEffect",
     "imageDialog",
     "deleteImageDialog"
   ],
@@ -5167,20 +5624,25 @@ const PlasmicDescendants = {
     "centersApi",
     "provinceSelect",
     "citySelect",
-    "input",
+    "address",
+    "tells",
     "input2",
+    "input4",
     "input3",
     "galleryApi",
     "upload",
     "checkbox",
     "checkbox2",
     "checkbox3",
-    "checkbox4"
+    "checkbox4",
+    "sideEffect"
   ],
   provinceSelect: ["provinceSelect"],
   citySelect: ["citySelect"],
-  input: ["input"],
+  address: ["address"],
+  tells: ["tells", "input2", "input4"],
   input2: ["input2"],
+  input4: ["input4"],
   input3: ["input3"],
   galleryApi: ["galleryApi"],
   upload: ["upload"],
@@ -5188,6 +5650,7 @@ const PlasmicDescendants = {
   checkbox2: ["checkbox2"],
   checkbox3: ["checkbox3"],
   checkbox4: ["checkbox4"],
+  sideEffect: ["sideEffect"],
   imageDialog: ["imageDialog"],
   deleteImageDialog: ["deleteImageDialog"]
 } as const;
@@ -5199,8 +5662,10 @@ type NodeDefaultElementType = {
   centersApi: typeof ApiRequest;
   provinceSelect: typeof Select;
   citySelect: typeof Select;
-  input: typeof Input;
+  address: typeof Input;
+  tells: "div";
   input2: typeof Input;
+  input4: typeof Input;
   input3: typeof Input;
   galleryApi: typeof ApiRequest;
   upload: typeof UploadWrapper;
@@ -5208,6 +5673,7 @@ type NodeDefaultElementType = {
   checkbox2: typeof Checkbox;
   checkbox3: typeof Checkbox;
   checkbox4: typeof Checkbox;
+  sideEffect: typeof SideEffect;
   imageDialog: typeof Dialog;
   deleteImageDialog: typeof Dialog;
 };
@@ -5275,8 +5741,10 @@ export const PlasmicProfileAddress = Object.assign(
     centersApi: makeNodeComponent("centersApi"),
     provinceSelect: makeNodeComponent("provinceSelect"),
     citySelect: makeNodeComponent("citySelect"),
-    input: makeNodeComponent("input"),
+    address: makeNodeComponent("address"),
+    tells: makeNodeComponent("tells"),
     input2: makeNodeComponent("input2"),
+    input4: makeNodeComponent("input4"),
     input3: makeNodeComponent("input3"),
     galleryApi: makeNodeComponent("galleryApi"),
     upload: makeNodeComponent("upload"),
@@ -5284,6 +5752,7 @@ export const PlasmicProfileAddress = Object.assign(
     checkbox2: makeNodeComponent("checkbox2"),
     checkbox3: makeNodeComponent("checkbox3"),
     checkbox4: makeNodeComponent("checkbox4"),
+    sideEffect: makeNodeComponent("sideEffect"),
     imageDialog: makeNodeComponent("imageDialog"),
     deleteImageDialog: makeNodeComponent("deleteImageDialog"),
 

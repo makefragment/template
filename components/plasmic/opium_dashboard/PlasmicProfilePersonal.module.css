@@ -121,6 +121,7 @@
 }
 .profilePersonalBiography:global(.__wab_instance) {
   max-width: 100%;
+  display: none;
 }
 .button:global(.__wab_instance) {
   max-width: 100%;

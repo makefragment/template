@@ -25,9 +25,11 @@
   min-width: 0;
   padding: 8px;
 }
-.svg__y7K04 {
+.svg__pYFnr {
   object-fit: cover;
   max-width: 100%;
+  width: 24px;
+  flex-shrink: 0;
   height: 1em;
 }
 .text__f4832 {

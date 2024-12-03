@@ -70,7 +70,7 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfileHead.module.css"; // plasmic-import: PIAFRsJicCGh/css
 
-import Icon10Icon from "./icons/PlasmicIcon__Icon10"; // plasmic-import: BN2FHeznHhq_/icon
+import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
 import Icon26Icon from "./icons/PlasmicIcon__Icon26"; // plasmic-import: frSwMvWOgAN1/icon
 
 createPlasmicElementProxy;
@@ -212,8 +212,8 @@ function PlasmicProfileHead__RenderFunc(props: {
         }
         loadingDisplay={
           <div className={classNames(projectcss.all, sty.freeBox__ehRb)}>
-            <Icon10Icon
-              className={classNames(projectcss.all, sty.svg__y7K04)}
+            <Icon34Icon
+              className={classNames(projectcss.all, sty.svg__pYFnr)}
               role={"img"}
             />
           </div>

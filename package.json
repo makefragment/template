@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "29.1.0",
+    "@ckeditor/ckeditor5-react": "3.0.2",
     "@growthbook/growthbook-react": "^1.0.0",
     "@plasmicapp/cli": "^0.1.334",
     "@plasmicapp/host": "^1.0.196",

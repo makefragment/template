@@ -17,6 +17,7 @@ import { ApiRequest, apiRequestMeta } from "@/fragment/components/api-request";
 import { Slider, sliderMeta } from "@/fragment/components/slider";
 import { Chart, chartMeta } from "@/fragment/components/chart";
 import { Hamdast, hamdastMeta } from "@/hamdast/hamdast";
+import { TextEditor, TextEditorMeta } from "@/fragment/components/text-editor";
 export default function PlasmicHost() {
   return <PlasmicCanvasHost />;
 }
@@ -33,3 +34,4 @@ registerComponent(Switch, switchMeta);
 registerComponent(Slider, sliderMeta);
 registerComponent(ApiRequest, apiRequestMeta);
 registerComponent(Chart, chartMeta);
+registerComponent(TextEditor, TextEditorMeta);

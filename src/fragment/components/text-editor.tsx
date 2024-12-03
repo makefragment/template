@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { CodeComponentMeta } from "@plasmicapp/host";
 const CKEditor = dynamic(() => import("@/components/ckEditor"), {
   ssr: false,
-  loading: () => <div>Loading editor...</div>,
+  loading: () => <div>...</div>,
 });
 
 export const TextEditor = ({

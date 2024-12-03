@@ -1,14 +1,18 @@
+import dynamic from "next/dynamic";
 import React from "react";
-
+const Map = dynamic(() => import("@/components/map"), {
+  ssr: false,
+  loading: () => <div>...</div>,
+});
 const TestPage = () => {
   return (
-    <div>
-      <label htmlFor="file">choose image</label>
-      <input
-        type="file"
-        id="selectImage"
-        accept="image/png, image/jpg, image/jpeg, image/bmp"
-        onChange={(e) => console.log(e?.target?.files)}
+    <div className="h-64">
+      <Map
+        lat={34}
+        lng={-118}
+        zoom={20}
+        // setZoom={setMapZoom}
+        sendPosition={(pos) => console.log(pos)}
       />
     </div>
   );

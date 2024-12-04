@@ -67,6 +67,8 @@ import SafeCall from "../../SafeCall"; // plasmic-import: m0lwAXhykBZV/component
 import BookStatusButton from "../../BookStatusButton"; // plasmic-import: aW1julV8kikd/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
+import { useScreenVariants as useScreenVariantsfobTirRaixGf } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: fobTIRRaixGf/globalVariant
+
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
@@ -320,6 +322,10 @@ function PlasmicAppointmentCard__RenderFunc(props: {
     $ctx,
     $queries: {},
     $refs
+  });
+
+  const globalVariants = ensureGlobalVariants({
+    screen: useScreenVariantsfobTirRaixGf()
   });
 
   return (
@@ -1757,6 +1763,40 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                   />
                 ) : null}
               </Stack__>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__azID
+                )}
+              >
+                <React.Fragment>
+                  {(() => {
+                    try {
+                      return $props.nationalcode;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "09136020023";
+                      }
+                      throw e;
+                    }
+                  })()}
+                </React.Fragment>
+              </div>
+              {(
+                hasVariant(globalVariants, "screen", "mobileOnly")
+                  ? true
+                  : false
+              ) ? (
+                <Stack__
+                  as={"div"}
+                  hasGap={true}
+                  className={classNames(projectcss.all, sty.freeBox__zrFqj)}
+                />
+              ) : null}
             </Stack__>
           </Stack__>
         }

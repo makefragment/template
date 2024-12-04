@@ -19,6 +19,7 @@ import { Chart, chartMeta } from "@/fragment/components/chart";
 import { Hamdast, hamdastMeta } from "@/hamdast/hamdast";
 import { TextEditor, TextEditorMeta } from "@/fragment/components/text-editor";
 import { FileInput, fileInputMeta } from "@/fragment/components/file-input";
+import Map, { mapMeta } from "@/fragment/components/map";
 export default function PlasmicHost() {
   return <PlasmicCanvasHost />;
 }
@@ -37,3 +38,4 @@ registerComponent(ApiRequest, apiRequestMeta);
 registerComponent(Chart, chartMeta);
 registerComponent(TextEditor, TextEditorMeta);
 registerComponent(FileInput, fileInputMeta);
+registerComponent(Map, mapMeta);

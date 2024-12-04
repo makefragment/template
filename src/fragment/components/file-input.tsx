@@ -1,17 +1,19 @@
 import { CodeComponentMeta } from "@plasmicapp/host";
 import { ReactNode } from "react";
 
+type IFileInput = {
+  accept?: string;
+  onFileSelect?: (files: FileList | null) => void;
+  inputType?: "file" | "image" | "text";
+  children: ReactNode;
+};
+
 export const FileInput = ({
   accept = "image/png, image/jpg, image/jpeg, image/bmp",
   onFileSelect,
   inputType = "file",
   children,
-}: {
-  accept?: string;
-  onFileSelect?: (files: FileList | null) => void;
-  inputType?: "file" | "image" | "text";
-  children: ReactNode;
-}) => {
+}: IFileInput) => {
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (onFileSelect) {
@@ -33,12 +35,13 @@ export const FileInput = ({
   );
 };
 
-export const fileInputMeta: CodeComponentMeta<any> = {
+export const fileInputMeta: CodeComponentMeta<IFileInput> = {
   name: "FileInput",
   displayName: "Fragment/FileInput",
   importPath: "@/fragment/components/FileInput",
   props: {
     children: "slot",
+    value: "object",
     accept: {
       type: "string",
       defaultValue: "image/png, image/jpg, image/jpeg, image/bmp",

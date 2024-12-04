@@ -95,12 +95,6 @@ export const TextEditorMeta: CodeComponentMeta<any> = {
         },
       ],
     },
-    // contentsLangDirection: {
-    //   type: "choice",
-    //   options: ["ltr", "rtl"],
-    //   defaultValue: "rtl",
-    //   description: "Sets the text direction of the editor's content.",
-    // },
     language: {
       type: "choice",
       options: ["fa", "en"],

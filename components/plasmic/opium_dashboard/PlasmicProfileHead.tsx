@@ -73,6 +73,8 @@ import sty from "./PlasmicProfileHead.module.css"; // plasmic-import: PIAFRsJicC
 import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
 import Icon26Icon from "./icons/PlasmicIcon__Icon26"; // plasmic-import: frSwMvWOgAN1/icon
 
+import __lib_axios from "axios";
+
 createPlasmicElementProxy;
 
 export type PlasmicProfileHead__VariantMembers = {};
@@ -96,7 +98,9 @@ export interface DefaultProfileHeadProps {
   className?: string;
 }
 
-const $$ = {};
+const $$ = {
+  axios: __lib_axios
+};
 
 function useNextRouter() {
   try {
@@ -269,7 +273,7 @@ function PlasmicProfileHead__RenderFunc(props: {
                   (async files => {
                     const $steps = {};
 
-                    $steps["invokeGlobalAction"] = true
+                    $steps["invokeGlobalAction"] = false
                       ? (() => {
                           const actionArgs = {
                             args: [
@@ -278,14 +282,7 @@ function PlasmicProfileHead__RenderFunc(props: {
                               undefined,
                               (() => {
                                 try {
-                                  return (() => {
-                                    let formData = new globalThis.FormData();
-                                    formData.append(
-                                      "file",
-                                      $state.upload.files?.[0]?.contents
-                                    );
-                                    return formData;
-                                  })();
+                                  return {};
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
@@ -297,11 +294,27 @@ function PlasmicProfileHead__RenderFunc(props: {
                                   throw e;
                                 }
                               })(),
-                              {
-                                headers: {
-                                  "Content-Type": "multipart/form-data"
+                              (() => {
+                                try {
+                                  return {
+                                    ...$ctx.Fragment.apiConfig,
+                                    headers: {
+                                      ...$ctx.Fragment.previewApiConfig
+                                        ?.headers,
+                                      "Content-Type": "multipart/form-data"
+                                    }
+                                  };
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return {};
+                                  }
+                                  throw e;
                                 }
-                              }
+                              })()
                             ]
                           };
                           return $globalActions["Fragment.apiRequest"]?.apply(
@@ -320,17 +333,34 @@ function PlasmicProfileHead__RenderFunc(props: {
                       ];
                     }
 
-                    $steps["runCode"] = false
+                    $steps["runCode"] = true
                       ? (() => {
                           const actionArgs = {
                             customFunction: async () => {
                               return (() => {
-                                let formData = new globalThis.FormData();
-                                formData.append(
-                                  "file",
-                                  $state.upload.files?.[0]?.contents
+                                const file = $state.upload.files[0];
+                                const formData = params => {
+                                  const dt = new globalThis.FormData();
+                                  for (const [key, value] of Object.entries(
+                                    params
+                                  )) {
+                                    dt.append(key, value);
+                                  }
+                                  return dt;
+                                };
+                                return $$.axios.post(
+                                  "https://api.paziresh24.com/V1/doctor/profile/image",
+                                  formData({
+                                    file: file,
+                                    center_id:
+                                      "8fa2d51b-be88-4a7e-86fd-936391806395"
+                                  }),
+                                  {
+                                    headers: {
+                                      ...$ctx.Fragment.previewApiConfig.headers
+                                    }
+                                  }
                                 );
-                                return console.log(formData);
                               })();
                             }
                           };

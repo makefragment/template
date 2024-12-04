@@ -746,6 +746,19 @@ function PlasmicPatientList__RenderFunc(props: {
                   }
                 })()}
                 className={classNames("__wab_instance", sty.appointmentCard)}
+                cost={(() => {
+                  try {
+                    return (currentItem.cost / 10).toLocaleString() + " تومان";
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
                 date={(() => {
                   try {
                     return currentItem.type === "prescription"
@@ -784,6 +797,19 @@ function PlasmicPatientList__RenderFunc(props: {
                         currentItem.finalized) ||
                       false
                     );
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return undefined;
+                    }
+                    throw e;
+                  }
+                })()}
+                insurance={(() => {
+                  try {
+                    return currentItem.insurance;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||

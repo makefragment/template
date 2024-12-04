@@ -130,6 +130,7 @@
 .text__lqNfE {
   position: relative;
   font-weight: 500;
+  width: 150px;
 }
 .freeBox__rChaj {
   display: flex;
@@ -288,11 +289,19 @@
   max-width: 100%;
   position: relative;
 }
+.bime:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
 .patientPrivateData__x7Ftj:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }
 .patientPrivateData__ujSgU:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.cost2:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
 }
@@ -430,6 +439,49 @@
   object-fit: cover;
   width: auto;
   height: 1em;
+}
+.freeBox__cuGmL {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.freeBox__pQoHb {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.freeBox__pQoHb > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  margin-left: calc(0px - var(--token-_c276Gs_1FIE));
+  width: calc(100% + var(--token-_c276Gs_1FIE));
+}
+.freeBox__pQoHb > :global(.__wab_flex-container) > *,
+.freeBox__pQoHb > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__pQoHb > :global(.__wab_flex-container) > picture > img,
+.freeBox__pQoHb
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: var(--token-_c276Gs_1FIE);
+}
+.text__aGdOv {
+  font-size: var(--token-6NbVMeD6zQwn);
+  font-weight: 100;
 }
 .bookState {
   display: flex;

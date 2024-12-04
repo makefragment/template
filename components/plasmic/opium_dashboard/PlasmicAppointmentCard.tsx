@@ -119,6 +119,8 @@ export type PlasmicAppointmentCard__ArgsType = {
   insurances?: string;
   userCenterId?: string;
   treatmentCenter?: string;
+  cost?: string;
+  insurance?: string;
 };
 type ArgPropType = keyof PlasmicAppointmentCard__ArgsType;
 export const PlasmicAppointmentCard__ArgProps = new Array<ArgPropType>(
@@ -143,13 +145,17 @@ export const PlasmicAppointmentCard__ArgProps = new Array<ArgPropType>(
   "prescriptionId",
   "insurances",
   "userCenterId",
-  "treatmentCenter"
+  "treatmentCenter",
+  "cost",
+  "insurance"
 );
 
 export type PlasmicAppointmentCard__OverridesType = {
   root?: Flex__<"div">;
   dialog?: Flex__<typeof Dialog>;
   ساعتوتاریخ?: Flex__<"div">;
+  bime?: Flex__<typeof PatientPrivateData>;
+  cost2?: Flex__<typeof PatientPrivateData>;
   deletebookdialog?: Flex__<typeof Dialog>;
   bookState?: Flex__<"div">;
   dialog2?: Flex__<typeof Dialog>;
@@ -182,6 +188,8 @@ export interface DefaultAppointmentCardProps {
   insurances?: string;
   userCenterId?: string;
   treatmentCenter?: string;
+  cost?: string;
+  insurance?: string;
   onlineBorder?: SingleBooleanChoiceArg<"onlineBorder">;
   className?: string;
 }
@@ -211,7 +219,10 @@ function PlasmicAppointmentCard__RenderFunc(props: {
     () =>
       Object.assign(
         {
-          secureCall: false
+          secureCall: false,
+          cost: "10000 \u062a\u0648\u0645\u0627\u0646",
+          insurance:
+            "\u062a\u0627\u0645\u06cc\u0646 \u0627\u062c\u062a\u0645\u0627\u0639\u06cc"
         },
         Object.fromEntries(
           Object.entries(props.args).filter(([_, v]) => v !== undefined)
@@ -449,27 +460,81 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                 })()}
               />
 
-              <PatientPrivateData
-                className={classNames(
-                  "__wab_instance",
-                  sty.patientPrivateData__toQxz
-                )}
-                label={"\u06a9\u062f\u0645\u0644\u06cc"}
-                value={(() => {
-                  try {
-                    return $props.nationalcode;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return undefined;
-                    }
-                    throw e;
+              {(() => {
+                try {
+                  return (
+                    $props.nationalcode !== undefined &&
+                    $props.nationalcode !== "" &&
+                    $props.nationalcode !== null
+                  );
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return false;
                   }
-                })()}
-              />
-
+                  throw e;
+                }
+              })() ? (
+                <PatientPrivateData
+                  className={classNames(
+                    "__wab_instance",
+                    sty.patientPrivateData__toQxz
+                  )}
+                  label={"\u06a9\u062f\u0645\u0644\u06cc"}
+                  value={(() => {
+                    try {
+                      return $props.nationalcode;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                />
+              ) : null}
+              {(() => {
+                try {
+                  return (
+                    $props.insurance !== undefined &&
+                    $props.insurance !== "" &&
+                    $props.insurance !== null
+                  );
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return false;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <PatientPrivateData
+                  data-plasmic-name={"bime"}
+                  data-plasmic-override={overrides.bime}
+                  className={classNames("__wab_instance", sty.bime)}
+                  label={"\u0628\u06cc\u0645\u0647"}
+                  value={(() => {
+                    try {
+                      return $props.insurance;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                />
+              ) : null}
               <PatientPrivateData
                 className={classNames(
                   "__wab_instance",
@@ -515,6 +580,46 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                 })()}
               />
 
+              {(() => {
+                try {
+                  return (
+                    $props.cost !== undefined &&
+                    $props.cost !== "" &&
+                    $props.cost !== "0 تومان" &&
+                    $props.cost !== "NaN تومان"
+                  );
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return false;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <PatientPrivateData
+                  data-plasmic-name={"cost2"}
+                  data-plasmic-override={overrides.cost2}
+                  className={classNames("__wab_instance", sty.cost2)}
+                  label={
+                    "\u0645\u0628\u0644\u063a \u0648\u06cc\u0632\u06cc\u062a"
+                  }
+                  value={(() => {
+                    try {
+                      return $props.cost;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                />
+              ) : null}
               <PatientPrivateData
                 className={classNames(
                   "__wab_instance",
@@ -1657,6 +1762,37 @@ function PlasmicAppointmentCard__RenderFunc(props: {
         }
       />
 
+      <div className={classNames(projectcss.all, sty.freeBox__cuGmL)}>
+        <Stack__
+          as={"div"}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.freeBox__pQoHb)}
+        >
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text__aGdOv
+            )}
+          >
+            <React.Fragment>
+              {(() => {
+                try {
+                  return $props.nationalcode;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return "09136020023";
+                  }
+                  throw e;
+                }
+              })()}
+            </React.Fragment>
+          </div>
+        </Stack__>
+      </div>
       <Stack__
         as={"div"}
         data-plasmic-name={"bookState"}
@@ -1971,7 +2107,7 @@ function PlasmicAppointmentCard__RenderFunc(props: {
               e instanceof TypeError ||
               e?.plasmicType === "PlasmicUndefinedDataError"
             ) {
-              return true;
+              return false;
             }
             throw e;
           }
@@ -2462,6 +2598,8 @@ const PlasmicDescendants = {
     "root",
     "dialog",
     "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e",
+    "bime",
+    "cost2",
     "deletebookdialog",
     "bookState",
     "dialog2",
@@ -2473,9 +2611,13 @@ const PlasmicDescendants = {
   dialog: [
     "dialog",
     "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e",
+    "bime",
+    "cost2",
     "deletebookdialog"
   ],
   ساعتوتاریخ: ["\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e"],
+  bime: ["bime"],
+  cost2: ["cost2"],
   deletebookdialog: ["deletebookdialog"],
   bookState: [
     "bookState",
@@ -2498,6 +2640,8 @@ type NodeDefaultElementType = {
   root: "div";
   dialog: typeof Dialog;
   ساعتوتاریخ: "div";
+  bime: typeof PatientPrivateData;
+  cost2: typeof PatientPrivateData;
   deletebookdialog: typeof Dialog;
   bookState: "div";
   dialog2: typeof Dialog;
@@ -2571,6 +2715,8 @@ export const PlasmicAppointmentCard = Object.assign(
     ساعتوتاریخ: makeNodeComponent(
       "\u0633\u0627\u0639\u062a\u0648\u062a\u0627\u0631\u06cc\u062e"
     ),
+    bime: makeNodeComponent("bime"),
+    cost2: makeNodeComponent("cost2"),
     deletebookdialog: makeNodeComponent("deletebookdialog"),
     bookState: makeNodeComponent("bookState"),
     dialog2: makeNodeComponent("dialog2"),

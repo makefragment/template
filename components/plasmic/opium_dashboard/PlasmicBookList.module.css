@@ -19,9 +19,16 @@
       calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
     )
     minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
+  padding: 5px 50px;
 }
 .bookList > * {
   grid-column: 4;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .bookList {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .bookList > * {

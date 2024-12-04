@@ -2073,6 +2073,11 @@
           "id": "Pu6FdA6kdBUA",
           "name": "Icon34Icon",
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon34.tsx"
+        },
+        {
+          "id": "JFE5vLu_22XX",
+          "name": "Icon35Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon35.tsx"
         }
       ],
       "images": [

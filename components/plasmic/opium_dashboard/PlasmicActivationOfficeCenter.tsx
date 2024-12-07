@@ -219,19 +219,20 @@ function PlasmicActivationOfficeCenter__RenderFunc(props: {
         sty.root
       )}
     >
-      <Map
-        data-plasmic-name={"map"}
-        data-plasmic-override={overrides.map}
-        className={classNames("__wab_instance", sty.map)}
-        height={"300px"}
-        lat={generateStateValueProp($state, ["map", "lat"])}
-        lng={generateStateValueProp($state, ["map", "lng"])}
-        onChangeLat={generateStateOnChangeProp($state, ["map", "lat"])}
-        onChangeLng={generateStateOnChangeProp($state, ["map", "lng"])}
-        width={"100%"}
-        zoom={20}
-      />
-
+      <div className={classNames(projectcss.all, sty.freeBox__mm0Oa)}>
+        <Map
+          data-plasmic-name={"map"}
+          data-plasmic-override={overrides.map}
+          className={classNames("__wab_instance", sty.map)}
+          height={"300px"}
+          lat={generateStateValueProp($state, ["map", "lat"])}
+          lng={generateStateValueProp($state, ["map", "lng"])}
+          onChangeLat={generateStateOnChangeProp($state, ["map", "lat"])}
+          onChangeLng={generateStateOnChangeProp($state, ["map", "lng"])}
+          width={"100%"}
+          zoom={20}
+        />
+      </div>
       <div
         className={classNames(
           projectcss.all,

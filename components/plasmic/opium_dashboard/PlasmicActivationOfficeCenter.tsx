@@ -60,6 +60,10 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { Map } from "@/fragment/components/map"; // plasmic-import: Hj9PnfcAA6rQ/codeComponent
+import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-import: Gl72hv5IMo-p/codeComponent
+import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
+import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
+import ProfileTells from "../../ProfileTells"; // plasmic-import: yzo0JdTgs2uD/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -69,6 +73,9 @@ import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJ
 import sty from "./PlasmicActivationOfficeCenter.module.css"; // plasmic-import: eC1lHj9ndIjA/css
 
 import Icon26Icon from "./icons/PlasmicIcon__Icon26"; // plasmic-import: frSwMvWOgAN1/icon
+import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
+import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
+import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 
 createPlasmicElementProxy;
 
@@ -85,8 +92,10 @@ export const PlasmicActivationOfficeCenter__ArgProps = new Array<ArgPropType>();
 export type PlasmicActivationOfficeCenter__OverridesType = {
   root?: Flex__<"div">;
   map?: Flex__<typeof Map>;
-  freeBox?: Flex__<"div">;
-  svg?: Flex__<"svg">;
+  addressApi?: Flex__<typeof ApiRequest>;
+  button?: Flex__<typeof Button>;
+  tellsDialog?: Flex__<typeof Dialog>;
+  tells?: Flex__<typeof ProfileTells>;
 };
 
 export interface DefaultActivationOfficeCenterProps {
@@ -144,6 +153,42 @@ function PlasmicActivationOfficeCenter__RenderFunc(props: {
         type: "private",
         variableType: "number",
         initFunc: ({ $props, $state, $queries, $ctx }) => 51.35918498039246
+      },
+      {
+        path: "addressApi.data",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "addressApi.error",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "addressApi.loading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "tellsDialog.open",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "tells.oldTells",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "tells.newTells",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
     [$props, $ctx, $refs]
@@ -156,11 +201,13 @@ function PlasmicActivationOfficeCenter__RenderFunc(props: {
   });
 
   return (
-    <div
+    <Stack__
+      as={"div"}
       data-plasmic-name={"root"}
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
+      hasGap={true}
       className={classNames(
         projectcss.all,
         projectcss.root_reset,
@@ -196,46 +243,174 @@ function PlasmicActivationOfficeCenter__RenderFunc(props: {
           "\u0645\u062d\u0644 \u0645\u0637\u0628 \u062e\u0648\u062f \u0631\u0627 \u0627\u0632 \u0631\u0648\u06cc \u0646\u0642\u0634\u0647 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f."
         }
       </div>
-      <div
-        data-plasmic-name={"freeBox"}
-        data-plasmic-override={overrides.freeBox}
-        className={classNames(projectcss.all, sty.freeBox)}
-      >
-        <Icon26Icon
-          data-plasmic-name={"svg"}
-          data-plasmic-override={overrides.svg}
-          className={classNames(projectcss.all, sty.svg)}
-          role={"img"}
-        />
+      <ApiRequest
+        data-plasmic-name={"addressApi"}
+        data-plasmic-override={overrides.addressApi}
+        className={classNames("__wab_instance", sty.addressApi)}
+        errorDisplay={
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text__jjUz9
+            )}
+          >
+            {"Error fetching data"}
+          </div>
+        }
+        loadingDisplay={
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__w7Wnr)}
+          >
+            <Icon26Icon
+              className={classNames(projectcss.all, sty.svg__slnZl)}
+              role={"img"}
+            />
 
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text__ckLj3
-          )}
+            <Icon34Icon
+              className={classNames(projectcss.all, sty.svg__i5Zwx)}
+              role={"img"}
+            />
+          </Stack__>
+        }
+        method={"GET"}
+        onError={generateStateOnChangeProp($state, ["addressApi", "error"])}
+        onLoading={generateStateOnChangeProp($state, ["addressApi", "loading"])}
+        onSuccess={generateStateOnChangeProp($state, ["addressApi", "data"])}
+        url={(() => {
+          try {
+            return `https://api.paziresh24.com/V1/geocoding/reverse?lat=${$state.map.lat}&long=${$state.map.lng}`;
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return undefined;
+            }
+            throw e;
+          }
+        })()}
+      >
+        <Stack__
+          as={"div"}
+          hasGap={true}
+          className={classNames(projectcss.all, sty.freeBox__itFNx)}
         >
-          <React.Fragment>
-            <span
-              className={"plasmic_default__all plasmic_default__span"}
-              style={{ fontWeight: 700 }}
-            >
-              {
-                "\u062a\u0647\u0631\u0627\u0646\u060c \u06cc\u0627\u062f\u06af\u0627\u0631 \u0627\u0645\u0627\u0645\u060c \u0632\u0646\u062c\u0627\u0646 \u062c\u0646\u0648\u0628\u06cc\u060c \u0627\u0635\u0644\u0627\u0646\u06cc"
-              }
-            </span>
-          </React.Fragment>
-        </div>
-      </div>
-    </div>
+          <Icon26Icon
+            className={classNames(projectcss.all, sty.svg__xlRns)}
+            role={"img"}
+          />
+
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text__bziHh
+            )}
+          >
+            <React.Fragment>
+              {(() => {
+                try {
+                  return $state.addressApi.data.formatted_address;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return "\u062a\u0647\u0631\u0627\u0646\u066c \u0633\u0639\u0627\u062f\u062a \u0622\u0628\u0627\u062f";
+                  }
+                  throw e;
+                }
+              })()}
+            </React.Fragment>
+          </div>
+        </Stack__>
+      </ApiRequest>
+      <Button
+        data-plasmic-name={"button"}
+        data-plasmic-override={overrides.button}
+        children2={"\u0627\u0646\u062c\u0627\u0645 \u0634\u062f"}
+        className={classNames("__wab_instance", sty.button)}
+        onClick={async event => {
+          const $steps = {};
+
+          $steps["updateTellsDialogOpen"] = true
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["tellsDialog", "open"]
+                  },
+                  operation: 4
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
+
+                  const oldValue = $stateGet(objRoot, variablePath);
+                  $stateSet(objRoot, variablePath, !oldValue);
+                  return !oldValue;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["updateTellsDialogOpen"] != null &&
+            typeof $steps["updateTellsDialogOpen"] === "object" &&
+            typeof $steps["updateTellsDialogOpen"].then === "function"
+          ) {
+            $steps["updateTellsDialogOpen"] = await $steps[
+              "updateTellsDialogOpen"
+            ];
+          }
+        }}
+      />
+
+      <Dialog
+        data-plasmic-name={"tellsDialog"}
+        data-plasmic-override={overrides.tellsDialog}
+        body={
+          <div className={classNames(projectcss.all, sty.freeBox__snooH)}>
+            <ProfileTells
+              data-plasmic-name={"tells"}
+              data-plasmic-override={overrides.tells}
+              className={classNames("__wab_instance", sty.tells)}
+              newTells={generateStateValueProp($state, ["tells", "newTells"])}
+              oldTells={generateStateValueProp($state, ["tells", "oldTells"])}
+              onNewTellsChange={generateStateOnChangeProp($state, [
+                "tells",
+                "newTells"
+              ])}
+              onOldTellsChange={generateStateOnChangeProp($state, [
+                "tells",
+                "oldTells"
+              ])}
+            />
+          </div>
+        }
+        className={classNames("__wab_instance", sty.tellsDialog)}
+        noTrigger={true}
+        onOpenChange={generateStateOnChangeProp($state, [
+          "tellsDialog",
+          "open"
+        ])}
+        open={generateStateValueProp($state, ["tellsDialog", "open"])}
+        trigger={null}
+      />
+    </Stack__>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "map", "freeBox", "svg"],
+  root: ["root", "map", "addressApi", "button", "tellsDialog", "tells"],
   map: ["map"],
-  freeBox: ["freeBox", "svg"],
-  svg: ["svg"]
+  addressApi: ["addressApi"],
+  button: ["button"],
+  tellsDialog: ["tellsDialog", "tells"],
+  tells: ["tells"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -243,8 +418,10 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   map: typeof Map;
-  freeBox: "div";
-  svg: "svg";
+  addressApi: typeof ApiRequest;
+  button: typeof Button;
+  tellsDialog: typeof Dialog;
+  tells: typeof ProfileTells;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -308,8 +485,10 @@ export const PlasmicActivationOfficeCenter = Object.assign(
   {
     // Helper components rendering sub-elements
     map: makeNodeComponent("map"),
-    freeBox: makeNodeComponent("freeBox"),
-    svg: makeNodeComponent("svg"),
+    addressApi: makeNodeComponent("addressApi"),
+    button: makeNodeComponent("button"),
+    tellsDialog: makeNodeComponent("tellsDialog"),
+    tells: makeNodeComponent("tells"),
 
     // Metadata about props expected for PlasmicActivationOfficeCenter
     internalVariantProps: PlasmicActivationOfficeCenter__VariantProps,

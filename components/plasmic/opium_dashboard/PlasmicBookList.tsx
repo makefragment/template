@@ -778,14 +778,18 @@ function PlasmicBookList__RenderFunc(props: {
                 onClick={async event => {
                   const $steps = {};
 
-                  $steps["updateFragmentDatePickerValues"] = true
+                  $steps["updateFragmentDatePickerValue"] = true
                     ? (() => {
                         const actionArgs = {
                           variable: {
                             objRoot: $state,
-                            variablePath: ["fragmentDatePicker", "values"]
+                            variablePath: ["fragmentDatePicker", "value"]
                           },
-                          operation: 0
+                          operation: 0,
+                          value:
+                            ($state.fragmentDatePicker?.value ??
+                              Date.now() / 1000) -
+                            24 * 60 * 60
                         };
                         return (({
                           variable,
@@ -804,21 +808,25 @@ function PlasmicBookList__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
-                    $steps["updateFragmentDatePickerValues"] != null &&
-                    typeof $steps["updateFragmentDatePickerValues"] ===
+                    $steps["updateFragmentDatePickerValue"] != null &&
+                    typeof $steps["updateFragmentDatePickerValue"] ===
                       "object" &&
-                    typeof $steps["updateFragmentDatePickerValues"].then ===
+                    typeof $steps["updateFragmentDatePickerValue"].then ===
                       "function"
                   ) {
-                    $steps["updateFragmentDatePickerValues"] = await $steps[
-                      "updateFragmentDatePickerValues"
+                    $steps["updateFragmentDatePickerValue"] = await $steps[
+                      "updateFragmentDatePickerValue"
                     ];
                   }
                 }}
                 role={"img"}
               />
 
-              <div className={classNames(projectcss.all, sty.freeBox__jlzo)}>
+              <Stack__
+                as={"div"}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.freeBox__jlzo)}
+              >
                 <div
                   className={classNames(
                     projectcss.all,
@@ -917,6 +925,7 @@ function PlasmicBookList__RenderFunc(props: {
                           }
                         })()}
                         locale={"fa"}
+                        mode={"single"}
                         onChange={async (...eventArgs: any) => {
                           generateStateOnChangeProp($state, [
                             "fragmentDatePicker",
@@ -1009,21 +1018,24 @@ function PlasmicBookList__RenderFunc(props: {
                     />
                   }
                 />
-              </div>
+              </Stack__>
               <Icon37Icon
                 className={classNames(projectcss.all, sty.svg__wr8D)}
                 onClick={async event => {
                   const $steps = {};
 
-                  $steps["updateFragmentDatePickerValues"] = true
+                  $steps["updateFragmentDatePickerValue"] = true
                     ? (() => {
                         const actionArgs = {
                           variable: {
                             objRoot: $state,
-                            variablePath: ["fragmentDatePicker", "values"]
+                            variablePath: ["fragmentDatePicker", "value"]
                           },
                           operation: 0,
-                          value: $state.fragmentDatePicker.values + 24 * 60 * 60
+                          value:
+                            ($state.fragmentDatePicker?.value ??
+                              Date.now() / 1000) +
+                            24 * 60 * 60
                         };
                         return (({
                           variable,
@@ -1042,14 +1054,14 @@ function PlasmicBookList__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
-                    $steps["updateFragmentDatePickerValues"] != null &&
-                    typeof $steps["updateFragmentDatePickerValues"] ===
+                    $steps["updateFragmentDatePickerValue"] != null &&
+                    typeof $steps["updateFragmentDatePickerValue"] ===
                       "object" &&
-                    typeof $steps["updateFragmentDatePickerValues"].then ===
+                    typeof $steps["updateFragmentDatePickerValue"].then ===
                       "function"
                   ) {
-                    $steps["updateFragmentDatePickerValues"] = await $steps[
-                      "updateFragmentDatePickerValues"
+                    $steps["updateFragmentDatePickerValue"] = await $steps[
+                      "updateFragmentDatePickerValue"
                     ];
                   }
                 }}

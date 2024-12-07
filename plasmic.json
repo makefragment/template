@@ -1918,6 +1918,19 @@
           "cssFilePath": "plasmic/opium_dashboard/PlasmicActivationOfficeCenter.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "yzo0JdTgs2uD",
+          "name": "ProfileTells",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicProfileTells.tsx",
+          "importSpec": {
+            "modulePath": "ProfileTells.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicProfileTells.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

@@ -123,6 +123,7 @@ export type PlasmicAppointmentCard__ArgsType = {
   treatmentCenter?: string;
   cost?: string;
   insurance?: string;
+  onDelete?: () => void;
 };
 type ArgPropType = keyof PlasmicAppointmentCard__ArgsType;
 export const PlasmicAppointmentCard__ArgProps = new Array<ArgPropType>(
@@ -149,7 +150,8 @@ export const PlasmicAppointmentCard__ArgProps = new Array<ArgPropType>(
   "userCenterId",
   "treatmentCenter",
   "cost",
-  "insurance"
+  "insurance",
+  "onDelete"
 );
 
 export type PlasmicAppointmentCard__OverridesType = {
@@ -192,6 +194,7 @@ export interface DefaultAppointmentCardProps {
   treatmentCenter?: string;
   cost?: string;
   insurance?: string;
+  onDelete?: () => void;
   onlineBorder?: SingleBooleanChoiceArg<"onlineBorder">;
   className?: string;
 }
@@ -1378,6 +1381,24 @@ function PlasmicAppointmentCard__RenderFunc(props: {
                       ) {
                         $steps["eventDeleteBook"] = await $steps[
                           "eventDeleteBook"
+                        ];
+                      }
+
+                      $steps["updateDialogOpen3"] = true
+                        ? (() => {
+                            const actionArgs = { eventRef: $props["onDelete"] };
+                            return (({ eventRef, args }) => {
+                              return eventRef?.(...(args ?? []));
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateDialogOpen3"] != null &&
+                        typeof $steps["updateDialogOpen3"] === "object" &&
+                        typeof $steps["updateDialogOpen3"].then === "function"
+                      ) {
+                        $steps["updateDialogOpen3"] = await $steps[
+                          "updateDialogOpen3"
                         ];
                       }
 

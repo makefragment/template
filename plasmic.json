@@ -2078,6 +2078,16 @@
           "id": "JFE5vLu_22XX",
           "name": "Icon35Icon",
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon35.tsx"
+        },
+        {
+          "id": "u-KkD0J54Ar7",
+          "name": "Icon36Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon36.tsx"
+        },
+        {
+          "id": "Cp6R_3Zg_y_k",
+          "name": "Icon37Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon37.tsx"
         }
       ],
       "images": [
@@ -2220,6 +2230,24 @@
           "name": "Chart",
           "displayName": "Chart",
           "componentImportPath": "@/fragment/components/chart"
+        },
+        {
+          "id": "5XrOgmhx9P3d",
+          "name": "TextEditor",
+          "displayName": "TextEditor",
+          "componentImportPath": "@/fragment/components/text-editor"
+        },
+        {
+          "id": "FbJKJDT4Zqs9",
+          "name": "FileInput",
+          "displayName": "FileInput",
+          "componentImportPath": "@/fragment/components/FileInput"
+        },
+        {
+          "id": "Hj9PnfcAA6rQ",
+          "name": "Map",
+          "displayName": "Map",
+          "componentImportPath": "@/fragment/components/map"
         }
       ],
       "customFunctions": []

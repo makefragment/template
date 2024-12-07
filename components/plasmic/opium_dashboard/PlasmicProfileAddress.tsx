@@ -63,8 +63,9 @@ import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-impor
 import { Select } from "@/fragment/components/select"; // plasmic-import: n8ioKZzFQxrO/codeComponent
 import { Input } from "@/fragment/components/input"; // plasmic-import: ByhbQ0nAxig8/codeComponent
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
-import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
+import { FileInput } from "@/fragment/components/FileInput"; // plasmic-import: FbJKJDT4Zqs9/codeComponent
 import Checkbox from "../../Checkbox"; // plasmic-import: IDR0sAqN5tth/component
+import { Map } from "@/fragment/components/map"; // plasmic-import: Hj9PnfcAA6rQ/codeComponent
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
@@ -108,11 +109,12 @@ export type PlasmicProfileAddress__OverridesType = {
   input4?: Flex__<typeof Input>;
   input3?: Flex__<typeof Input>;
   galleryApi?: Flex__<typeof ApiRequest>;
-  upload?: Flex__<typeof UploadWrapper>;
+  fragmentFileInput?: Flex__<typeof FileInput>;
   checkbox?: Flex__<typeof Checkbox>;
   checkbox2?: Flex__<typeof Checkbox>;
   checkbox3?: Flex__<typeof Checkbox>;
   checkbox4?: Flex__<typeof Checkbox>;
+  map?: Flex__<typeof Map>;
   sideEffect?: Flex__<typeof SideEffect>;
   imageDialog?: Flex__<typeof Dialog>;
   deleteImageDialog?: Flex__<typeof Dialog>;
@@ -4188,12 +4190,6 @@ function PlasmicProfileAddress__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
       },
       {
-        path: "upload.files",
-        type: "private",
-        variableType: "array",
-        initFunc: ({ $props, $state, $queries, $ctx }) => []
-      },
-      {
         path: "checkbox.isChecked",
         type: "private",
         variableType: "boolean",
@@ -4239,6 +4235,18 @@ function PlasmicProfileAddress__RenderFunc(props: {
         type: "private",
         variableType: "array",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "map.lat",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => 35.70069003610754
+      },
+      {
+        path: "map.lng",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => 51.35918498039246
       }
     ],
     [$props, $ctx, $refs]
@@ -5037,88 +5045,176 @@ function PlasmicProfileAddress__RenderFunc(props: {
               })}
             </Stack__>
           </ApiRequest>
-          <UploadWrapper
-            data-plasmic-name={"upload"}
-            data-plasmic-override={overrides.upload}
-            accept={""}
-            className={classNames("__wab_instance", sty.upload)}
-            files={generateStateValueProp($state, ["upload", "files"])}
-            onFilesChange={async (...eventArgs: any) => {
-              generateStateOnChangeProp($state, ["upload", "files"]).apply(
-                null,
-                eventArgs
-              );
-              (async files => {
+          <div className={classNames(projectcss.all, sty.freeBox__pr7VM)}>
+            <FileInput
+              data-plasmic-name={"fragmentFileInput"}
+              data-plasmic-override={overrides.fragmentFileInput}
+              accept={"image/png, image/jpg, image/jpeg, image/bmp"}
+              className={classNames("__wab_instance", sty.fragmentFileInput)}
+              inputType={"file"}
+              onFileSelect={async files => {
                 const $steps = {};
 
-                $steps["updateProvince"] = true
+                $steps["uploadImage"] = true
                   ? (() => {
                       const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["province"]
-                        },
-                        operation: 0
+                        args: [
+                          "POST",
+                          "https://api.paziresh24.com/V1/doctor/center/gallery",
+                          undefined,
+                          (() => {
+                            try {
+                              return (() => {
+                                const file = files[0];
+                                const formData = params => {
+                                  const dt = new globalThis.FormData();
+                                  for (const [key, value] of Object.entries(
+                                    params
+                                  )) {
+                                    dt.append(key, value);
+                                  }
+                                  return dt;
+                                };
+                                const data = formData({ file });
+                                return data;
+                              })();
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })(),
+                          (() => {
+                            try {
+                              return {
+                                ...$ctx.Fragment.apiConfig,
+                                headers: {
+                                  ...$ctx.Fragment.previewApiConfig?.headers,
+                                  "Content-Type": "multipart/form-data"
+                                }
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
                       };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
-                      })?.apply(null, [actionArgs]);
+                      return $globalActions["Fragment.apiRequest"]?.apply(
+                        null,
+                        [...actionArgs.args]
+                      );
                     })()
                   : undefined;
                 if (
-                  $steps["updateProvince"] != null &&
-                  typeof $steps["updateProvince"] === "object" &&
-                  typeof $steps["updateProvince"].then === "function"
+                  $steps["uploadImage"] != null &&
+                  typeof $steps["uploadImage"] === "object" &&
+                  typeof $steps["uploadImage"].then === "function"
                 ) {
-                  $steps["updateProvince"] = await $steps["updateProvince"];
+                  $steps["uploadImage"] = await $steps["uploadImage"];
                 }
-              }).apply(null, eventArgs);
-            }}
-            showUploadList={true}
-          >
-            <Stack__
-              as={"div"}
-              hasGap={true}
-              className={classNames(projectcss.all, sty.freeBox___0EeuL)}
-            >
-              <Icon2Icon
-                className={classNames(projectcss.all, sty.svg__mDSc2)}
-                role={"img"}
-              />
 
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__irtxf
-                )}
-              >
-                {"\u0639\u06a9\u0633 \u0645\u0637\u0628"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__bJllt
-                )}
-              >
-                {
-                  "( \u062d\u062f\u0627\u06a9\u062b\u0631 \u06cc\u06a9 \u0645\u06af\u0627\u0628\u0627\u06cc\u062a )"
+                $steps["invokeGlobalAction"] =
+                  $steps.uploadImage.status == 200
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            undefined,
+                            (() => {
+                              try {
+                                return $steps.uploadImage?.data?.message;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Fragment.showToast"]?.apply(
+                          null,
+                          [...actionArgs.args]
+                        );
+                      })()
+                    : undefined;
+                if (
+                  $steps["invokeGlobalAction"] != null &&
+                  typeof $steps["invokeGlobalAction"] === "object" &&
+                  typeof $steps["invokeGlobalAction"].then === "function"
+                ) {
+                  $steps["invokeGlobalAction"] = await $steps[
+                    "invokeGlobalAction"
+                  ];
                 }
-              </div>
-            </Stack__>
-          </UploadWrapper>
+
+                $steps["runCode"] =
+                  $steps.uploadImage.status == 200
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return globalThis.location.reload();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                if (
+                  $steps["runCode"] != null &&
+                  typeof $steps["runCode"] === "object" &&
+                  typeof $steps["runCode"].then === "function"
+                ) {
+                  $steps["runCode"] = await $steps["runCode"];
+                }
+              }}
+            >
+              <Stack__
+                as={"div"}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.freeBox___0EeuL)}
+              >
+                <Icon2Icon
+                  className={classNames(projectcss.all, sty.svg__mDSc2)}
+                  role={"img"}
+                />
+
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__irtxf
+                  )}
+                >
+                  {"\u0639\u06a9\u0633 \u0645\u0637\u0628"}
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__bJllt
+                  )}
+                >
+                  {
+                    "( \u062d\u062f\u0627\u06a9\u062b\u0631 \u06cc\u06a9 \u0645\u06af\u0627\u0628\u0627\u06cc\u062a )"
+                  }
+                </div>
+              </Stack__>
+            </FileInput>
+          </div>
           <Stack__
             as={"div"}
             hasGap={true}
@@ -5201,6 +5297,42 @@ function PlasmicProfileAddress__RenderFunc(props: {
               }
             </Checkbox>
           </Stack__>
+          <div className={classNames(projectcss.all, sty.freeBox__yYGwS)}>
+            {(() => {
+              try {
+                return !$state.imageDialog.open;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return true;
+                }
+                throw e;
+              }
+            })() ? (
+              <div className={classNames(projectcss.all, sty.freeBox__p1Evm)}>
+                <Map
+                  data-plasmic-name={"map"}
+                  data-plasmic-override={overrides.map}
+                  className={classNames("__wab_instance", sty.map)}
+                  height={"256px"}
+                  lat={generateStateValueProp($state, ["map", "lat"])}
+                  lng={generateStateValueProp($state, ["map", "lng"])}
+                  onChangeLat={generateStateOnChangeProp($state, [
+                    "map",
+                    "lat"
+                  ])}
+                  onChangeLng={generateStateOnChangeProp($state, [
+                    "map",
+                    "lng"
+                  ])}
+                  width={"100%"}
+                  zoom={20}
+                />
+              </div>
+            ) : null}
+          </div>
           <Button
             children2={
               <div
@@ -5252,6 +5384,8 @@ function PlasmicProfileAddress__RenderFunc(props: {
                               return {
                                 address: $state.address.value,
                                 city: $state.citySelect.value,
+                                lat: $state.map.lat,
+                                lon: $state.map.lng,
                                 province: $state.provinceSelect.value,
                                 tells: [...$state.oldPhoneNumbers, ...newTells]
                               };
@@ -5684,11 +5818,12 @@ const PlasmicDescendants = {
     "input4",
     "input3",
     "galleryApi",
-    "upload",
+    "fragmentFileInput",
     "checkbox",
     "checkbox2",
     "checkbox3",
     "checkbox4",
+    "map",
     "sideEffect",
     "imageDialog",
     "deleteImageDialog"
@@ -5703,11 +5838,12 @@ const PlasmicDescendants = {
     "input4",
     "input3",
     "galleryApi",
-    "upload",
+    "fragmentFileInput",
     "checkbox",
     "checkbox2",
     "checkbox3",
     "checkbox4",
+    "map",
     "sideEffect"
   ],
   provinceSelect: ["provinceSelect"],
@@ -5718,11 +5854,12 @@ const PlasmicDescendants = {
   input4: ["input4"],
   input3: ["input3"],
   galleryApi: ["galleryApi"],
-  upload: ["upload"],
+  fragmentFileInput: ["fragmentFileInput"],
   checkbox: ["checkbox"],
   checkbox2: ["checkbox2"],
   checkbox3: ["checkbox3"],
   checkbox4: ["checkbox4"],
+  map: ["map"],
   sideEffect: ["sideEffect"],
   imageDialog: ["imageDialog"],
   deleteImageDialog: ["deleteImageDialog"]
@@ -5741,11 +5878,12 @@ type NodeDefaultElementType = {
   input4: typeof Input;
   input3: typeof Input;
   galleryApi: typeof ApiRequest;
-  upload: typeof UploadWrapper;
+  fragmentFileInput: typeof FileInput;
   checkbox: typeof Checkbox;
   checkbox2: typeof Checkbox;
   checkbox3: typeof Checkbox;
   checkbox4: typeof Checkbox;
+  map: typeof Map;
   sideEffect: typeof SideEffect;
   imageDialog: typeof Dialog;
   deleteImageDialog: typeof Dialog;
@@ -5820,11 +5958,12 @@ export const PlasmicProfileAddress = Object.assign(
     input4: makeNodeComponent("input4"),
     input3: makeNodeComponent("input3"),
     galleryApi: makeNodeComponent("galleryApi"),
-    upload: makeNodeComponent("upload"),
+    fragmentFileInput: makeNodeComponent("fragmentFileInput"),
     checkbox: makeNodeComponent("checkbox"),
     checkbox2: makeNodeComponent("checkbox2"),
     checkbox3: makeNodeComponent("checkbox3"),
     checkbox4: makeNodeComponent("checkbox4"),
+    map: makeNodeComponent("map"),
     sideEffect: makeNodeComponent("sideEffect"),
     imageDialog: makeNodeComponent("imageDialog"),
     deleteImageDialog: makeNodeComponent("deleteImageDialog"),

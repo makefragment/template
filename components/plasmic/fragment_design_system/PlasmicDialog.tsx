@@ -215,7 +215,7 @@ function PlasmicDialog__RenderFunc(props: {
           "screen",
           "mobileOnly"
         ),
-        [sty["pcls_ukY8bLVH2ml5"]]: true
+        [sty["pcls_W-THuxFZxtZl"]]: true
       })}
       themeResetClass={classNames(
         projectcss.root_reset,

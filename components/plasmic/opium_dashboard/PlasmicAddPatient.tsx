@@ -1795,183 +1795,181 @@ function PlasmicAddPatient__RenderFunc(props: {
                               sty.freeBox__xnFeB
                             )}
                           >
-                            <Stack__
-                              as={"div"}
-                              hasGap={true}
-                              className={classNames(
-                                projectcss.all,
-                                sty.freeBox__kqRc
-                              )}
-                            >
-                              <div
-                                className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text__skZB
-                                )}
-                              >
-                                <React.Fragment>
-                                  {(() => {
-                                    try {
-                                      return (() => {
-                                        const persianDate = $state.datePicker
-                                          .value
-                                          ? new Intl.DateTimeFormat(
-                                              "fa-IR"
-                                            ).format(
-                                              $state.datePicker.value * 1000
-                                            )
-                                          : new Intl.DateTimeFormat(
-                                              "fa-IR"
-                                            ).format(
-                                              $ctx.fetchedDatafirstfreeturn[0]
-                                                .filds.result[0].from * 1000
-                                            );
-                                        return persianDate;
-                                      })();
-                                    } catch (e) {
-                                      if (
-                                        e instanceof TypeError ||
-                                        e?.plasmicType ===
-                                          "PlasmicUndefinedDataError"
-                                      ) {
-                                        return "";
+                            <Dialog
+                              data-plasmic-name={
+                                "\u062a\u0642\u0648\u06cc\u0645"
+                              }
+                              data-plasmic-override={overrides.تقویم}
+                              body={
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.freeBox___2SXqI
+                                  )}
+                                >
+                                  <DatePicker
+                                    data-plasmic-name={"datePicker"}
+                                    data-plasmic-override={overrides.datePicker}
+                                    className={classNames(
+                                      "__wab_instance",
+                                      sty.datePicker
+                                    )}
+                                    holidays={(() => {
+                                      try {
+                                        return $state.holidays.map(
+                                          item => item.date
+                                        );
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return [];
+                                        }
+                                        throw e;
                                       }
-                                      throw e;
-                                    }
-                                  })()}
-                                </React.Fragment>
-                              </div>
-                              <Dialog
-                                data-plasmic-name={
-                                  "\u062a\u0642\u0648\u06cc\u0645"
-                                }
-                                data-plasmic-override={overrides.تقویم}
-                                body={
+                                    })()}
+                                    locale={"fa"}
+                                    onChange={async (...eventArgs: any) => {
+                                      generateStateOnChangeProp($state, [
+                                        "datePicker",
+                                        "value"
+                                      ]).apply(null, eventArgs);
+                                      generateStateOnChangeProp($state, [
+                                        "datePicker",
+                                        "values"
+                                      ]).apply(null, eventArgs);
+                                      (async date => {
+                                        const $steps = {};
+
+                                        $steps["updateStateتقویمOpen"] = true
+                                          ? (() => {
+                                              const actionArgs = {
+                                                variable: {
+                                                  objRoot: $state,
+                                                  variablePath: [
+                                                    "تقویم",
+                                                    "open"
+                                                  ]
+                                                },
+                                                operation: 0,
+                                                value: false
+                                              };
+                                              return (({
+                                                variable,
+                                                value,
+                                                startIndex,
+                                                deleteCount
+                                              }) => {
+                                                if (!variable) {
+                                                  return;
+                                                }
+                                                const {
+                                                  objRoot,
+                                                  variablePath
+                                                } = variable;
+
+                                                $stateSet(
+                                                  objRoot,
+                                                  variablePath,
+                                                  value
+                                                );
+                                                return value;
+                                              })?.apply(null, [actionArgs]);
+                                            })()
+                                          : undefined;
+                                        if (
+                                          $steps["updateStateتقویمOpen"] !=
+                                            null &&
+                                          typeof $steps[
+                                            "updateStateتقویمOpen"
+                                          ] === "object" &&
+                                          typeof $steps["updateStateتقویمOpen"]
+                                            .then === "function"
+                                        ) {
+                                          $steps["updateStateتقویمOpen"] =
+                                            await $steps[
+                                              "updateStateتقویمOpen"
+                                            ];
+                                        }
+                                      }).apply(null, eventArgs);
+                                    }}
+                                    value={generateStateValueProp($state, [
+                                      "datePicker",
+                                      "value"
+                                    ])}
+                                    values={generateStateValueProp($state, [
+                                      "datePicker",
+                                      "values"
+                                    ])}
+                                  />
+                                </div>
+                              }
+                              className={classNames(
+                                "__wab_instance",
+                                sty.تقویم
+                              )}
+                              onOpenChange={generateStateOnChangeProp($state, [
+                                "تقویم",
+                                "open"
+                              ])}
+                              open={generateStateValueProp($state, [
+                                "تقویم",
+                                "open"
+                              ])}
+                              title={
+                                "\u062a\u0642\u0648\u06cc\u0645 \u0645\u0627\u0647\u0627\u0646\u0647"
+                              }
+                              trigger={
+                                <Stack__
+                                  as={"div"}
+                                  hasGap={true}
+                                  className={classNames(
+                                    projectcss.all,
+                                    sty.freeBox__kqRc
+                                  )}
+                                >
                                   <div
                                     className={classNames(
                                       projectcss.all,
-                                      sty.freeBox___2SXqI
+                                      projectcss.__wab_text,
+                                      sty.text__skZB
                                     )}
                                   >
-                                    <DatePicker
-                                      data-plasmic-name={"datePicker"}
-                                      data-plasmic-override={
-                                        overrides.datePicker
-                                      }
-                                      className={classNames(
-                                        "__wab_instance",
-                                        sty.datePicker
-                                      )}
-                                      holidays={(() => {
+                                    <React.Fragment>
+                                      {(() => {
                                         try {
-                                          return $state.holidays.map(
-                                            item => item.date
-                                          );
+                                          return (() => {
+                                            const persianDate = $state
+                                              .datePicker.value
+                                              ? new Intl.DateTimeFormat(
+                                                  "fa-IR"
+                                                ).format(
+                                                  $state.datePicker.value * 1000
+                                                )
+                                              : new Intl.DateTimeFormat(
+                                                  "fa-IR"
+                                                ).format(
+                                                  $ctx
+                                                    .fetchedDatafirstfreeturn[0]
+                                                    .filds.result[0].from * 1000
+                                                );
+                                            return persianDate;
+                                          })();
                                         } catch (e) {
                                           if (
                                             e instanceof TypeError ||
                                             e?.plasmicType ===
                                               "PlasmicUndefinedDataError"
                                           ) {
-                                            return [];
+                                            return "";
                                           }
                                           throw e;
                                         }
                                       })()}
-                                      locale={"fa"}
-                                      onChange={async (...eventArgs: any) => {
-                                        generateStateOnChangeProp($state, [
-                                          "datePicker",
-                                          "value"
-                                        ]).apply(null, eventArgs);
-                                        generateStateOnChangeProp($state, [
-                                          "datePicker",
-                                          "values"
-                                        ]).apply(null, eventArgs);
-                                        (async date => {
-                                          const $steps = {};
-
-                                          $steps["updateStateتقویمOpen"] = true
-                                            ? (() => {
-                                                const actionArgs = {
-                                                  variable: {
-                                                    objRoot: $state,
-                                                    variablePath: [
-                                                      "تقویم",
-                                                      "open"
-                                                    ]
-                                                  },
-                                                  operation: 0,
-                                                  value: false
-                                                };
-                                                return (({
-                                                  variable,
-                                                  value,
-                                                  startIndex,
-                                                  deleteCount
-                                                }) => {
-                                                  if (!variable) {
-                                                    return;
-                                                  }
-                                                  const {
-                                                    objRoot,
-                                                    variablePath
-                                                  } = variable;
-
-                                                  $stateSet(
-                                                    objRoot,
-                                                    variablePath,
-                                                    value
-                                                  );
-                                                  return value;
-                                                })?.apply(null, [actionArgs]);
-                                              })()
-                                            : undefined;
-                                          if (
-                                            $steps["updateStateتقویمOpen"] !=
-                                              null &&
-                                            typeof $steps[
-                                              "updateStateتقویمOpen"
-                                            ] === "object" &&
-                                            typeof $steps[
-                                              "updateStateتقویمOpen"
-                                            ].then === "function"
-                                          ) {
-                                            $steps["updateStateتقویمOpen"] =
-                                              await $steps[
-                                                "updateStateتقویمOpen"
-                                              ];
-                                          }
-                                        }).apply(null, eventArgs);
-                                      }}
-                                      value={generateStateValueProp($state, [
-                                        "datePicker",
-                                        "value"
-                                      ])}
-                                      values={generateStateValueProp($state, [
-                                        "datePicker",
-                                        "values"
-                                      ])}
-                                    />
+                                    </React.Fragment>
                                   </div>
-                                }
-                                className={classNames(
-                                  "__wab_instance",
-                                  sty.تقویم
-                                )}
-                                onOpenChange={generateStateOnChangeProp(
-                                  $state,
-                                  ["تقویم", "open"]
-                                )}
-                                open={generateStateValueProp($state, [
-                                  "تقویم",
-                                  "open"
-                                ])}
-                                title={
-                                  "\u062a\u0642\u0648\u06cc\u0645 \u0645\u0627\u0647\u0627\u0646\u0647"
-                                }
-                                trigger={
                                   <CalendarIcon
                                     className={classNames(
                                       projectcss.all,
@@ -1979,9 +1977,10 @@ function PlasmicAddPatient__RenderFunc(props: {
                                     )}
                                     role={"img"}
                                   />
-                                }
-                              />
-                            </Stack__>
+                                </Stack__>
+                              }
+                            />
+
                             <Stack__
                               as={"div"}
                               hasGap={true}

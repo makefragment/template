@@ -122,6 +122,24 @@
   top: 0;
   right: 0;
   cursor: pointer;
+  display: none;
+}
+.freeBox__uHzX {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  left: auto;
+  top: 0;
+  right: 0;
+}
+.fragmentFileInput:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
 }
 .freeBox___6GKuj {
   display: flex;
@@ -134,6 +152,7 @@
   max-width: 100%;
   background: #ffffff;
   overflow: hidden;
+  cursor: pointer;
   min-width: 0;
   border-radius: 1000px;
   padding: 8px;

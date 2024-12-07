@@ -80,7 +80,9 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicBookList.module.css"; // plasmic-import: Ita2Jf6_aAkK/css
 
+import Icon36Icon from "./icons/PlasmicIcon__Icon36"; // plasmic-import: u-KkD0J54Ar7/icon
 import CalendarIcon from "../fragment_icons/icons/PlasmicIcon__Calendar"; // plasmic-import: e2zWN9c_lxv7/icon
+import Icon37Icon from "./icons/PlasmicIcon__Icon37"; // plasmic-import: Cp6R_3Zg_y_k/icon
 import ChevronRightIcon from "../fragment_icons/icons/PlasmicIcon__ChevronRight"; // plasmic-import: GHdF3hS-oP_3/icon
 import ChevronLeftIcon from "../fragment_icons/icons/PlasmicIcon__ChevronLeft"; // plasmic-import: r9Upp9NbiZkf/icon
 import Icon13Icon from "./icons/PlasmicIcon__Icon13"; // plasmic-import: HIVxXykiyWcr/icon
@@ -764,29 +766,30 @@ function PlasmicBookList__RenderFunc(props: {
             data-plasmic-override={overrides.date}
             className={classNames(projectcss.all, sty.date)}
           >
-            <div
+            <Stack__
+              as={"div"}
               data-plasmic-name={"date2"}
               data-plasmic-override={overrides.date2}
+              hasGap={true}
               className={classNames(projectcss.all, sty.date2)}
             >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__qxVhq
-                )}
+              <Icon36Icon
+                className={classNames(projectcss.all, sty.svg__tL6Vy)}
                 onClick={async event => {
                   const $steps = {};
 
-                  $steps["updateCalendarOpen"] = true
+                  $steps["updateFragmentDatePickerValue"] = true
                     ? (() => {
                         const actionArgs = {
                           variable: {
                             objRoot: $state,
-                            variablePath: ["calendar", "open"]
+                            variablePath: ["fragmentDatePicker", "value"]
                           },
                           operation: 0,
-                          value: true
+                          value:
+                            ($state.fragmentDatePicker?.value ??
+                              Date.now() / 1000) -
+                            24 * 60 * 60
                         };
                         return (({
                           variable,
@@ -805,160 +808,266 @@ function PlasmicBookList__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
-                    $steps["updateCalendarOpen"] != null &&
-                    typeof $steps["updateCalendarOpen"] === "object" &&
-                    typeof $steps["updateCalendarOpen"].then === "function"
+                    $steps["updateFragmentDatePickerValue"] != null &&
+                    typeof $steps["updateFragmentDatePickerValue"] ===
+                      "object" &&
+                    typeof $steps["updateFragmentDatePickerValue"].then ===
+                      "function"
                   ) {
-                    $steps["updateCalendarOpen"] = await $steps[
-                      "updateCalendarOpen"
+                    $steps["updateFragmentDatePickerValue"] = await $steps[
+                      "updateFragmentDatePickerValue"
                     ];
                   }
                 }}
+                role={"img"}
+              />
+
+              <Stack__
+                as={"div"}
+                hasGap={true}
+                className={classNames(projectcss.all, sty.freeBox__jlzo)}
               >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return $state.fragmentDatePicker.value
-                        ? new Date($state.fragmentDatePicker.value * 1000)
-                            .toLocaleDateString("fa-IR")
-                            .split("/")
-                            .join("/")
-                        : new Date()
-                            .toLocaleDateString("fa-IR")
-                            .split("/")
-                            .join("/");
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "";
-                      }
-                      throw e;
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__qxVhq
+                  )}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["updateCalendarOpen"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["calendar", "open"]
+                            },
+                            operation: 0,
+                            value: true
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateCalendarOpen"] != null &&
+                      typeof $steps["updateCalendarOpen"] === "object" &&
+                      typeof $steps["updateCalendarOpen"].then === "function"
+                    ) {
+                      $steps["updateCalendarOpen"] = await $steps[
+                        "updateCalendarOpen"
+                      ];
                     }
-                  })()}
-                </React.Fragment>
-              </div>
-              <Dialog
-                data-plasmic-name={"calendar"}
-                data-plasmic-override={overrides.calendar}
-                body={
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__dhNMk)}
-                  >
-                    <DatePicker
-                      data-plasmic-name={"fragmentDatePicker"}
-                      data-plasmic-override={overrides.fragmentDatePicker}
-                      className={classNames(
-                        "__wab_instance",
-                        sty.fragmentDatePicker
-                      )}
-                      holidays={(() => {
-                        try {
-                          return $state.holiday.map(item => item.date);
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
-                          }
-                          throw e;
+                  }}
+                >
+                  <React.Fragment>
+                    {(() => {
+                      try {
+                        return $state.fragmentDatePicker.value
+                          ? new Date($state.fragmentDatePicker.value * 1000)
+                              .toLocaleDateString("fa-IR")
+                              .split("/")
+                              .join("/")
+                          : new Date()
+                              .toLocaleDateString("fa-IR")
+                              .split("/")
+                              .join("/");
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return "";
                         }
-                      })()}
-                      locale={"fa"}
-                      onChange={async (...eventArgs: any) => {
-                        generateStateOnChangeProp($state, [
+                        throw e;
+                      }
+                    })()}
+                  </React.Fragment>
+                </div>
+                <Dialog
+                  data-plasmic-name={"calendar"}
+                  data-plasmic-override={overrides.calendar}
+                  body={
+                    <div
+                      className={classNames(projectcss.all, sty.freeBox__dhNMk)}
+                    >
+                      <DatePicker
+                        data-plasmic-name={"fragmentDatePicker"}
+                        data-plasmic-override={overrides.fragmentDatePicker}
+                        className={classNames(
+                          "__wab_instance",
+                          sty.fragmentDatePicker
+                        )}
+                        holidays={(() => {
+                          try {
+                            return $state.holiday.map(item => item.date);
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return [];
+                            }
+                            throw e;
+                          }
+                        })()}
+                        locale={"fa"}
+                        mode={"single"}
+                        onChange={async (...eventArgs: any) => {
+                          generateStateOnChangeProp($state, [
+                            "fragmentDatePicker",
+                            "value"
+                          ]).apply(null, eventArgs);
+                          generateStateOnChangeProp($state, [
+                            "fragmentDatePicker",
+                            "values"
+                          ]).apply(null, eventArgs);
+                          (async date => {
+                            const $steps = {};
+
+                            $steps["updateStateتقومOpen"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: ["calendar", "open"]
+                                    },
+                                    operation: 0,
+                                    value: false
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updateStateتقومOpen"] != null &&
+                              typeof $steps["updateStateتقومOpen"] ===
+                                "object" &&
+                              typeof $steps["updateStateتقومOpen"].then ===
+                                "function"
+                            ) {
+                              $steps["updateStateتقومOpen"] = await $steps[
+                                "updateStateتقومOpen"
+                              ];
+                            }
+                          }).apply(null, eventArgs);
+                        }}
+                        value={generateStateValueProp($state, [
                           "fragmentDatePicker",
                           "value"
-                        ]).apply(null, eventArgs);
-                        generateStateOnChangeProp($state, [
+                        ])}
+                        values={generateStateValueProp($state, [
                           "fragmentDatePicker",
                           "values"
-                        ]).apply(null, eventArgs);
-                        (async date => {
-                          const $steps = {};
-
-                          $steps["updateStateتقومOpen"] = true
-                            ? (() => {
-                                const actionArgs = {
-                                  variable: {
-                                    objRoot: $state,
-                                    variablePath: ["calendar", "open"]
-                                  },
-                                  operation: 0,
-                                  value: false
-                                };
-                                return (({
-                                  variable,
-                                  value,
-                                  startIndex,
-                                  deleteCount
-                                }) => {
-                                  if (!variable) {
-                                    return;
-                                  }
-                                  const { objRoot, variablePath } = variable;
-
-                                  $stateSet(objRoot, variablePath, value);
-                                  return value;
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["updateStateتقومOpen"] != null &&
-                            typeof $steps["updateStateتقومOpen"] === "object" &&
-                            typeof $steps["updateStateتقومOpen"].then ===
-                              "function"
-                          ) {
-                            $steps["updateStateتقومOpen"] = await $steps[
-                              "updateStateتقومOpen"
-                            ];
-                          }
-                        }).apply(null, eventArgs);
-                      }}
-                      value={generateStateValueProp($state, [
-                        "fragmentDatePicker",
-                        "value"
-                      ])}
-                      values={generateStateValueProp($state, [
-                        "fragmentDatePicker",
-                        "values"
-                      ])}
+                        ])}
+                      />
+                    </div>
+                  }
+                  className={classNames("__wab_instance", sty.calendar)}
+                  onOpenChange={generateStateOnChangeProp($state, [
+                    "calendar",
+                    "open"
+                  ])}
+                  open={generateStateValueProp($state, ["calendar", "open"])}
+                  title={
+                    <div
+                      data-plasmic-name={
+                        "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
+                      }
+                      data-plasmic-override={overrides.تقویمماهانه}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.تقویمماهانه
+                      )}
+                    >
+                      {
+                        "\u062a\u0642\u0648\u06cc\u0645 \u0645\u0627\u0647\u0627\u0646\u0647"
+                      }
+                    </div>
+                  }
+                  trigger={
+                    <CalendarIcon
+                      className={classNames(projectcss.all, sty.svg__g42XL)}
+                      role={"img"}
                     />
-                  </div>
-                }
-                className={classNames("__wab_instance", sty.calendar)}
-                onOpenChange={generateStateOnChangeProp($state, [
-                  "calendar",
-                  "open"
-                ])}
-                open={generateStateValueProp($state, ["calendar", "open"])}
-                title={
-                  <div
-                    data-plasmic-name={
-                      "\u062a\u0642\u0648\u06cc\u0645\u0645\u0627\u0647\u0627\u0646\u0647"
-                    }
-                    data-plasmic-override={overrides.تقویمماهانه}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.تقویمماهانه
-                    )}
-                  >
-                    {
-                      "\u062a\u0642\u0648\u06cc\u0645 \u0645\u0627\u0647\u0627\u0646\u0647"
-                    }
-                  </div>
-                }
-                trigger={
-                  <CalendarIcon
-                    className={classNames(projectcss.all, sty.svg__g42XL)}
-                    role={"img"}
-                  />
-                }
+                  }
+                />
+              </Stack__>
+              <Icon37Icon
+                className={classNames(projectcss.all, sty.svg__wr8D)}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["updateFragmentDatePickerValue"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["fragmentDatePicker", "value"]
+                          },
+                          operation: 0,
+                          value:
+                            ($state.fragmentDatePicker?.value ??
+                              Date.now() / 1000) +
+                            24 * 60 * 60
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateFragmentDatePickerValue"] != null &&
+                    typeof $steps["updateFragmentDatePickerValue"] ===
+                      "object" &&
+                    typeof $steps["updateFragmentDatePickerValue"].then ===
+                      "function"
+                  ) {
+                    $steps["updateFragmentDatePickerValue"] = await $steps[
+                      "updateFragmentDatePickerValue"
+                    ];
+                  }
+                }}
+                role={"img"}
               />
-            </div>
+            </Stack__>
           </div>
           <div
             data-plasmic-name={"center"}

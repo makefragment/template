@@ -2277,15 +2277,15 @@ function PlasmicListOfNotofications__RenderFunc(props: {
                                                 finalText.length;
                                               let finalPrice = 0;
                                               if (charCount < 70) {
-                                                finalPrice = 9650;
+                                                finalPrice = 7500;
                                               } else if (
                                                 charCount >= 70 &&
                                                 charCount < 140
                                               ) {
-                                                finalPrice = 9650 * 2;
+                                                finalPrice = 7500 * 2;
                                               } else {
                                                 finalPrice =
-                                                  9650 *
+                                                  7500 *
                                                   Math.ceil(charCount / 70);
                                               }
                                               return finalPrice / 10 + " تومان";

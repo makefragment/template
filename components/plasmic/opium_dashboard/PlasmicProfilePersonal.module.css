@@ -119,22 +119,22 @@
   object-fit: cover;
   min-width: 0;
 }
-.profilePersonalBiography:global(.__wab_instance) {
+.fragmentTextEditor:global(.__wab_instance) {
   max-width: 100%;
-  display: none;
+  object-fit: cover;
 }
 .button:global(.__wab_instance) {
   max-width: 100%;
   width: 100%;
   min-width: 0;
 }
-.svg__xM5YX {
+.svg__cbF7U {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
 }
-.svg__hCbdr {
+.svg__blwEa {
   position: relative;
   object-fit: cover;
   width: auto;

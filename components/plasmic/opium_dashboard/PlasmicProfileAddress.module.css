@@ -424,6 +424,12 @@
   > img {
   margin-top: var(--token-vMUQwr5Jto1d);
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox___0EeuL {
+    padding-right: var(--token-QcxRWQfhgyJI);
+    padding-left: var(--token-QcxRWQfhgyJI);
+  }
+}
 .svg__mDSc2 {
   object-fit: cover;
   max-width: 100%;

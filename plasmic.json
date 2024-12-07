@@ -1866,6 +1866,58 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/profile-page"
+        },
+        {
+          "id": "K7XaM-bxyF8o",
+          "name": "Activation",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicActivation.tsx",
+          "importSpec": {
+            "modulePath": "Activation.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicActivation.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "ozcO84WaZS1-",
+          "name": "ActivationServiceSelection",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicActivationServiceSelection.tsx",
+          "importSpec": {
+            "modulePath": "ActivationServiceSelection.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicActivationServiceSelection.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "dvxpjd6PRJ15",
+          "name": "ActivationServiceSelectionButton",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicActivationServiceSelectionButton.tsx",
+          "importSpec": {
+            "modulePath": "ActivationServiceSelectionButton.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicActivationServiceSelectionButton.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "eC1lHj9ndIjA",
+          "name": "ActivationOfficeCenter",
+          "type": "managed",
+          "projectId": "9g1e5LLLDS4TGJiaFCSEyH",
+          "renderModuleFilePath": "plasmic/opium_dashboard/PlasmicActivationOfficeCenter.tsx",
+          "importSpec": {
+            "modulePath": "ActivationOfficeCenter.tsx"
+          },
+          "cssFilePath": "plasmic/opium_dashboard/PlasmicActivationOfficeCenter.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -2088,6 +2140,16 @@
           "id": "Cp6R_3Zg_y_k",
           "name": "Icon37Icon",
           "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon37.tsx"
+        },
+        {
+          "id": "LqoK5gvFTEf6",
+          "name": "Icon38Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon38.tsx"
+        },
+        {
+          "id": "owLJpLIDixzU",
+          "name": "Icon39Icon",
+          "moduleFilePath": "plasmic/opium_dashboard/icons/PlasmicIcon__Icon39.tsx"
         }
       ],
       "images": [

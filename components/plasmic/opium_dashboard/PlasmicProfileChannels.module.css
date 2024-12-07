@@ -176,6 +176,11 @@
   font-weight: 600;
   min-width: 0;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .text___1Kj1M {
+    color: var(--token-u3OudfMChOo3);
+  }
+}
 .text__j1PZ2 {
   position: relative;
   width: 100%;
@@ -228,6 +233,11 @@
   font-size: var(--token-6NbVMeD6zQwn);
   min-width: 0;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .text___4Hz4A {
+    color: var(--token-u3OudfMChOo3);
+  }
+}
 .eitaa:global(.__wab_instance) {
   max-width: 100%;
 }
@@ -272,6 +282,11 @@
   font-size: var(--token-6NbVMeD6zQwn);
   min-width: 0;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .text__wYuAl {
+    color: var(--token-u3OudfMChOo3);
+  }
+}
 .whatsapp:global(.__wab_instance) {
   max-width: 100%;
 }
@@ -300,8 +315,6 @@
   display: flex;
   flex-direction: row;
   position: relative;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -310,6 +323,35 @@
   border-radius: var(--token-_c276Gs_1FIE);
   padding: var(--token-vMUQwr5Jto1d);
   border: 1px solid var(--token-Y3HOiwZmAcAF);
+}
+.freeBox__dOtV > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox__dOtV > :global(.__wab_flex-container) {
+    justify-content: center;
+    align-items: center;
+    margin-left: calc(0px - var(--token-_c276Gs_1FIE));
+    width: calc(100% + var(--token-_c276Gs_1FIE));
+    margin-top: calc(0px - 0px);
+    height: calc(100% + 0px);
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox__dOtV > :global(.__wab_flex-container) > *,
+  .freeBox__dOtV > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+  .freeBox__dOtV > :global(.__wab_flex-container) > picture > img,
+  .freeBox__dOtV
+    > :global(.__wab_flex-container)
+    > :global(.__wab_slot)
+    > picture
+    > img {
+    margin-left: var(--token-_c276Gs_1FIE);
+    margin-top: 0px;
+  }
 }
 .freeBox__awmco {
   display: flex;
@@ -344,6 +386,11 @@
   padding-bottom: 0px;
   font-weight: 400;
   font-size: var(--token-6NbVMeD6zQwn);
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .text__d7MSz {
+    color: var(--token-u3OudfMChOo3);
+  }
 }
 .svg__acy02 {
   object-fit: cover;

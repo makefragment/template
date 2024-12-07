@@ -38,7 +38,7 @@ export const FileInput = ({
 export const fileInputMeta: CodeComponentMeta<IFileInput> = {
   name: "FileInput",
   displayName: "Fragment/FileInput",
-  importPath: "@/fragment/components/FileInput",
+  importPath: "@/fragment/components/file-input",
   props: {
     children: "slot",
     value: "object",

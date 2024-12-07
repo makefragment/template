@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { cn } from "@/lib/utils";
 
 export default function Editor({
   data = "",
@@ -23,6 +24,7 @@ export default function Editor({
   ],
   contentsLangDirection = "rtl",
   language = "fa",
+  className,
 }: {
   data?: string;
   onBlur?: (data: string) => void;
@@ -30,15 +32,15 @@ export default function Editor({
   headingOptions?: any[];
   contentsLangDirection?: string;
   language?: string;
+  className?: string;
 }) {
   return (
-    <div className="w-full min-h-[200px!]">
+    <div className={cn("w-full", className)}>
       <CKEditor
         editor={ClassicEditor}
         config={{
           toolbar,
           heading: { options: headingOptions },
-          // contenteditable,
           language,
         }}
         data={data}

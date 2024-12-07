@@ -28,6 +28,7 @@ export const TextEditor = ({
   ],
   contentsLangDirection = "rtl",
   language = "fa",
+  className,
 }: {
   data?: string;
   onBlur?: (data: string) => void;
@@ -35,9 +36,10 @@ export const TextEditor = ({
   headingOptions?: any[];
   contentsLangDirection?: string;
   language?: string;
+  className?: string;
 }) => {
   return (
-    <div className="w-full min-h-[200px]">
+    <div className="w-full">
       <CKEditor
         contentsLangDirection={contentsLangDirection}
         data={data}
@@ -45,6 +47,7 @@ export const TextEditor = ({
         language={language}
         onBlur={onBlur}
         toolbar={toolbar}
+        className={className}
       />
     </div>
   );
@@ -108,4 +111,5 @@ export const TextEditorMeta: CodeComponentMeta<any> = {
         "Triggered when the editor loses focus, passing the editor's data.",
     },
   },
+  classNameProp: "className",
 };

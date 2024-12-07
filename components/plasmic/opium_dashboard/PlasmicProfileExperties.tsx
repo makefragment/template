@@ -63,7 +63,6 @@ import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-impor
 import ProfileExpertiseItem from "../../ProfileExpertiseItem"; // plasmic-import: E4hp1BPnaz1R/component
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -5119,6 +5118,12 @@ function PlasmicProfileExperties__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "isLoading",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
     [$props, $ctx, $refs]
@@ -6217,7 +6222,7 @@ function PlasmicProfileExperties__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
-                $steps["invokeGlobalAction"] = true
+                $steps["deleteExpertisApi"] = true
                   ? (() => {
                       const actionArgs = {
                         args: [
@@ -6236,7 +6241,22 @@ function PlasmicProfileExperties__RenderFunc(props: {
                             }
                           })(),
                           undefined,
-                          undefined,
+                          (() => {
+                            try {
+                              return {
+                                ...$ctx.Fragment.apiConfig,
+                                ...$ctx.Fragment.previewApiConfig
+                              };
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })(),
                           (() => {
                             try {
                               return {
@@ -6262,49 +6282,119 @@ function PlasmicProfileExperties__RenderFunc(props: {
                     })()
                   : undefined;
                 if (
-                  $steps["invokeGlobalAction"] != null &&
-                  typeof $steps["invokeGlobalAction"] === "object" &&
-                  typeof $steps["invokeGlobalAction"].then === "function"
+                  $steps["deleteExpertisApi"] != null &&
+                  typeof $steps["deleteExpertisApi"] === "object" &&
+                  typeof $steps["deleteExpertisApi"].then === "function"
                 ) {
-                  $steps["invokeGlobalAction"] = await $steps[
-                    "invokeGlobalAction"
+                  $steps["deleteExpertisApi"] = await $steps[
+                    "deleteExpertisApi"
                   ];
                 }
 
-                $steps["runCode"] = false
+                $steps["invokeGlobalAction2"] =
+                  $steps.deleteExpertisApi.status == 200
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            undefined,
+                            (() => {
+                              try {
+                                return $steps.deleteExpertisApi.data.message;
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })()
+                          ]
+                        };
+                        return $globalActions["Fragment.showToast"]?.apply(
+                          null,
+                          [...actionArgs.args]
+                        );
+                      })()
+                    : undefined;
+                if (
+                  $steps["invokeGlobalAction2"] != null &&
+                  typeof $steps["invokeGlobalAction2"] === "object" &&
+                  typeof $steps["invokeGlobalAction2"].then === "function"
+                ) {
+                  $steps["invokeGlobalAction2"] = await $steps[
+                    "invokeGlobalAction2"
+                  ];
+                }
+
+                $steps["updateIsLoading"] = true
                   ? (() => {
                       const actionArgs = {
-                        customFunction: async () => {
-                          return (async () => {
-                            const handleDelete = async () => {
-                              try {
-                                const result = await $$.axios.delete(
-                                  `https://apigw.paziresh24.com/v1/providers-specialities/${$state.selectedId}`,
-                                  {
-                                    ...$ctx.Fragment.apiConfig,
-                                    ...$ctx.Fragment.previewApiConfig
-                                  }
-                                );
-                                $state.dialog.open = false;
-                              } catch (e) {
-                                console.log(`Somethings went wrong ${e}`);
-                              }
-                            };
-                            return handleDelete();
-                          })();
-                        }
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["isLoading"]
+                        },
+                        operation: 0,
+                        value: true
                       };
-                      return (({ customFunction }) => {
-                        return customFunction();
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
                       })?.apply(null, [actionArgs]);
                     })()
                   : undefined;
                 if (
-                  $steps["runCode"] != null &&
-                  typeof $steps["runCode"] === "object" &&
-                  typeof $steps["runCode"].then === "function"
+                  $steps["updateIsLoading"] != null &&
+                  typeof $steps["updateIsLoading"] === "object" &&
+                  typeof $steps["updateIsLoading"].then === "function"
                 ) {
-                  $steps["runCode"] = await $steps["runCode"];
+                  $steps["updateIsLoading"] = await $steps["updateIsLoading"];
+                }
+
+                $steps["updateIsLoading2"] =
+                  $steps.deleteExpertisApi.status == 200
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["isLoading"]
+                          },
+                          operation: 0,
+                          value: false
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                if (
+                  $steps["updateIsLoading2"] != null &&
+                  typeof $steps["updateIsLoading2"] === "object" &&
+                  typeof $steps["updateIsLoading2"].then === "function"
+                ) {
+                  $steps["updateIsLoading2"] = await $steps["updateIsLoading2"];
                 }
               }}
             />
@@ -6318,7 +6408,7 @@ function PlasmicProfileExperties__RenderFunc(props: {
                     sty.text__nu3Ag
                   )}
                 >
-                  {"\u0644\u063a\u0648 \u0639\u0645\u0644\u06cc\u0627\u062a"}
+                  {"\u0644\u063a\u0648"}
                 </div>
               }
               className={classNames("__wab_instance", sty.button__lcR8T)}

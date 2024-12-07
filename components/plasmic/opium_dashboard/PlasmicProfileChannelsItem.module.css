@@ -48,6 +48,11 @@
   > img {
   margin-left: var(--token-fhaz6q6bl-fW);
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .freeBox__u6DHm {
+    width: 30%;
+  }
+}
 .svg__gIdMc {
   object-fit: cover;
   max-width: 100%;
@@ -70,6 +75,8 @@
   height: auto;
   max-width: 100%;
   text-align: center;
+  font-weight: 400;
+  font-size: var(--token-6NbVMeD6zQwn);
 }
 .freeBox__aaHpl {
   display: flex;

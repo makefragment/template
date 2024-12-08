@@ -1,0 +1,41 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  justify-self: flex-start;
+  min-width: 0;
+}
+.root > :global(.__wab_flex-container) {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  margin-top: calc(0px - var(--token-Fv8-L_kN-2Ma));
+  height: calc(100% + var(--token-Fv8-L_kN-2Ma));
+}
+.root > :global(.__wab_flex-container) > *,
+.root > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.root > :global(.__wab_flex-container) > picture > img,
+.root > :global(.__wab_flex-container) > :global(.__wab_slot) > picture > img {
+  margin-top: var(--token-Fv8-L_kN-2Ma);
+}
+.firstName:global(.__wab_instance) {
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  outline-style: none;
+  outline-color: transparent;
+  outline-offset: 0px;
+  min-width: 0;
+}
+.lastName:global(.__wab_instance) {
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  outline-style: none;
+  outline-color: transparent;
+  outline-offset: 0px;
+  min-width: 0;
+}

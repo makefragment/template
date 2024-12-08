@@ -64,6 +64,7 @@ import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-impor
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 import Dialog from "../../Dialog"; // plasmic-import: FJiI2-N1is_F/component
 import ProfileTells from "../../ProfileTells"; // plasmic-import: yzo0JdTgs2uD/component
+import ProfileNotifyCell from "../../ProfileNotifyCell"; // plasmic-import: ZGi1LAR5yxN_/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -96,6 +97,7 @@ export type PlasmicActivationOfficeCenter__OverridesType = {
   button?: Flex__<typeof Button>;
   tellsDialog?: Flex__<typeof Dialog>;
   tells?: Flex__<typeof ProfileTells>;
+  notifyCell?: Flex__<typeof ProfileNotifyCell>;
 };
 
 export interface DefaultActivationOfficeCenterProps {
@@ -182,13 +184,32 @@ function PlasmicActivationOfficeCenter__RenderFunc(props: {
         path: "tells.oldTells",
         type: "private",
         variableType: "array",
-        initFunc: ({ $props, $state, $queries, $ctx }) => []
+        initFunc: ({ $props, $state, $queries, $ctx }) => ["021"]
       },
       {
         path: "tells.newTells",
         type: "private",
         variableType: "array",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "notifyCell.notifyCellValue",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.apiRequest.data.providers[0].notify_cell;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -374,7 +395,11 @@ function PlasmicActivationOfficeCenter__RenderFunc(props: {
         data-plasmic-name={"tellsDialog"}
         data-plasmic-override={overrides.tellsDialog}
         body={
-          <div className={classNames(projectcss.all, sty.freeBox__snooH)}>
+          <Stack__
+            as={"div"}
+            hasGap={true}
+            className={classNames(projectcss.all, sty.freeBox__snooH)}
+          >
             <ProfileTells
               data-plasmic-name={"tells"}
               data-plasmic-override={overrides.tells}
@@ -390,7 +415,21 @@ function PlasmicActivationOfficeCenter__RenderFunc(props: {
                 "oldTells"
               ])}
             />
-          </div>
+
+            <ProfileNotifyCell
+              data-plasmic-name={"notifyCell"}
+              data-plasmic-override={overrides.notifyCell}
+              className={classNames("__wab_instance", sty.notifyCell)}
+              notifyCellValue={generateStateValueProp($state, [
+                "notifyCell",
+                "notifyCellValue"
+              ])}
+              onNotifyCellValueChange={generateStateOnChangeProp($state, [
+                "notifyCell",
+                "notifyCellValue"
+              ])}
+            />
+          </Stack__>
         }
         className={classNames("__wab_instance", sty.tellsDialog)}
         noTrigger={true}
@@ -399,6 +438,9 @@ function PlasmicActivationOfficeCenter__RenderFunc(props: {
           "open"
         ])}
         open={generateStateValueProp($state, ["tellsDialog", "open"])}
+        title={
+          "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u062a\u0645\u0627\u0633 \u0645\u0637\u0628"
+        }
         trigger={null}
       />
     </Stack__>
@@ -406,12 +448,21 @@ function PlasmicActivationOfficeCenter__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "map", "addressApi", "button", "tellsDialog", "tells"],
+  root: [
+    "root",
+    "map",
+    "addressApi",
+    "button",
+    "tellsDialog",
+    "tells",
+    "notifyCell"
+  ],
   map: ["map"],
   addressApi: ["addressApi"],
   button: ["button"],
-  tellsDialog: ["tellsDialog", "tells"],
-  tells: ["tells"]
+  tellsDialog: ["tellsDialog", "tells", "notifyCell"],
+  tells: ["tells"],
+  notifyCell: ["notifyCell"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -423,6 +474,7 @@ type NodeDefaultElementType = {
   button: typeof Button;
   tellsDialog: typeof Dialog;
   tells: typeof ProfileTells;
+  notifyCell: typeof ProfileNotifyCell;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -490,6 +542,7 @@ export const PlasmicActivationOfficeCenter = Object.assign(
     button: makeNodeComponent("button"),
     tellsDialog: makeNodeComponent("tellsDialog"),
     tells: makeNodeComponent("tells"),
+    notifyCell: makeNodeComponent("notifyCell"),
 
     // Metadata about props expected for PlasmicActivationOfficeCenter
     internalVariantProps: PlasmicActivationOfficeCenter__VariantProps,

@@ -207,6 +207,7 @@ function PlasmicDialog__RenderFunc(props: {
         sty.dialog,
         { [sty.dialognoTrigger]: hasVariant($state, "noTrigger", "noTrigger") }
       )}
+      modal={true}
       onOpenChange={generateStateOnChangeProp($state, ["dialog", "open"])}
       open={generateStateValueProp($state, ["dialog", "open"])}
       overlayClassName={classNames({

@@ -23,7 +23,7 @@ type IMap = {
   width?: string;
 };
 
-const Map = (props: IMap) => {
+export const Map = (props: IMap) => {
   const {
     lat,
     lng,

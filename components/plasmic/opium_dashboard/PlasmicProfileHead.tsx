@@ -51,18 +51,18 @@ import {
   useDollarState,
   usePlasmicTranslator,
   useTrigger,
-  wrapWithClassName
+  wrapWithClassName,
 } from "@plasmicapp/react-web";
 import {
   DataCtxReader as DataCtxReader__,
   useDataEnv,
-  useGlobalActions
+  useGlobalActions,
 } from "@plasmicapp/react-web/lib/host";
 
 import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-import: Gl72hv5IMo-p/codeComponent
 import Avatar from "../../Avatar"; // plasmic-import: 3i84rYjQRrs4/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
-import { FileInput } from "@/fragment/components/FileInput"; // plasmic-import: FbJKJDT4Zqs9/codeComponent
+import { FileInput } from "@/fragment/components/file-input"; // plasmic-import: FbJKJDT4Zqs9/codeComponent
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -129,7 +129,7 @@ function PlasmicProfileHead__RenderFunc(props: {
 
   const $props = {
     ...args,
-    ...variants
+    ...variants,
   };
 
   const __nextRouter = useNextRouter();
@@ -145,32 +145,32 @@ function PlasmicProfileHead__RenderFunc(props: {
         path: "upload.files",
         type: "private",
         variableType: "array",
-        initFunc: ({ $props, $state, $queries, $ctx }) => []
+        initFunc: ({ $props, $state, $queries, $ctx }) => [],
       },
       {
         path: "imgPreview",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+        initFunc: ({ $props, $state, $queries, $ctx }) => "",
       },
       {
         path: "profile.data",
         type: "private",
         variableType: "object",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
       },
       {
         path: "profile.error",
         type: "private",
         variableType: "object",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
       },
       {
         path: "profile.loading",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      }
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+      },
     ],
     [$props, $ctx, $refs]
   );
@@ -178,7 +178,7 @@ function PlasmicProfileHead__RenderFunc(props: {
     $props,
     $ctx,
     $queries: {},
-    $refs
+    $refs,
   });
 
   return (
@@ -270,7 +270,7 @@ function PlasmicProfileHead__RenderFunc(props: {
                     null,
                     eventArgs
                   );
-                  (async files => {
+                  (async (files) => {
                     const $steps = {};
                   }).apply(null, eventArgs);
                 }}
@@ -287,7 +287,7 @@ function PlasmicProfileHead__RenderFunc(props: {
                     sty.fragmentFileInput
                   )}
                   inputType={"file"}
-                  onFileSelect={async files => {
+                  onFileSelect={async (files) => {
                     const $steps = {};
 
                     $steps["uploadImage"] = true
@@ -301,7 +301,7 @@ function PlasmicProfileHead__RenderFunc(props: {
                                 try {
                                   return (() => {
                                     const file = files[0];
-                                    const formData = params => {
+                                    const formData = (params) => {
                                       const dt = new globalThis.FormData();
                                       for (const [key, value] of Object.entries(
                                         params
@@ -313,7 +313,7 @@ function PlasmicProfileHead__RenderFunc(props: {
                                     const data = formData({
                                       file,
                                       centerId:
-                                        "8fa2d51b-be88-4a7e-86fd-936391806395"
+                                        "8fa2d51b-be88-4a7e-86fd-936391806395",
                                     });
                                     return data;
                                   })();
@@ -335,8 +335,8 @@ function PlasmicProfileHead__RenderFunc(props: {
                                     headers: {
                                       ...$ctx.Fragment.previewApiConfig
                                         ?.headers,
-                                      "Content-Type": "multipart/form-data"
-                                    }
+                                      "Content-Type": "multipart/form-data",
+                                    },
                                   };
                                 } catch (e) {
                                   if (
@@ -348,8 +348,8 @@ function PlasmicProfileHead__RenderFunc(props: {
                                   }
                                   throw e;
                                 }
-                              })()
-                            ]
+                              })(),
+                            ],
                           };
                           return $globalActions["Fragment.apiRequest"]?.apply(
                             null,
@@ -384,8 +384,8 @@ function PlasmicProfileHead__RenderFunc(props: {
                                     }
                                     throw e;
                                   }
-                                })()
-                              ]
+                                })(),
+                              ],
                             };
                             return $globalActions["Fragment.showToast"]?.apply(
                               null,
@@ -409,7 +409,7 @@ function PlasmicProfileHead__RenderFunc(props: {
                             const actionArgs = {
                               customFunction: async () => {
                                 return globalThis.location.reload();
-                              }
+                              },
                             };
                             return (({ customFunction }) => {
                               return customFunction();
@@ -475,7 +475,7 @@ function PlasmicProfileHead__RenderFunc(props: {
                   "no-scroll"
                 )}
               >
-                {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                {((_par) => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                   (() => {
                     try {
                       return $state.profile.data.data.expertises;
@@ -570,7 +570,7 @@ const PlasmicDescendants = {
   avatar: ["avatar"],
   upload: ["upload"],
   fragmentFileInput: ["fragmentFileInput"],
-  link: ["link"]
+  link: ["link"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -620,7 +620,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
           name: nodeName,
           descendantNames: PlasmicDescendants[nodeName],
           internalArgPropNames: PlasmicProfileHead__ArgProps,
-          internalVariantPropNames: PlasmicProfileHead__VariantProps
+          internalVariantPropNames: PlasmicProfileHead__VariantProps,
         }),
       [props, nodeName]
     );
@@ -628,7 +628,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       variants,
       args,
       overrides,
-      forNode: nodeName
+      forNode: nodeName,
     });
   };
   if (nodeName === "root") {
@@ -652,7 +652,7 @@ export const PlasmicProfileHead = Object.assign(
 
     // Metadata about props expected for PlasmicProfileHead
     internalVariantProps: PlasmicProfileHead__VariantProps,
-    internalArgProps: PlasmicProfileHead__ArgProps
+    internalArgProps: PlasmicProfileHead__ArgProps,
   }
 );
 

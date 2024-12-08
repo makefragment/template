@@ -2329,7 +2329,7 @@
           "id": "FbJKJDT4Zqs9",
           "name": "FileInput",
           "displayName": "FileInput",
-          "componentImportPath": "@/fragment/components/FileInput"
+          "componentImportPath": "@/fragment/components/file-input"
         },
         {
           "id": "Hj9PnfcAA6rQ",

@@ -1,0 +1,106 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+}
+.freeBox__m0ESn {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  box-shadow: 0px 1px 2px 0px #0000001a;
+  cursor: pointer;
+  min-width: 0;
+  border-radius: var(--token-_c276Gs_1FIE);
+  padding: var(--token-vMUQwr5Jto1d);
+  border: 1px solid transparent;
+}
+.freeBox__m0ESn > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-width: 0;
+  margin-left: calc(0px - var(--token-vMUQwr5Jto1d));
+  width: calc(100% + var(--token-vMUQwr5Jto1d));
+}
+.freeBox__m0ESn > :global(.__wab_flex-container) > *,
+.freeBox__m0ESn > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__m0ESn > :global(.__wab_flex-container) > picture > img,
+.freeBox__m0ESn
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: var(--token-vMUQwr5Jto1d);
+}
+.freeBoxisSelected__m0ESnuUtvU {
+  border: 1px solid var(--token-JDvyxAtm9ONK);
+}
+.freeBox__wdeaP {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 56px;
+  height: 56px;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  background: #f0f1f2;
+  flex-shrink: 0;
+  border-radius: var(--token-_c276Gs_1FIE);
+  padding: 0px;
+}
+.svg___3B5F7 {
+  object-fit: cover;
+  max-width: 100%;
+  color: #000;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.svg__eo17Y {
+  object-fit: cover;
+  max-width: 100%;
+  color: var(--token-u3OudfMChOo3);
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.freeBox__ppl3T {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 0px;
+}
+.text__ztWjd {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: var(--token-u3OudfMChOo3);
+  font-size: var(--token-tM2Vh4zTir7U);
+  min-width: 0;
+}
+.text___4CgdL {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: #00000099;
+  font-size: var(--token-6NbVMeD6zQwn);
+  font-weight: 400;
+  min-width: 0;
+}

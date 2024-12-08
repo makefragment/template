@@ -16,18 +16,15 @@
 }
 .freeBox___2MnkV {
   display: flex;
-  position: fixed;
+  position: absolute;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: auto;
   height: auto;
   max-width: 100%;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  right: 0;
-  bottom: 0;
+  left: auto;
+  top: var(--token-QcxRWQfhgyJI);
   padding: 8px;
 }
 .svg {

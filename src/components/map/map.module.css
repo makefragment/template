@@ -1,0 +1,22 @@
+#map {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-marker-centered {
+  position: absolute;
+  z-index: 20;
+  transition: all 0.4s ease;
+  z-index: 500;
+}
+
+/* :global {
+    .leaflet-control-zoom {
+        display: none;
+    }
+} */

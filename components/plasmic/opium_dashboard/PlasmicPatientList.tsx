@@ -278,40 +278,38 @@ function PlasmicPatientList__RenderFunc(props: {
             $steps["updateLoading"] = await $steps["updateLoading"];
           }
 
-          $steps["apiAllVisitorsData"] =
-            $props.centers.length > 0 &&
-            !$ctx.GrowthBook.features["show-list-of-centers-patients"]
-              ? (() => {
-                  const actionArgs = {
-                    args: [
-                      "GET",
-                      "https://apigw.paziresh24.com/v1/allvisitorsdata",
-                      (() => {
-                        try {
-                          return {
-                            centers:
-                              $props.selectedCenter == "all"
-                                ? $props.centers.map(center => center.id)
-                                : $props.selectedCenter,
-                            date: $props.date
-                          };
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return undefined;
-                          }
-                          throw e;
+          $steps["apiAllVisitorsData"] = false
+            ? (() => {
+                const actionArgs = {
+                  args: [
+                    "GET",
+                    "https://apigw.paziresh24.com/v1/allvisitorsdata",
+                    (() => {
+                      try {
+                        return {
+                          centers:
+                            $props.selectedCenter == "all"
+                              ? $props.centers.map(center => center.id)
+                              : $props.selectedCenter,
+                          date: $props.date
+                        };
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
                         }
-                      })()
-                    ]
-                  };
-                  return $globalActions["Fragment.apiRequest"]?.apply(null, [
-                    ...actionArgs.args
-                  ]);
-                })()
-              : undefined;
+                        throw e;
+                      }
+                    })()
+                  ]
+                };
+                return $globalActions["Fragment.apiRequest"]?.apply(null, [
+                  ...actionArgs.args
+                ]);
+              })()
+            : undefined;
           if (
             $steps["apiAllVisitorsData"] != null &&
             typeof $steps["apiAllVisitorsData"] === "object" &&
@@ -321,8 +319,7 @@ function PlasmicPatientList__RenderFunc(props: {
           }
 
           $steps["apiAllbooks"] =
-            $props.centers.length > 0 &&
-            $ctx.GrowthBook.features["show-list-of-centers-patients"]
+            $props.centers.length > 0
               ? (() => {
                   const actionArgs = {
                     args: [
@@ -373,9 +370,7 @@ function PlasmicPatientList__RenderFunc(props: {
           }
 
           $steps["updateAllvisitorsdata"] =
-            $props.centers.length > 0 &&
-            $ctx.GrowthBook.features["show-list-of-centers-patients"] &&
-            $steps.apiAllbooks.data
+            $props.centers.length > 0 && $steps.apiAllbooks.data
               ? (() => {
                   const actionArgs = {
                     variable: {
@@ -409,33 +404,30 @@ function PlasmicPatientList__RenderFunc(props: {
             ];
           }
 
-          $steps["updateAllvisitorsdata2"] =
-            $props.centers.length > 0 &&
-            !$ctx.GrowthBook.features["show-list-of-centers-patients"] &&
-            $steps.apiAllVisitorsData.data
-              ? (() => {
-                  const actionArgs = {
-                    variable: {
-                      objRoot: $state,
-                      variablePath: ["allvisitorsdata"]
-                    },
-                    operation: 0,
-                    value: $steps.apiAllVisitorsData.data
-                      .map(item => item.data)
-                      .flat()
-                      .sort((a, b) => new Date(a.from) - new Date(b.from))
-                  };
-                  return (({ variable, value, startIndex, deleteCount }) => {
-                    if (!variable) {
-                      return;
-                    }
-                    const { objRoot, variablePath } = variable;
+          $steps["updateAllvisitorsdata2"] = false
+            ? (() => {
+                const actionArgs = {
+                  variable: {
+                    objRoot: $state,
+                    variablePath: ["allvisitorsdata"]
+                  },
+                  operation: 0,
+                  value: $steps.apiAllVisitorsData.data
+                    .map(item => item.data)
+                    .flat()
+                    .sort((a, b) => new Date(a.from) - new Date(b.from))
+                };
+                return (({ variable, value, startIndex, deleteCount }) => {
+                  if (!variable) {
+                    return;
+                  }
+                  const { objRoot, variablePath } = variable;
 
-                    $stateSet(objRoot, variablePath, value);
-                    return value;
-                  })?.apply(null, [actionArgs]);
-                })()
-              : undefined;
+                  $stateSet(objRoot, variablePath, value);
+                  return value;
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
           if (
             $steps["updateAllvisitorsdata2"] != null &&
             typeof $steps["updateAllvisitorsdata2"] === "object" &&
@@ -875,6 +867,171 @@ function PlasmicPatientList__RenderFunc(props: {
                     throw e;
                   }
                 })()}
+                onDelete={async () => {
+                  const $steps = {};
+
+                  $steps["updateLoading"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["loading"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateLoading"] != null &&
+                    typeof $steps["updateLoading"] === "object" &&
+                    typeof $steps["updateLoading"].then === "function"
+                  ) {
+                    $steps["updateLoading"] = await $steps["updateLoading"];
+                  }
+
+                  $steps["apiAllbooks"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          args: [
+                            undefined,
+                            "https://apigw.paziresh24.com/v1/n8n-nelson/webhook/allbooks",
+                            (() => {
+                              try {
+                                return {
+                                  centers:
+                                    $props.selectedCenter == "all"
+                                      ? $props.centers
+                                          .filter(
+                                            center => center.is_active_booking
+                                          )
+                                          .map(center => ({
+                                            id: center.id,
+                                            user_center_id:
+                                              center.user_center_id
+                                          }))
+                                      : [
+                                          {
+                                            id: $props.selectedCenter,
+                                            user_center_id: $props.userCenterId
+                                          }
+                                        ],
+                                  date: $props.date
+                                };
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return undefined;
+                                }
+                                throw e;
+                              }
+                            })(),
+                            undefined
+                          ]
+                        };
+                        return $globalActions["Fragment.apiRequest"]?.apply(
+                          null,
+                          [...actionArgs.args]
+                        );
+                      })()
+                    : undefined;
+                  if (
+                    $steps["apiAllbooks"] != null &&
+                    typeof $steps["apiAllbooks"] === "object" &&
+                    typeof $steps["apiAllbooks"].then === "function"
+                  ) {
+                    $steps["apiAllbooks"] = await $steps["apiAllbooks"];
+                  }
+
+                  $steps["updateAllvisitorsdata"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["allvisitorsdata"]
+                          },
+                          operation: 0,
+                          value: $steps.apiAllbooks.data
+                            .map(item => item.data)
+                            .flat()
+                            .sort((a, b) => new Date(a.from) - new Date(b.from))
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateAllvisitorsdata"] != null &&
+                    typeof $steps["updateAllvisitorsdata"] === "object" &&
+                    typeof $steps["updateAllvisitorsdata"].then === "function"
+                  ) {
+                    $steps["updateAllvisitorsdata"] = await $steps[
+                      "updateAllvisitorsdata"
+                    ];
+                  }
+
+                  $steps["updateLoading2"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["loading"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateLoading2"] != null &&
+                    typeof $steps["updateLoading2"] === "object" &&
+                    typeof $steps["updateLoading2"].then === "function"
+                  ) {
+                    $steps["updateLoading2"] = await $steps["updateLoading2"];
+                  }
+                }}
                 onlineBorder={(() => {
                   try {
                     return (

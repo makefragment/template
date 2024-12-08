@@ -694,6 +694,41 @@ function PlasmicProfilePersonalPhoneNumber__RenderFunc(props: {
                 ) {
                   $steps["updateStep"] = await $steps["updateStep"];
                 }
+
+                $steps["invokeGlobalAction2"] = false
+                  ? (() => {
+                      const actionArgs = {
+                        args: [
+                          "error",
+                          (() => {
+                            try {
+                              return $steps.sendCodeApi.message;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return undefined;
+                              }
+                              throw e;
+                            }
+                          })()
+                        ]
+                      };
+                      return $globalActions["Fragment.showToast"]?.apply(null, [
+                        ...actionArgs.args
+                      ]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["invokeGlobalAction2"] != null &&
+                  typeof $steps["invokeGlobalAction2"] === "object" &&
+                  typeof $steps["invokeGlobalAction2"].then === "function"
+                ) {
+                  $steps["invokeGlobalAction2"] = await $steps[
+                    "invokeGlobalAction2"
+                  ];
+                }
               }}
             />
           </Stack__>

@@ -63,7 +63,7 @@ import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-impor
 import ProfilePersonalName from "../../ProfilePersonalName"; // plasmic-import: abv63v9O9ARy/component
 import { Input } from "@/fragment/components/input"; // plasmic-import: ByhbQ0nAxig8/codeComponent
 import ProfilePersonalPhoneNumber from "../../ProfilePersonalPhoneNumber"; // plasmic-import: eYafZiJOKVtf/component
-import ProfilePersonalBiography from "../../ProfilePersonalBiography"; // plasmic-import: EB-Xw4Ecb7gM/component
+import { TextEditor } from "@/fragment/components/text-editor"; // plasmic-import: 5XrOgmhx9P3d/codeComponent
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -118,7 +118,7 @@ export type PlasmicProfilePersonal__OverridesType = {
   providerApi?: Flex__<typeof ApiRequest>;
   notifyCellApi?: Flex__<typeof ApiRequest>;
   notifyCell?: Flex__<typeof Input>;
-  profilePersonalBiography?: Flex__<typeof ProfilePersonalBiography>;
+  fragmentTextEditor?: Flex__<typeof TextEditor>;
   button?: Flex__<typeof Button>;
 };
 
@@ -316,25 +316,6 @@ function PlasmicProfilePersonal__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "profilePersonalBiography.biographyValue",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.profile.data.data.biography;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()
-      },
-      {
         path: "notifyCellApi.data",
         type: "private",
         variableType: "object",
@@ -388,6 +369,12 @@ function PlasmicProfilePersonal__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "biography",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -449,7 +436,44 @@ function PlasmicProfilePersonal__RenderFunc(props: {
           method={"GET"}
           onError={generateStateOnChangeProp($state, ["profile", "error"])}
           onLoading={generateStateOnChangeProp($state, ["profile", "loading"])}
-          onSuccess={generateStateOnChangeProp($state, ["profile", "data"])}
+          onSuccess={async (...eventArgs: any) => {
+            generateStateOnChangeProp($state, ["profile", "data"]).apply(
+              null,
+              eventArgs
+            );
+            (async data => {
+              const $steps = {};
+
+              $steps["updateBiography"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["biography"]
+                      },
+                      operation: 0,
+                      value: $state.providerApi?.data?.providers?.[0]?.biography
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+
+                      $stateSet(objRoot, variablePath, value);
+                      return value;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["updateBiography"] != null &&
+                typeof $steps["updateBiography"] === "object" &&
+                typeof $steps["updateBiography"].then === "function"
+              ) {
+                $steps["updateBiography"] = await $steps["updateBiography"];
+              }
+            }).apply(null, eventArgs);
+          }}
           url={"https://api.paziresh24.com/V1/doctor/profile"}
         >
           <Stack__
@@ -716,38 +740,90 @@ function PlasmicProfilePersonal__RenderFunc(props: {
                 />
               </ApiRequest>
             </ApiRequest>
-            {(
-              hasVariant($state, "noBiography", "noBiography") ? false : true
-            ) ? (
-              <ProfilePersonalBiography
-                data-plasmic-name={"profilePersonalBiography"}
-                data-plasmic-override={overrides.profilePersonalBiography}
-                biographyValue={generateStateValueProp($state, [
-                  "profilePersonalBiography",
-                  "biographyValue"
-                ])}
-                className={classNames(
-                  "__wab_instance",
-                  sty.profilePersonalBiography,
-                  {
-                    [sty.profilePersonalBiographynoBiography]: hasVariant(
-                      $state,
-                      "noBiography",
-                      "noBiography"
-                    )
+            <TextEditor
+              data-plasmic-name={"fragmentTextEditor"}
+              data-plasmic-override={overrides.fragmentTextEditor}
+              className={classNames("__wab_instance", sty.fragmentTextEditor)}
+              data={(() => {
+                try {
+                  return $state.biography;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
                   }
-                )}
-                onBiographyValueChange={async (...eventArgs: any) => {
-                  generateStateOnChangeProp($state, [
-                    "profilePersonalBiography",
-                    "biographyValue"
-                  ]).apply(null, eventArgs);
-                  (async val => {
-                    const $steps = {};
-                  }).apply(null, eventArgs);
-                }}
-              />
-            ) : null}
+                  throw e;
+                }
+              })()}
+              headingOptions={[
+                {
+                  model: "paragraph",
+                  title: "Paragraph",
+                  class: "ck-heading_paragraph"
+                },
+                {
+                  model: "heading1",
+                  view: "h1",
+                  title: "Heading 1",
+                  class: "ck-heading_heading1"
+                },
+                {
+                  model: "heading2",
+                  view: "h2",
+                  title: "Heading 2",
+                  class: "ck-heading_heading2"
+                }
+              ]}
+              language={"fa"}
+              onBlur={async data => {
+                const $steps = {};
+
+                $steps["updateBiography"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["biography"]
+                        },
+                        operation: 0,
+                        value: data
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateBiography"] != null &&
+                  typeof $steps["updateBiography"] === "object" &&
+                  typeof $steps["updateBiography"].then === "function"
+                ) {
+                  $steps["updateBiography"] = await $steps["updateBiography"];
+                }
+              }}
+              toolbar={[
+                "heading",
+                "|",
+                "bold",
+                "italic",
+                "bulletedList",
+                "numberedList"
+              ]}
+            />
+
             <Button
               data-plasmic-name={"button"}
               data-plasmic-override={overrides.button}
@@ -780,9 +856,7 @@ function PlasmicProfilePersonal__RenderFunc(props: {
                           (() => {
                             try {
                               return {
-                                biography:
-                                  $state.profilePersonalBiography
-                                    .biographyValue,
+                                biography: "",
                                 employee_id: $state.medicalCode.value,
                                 notify_cell: $state.notifyCell.value
                               };
@@ -890,7 +964,7 @@ const PlasmicDescendants = {
     "providerApi",
     "notifyCellApi",
     "notifyCell",
-    "profilePersonalBiography",
+    "fragmentTextEditor",
     "button"
   ],
   auth: [
@@ -904,7 +978,7 @@ const PlasmicDescendants = {
     "providerApi",
     "notifyCellApi",
     "notifyCell",
-    "profilePersonalBiography",
+    "fragmentTextEditor",
     "button"
   ],
   profile: [
@@ -917,7 +991,7 @@ const PlasmicDescendants = {
     "providerApi",
     "notifyCellApi",
     "notifyCell",
-    "profilePersonalBiography",
+    "fragmentTextEditor",
     "button"
   ],
   freeBox: [
@@ -929,7 +1003,7 @@ const PlasmicDescendants = {
     "providerApi",
     "notifyCellApi",
     "notifyCell",
-    "profilePersonalBiography",
+    "fragmentTextEditor",
     "button"
   ],
   profilePersonalName: ["profilePersonalName"],
@@ -939,7 +1013,7 @@ const PlasmicDescendants = {
   providerApi: ["providerApi", "notifyCellApi", "notifyCell"],
   notifyCellApi: ["notifyCellApi", "notifyCell"],
   notifyCell: ["notifyCell"],
-  profilePersonalBiography: ["profilePersonalBiography"],
+  fragmentTextEditor: ["fragmentTextEditor"],
   button: ["button"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -957,7 +1031,7 @@ type NodeDefaultElementType = {
   providerApi: typeof ApiRequest;
   notifyCellApi: typeof ApiRequest;
   notifyCell: typeof Input;
-  profilePersonalBiography: typeof ProfilePersonalBiography;
+  fragmentTextEditor: typeof TextEditor;
   button: typeof Button;
 };
 
@@ -1031,7 +1105,7 @@ export const PlasmicProfilePersonal = Object.assign(
     providerApi: makeNodeComponent("providerApi"),
     notifyCellApi: makeNodeComponent("notifyCellApi"),
     notifyCell: makeNodeComponent("notifyCell"),
-    profilePersonalBiography: makeNodeComponent("profilePersonalBiography"),
+    fragmentTextEditor: makeNodeComponent("fragmentTextEditor"),
     button: makeNodeComponent("button"),
 
     // Metadata about props expected for PlasmicProfilePersonal

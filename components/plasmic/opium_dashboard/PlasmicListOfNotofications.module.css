@@ -819,7 +819,6 @@
   font-size: 12px;
   text-align: left;
   flex-shrink: 0;
-  display: none;
 }
 .text___08Mzx {
   position: relative;
@@ -864,13 +863,13 @@
   width: 100%;
   min-width: 0;
 }
-.svg__hVtMb {
+.svg__im8Y {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
 }
-.svg__m6PMf {
+.svg__bDmi1 {
   position: relative;
   object-fit: cover;
   width: auto;

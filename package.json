@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "29.1.0",
+    "@ckeditor/ckeditor5-react": "3.0.2",
     "@growthbook/growthbook-react": "^1.0.0",
     "@plasmicapp/cli": "^0.1.334",
     "@plasmicapp/host": "^1.0.196",
     "@plasmicapp/react-web": "^0.2.337",
     "@plasmicpkgs/antd5": "^0.0.241",
     "@plasmicpkgs/plasmic-basic-components": "^0.0.215",
+    "@plasmicpkgs/plasmic-embed-css": "^0.1.192",
     "@plasmicpkgs/plasmic-query": "^0.0.214",
     "@plasmicpkgs/radix-ui": "^0.0.51",
     "@plasmicpkgs/react-quill": "1.0.65",
@@ -25,11 +28,13 @@
     "axios": "^1.7.2",
     "clsx": "^2.1.1",
     "jalali-moment": "^3.3.11",
+    "leaflet": "1.8.0",
     "lucide-react": "^0.399.0",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
+    "react-leaflet": "4.0.1",
     "react-multi-date-picker": "^4.5.2",
     "react-quill": "^2.0.0",
     "react-timeit": "^1.2.12",
@@ -40,6 +45,7 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.14",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

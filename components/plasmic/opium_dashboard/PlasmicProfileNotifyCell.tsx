@@ -69,6 +69,8 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: 9g1e5LLLDS4TGJiaFCSEyH/projectcss
 import sty from "./PlasmicProfileNotifyCell.module.css"; // plasmic-import: ZGi1LAR5yxN_/css
 
+import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
+
 createPlasmicElementProxy;
 
 export type PlasmicProfileNotifyCell__VariantMembers = {};
@@ -90,6 +92,7 @@ export const PlasmicProfileNotifyCell__ArgProps = new Array<ArgPropType>(
 export type PlasmicProfileNotifyCell__OverridesType = {
   root?: Flex__<"div">;
   apiRequest?: Flex__<typeof ApiRequest>;
+  svg?: Flex__<"svg">;
   notifyCell?: Flex__<typeof Input>;
 };
 
@@ -197,11 +200,57 @@ function PlasmicProfileNotifyCell__RenderFunc(props: {
         data-plasmic-override={overrides.apiRequest}
         className={classNames("__wab_instance", sty.apiRequest)}
         errorDisplay={null}
-        loadingDisplay={null}
+        loadingDisplay={
+          <Icon34Icon
+            data-plasmic-name={"svg"}
+            data-plasmic-override={overrides.svg}
+            className={classNames(projectcss.all, sty.svg)}
+            role={"img"}
+          />
+        }
         method={"GET"}
         onError={generateStateOnChangeProp($state, ["apiRequest", "error"])}
         onLoading={generateStateOnChangeProp($state, ["apiRequest", "loading"])}
-        onSuccess={generateStateOnChangeProp($state, ["apiRequest", "data"])}
+        onSuccess={async (...eventArgs: any) => {
+          generateStateOnChangeProp($state, ["apiRequest", "data"]).apply(
+            null,
+            eventArgs
+          );
+          (async data => {
+            const $steps = {};
+
+            $steps["updateNotifyCellValue"] = true
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["notifyCell", "value"]
+                    },
+                    operation: 0,
+                    value: $state.apiRequest.data.providers[0].notify_cell
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+
+                    $stateSet(objRoot, variablePath, value);
+                    return value;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["updateNotifyCellValue"] != null &&
+              typeof $steps["updateNotifyCellValue"] === "object" &&
+              typeof $steps["updateNotifyCellValue"].then === "function"
+            ) {
+              $steps["updateNotifyCellValue"] = await $steps[
+                "updateNotifyCellValue"
+              ];
+            }
+          }).apply(null, eventArgs);
+        }}
         url={"https://apigw.paziresh24.com/v1/providers/1494238/notify-cell"}
       >
         <Input
@@ -222,8 +271,9 @@ function PlasmicProfileNotifyCell__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "apiRequest", "notifyCell"],
-  apiRequest: ["apiRequest", "notifyCell"],
+  root: ["root", "apiRequest", "svg", "notifyCell"],
+  apiRequest: ["apiRequest", "svg", "notifyCell"],
+  svg: ["svg"],
   notifyCell: ["notifyCell"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -232,6 +282,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   apiRequest: typeof ApiRequest;
+  svg: "svg";
   notifyCell: typeof Input;
 };
 
@@ -296,6 +347,7 @@ export const PlasmicProfileNotifyCell = Object.assign(
   {
     // Helper components rendering sub-elements
     apiRequest: makeNodeComponent("apiRequest"),
+    svg: makeNodeComponent("svg"),
     notifyCell: makeNodeComponent("notifyCell"),
 
     // Metadata about props expected for PlasmicProfileNotifyCell

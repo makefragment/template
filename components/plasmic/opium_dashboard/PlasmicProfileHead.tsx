@@ -51,17 +51,19 @@ import {
   useDollarState,
   usePlasmicTranslator,
   useTrigger,
-  wrapWithClassName
+  wrapWithClassName,
 } from "@plasmicapp/react-web";
 import {
   DataCtxReader as DataCtxReader__,
   useDataEnv,
-  useGlobalActions
+  useGlobalActions,
 } from "@plasmicapp/react-web/lib/host";
 
 import { ApiRequest } from "@/fragment/components/api-request"; // plasmic-import: Gl72hv5IMo-p/codeComponent
 import Avatar from "../../Avatar"; // plasmic-import: 3i84rYjQRrs4/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
+import { FileInput } from "@/fragment/components/file-input"; // plasmic-import: FbJKJDT4Zqs9/codeComponent
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -72,8 +74,6 @@ import sty from "./PlasmicProfileHead.module.css"; // plasmic-import: PIAFRsJicC
 
 import Icon34Icon from "./icons/PlasmicIcon__Icon34"; // plasmic-import: Pu6FdA6kdBUA/icon
 import Icon26Icon from "./icons/PlasmicIcon__Icon26"; // plasmic-import: frSwMvWOgAN1/icon
-
-import __lib_axios from "axios";
 
 createPlasmicElementProxy;
 
@@ -91,6 +91,7 @@ export type PlasmicProfileHead__OverridesType = {
   profile?: Flex__<typeof ApiRequest>;
   avatar?: Flex__<typeof Avatar>;
   upload?: Flex__<typeof UploadWrapper>;
+  fragmentFileInput?: Flex__<typeof FileInput>;
   link?: Flex__<"a"> & Partial<LinkProps>;
 };
 
@@ -98,9 +99,7 @@ export interface DefaultProfileHeadProps {
   className?: string;
 }
 
-const $$ = {
-  axios: __lib_axios
-};
+const $$ = {};
 
 function useNextRouter() {
   try {
@@ -130,7 +129,7 @@ function PlasmicProfileHead__RenderFunc(props: {
 
   const $props = {
     ...args,
-    ...variants
+    ...variants,
   };
 
   const __nextRouter = useNextRouter();
@@ -146,32 +145,32 @@ function PlasmicProfileHead__RenderFunc(props: {
         path: "upload.files",
         type: "private",
         variableType: "array",
-        initFunc: ({ $props, $state, $queries, $ctx }) => []
+        initFunc: ({ $props, $state, $queries, $ctx }) => [],
       },
       {
         path: "imgPreview",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
+        initFunc: ({ $props, $state, $queries, $ctx }) => "",
       },
       {
         path: "profile.data",
         type: "private",
         variableType: "object",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
       },
       {
         path: "profile.error",
         type: "private",
         variableType: "object",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
       },
       {
         path: "profile.loading",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      }
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+      },
     ],
     [$props, $ctx, $refs]
   );
@@ -179,7 +178,7 @@ function PlasmicProfileHead__RenderFunc(props: {
     $props,
     $ctx,
     $queries: {},
-    $refs
+    $refs,
   });
 
   return (
@@ -262,6 +261,7 @@ function PlasmicProfileHead__RenderFunc(props: {
                 data-plasmic-name={"upload"}
                 data-plasmic-override={overrides.upload}
                 accept={"image/*"}
+                children={null}
                 className={classNames("__wab_instance", sty.upload)}
                 files={generateStateValueProp($state, ["upload", "files"])}
                 listType={"picture"}
@@ -270,10 +270,27 @@ function PlasmicProfileHead__RenderFunc(props: {
                     null,
                     eventArgs
                   );
-                  (async files => {
+                  (async (files) => {
+                    const $steps = {};
+                  }).apply(null, eventArgs);
+                }}
+                showUploadList={false}
+              />
+
+              <div className={classNames(projectcss.all, sty.freeBox__uHzX)}>
+                <FileInput
+                  data-plasmic-name={"fragmentFileInput"}
+                  data-plasmic-override={overrides.fragmentFileInput}
+                  accept={"image/png, image/jpg, image/jpeg, image/bmp"}
+                  className={classNames(
+                    "__wab_instance",
+                    sty.fragmentFileInput
+                  )}
+                  inputType={"file"}
+                  onFileSelect={async (files) => {
                     const $steps = {};
 
-                    $steps["invokeGlobalAction"] = false
+                    $steps["uploadImage"] = true
                       ? (() => {
                           const actionArgs = {
                             args: [
@@ -282,7 +299,24 @@ function PlasmicProfileHead__RenderFunc(props: {
                               undefined,
                               (() => {
                                 try {
-                                  return {};
+                                  return (() => {
+                                    const file = files[0];
+                                    const formData = (params) => {
+                                      const dt = new globalThis.FormData();
+                                      for (const [key, value] of Object.entries(
+                                        params
+                                      )) {
+                                        dt.append(key, value);
+                                      }
+                                      return dt;
+                                    };
+                                    const data = formData({
+                                      file,
+                                      centerId:
+                                        "8fa2d51b-be88-4a7e-86fd-936391806395",
+                                    });
+                                    return data;
+                                  })();
                                 } catch (e) {
                                   if (
                                     e instanceof TypeError ||
@@ -301,8 +335,8 @@ function PlasmicProfileHead__RenderFunc(props: {
                                     headers: {
                                       ...$ctx.Fragment.previewApiConfig
                                         ?.headers,
-                                      "Content-Type": "multipart/form-data"
-                                    }
+                                      "Content-Type": "multipart/form-data",
+                                    },
                                   };
                                 } catch (e) {
                                   if (
@@ -310,12 +344,12 @@ function PlasmicProfileHead__RenderFunc(props: {
                                     e?.plasmicType ===
                                       "PlasmicUndefinedDataError"
                                   ) {
-                                    return {};
+                                    return undefined;
                                   }
                                   throw e;
                                 }
-                              })()
-                            ]
+                              })(),
+                            ],
                           };
                           return $globalActions["Fragment.apiRequest"]?.apply(
                             null,
@@ -323,6 +357,42 @@ function PlasmicProfileHead__RenderFunc(props: {
                           );
                         })()
                       : undefined;
+                    if (
+                      $steps["uploadImage"] != null &&
+                      typeof $steps["uploadImage"] === "object" &&
+                      typeof $steps["uploadImage"].then === "function"
+                    ) {
+                      $steps["uploadImage"] = await $steps["uploadImage"];
+                    }
+
+                    $steps["invokeGlobalAction"] =
+                      $steps.uploadImage.status == 200
+                        ? (() => {
+                            const actionArgs = {
+                              args: [
+                                undefined,
+                                (() => {
+                                  try {
+                                    return $steps.uploadImage?.data?.message;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
+                                  }
+                                })(),
+                              ],
+                            };
+                            return $globalActions["Fragment.showToast"]?.apply(
+                              null,
+                              [...actionArgs.args]
+                            );
+                          })()
+                        : undefined;
                     if (
                       $steps["invokeGlobalAction"] != null &&
                       typeof $steps["invokeGlobalAction"] === "object" &&
@@ -333,42 +403,19 @@ function PlasmicProfileHead__RenderFunc(props: {
                       ];
                     }
 
-                    $steps["runCode"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            customFunction: async () => {
-                              return (() => {
-                                const file = $state.upload.files[0];
-                                const formData = params => {
-                                  const dt = new globalThis.FormData();
-                                  for (const [key, value] of Object.entries(
-                                    params
-                                  )) {
-                                    dt.append(key, value);
-                                  }
-                                  return dt;
-                                };
-                                return $$.axios.post(
-                                  "https://api.paziresh24.com/V1/doctor/profile/image",
-                                  formData({
-                                    file: file,
-                                    center_id:
-                                      "8fa2d51b-be88-4a7e-86fd-936391806395"
-                                  }),
-                                  {
-                                    headers: {
-                                      ...$ctx.Fragment.previewApiConfig.headers
-                                    }
-                                  }
-                                );
-                              })();
-                            }
-                          };
-                          return (({ customFunction }) => {
-                            return customFunction();
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
+                    $steps["runCode"] =
+                      $steps.uploadImage.status == 200
+                        ? (() => {
+                            const actionArgs = {
+                              customFunction: async () => {
+                                return globalThis.location.reload();
+                              },
+                            };
+                            return (({ customFunction }) => {
+                              return customFunction();
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
                     if (
                       $steps["runCode"] != null &&
                       typeof $steps["runCode"] === "object" &&
@@ -376,19 +423,18 @@ function PlasmicProfileHead__RenderFunc(props: {
                     ) {
                       $steps["runCode"] = await $steps["runCode"];
                     }
-                  }).apply(null, eventArgs);
-                }}
-                showUploadList={false}
-              >
-                <div
-                  className={classNames(projectcss.all, sty.freeBox___6GKuj)}
+                  }}
                 >
-                  <Icon26Icon
-                    className={classNames(projectcss.all, sty.svg__r5O0X)}
-                    role={"img"}
-                  />
-                </div>
-              </UploadWrapper>
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox___6GKuj)}
+                  >
+                    <Icon26Icon
+                      className={classNames(projectcss.all, sty.svg__r5O0X)}
+                      role={"img"}
+                    />
+                  </div>
+                </FileInput>
+              </div>
             </div>
             <Stack__
               as={"div"}
@@ -429,7 +475,7 @@ function PlasmicProfileHead__RenderFunc(props: {
                   "no-scroll"
                 )}
               >
-                {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                {((_par) => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                   (() => {
                     try {
                       return $state.profile.data.data.expertises;
@@ -519,11 +565,12 @@ function PlasmicProfileHead__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "profile", "avatar", "upload", "link"],
-  profile: ["profile", "avatar", "upload", "link"],
+  root: ["root", "profile", "avatar", "upload", "fragmentFileInput", "link"],
+  profile: ["profile", "avatar", "upload", "fragmentFileInput", "link"],
   avatar: ["avatar"],
   upload: ["upload"],
-  link: ["link"]
+  fragmentFileInput: ["fragmentFileInput"],
+  link: ["link"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -533,6 +580,7 @@ type NodeDefaultElementType = {
   profile: typeof ApiRequest;
   avatar: typeof Avatar;
   upload: typeof UploadWrapper;
+  fragmentFileInput: typeof FileInput;
   link: "a";
 };
 
@@ -572,7 +620,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
           name: nodeName,
           descendantNames: PlasmicDescendants[nodeName],
           internalArgPropNames: PlasmicProfileHead__ArgProps,
-          internalVariantPropNames: PlasmicProfileHead__VariantProps
+          internalVariantPropNames: PlasmicProfileHead__VariantProps,
         }),
       [props, nodeName]
     );
@@ -580,7 +628,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       variants,
       args,
       overrides,
-      forNode: nodeName
+      forNode: nodeName,
     });
   };
   if (nodeName === "root") {
@@ -599,11 +647,12 @@ export const PlasmicProfileHead = Object.assign(
     profile: makeNodeComponent("profile"),
     avatar: makeNodeComponent("avatar"),
     upload: makeNodeComponent("upload"),
+    fragmentFileInput: makeNodeComponent("fragmentFileInput"),
     link: makeNodeComponent("link"),
 
     // Metadata about props expected for PlasmicProfileHead
     internalVariantProps: PlasmicProfileHead__VariantProps,
-    internalArgProps: PlasmicProfileHead__ArgProps
+    internalArgProps: PlasmicProfileHead__ArgProps,
   }
 );
 

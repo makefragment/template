@@ -65,6 +65,8 @@ import ProfileChannelsItem from "../../ProfileChannelsItem"; // plasmic-import: 
 import { Switch } from "@/fragment/components/switch"; // plasmic-import: dH6_VlwkAh4P/codeComponent
 import Button from "../../Button"; // plasmic-import: oVzoHzMf1TLl/component
 
+import { useScreenVariants as useScreenVariantsfobTirRaixGf } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: fobTIRRaixGf/globalVariant
+
 import "@plasmicapp/react-web/lib/plasmic.css";
 
 import plasmic_fragment_design_system_css from "../fragment_design_system/plasmic.module.css"; // plasmic-import: h9Dbk9ygddw7UVEq1NNhKi/projectcss
@@ -273,6 +275,10 @@ function PlasmicProfileChannels__RenderFunc(props: {
     $ctx,
     $queries: {},
     $refs
+  });
+
+  const globalVariants = ensureGlobalVariants({
+    screen: useScreenVariantsfobTirRaixGf()
   });
 
   return (
@@ -521,7 +527,11 @@ function PlasmicProfileChannels__RenderFunc(props: {
             >
               {"\u062a\u0645\u0627\u0633 \u0627\u064e\u0645\u0646"}
             </div>
-            <div className={classNames(projectcss.all, sty.freeBox__dOtV)}>
+            <Stack__
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox__dOtV)}
+            >
               <Stack__
                 as={"div"}
                 hasGap={true}
@@ -592,7 +602,7 @@ function PlasmicProfileChannels__RenderFunc(props: {
                   "checked"
                 ])}
               />
-            </div>
+            </Stack__>
           </div>
           <Button
             data-plasmic-name={"button"}

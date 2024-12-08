@@ -14,6 +14,12 @@
   max-width: 100%;
   object-fit: cover;
 }
+.svg {
+  object-fit: cover;
+  max-width: 100%;
+  width: 22px;
+  height: 1em;
+}
 .notifyCell:global(.__wab_instance) {
   width: 100%;
   max-width: 100%;

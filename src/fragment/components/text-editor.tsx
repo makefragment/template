@@ -1,9 +1,13 @@
 import React from "react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CodeComponentMeta } from "@plasmicapp/host";
+import dynamic from "next/dynamic";
 
-export const CustomCKEditor = ({
+import { CodeComponentMeta } from "@plasmicapp/host";
+const CKEditor = dynamic(() => import("@/components/ckEditor"), {
+  ssr: false,
+  loading: () => <div>...</div>,
+});
+
+export const TextEditor = ({
   data = "",
   onBlur,
   toolbar = ["heading", "|", "bold", "italic", "bulletedList", "numberedList"],
@@ -24,35 +28,34 @@ export const CustomCKEditor = ({
   ],
   contentsLangDirection = "rtl",
   language = "fa",
+  className,
 }: {
   data?: string;
   onBlur?: (data: string) => void;
   toolbar?: string[];
-  headingOptions?: { model: string; title: string; class: string }[];
+  headingOptions?: any[];
   contentsLangDirection?: string;
   language?: string;
+  className?: string;
 }) => {
   return (
-    <CKEditor
-      editor={ClassicEditor}
-      config={{
-        toolbar,
-        heading: { options: headingOptions },
-        contentsLangDirection,
-        language,
-      }}
-      data={data}
-      onBlur={(event, editor) => {
-        const editorData = editor.getData();
-        if (onBlur) onBlur(editorData);
-      }}
-    />
+    <div className="w-full">
+      <CKEditor
+        contentsLangDirection={contentsLangDirection}
+        data={data}
+        headingOptions={headingOptions}
+        language={language}
+        onBlur={onBlur}
+        toolbar={toolbar}
+        className={className}
+      />
+    </div>
   );
 };
 
-export const ckEditorMeta: CodeComponentMeta<any> = {
-  name: "CustomCKEditor",
-  displayName: "Text Editor",
+export const TextEditorMeta: CodeComponentMeta<any> = {
+  name: "TextEditor",
+  displayName: "Fragment/TextEditor",
   importPath: "@/fragment/components/text-editor",
   props: {
     data: {
@@ -95,12 +98,6 @@ export const ckEditorMeta: CodeComponentMeta<any> = {
         },
       ],
     },
-    contentsLangDirection: {
-      type: "choice",
-      options: ["ltr", "rtl"],
-      defaultValue: "rtl",
-      description: "Sets the text direction of the editor's content.",
-    },
     language: {
       type: "choice",
       options: ["fa", "en"],
@@ -114,4 +111,5 @@ export const ckEditorMeta: CodeComponentMeta<any> = {
         "Triggered when the editor loses focus, passing the editor's data.",
     },
   },
+  classNameProp: "className",
 };

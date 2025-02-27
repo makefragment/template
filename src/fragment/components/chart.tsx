@@ -202,7 +202,7 @@ export const chartMeta: CodeComponentMeta<ChartType> = {
   displayName: "Fragment/Chart",
   importPath: "@/fragment/components/chart",
   figmaMappings: [{ figmaComponentName: "Chart" }],
-
+  section: "Fragment",
   props: {
     type: {
       type: "cardPicker",

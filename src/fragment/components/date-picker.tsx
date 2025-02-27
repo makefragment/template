@@ -25,8 +25,9 @@ export const DatePicker = ({
       <Calendar
         monthYearSeparator="|"
         multiple={mode === "multiple"}
+        range={mode === "range"}
         value={
-          mode === "multiple"
+          mode === "multiple" || mode === "range"
             ? (Array.isArray(values) ? values : [values]).map(
                 (item: any) => item * 1000
               )
@@ -80,7 +81,7 @@ export const DatePicker = ({
                 isSelected: Array.isArray(selectedDate)
                   ? selectedDate.some(
                       (item) =>
-                        moment(+item.unix * 1000)
+                        moment(+(item as DateObject)!.unix! * 1000)
                           .startOf("day")
                           .unix() ==
                         moment(date.unix * 1000)
@@ -116,7 +117,7 @@ export const DatePicker = ({
             Array.isArray(selectedDate)
               ? selectedDate.some(
                   (item) =>
-                    moment(+item.unix * 1000)
+                    moment(+(item as DateObject)!.unix! * 1000)
                       .startOf("day")
                       .unix() ==
                     moment(date.unix * 1000)
@@ -138,8 +139,12 @@ export const datePickerMeta: CodeComponentMeta<any> = {
   name: "DatePicker",
   displayName: "Fragment/DatePicker",
   importPath: "@/fragment/components/date-picker",
+  section: "Fragment",
   props: {
-    value: { type: "number", hidden: (ps) => ps.mode === "multiple" },
+    value: {
+      type: "number",
+      hidden: (ps) => ps.mode === "multiple" || ps.mode === "range",
+    },
     values: {
       type: "array",
       hidden: (ps) => ps.mode === "single",
@@ -188,6 +193,10 @@ export const datePickerMeta: CodeComponentMeta<any> = {
           label: "Multiple",
           value: "multiple",
         },
+        {
+          label: "Range",
+          value: "range",
+        },
       ],
     },
     holidays: {
@@ -209,7 +218,7 @@ export const datePickerMeta: CodeComponentMeta<any> = {
       variableType: "number",
       valueProp: "value",
       onChangeProp: "onChange",
-      hidden: (ps) => ps.mode === "multiple",
+      hidden: (ps) => ps.mode === "multiple" || ps.mode === "range",
     },
     values: {
       type: "writable",

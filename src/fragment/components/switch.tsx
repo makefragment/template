@@ -30,6 +30,7 @@ export const switchMeta: CodeComponentMeta<SwitchType> = {
   displayName: "Fragment/Switch",
   importPath: "@/fragment/components/switch",
   figmaMappings: [{ figmaComponentName: "Switch" }],
+  section: "Fragment",
   props: {
     checked: "boolean",
     disabled: "boolean",

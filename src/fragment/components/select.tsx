@@ -60,6 +60,7 @@ export const selectMeta: CodeComponentMeta<SelectType> = {
   displayName: "Fragment/Select",
   importPath: "@/fragment/components/select",
   figmaMappings: [{ figmaComponentName: "Select" }],
+  section: "Fragment",
   props: {
     placeholder: "string",
     onChange: {

@@ -46,6 +46,7 @@ export const sliderMeta: CodeComponentMeta<SliderType> = {
   displayName: "Fragment/Slider",
   importPath: "@/fragment/components/slider",
   figmaMappings: [{ figmaComponentName: "Slider" }],
+  section: "Fragment",
   props: {
     max: "number",
     min: "number",
